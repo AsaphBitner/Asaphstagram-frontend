@@ -1,0 +1,26 @@
+{
+  "name": "sprint_04",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AsaphBitner/Sptint_04.git"
+  },
+  "author": "Asaph Bitner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AsaphBitner/Sptint_04/issues"
+  },
+  "homepage": "https://github.com/AsaphBitner/Sptint_04#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "vue": "^2.6.14",
+    "vue-router": "^3.5.2",
+    "vuex": "^3.6.2"
+  }
+}
