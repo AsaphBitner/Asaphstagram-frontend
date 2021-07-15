@@ -1,0 +1,39 @@
+
+@font-face {
+    font-family: 'Instagram Logo regular';
+    src: url(../fonts/instagram_logo/Fontspring-DEMO-blue_vinyl_regular_ps_ot.otf) format('opentype');
+}
+
+@font-face {
+    font-family: 'Billabong';
+    src: url(../fonts/instagram_logo/FontsFree-Net-Billabong.ttf) format('truetype');
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.header-container{
+    display: flex;
+    gap: 1rem;
+    // align-items: space-between;
+    justify-content: center;
+
+    .header-logo{
+        font-family: 'Instagram Logo regular', sans-serif;
+        font-weight: 100;
+    }
+}
+ img{
+     max-width: 100%;
+     max-height: 100%;
+ }
+.img-container{
+    max-height: 25rem;
+    max-width: 25rem;
+    object-fit: contain;
+    // height: 1rem;
+    
+}
