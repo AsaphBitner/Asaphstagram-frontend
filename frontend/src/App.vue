@@ -7,6 +7,7 @@
 </template>
 
 <script>
+// ./components/1HelloWorld.vue
 import appHeader from './components/app-header.vue'
 
 export default {
