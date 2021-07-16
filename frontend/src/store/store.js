@@ -13,31 +13,31 @@ export const store = new Vuex.Store({
         photos: [
             {
                 name: 'NY1',
-                url: '../assets/Stock photos - NY/NY01.jpg'
+                url: 'img/Stock photos - NY/NY01.jpg'
             },
             {
                 name: 'NY2',
-                url: '../assets/Stock photos - NY/NY02.jpg'
+                url: 'img/Stock photos - NY/NY02.jpg'
             },
             {
                 name: 'NY3',
-                url: '../assets/Stock photos - NY/NY03.jpeg'
+                url: 'img/Stock photos - NY/NY03.jpeg'
             },
             {
                 name: 'NY4',
-                url: '../assets/Stock photos - NY/NY04.jpg'
+                url: 'img/Stock photos - NY/NY04.jpg'
             },
             {
                 name: 'NY5',
-                url: '../assets/Stock photos - NY/NY05.jpeg'
+                url: 'img/Stock photos - NY/NY05.jpeg'
             },
             {
                 name: 'NY6',
-                url: '../assets/Stock photos - NY/NY06.jpg'
+                url: 'img/Stock photos - NY/NY06.jpg'
             },
             {
                 name: 'NY7',
-                url: '../assets/Stock photos - NY/NY07.jpg'
+                url: 'img/Stock photos - NY/NY07.jpg'
             },
         ],
         //=================================USERS!!!=========================================================
@@ -49,30 +49,30 @@ export const store = new Vuex.Store({
                 password: 'Springfield',
                 fullname: 'Homer Simpson',
                 birthDate: 410273492,
-                profileImgUrl: '../profile photos/IMG1.jpg',
+                profileImgUrl: 'img/profile photos/IMG1.jpg',
                 likesGiven: ['p36788', 'p00845'],
                 following: [
                     {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u33333',
                         fullname: 'James T. Kirk',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
                 followers: [
                     {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u33333',
                         fullname: 'James T. Kirk',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     }
                 ],
                 savedPhotoStoryIds: ['s111', 's112', 's113'],
@@ -83,30 +83,30 @@ export const store = new Vuex.Store({
                 password: 'NewJersey',
                 fullname: 'Tony Soprano',
                 birthDate: 410273421,
-                profileImgUrl: '../profile photos/IMG1.jpg',
+                profileImgUrl: 'img/profile photos/IMG1.jpg',
                 likesGiven: ['p36788', 'p00845'],
                 following: [
                     {
                         id: 'u11111',
                         fullname: 'Homer Simpson',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u33333',
                         fullname: 'James T. Kirk',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     }
                 ],
                 followers: [
                     {
                         id: 'u11111',
                         fullname: 'Homer Simpson',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u33333',
                         fullname: 'James T. Kirk',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
                 savedPhotoStoryIds: ['s221', 's222', 's223'],
@@ -117,30 +117,30 @@ export const store = new Vuex.Store({
                 password: 'Enterprise',
                 fullname: 'James T. Kirk',
                 birthDate: 510273421,
-                profileImgUrl: '../profile photos/IMG1.jpg',
+                profileImgUrl: 'img/profile photos/IMG1.jpg',
                 likesGiven: ['p36788', 'p00845'],
                 following: [
                     {
                         id: 'u11111',
                         fullname: 'Homer Simpson',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     }
                 ],
                 followers: [
                     {
                         id: 'u11111',
                         fullname: 'Homer Simpson',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
                 savedPhotoStoryIds: ['s331', 's332', 's333'],
@@ -156,12 +156,13 @@ export const store = new Vuex.Store({
             {
                 id: 's111',
                 txt: 'Best trip ever11111111',
-                imgUrl: '../Stock photos - NY/NY01', //Can be an array if decide to support multiple imgs
+                imgUrl: 'img/Stock photos - NY/NY01.jpg', //Can be an array if decide to support multiple imgs
                 createdAt: 123543452,
                 owner: {
                     id: 'u11111',
                     fullname: 'Homer Simpson',
-                    imgUrl: '../profile photos/IMG1.jpg'
+                    username: 'HomerS',
+                    imgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 loc: {
                     lat: 40.75249545209201, 
@@ -174,14 +175,14 @@ export const store = new Vuex.Store({
                         by: {
                             id: 'u22222',
                             fullname: 'Tony Soprano',
-                            imgUrl: '../profile photos/IMG1.jpg'
+                            imgUrl: 'img/profile photos/IMG1.jpg'
                         },
                         txt: 'good one!',
                         likedBy: [ // Optional
                             {
                                 id: 'u11111',
                                 fullname: 'Homer Simpson',
-                                imgUrl: '../profile photos/IMG1.jpg'
+                                imgUrl: 'img/profile photos/IMG1.jpg'
                             }
                         ]
                     },
@@ -190,7 +191,7 @@ export const store = new Vuex.Store({
                         by: {
                             '_id': 'u33333',
                             'fullname': 'James T. Kirk',
-                            'imgUrl': '../profile photos/IMG1.jpg'
+                            'imgUrl': 'img/profile photos/IMG1.jpg'
                         },
                         txt: 'not good!',
                     }
@@ -199,12 +200,12 @@ export const store = new Vuex.Store({
                     {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u33333',
                         fullname: 'James T. Kirk',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
             },
@@ -212,12 +213,13 @@ export const store = new Vuex.Store({
               {
                 id: 's222',
                 txt: 'Best trip ever222222',
-                imgUrl: '../Stock photos - NY/NY02', //Can be an array if decide to support multiple imgs
+                imgUrl: 'img/Stock photos - NY/NY02.jpg', //Can be an array if decide to support multiple imgs
                 createdAt: 123543452,
                 owner: {
                     id: 'u11111',
                     fullname: 'Homer Simpson',
-                    imgUrl: '../profile photos/IMG1.jpg'
+                    username: 'HomerS',
+                    imgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 loc: {
                     lat: 40.75249545209201, 
@@ -230,14 +232,14 @@ export const store = new Vuex.Store({
                         by: {
                             id: 'u22222',
                             fullname: 'Tony Soprano',
-                            imgUrl: '../profile photos/IMG1.jpg'
+                            imgUrl: 'img/profile photos/IMG1.jpg'
                         },
                         txt: 'good one!',
                         likedBy: [ // Optional
                             {
                                 id: 'u11111',
                                 fullname: 'Homer Simpson',
-                                imgUrl: '../profile photos/IMG1.jpg'
+                                imgUrl: 'img/profile photos/IMG1.jpg'
                             }
                         ]
                     },
@@ -246,7 +248,7 @@ export const store = new Vuex.Store({
                         by: {
                             '_id': 'u33333',
                             'fullname': 'James T. Kirk',
-                            'imgUrl': '../profile photos/IMG1.jpg'
+                            'imgUrl': 'img/profile photos/IMG1.jpg'
                         },
                         txt: 'not good!',
                     }
@@ -255,12 +257,12 @@ export const store = new Vuex.Store({
                     {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u33333',
                         fullname: 'James T. Kirk',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
             },
@@ -268,12 +270,13 @@ export const store = new Vuex.Store({
               {
                 id: 's333',
                 txt: 'Best trip ever333333',
-                imgUrl: '../Stock photos - NY/NY03', //Can be an array if decide to support multiple imgs
+                imgUrl: 'img/Stock photos - NY/NY03.jpeg', //Can be an array if decide to support multiple imgs
                 createdAt: 123543452,
                 owner: {
                     id: 'u11111',
                     fullname: 'Homer Simpson',
-                    imgUrl: '../profile photos/IMG1.jpg'
+                    username: 'HomerS',
+                    imgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 loc: {
                     lat: 40.75249545209201, 
@@ -286,14 +289,14 @@ export const store = new Vuex.Store({
                         by: {
                             id: 'u22222',
                             fullname: 'Tony Soprano',
-                            imgUrl: '../profile photos/IMG1.jpg'
+                            imgUrl: 'img/profile photos/IMG1.jpg'
                         },
                         txt: 'good one!',
                         likedBy: [ // Optional
                             {
                                 id: 'u11111',
                                 fullname: 'Homer Simpson',
-                                imgUrl: '../profile photos/IMG1.jpg'
+                                imgUrl: 'img/profile photos/IMG1.jpg'
                             }
                         ]
                     },
@@ -302,7 +305,7 @@ export const store = new Vuex.Store({
                         by: {
                             '_id': 'u33333',
                             'fullname': 'James T. Kirk',
-                            'imgUrl': '../profile photos/IMG1.jpg'
+                            'imgUrl': 'img/profile photos/IMG1.jpg'
                         },
                         txt: 'not good!',
                     }
@@ -311,12 +314,12 @@ export const store = new Vuex.Store({
                     {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u33333',
                         fullname: 'James T. Kirk',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
             },
@@ -324,12 +327,13 @@ export const store = new Vuex.Store({
            {
             id: 's444',
             txt: 'Best trip ever444444',
-            imgUrl: '../Stock photos - NY/NY04', //Can be an array if decide to support multiple imgs
+            imgUrl: 'img/Stock photos - NY/NY04.jpg', //Can be an array if decide to support multiple imgs
             createdAt: 123543452,
             owner: {
                 id: 'u11111',
                 fullname: 'Homer Simpson',
-                imgUrl: '../profile photos/IMG1.jpg'
+                username: 'HomerS',
+                imgUrl: 'img/profile photos/IMG1.jpg'
             },
             loc: {
                 lat: 40.75249545209201, 
@@ -342,14 +346,14 @@ export const store = new Vuex.Store({
                     by: {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     txt: 'good one!',
                     likedBy: [ // Optional
                         {
                             id: 'u11111',
                             fullname: 'Homer Simpson',
-                            imgUrl: '../profile photos/IMG1.jpg'
+                            imgUrl: 'img/profile photos/IMG1.jpg'
                         }
                     ]
                 },
@@ -358,7 +362,7 @@ export const store = new Vuex.Store({
                     by: {
                         '_id': 'u33333',
                         'fullname': 'James T. Kirk',
-                        'imgUrl': '../profile photos/IMG1.jpg'
+                        'imgUrl': 'img/profile photos/IMG1.jpg'
                     },
                     txt: 'not good!',
                 }
@@ -367,12 +371,12 @@ export const store = new Vuex.Store({
                 {
                     id: 'u22222',
                     fullname: 'Tony Soprano',
-                    imgUrl: '../profile photos/IMG1.jpg'
+                    imgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 {
                     id: 'u33333',
                     fullname: 'James T. Kirk',
-                    imgUrl: '../profile photos/IMG1.jpg'
+                    imgUrl: 'img/profile photos/IMG1.jpg'
                 },
             ],
         },
@@ -380,12 +384,13 @@ export const store = new Vuex.Store({
            {
             id: 's555',
             txt: 'Best trip ever5555555',
-            imgUrl: '../Stock photos - NY/NY05', //Can be an array if decide to support multiple imgs
+            imgUrl: 'img/Stock photos - NY/NY05.jpeg', //Can be an array if decide to support multiple imgs
             createdAt: 123543452,
             owner: {
                 id: 'u11111',
                 fullname: 'Homer Simpson',
-                imgUrl: '../profile photos/IMG1.jpg'
+                username: 'HomerS',
+                imgUrl: 'img/profile photos/IMG1.jpg'
             },
             loc: {
                 lat: 40.75249545209201, 
@@ -398,14 +403,14 @@ export const store = new Vuex.Store({
                     by: {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     txt: 'good one!',
                     likedBy: [ // Optional
                         {
                             id: 'u11111',
                             fullname: 'Homer Simpson',
-                            imgUrl: '../profile photos/IMG1.jpg'
+                            imgUrl: 'img/profile photos/IMG1.jpg'
                         }
                     ]
                 },
@@ -414,7 +419,7 @@ export const store = new Vuex.Store({
                     by: {
                         '_id': 'u33333',
                         'fullname': 'James T. Kirk',
-                        'imgUrl': '../profile photos/IMG1.jpg'
+                        'imgUrl': 'img/profile photos/IMG1.jpg'
                     },
                     txt: 'not good!',
                 }
@@ -423,12 +428,12 @@ export const store = new Vuex.Store({
                 {
                     id: 'u22222',
                     fullname: 'Tony Soprano',
-                    imgUrl: '../profile photos/IMG1.jpg'
+                    imgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 {
                     id: 'u33333',
                     fullname: 'James T. Kirk',
-                    imgUrl: '../profile photos/IMG1.jpg'
+                    imgUrl: 'img/profile photos/IMG1.jpg'
                 },
             ],
         },
@@ -436,12 +441,13 @@ export const store = new Vuex.Store({
            {
             id: 's666',
             txt: 'Best trip ever666666666',
-            imgUrl: '../Stock photos - NY/NY06', //Can be an array if decide to support multiple imgs
+            imgUrl: 'img/Stock photos - NY/NY06.jpg', //Can be an array if decide to support multiple imgs
             createdAt: 123543452,
             owner: {
                 id: 'u11111',
                 fullname: 'Homer Simpson',
-                imgUrl: '../profile photos/IMG1.jpg'
+                username: 'HomerS',
+                imgUrl: 'img/profile photos/IMG1.jpg'
             },
             loc: {
                 lat: 40.75249545209201, 
@@ -454,14 +460,14 @@ export const store = new Vuex.Store({
                     by: {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     txt: 'good one!',
                     likedBy: [ // Optional
                         {
                             id: 'u11111',
                             fullname: 'Homer Simpson',
-                            imgUrl: '../profile photos/IMG1.jpg'
+                            imgUrl: 'img/profile photos/IMG1.jpg'
                         }
                     ]
                 },
@@ -470,7 +476,7 @@ export const store = new Vuex.Store({
                     by: {
                         '_id': 'u33333',
                         'fullname': 'James T. Kirk',
-                        'imgUrl': '../profile photos/IMG1.jpg'
+                        'imgUrl': 'img/profile photos/IMG1.jpg'
                     },
                     txt: 'not good!',
                 }
@@ -479,12 +485,12 @@ export const store = new Vuex.Store({
                 {
                     id: 'u22222',
                     fullname: 'Tony Soprano',
-                    imgUrl: '../profile photos/IMG1.jpg'
+                    imgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 {
                     id: 'u33333',
                     fullname: 'James T. Kirk',
-                    imgUrl: '../profile photos/IMG1.jpg'
+                    imgUrl: 'img/profile photos/IMG1.jpg'
                 },
             ],
         },
@@ -492,12 +498,13 @@ export const store = new Vuex.Store({
            {
             id: 's777',
             txt: 'Best trip ever77777777',
-            imgUrl: '../Stock photos - NY/NY07', //Can be an array if decide to support multiple imgs
+            imgUrl: 'img/Stock photos - NY/NY07.jpg', //Can be an array if decide to support multiple imgs
             createdAt: 123543452,
             owner: {
                 id: 'u11111',
                 fullname: 'Homer Simpson',
-                imgUrl: '../profile photos/IMG1.jpg'
+                username: 'HomerS',
+                imgUrl: 'img/profile photos/IMG1.jpg'
             },
             loc: {
                 lat: 40.75249545209201, 
@@ -510,14 +517,14 @@ export const store = new Vuex.Store({
                     by: {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
-                        imgUrl: '../profile photos/IMG1.jpg'
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     txt: 'good one!',
                     likedBy: [ // Optional
                         {
                             id: 'u11111',
                             fullname: 'Homer Simpson',
-                            imgUrl: '../profile photos/IMG1.jpg'
+                            imgUrl: 'img/profile photos/IMG1.jpg'
                         }
                     ]
                 },
@@ -526,7 +533,7 @@ export const store = new Vuex.Store({
                     by: {
                         '_id': 'u33333',
                         'fullname': 'James T. Kirk',
-                        'imgUrl': '../profile photos/IMG1.jpg'
+                        'imgUrl': 'img/profile photos/IMG1.jpg'
                     },
                     txt: 'not good!',
                 }
@@ -535,12 +542,12 @@ export const store = new Vuex.Store({
                 {
                     id: 'u22222',
                     fullname: 'Tony Soprano',
-                    imgUrl: '../profile photos/IMG1.jpg'
+                    imgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 {
                     id: 'u33333',
                     fullname: 'James T. Kirk',
-                    imgUrl: '../profile photos/IMG1.jpg'
+                    imgUrl: 'img/profile photos/IMG1.jpg'
                 },
             ],
         },

@@ -2,7 +2,7 @@
   <div>
     <h1>LANDING PAGE!!!</h1>
     <div class="img-container">
-    <img src="../assets/Stock photos - NY/NY02.jpg" alt="Sorry, no image here" />
+    <img src="img/Stock photos - NY/NY02.jpg" alt="Sorry, no image here" />
     </div>
   </div>
 </template>
