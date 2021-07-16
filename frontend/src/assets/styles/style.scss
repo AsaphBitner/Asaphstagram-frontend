@@ -13,19 +13,15 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
 }
 
-.header-container{
-    display: flex;
-    gap: 1rem;
-    // align-items: space-between;
-    justify-content: center;
-
-    .header-logo{
-        font-family: 'Instagram Logo regular', sans-serif;
-        font-weight: 100;
-    }
+body{
+    background-color:  #fafafa;
+    color: #262626;
 }
+    
+
  img{
      max-width: 100%;
      max-height: 100%;
@@ -33,17 +29,122 @@
 .img-container{
     max-height: 25rem;
     max-width: 25rem;
-    object-fit: contain;
+    object-fit: cover;
     // height: 1rem;
     
 }
 
-.header-icon{
-    max-width: 1.5rem;
+.header-container{
+    background-color: #fafafa;
+    border-bottom: lightgray solid 0.08rem;
+    padding: 0.75rem;
+    justify-content: center;
+    color: #262626;
+        .header-icon{
+        max-width: 1.5rem;
+        max-height: 1.5rem;
+        cursor: pointer;
+    }
+    .header-logo{
+        font-family: 'Instagram Logo regular', sans-serif;
+        font-weight: 100;
+    }
+    
+    .header-profile-image-container{
+        border-radius: 50%;
+        object-fit: cover;
+        // border: 0.1rem solid black;
+    }
+
+    img{
+        width: 100%;
+        height:100%;
+        border-radius: 50%;
+    }
+    .header-search{
+        border: lightgray solid 0.08rem;
+        font-family: inherit;
+        padding-left: 0.5rem;
+    }
+    // .header-search-icon{
+    //     margin: 0;
+    // }
+    // .header-profile-image-container{
+    //     display: inline-block;
+    // }
 }
 
-.header-profile-image-container{
-    border-radius: 50%;
-    object-fit: cover;
-    border: 0.1rem solid black;
-}
+
+
+
+
+@media screen and (min-width: 880px){
+        
+        .header-container{
+            display: flex;
+            // gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fafafa;
+            border-bottom: lightgray solid 0.08rem;
+            padding: 0.2rem;
+            color: #262626;
+            max-height: 100rem;
+            margin-right: 1rem;
+            margin-left: 1rem;
+
+            
+            .header-flex-1,
+            .header-flex-2,
+            .header-flex-3{
+                display: flex;
+                gap: 1.3rem;
+                padding: 0;
+                margin: 0;
+                height: 100%;
+            }
+
+            .header-icon{
+                // max-width: 1.5rem;
+                // max-height: 1.5rem;
+                // font-size: 22rem;
+                cursor: pointer;
+            }
+            
+            .header-logo{
+                font-family: 'Instagram Logo regular', sans-serif;
+                font-weight: 100;
+                font-size: 1.5rem;
+            }
+            
+        .header-profile-image-container{
+            border-radius: 50%;
+            object-fit: cover;
+            // border: 0.1rem solid black;
+        }
+    
+        img{
+            width: 100%;
+            height:100%;
+            border-radius: 50%;
+        }
+        .header-search{
+            border: lightgray solid 0.08rem;
+            font-size: 1rem;
+            padding-left: 0.5rem;
+            max-width: 100rem;
+            max-height: 100rem;
+        }
+        .header-search-icon{
+            display: none;
+        }
+        // .header-profile-image-container{
+        //     display: inline-block;
+        // }
+        }
+        
+    }
+
+    
+
+
