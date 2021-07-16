@@ -37,3 +37,13 @@
     // height: 1rem;
     
 }
+
+.header-icon{
+    max-width: 1.5rem;
+}
+
+.header-profile-image-container{
+    border-radius: 50%;
+    object-fit: cover;
+    border: 0.1rem solid black;
+}
