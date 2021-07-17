@@ -5,17 +5,17 @@
     <div class="stories-container">
       <ul
         class="story-list"
-        v-for="(story, idx) in this.photoStoriesToShow"
+        v-for="(story) in this.photoStoriesToShow"
         :key="story.id"
       >
         <li>
           <div class="single-story-container">
             <div class="story-user-photo-name">
-              {{ idx }}
               <div class="small-profile-img-story">
                 <img :src="story.owner.imgUrl" alt="ERROR!" />
               </div>
               <p class="user-name-story">{{ story.owner.username }}</p>
+            </div>
               <div class="main-image-story">
                 <img :src="story.imgUrl" alt="ERROR!" />
               </div>
@@ -35,7 +35,6 @@
                 {{timeDifference(Date.now(), story.createdAt)}}
               </div>
               
-            </div>
           </div>
         </li>
       </ul>
