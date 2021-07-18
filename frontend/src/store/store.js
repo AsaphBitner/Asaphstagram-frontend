@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import {storageService} from '@/services/storage-service.js'
 
 
 Vue.use(Vuex)
@@ -630,8 +630,35 @@ export const store = new Vuex.Store({
             // console.log(storyIdx, storyId, state.photoStories[0].id)
             state.photoStories[storyIdx].likedBy.unshift(likeToAdd)
         },
+        
+        addComment(state, payload){
+            if (!payload.txt) return;
+            // var x=storageService.makeId()
+            // if (!x) return
+            console.log('store ', payload)
+            var commentToAdd = {
+                id: storageService.makeId(),
+                by: {
+                    id: state.loggedInUser.id,
+                    fullname: state.loggedInUser.fullname,
+                    username: state.loggedInUser.username,
+                    profileImgUrl: state.loggedInUser.profileImgUrl,
+                },
+                txt: payload.txt,
+            }
+            // console.log(commentText)
+            const storyIdx = state.photoStories.findIndex((element) => { return element.id === payload.id})
+            state.photoStories[storyIdx].comments.unshift(commentToAdd)
+        },
+        removeComment(state, storyId, commentId){
+            const storyIdx = state.photoStories.findIndex((element) => { return element.id === storyId})
+            const commentIdx = state.photoStories[storyIdx].comments.find((element) => { return element.id === commentId})
+            state.photoStories[storyIdx].comments.splice(commentIdx, 1)
+        },
+
     },
     actions: {
+    
     }
 })
 
