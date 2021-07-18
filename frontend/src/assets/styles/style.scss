@@ -19,6 +19,7 @@
 body{
     background-color:  #fafafa;
     color: #262626;
+    position: relative;
 }
     
 
@@ -26,12 +27,17 @@ body{
      max-width: 100%;
      max-height: 100%;
  }
+ //////////temporary, for testing
 .img-container{
     max-height: 25rem;
     max-width: 25rem;
-    object-fit: cover;
     // height: 1rem;
+    img{
+    object-fit: cover;
+
+    }
 }
+
 
 
 //============== HEADER ======================
@@ -44,6 +50,8 @@ body{
         border-bottom: lightgray solid 0.08rem;
         padding: 0.2rem;
         color: #262626;
+        position: sticky;
+        
 
         .header-icon{
         max-width: 1.5rem;
@@ -59,8 +67,10 @@ body{
     
     .header-profile-image-container{
         border-radius: 50%;
-        object-fit: cover;
         // border: 0.1rem solid black;
+        img{
+            object-fit: cover;
+        }
     }
 
     img{
@@ -99,15 +109,16 @@ body{
 .story-list{
     list-style: none;
     text-align: center;    
-    
 }
 .single-story-container{
-    // max-width: 70%;
     // max-height: 46.5625rem;
-    width: 38.375rem;
+    max-width: 38.375rem;
     border: 1px solid lightgray;
     display: inline-block;
-
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    // background-color: rgba(255, 255, 255, 0.829);
 }
 
 .story-user-photo-name{
@@ -119,8 +130,6 @@ body{
     margin: 1rem;
     font-weight: 600;
     font-size: 0.8rem;
-
-
 
     .small-profile-img-story{
         max-width: 1.3rem;
@@ -136,23 +145,119 @@ body{
 }
 
 .main-image-story{
-    object-fit: cover;
-
+   max-width: 100%;
+    
     img{
+        width: 100%;
+        // max-height: 46.5625rem;
         max-height: 46.5625rem;
+        object-fit: cover;
     }
 
+}
+
+.story-text{
+    width: 100%;
+    display: flex;
+    // margin: 0.2rem;
+    padding: 0.3rem;
+    // padding-top: 0.3rem;
+    // padding-bottom: 0.3rem;
+    // padding-left: 0.2rem;
+    // padding-right: 0.2rem;
+    p{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        word-wrap: break-all;
+        
+        span{
+            font-weight: 600;
+        }
+    }
+}
+
+.story-comment-like{
+    display: flex;
+    align-items: center;
+    // border-top: 1px solid rgb(231, 219, 201);
+    // border-bottom: 1px solid rgb(231, 219, 201);
+    padding: 0.3rem;
+
+    // *{
+    //     margin-left: .3rem;
+    //     margin-right: .3rem;
+    // }
+    span{
+        font-weight: 600;
+    }
+}
+.story-comment-like-icons{
+    cursor: pointer;
+}
+
+
+.story-comments{
+    display: flex;
+    align-items: center;
+    // border-bottom: 1px solid rgb(231, 219, 201);
+    padding: 0.3rem;
+    p{
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        word-wrap: break-all;
+        span{
+            font-weight: 600;
+        }
+    }
+}
+.view-all-comments{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #8e8e8e;
+    text-decoration: underline;
+    padding: 0.3rem;
+
+}
+.story-how-long-ago{
+    display: flex;
+    align-items: center;
+    color: #8e8e8e;
+    padding: 0.3rem;
+    padding-top: 0.5rem;
+}
+
+.story-add-comment{
+    max-width: 100%;
+    padding: .3rem;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    input{
+        font-size: .8rem;
+        max-width: 200%;
+        border: none;
+        padding: .3rem;
+    }
+    span{
+        font-weight: 601;
+    }
+    
 }
 
 
 
 
-
-
-
-
-
 //================================= MEDIA QUERIES =========================
+
+//------------------- HEADER --------------------------
+
 
 @media screen and (max-width: 415px){
  
@@ -182,7 +287,7 @@ body{
         
     }
     
-    @media screen and (max-width: 679px){
+    @media screen and (max-width: 680px){
         
         .header-container{
             margin-right: 1rem;
@@ -205,5 +310,30 @@ body{
 
 
     
+//============== FEED ======================
 
 
+@media screen and (max-width: 680px){
+
+    .story-list{
+        max-width: 100%;
+    }
+    .single-story-container{
+        max-width: 100%;
+    }
+
+
+    .main-image-story{
+        max-width: 100%;
+         
+         img{
+             width: 100%;
+             // max-height: 46.5625rem;
+             max-height: 21.875rem;
+            //  max-width: 100%;
+             object-fit: cover;
+         }
+     
+     }
+
+}

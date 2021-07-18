@@ -184,6 +184,7 @@ export const store = new Vuex.Store({
                         by: {
                             id: 'u22222',
                             fullname: 'Tony Soprano',
+                            username: 'TonyS',
                             imgUrl: 'img/profile photos/IMG1.jpg'
                         },
                         txt: 'good one!',
@@ -191,16 +192,18 @@ export const store = new Vuex.Store({
                             {
                                 id: 'u11111',
                                 fullname: 'Homer Simpson',
-                                imgUrl: 'img/profile photos/IMG1.jpg'
+                                username: 'HomerS',
+                                imgUrl: 'img/profile photos/IMG1.jpg',
                             }
-                        ]
+                        ],
                     },
                     {
                         id: 'c22222',
                         by: {
-                            '_id': 'u33333',
-                            'fullname': 'James T. Kirk',
-                            'imgUrl': 'img/profile photos/IMG1.jpg'
+                            id: 'u33333',
+                            fullname: 'James T. Kirk',
+                            username: 'JamesTK',
+                            imgUrl: 'img/profile photos/IMG1.jpg'
                         },
                         txt: 'not good!',
                     }
@@ -209,11 +212,13 @@ export const store = new Vuex.Store({
                     {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
+                        username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u33333',
                         fullname: 'James T. Kirk',
+                        username: 'JamesTK',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
@@ -241,6 +246,7 @@ export const store = new Vuex.Store({
                         by: {
                             id: 'u22222',
                             fullname: 'Tony Soprano',
+                            username: 'TonyS',
                             imgUrl: 'img/profile photos/IMG1.jpg'
                         },
                         txt: 'good one!',
@@ -248,16 +254,18 @@ export const store = new Vuex.Store({
                             {
                                 id: 'u11111',
                                 fullname: 'Homer Simpson',
-                                imgUrl: 'img/profile photos/IMG1.jpg'
+                                username: 'HomerS',
+                                imgUrl: 'img/profile photos/IMG1.jpg',
                             }
-                        ]
+                        ],
                     },
                     {
                         id: 'c22222',
                         by: {
-                            '_id': 'u33333',
-                            'fullname': 'James T. Kirk',
-                            'imgUrl': 'img/profile photos/IMG1.jpg'
+                            id: 'u33333',
+                            fullname: 'James T. Kirk',
+                            username: 'JamesTK',
+                            imgUrl: 'img/profile photos/IMG1.jpg'
                         },
                         txt: 'not good!',
                     }
@@ -266,11 +274,13 @@ export const store = new Vuex.Store({
                     {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
+                        username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u33333',
                         fullname: 'James T. Kirk',
+                        username: 'JamesTK',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
@@ -298,6 +308,7 @@ export const store = new Vuex.Store({
                         by: {
                             id: 'u22222',
                             fullname: 'Tony Soprano',
+                            username: 'TonyS',
                             imgUrl: 'img/profile photos/IMG1.jpg'
                         },
                         txt: 'good one!',
@@ -305,16 +316,18 @@ export const store = new Vuex.Store({
                             {
                                 id: 'u11111',
                                 fullname: 'Homer Simpson',
-                                imgUrl: 'img/profile photos/IMG1.jpg'
+                                username: 'HomerS',
+                                imgUrl: 'img/profile photos/IMG1.jpg',
                             }
-                        ]
+                        ],
                     },
                     {
                         id: 'c22222',
                         by: {
-                            '_id': 'u33333',
-                            'fullname': 'James T. Kirk',
-                            'imgUrl': 'img/profile photos/IMG1.jpg'
+                            id: 'u33333',
+                            fullname: 'James T. Kirk',
+                            username: 'JamesTK',
+                            imgUrl: 'img/profile photos/IMG1.jpg'
                         },
                         txt: 'not good!',
                     }
@@ -323,11 +336,13 @@ export const store = new Vuex.Store({
                     {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
+                        username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u33333',
                         fullname: 'James T. Kirk',
+                        username: 'JamesTK',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
@@ -355,6 +370,7 @@ export const store = new Vuex.Store({
                     by: {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
+                        username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     txt: 'good one!',
@@ -362,6 +378,7 @@ export const store = new Vuex.Store({
                         {
                             id: 'u11111',
                             fullname: 'Homer Simpson',
+                            username: 'HomerS',
                             imgUrl: 'img/profile photos/IMG1.jpg'
                         }
                     ]
@@ -369,9 +386,10 @@ export const store = new Vuex.Store({
                 {
                     id: 'c22222',
                     by: {
-                        '_id': 'u33333',
-                        'fullname': 'James T. Kirk',
-                        'imgUrl': 'img/profile photos/IMG1.jpg'
+                        id: 'u33333',
+                        fullname: 'James T. Kirk',
+                        username: 'JamesTK',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     txt: 'not good!',
                 }
@@ -380,11 +398,13 @@ export const store = new Vuex.Store({
                 {
                     id: 'u22222',
                     fullname: 'Tony Soprano',
+                    username: 'TonyS',
                     imgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 {
                     id: 'u33333',
                     fullname: 'James T. Kirk',
+                    username: 'JamesTK',
                     imgUrl: 'img/profile photos/IMG1.jpg'
                 },
             ],
@@ -412,6 +432,7 @@ export const store = new Vuex.Store({
                     by: {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
+                        username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     txt: 'good one!',
@@ -419,6 +440,7 @@ export const store = new Vuex.Store({
                         {
                             id: 'u11111',
                             fullname: 'Homer Simpson',
+                            username: 'HomerS',
                             imgUrl: 'img/profile photos/IMG1.jpg'
                         }
                     ]
@@ -426,9 +448,10 @@ export const store = new Vuex.Store({
                 {
                     id: 'c22222',
                     by: {
-                        '_id': 'u33333',
-                        'fullname': 'James T. Kirk',
-                        'imgUrl': 'img/profile photos/IMG1.jpg'
+                        id: 'u33333',
+                        fullname: 'James T. Kirk',
+                        username: 'JamesTK',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     txt: 'not good!',
                 }
@@ -437,11 +460,13 @@ export const store = new Vuex.Store({
                 {
                     id: 'u22222',
                     fullname: 'Tony Soprano',
+                    username: 'TonyS',
                     imgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 {
                     id: 'u33333',
                     fullname: 'James T. Kirk',
+                    username: 'JamesTK',
                     imgUrl: 'img/profile photos/IMG1.jpg'
                 },
             ],
@@ -469,6 +494,7 @@ export const store = new Vuex.Store({
                     by: {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
+                        username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     txt: 'good one!',
@@ -476,6 +502,7 @@ export const store = new Vuex.Store({
                         {
                             id: 'u11111',
                             fullname: 'Homer Simpson',
+                            username: 'HomerS',
                             imgUrl: 'img/profile photos/IMG1.jpg'
                         }
                     ]
@@ -483,9 +510,10 @@ export const store = new Vuex.Store({
                 {
                     id: 'c22222',
                     by: {
-                        '_id': 'u33333',
-                        'fullname': 'James T. Kirk',
-                        'imgUrl': 'img/profile photos/IMG1.jpg'
+                        id: 'u33333',
+                        fullname: 'James T. Kirk',
+                        username: 'JamesTK',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     txt: 'not good!',
                 }
@@ -494,11 +522,13 @@ export const store = new Vuex.Store({
                 {
                     id: 'u22222',
                     fullname: 'Tony Soprano',
+                    username: 'TonyS',
                     imgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 {
                     id: 'u33333',
                     fullname: 'James T. Kirk',
+                    username: 'JamesTK',
                     imgUrl: 'img/profile photos/IMG1.jpg'
                 },
             ],
@@ -526,6 +556,7 @@ export const store = new Vuex.Store({
                     by: {
                         id: 'u22222',
                         fullname: 'Tony Soprano',
+                        username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     txt: 'good one!',
@@ -533,6 +564,7 @@ export const store = new Vuex.Store({
                         {
                             id: 'u11111',
                             fullname: 'Homer Simpson',
+                            username: 'HomerS',
                             imgUrl: 'img/profile photos/IMG1.jpg'
                         }
                     ]
@@ -540,9 +572,10 @@ export const store = new Vuex.Store({
                 {
                     id: 'c22222',
                     by: {
-                        '_id': 'u33333',
-                        'fullname': 'James T. Kirk',
-                        'imgUrl': 'img/profile photos/IMG1.jpg'
+                        id: 'u33333',
+                        fullname: 'James T. Kirk',
+                        username: 'JamesTK',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     txt: 'not good!',
                 }
@@ -551,11 +584,13 @@ export const store = new Vuex.Store({
                 {
                     id: 'u22222',
                     fullname: 'Tony Soprano',
+                    username: 'TonyS',
                     imgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 {
                     id: 'u33333',
                     fullname: 'James T. Kirk',
+                    username: 'JamesTK',
                     imgUrl: 'img/profile photos/IMG1.jpg'
                 },
             ],
@@ -578,7 +613,23 @@ export const store = new Vuex.Store({
         },
     },
     mutations: {
+        removeLike(state, storyId){
+            const storyIdx = state.photoStories.findIndex((element) => { return element.id === storyId})
+            const toRemove = state.photoStories[storyIdx].likedBy.findIndex(item => {return item.id === state.loggedInUser.id})
+            state.photoStories[storyIdx].likedBy.splice(toRemove, 1)
 
+        },
+        addLike(state, storyId){
+            const likeToAdd = {
+                id: state.loggedInUser.id,
+                fullname: state.loggedInUser.fullname,
+                username: state.loggedInUser.username,
+                profileImgUrl: state.loggedInUser.profileImgUrl,
+            }
+            const storyIdx = state.photoStories.findIndex((element) => { return element.id === storyId})
+            // console.log(storyIdx, storyId, state.photoStories[0].id)
+            state.photoStories[storyIdx].likedBy.unshift(likeToAdd)
+        },
     },
     actions: {
     }
