@@ -1,0 +1,122 @@
+//============== HEADER ======================
+
+.header-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    // flex-flow: row-wrap;
+    background-color: #fafafa;
+    border-bottom: lightgray solid 0.08rem;
+    padding: 0.2rem;
+    color: #262626;
+    position: sticky;
+    
+
+    .header-icon{
+    max-width: 1.5rem;
+    max-height: 1.5rem;
+    cursor: pointer;
+}
+.header-logo{
+    font-family: 'Instagram Logo regular', sans-serif;
+    font-weight: 100;
+    font-size: 1.5rem;
+    margin: .4rem; 
+}
+
+.header-profile-image-container{
+    border-radius: 50%;
+    // border: 0.1rem solid black;
+    img{
+        object-fit: cover;
+    }
+}
+
+img{
+    width: 100%;
+    height:100%;
+    border-radius: 50%;
+}
+.header-search{
+    // border: rgba(142,142,142,1); solid 0.08rem;
+    // border: rgba(230, 227, 227, 1) solid 0.05rem;
+    border: .05rem solid #dbdbdb;
+    font-size: 0.9rem;
+    padding: 0.4rem 0 0.4rem 0.5rem;
+    max-width: 15rem;
+    color: #262626;
+    border-radius: 3px;
+    outline: 0;
+    ::placeholder{
+        text-align: center;
+    }
+} 
+}
+
+    .header-flex-1,
+    .header-flex-2,
+    .header-flex-3{
+    display: flex;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    }
+    .header-flex-3{
+    padding-top: 0.2rem;
+    }
+
+
+    //=======================MEDIA QUERIES=================================
+
+    //------------------- HEADER --------------------------
+
+
+@media screen and (max-width: 415px){
+ 
+    .header-container{
+        margin-right: 0.5rem;
+        margin-left: 0.5rem;
+    }
+            .header-flex-1,
+           .header-flex-3{
+               display: flex;
+               gap: .8rem;
+           }
+   }
+   
+   @media screen and (min-width: 680px){
+           
+           .header-container{
+               margin-right: 1rem;
+               margin-left: 1rem;
+               // background-color: black;
+           }
+           .header-flex-1,
+           .header-flex-3{
+               display: flex;
+               gap: 1.1rem;
+           }
+           
+       }
+       
+       @media screen and (max-width: 680px){
+           
+           .header-container{
+               margin-right: 1rem;
+               margin-left: 1rem;
+               // background-color: black;
+           }
+           
+           .header-flex-2{
+               display: none;
+           }
+           .header-search{
+               display: none;
+           }
+           .header-flex-1,
+           .header-flex-3{
+               display: flex;
+               gap: 0.8rem;
+           }
+          }
+   

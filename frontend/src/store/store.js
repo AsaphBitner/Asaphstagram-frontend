@@ -187,14 +187,14 @@ export const store = new Vuex.Store({
                             username: 'TonyS',
                             imgUrl: 'img/profile photos/IMG1.jpg'
                         },
-                        txt: 'good one!',
+                        txt: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
                         likedBy: [ // Optional
-                            {
-                                id: 'u11111',
-                                fullname: 'Homer Simpson',
-                                username: 'HomerS',
-                                imgUrl: 'img/profile photos/IMG1.jpg',
-                            }
+                           {
+                            id: 'u33333',
+                            fullname: 'James T. Kirk',
+                            username: 'JamesTK',
+                            imgUrl: 'img/profile photos/IMG1.jpg'
+                        },
                         ],
                     },
                     {
@@ -249,14 +249,14 @@ export const store = new Vuex.Store({
                             username: 'TonyS',
                             imgUrl: 'img/profile photos/IMG1.jpg'
                         },
-                        txt: 'good one!',
+                        txt: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
                         likedBy: [ // Optional
-                            {
-                                id: 'u11111',
-                                fullname: 'Homer Simpson',
-                                username: 'HomerS',
-                                imgUrl: 'img/profile photos/IMG1.jpg',
-                            }
+                           {
+                            id: 'u33333',
+                            fullname: 'James T. Kirk',
+                            username: 'JamesTK',
+                            imgUrl: 'img/profile photos/IMG1.jpg'
+                        },
                         ],
                     },
                     {
@@ -311,14 +311,14 @@ export const store = new Vuex.Store({
                             username: 'TonyS',
                             imgUrl: 'img/profile photos/IMG1.jpg'
                         },
-                        txt: 'good one!',
+                        txt: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
                         likedBy: [ // Optional
-                            {
-                                id: 'u11111',
-                                fullname: 'Homer Simpson',
-                                username: 'HomerS',
-                                imgUrl: 'img/profile photos/IMG1.jpg',
-                            }
+                           {
+                            id: 'u33333',
+                            fullname: 'James T. Kirk',
+                            username: 'JamesTK',
+                            imgUrl: 'img/profile photos/IMG1.jpg'
+                        },
                         ],
                     },
                     {
@@ -373,7 +373,7 @@ export const store = new Vuex.Store({
                         username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
-                    txt: 'good one!',
+                    txt: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
                     likedBy: [ // Optional
                         {
                             id: 'u11111',
@@ -435,7 +435,7 @@ export const store = new Vuex.Store({
                         username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
-                    txt: 'good one!',
+                    txt: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
                     likedBy: [ // Optional
                         {
                             id: 'u11111',
@@ -497,7 +497,7 @@ export const store = new Vuex.Store({
                         username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
-                    txt: 'good one!',
+                    txt: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
                     likedBy: [ // Optional
                         {
                             id: 'u11111',
@@ -559,7 +559,7 @@ export const store = new Vuex.Store({
                         username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
-                    txt: 'good one!',
+                    txt: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
                     likedBy: [ // Optional
                         {
                             id: 'u11111',
@@ -630,12 +630,34 @@ export const store = new Vuex.Store({
             // console.log(storyIdx, storyId, state.photoStories[0].id)
             state.photoStories[storyIdx].likedBy.unshift(likeToAdd)
         },
-        
+        addCommentLike(state, payload){
+            const likeToAdd = {
+                id: state.loggedInUser.id,
+                fullname: state.loggedInUser.fullname,
+                username: state.loggedInUser.username,
+                profileImgUrl: state.loggedInUser.profileImgUrl,
+            }
+
+            const storyIdx = state.photoStories.findIndex((element) => { return element.id === payload.storyId})
+            const commentIdx = state.photoStories[storyIdx].comments.findIndex((element) => { return element.id === payload.commentId})
+            if (!state.photoStories[storyIdx].comments[commentIdx].likedBy){
+                state.photoStories[storyIdx].comments[commentIdx].likedBy = []
+            }
+            state.photoStories[storyIdx].comments[commentIdx].likedBy.unshift(likeToAdd)
+            // console.log('added ', state.photoStories[0].comments[0].likedBy)
+        },
+        removeCommentLike(state, payload){
+            // console.log('to remove ', state.photoStories[0].comments[0].likedBy)
+            const storyIdx = state.photoStories.findIndex((element) => { return element.id === payload.storyId})
+            const commentIdx = state.photoStories[storyIdx].comments.findIndex((element) => { return element.id === payload.commentId})
+            const likeIdx = state.photoStories[storyIdx].comments[commentIdx].likedBy.findIndex((element) => { return element.id === state.loggedInUser.id})
+            state.photoStories[storyIdx].comments[commentIdx].likedBy.splice(likeIdx, 1)
+        },
+
         addComment(state, payload){
-            if (!payload.txt) return;
             // var x=storageService.makeId()
             // if (!x) return
-            console.log('store ', payload)
+            // console.log('store ', payload)
             var commentToAdd = {
                 id: storageService.makeId(),
                 by: {
