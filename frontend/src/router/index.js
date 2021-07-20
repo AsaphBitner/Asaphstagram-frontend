@@ -17,7 +17,7 @@ const routes = [
         component: landingPage
     },
     {
-        path: '/profile-page/',
+        path: '/profile-page/:userId?',
         name: 'profile-page',
         component: profilePage
     },

@@ -1,11 +1,11 @@
 <template>
   <div class="page-container">
-    <h1>FOLLOWING FEED!!!</h1>
+    <!-- <h1>FOLLOWING FEED!!!</h1> -->
 
     <div class="stories-container">
       <ul
         class="story-list"
-        v-for="(story, idx) in this.photoStoriesToShow"
+        v-for="(story, idx) in this.storiesToShow"
         :key="story.id"
       >
         <li>
@@ -27,15 +27,8 @@
               <img :src="story.imgUrl" alt="ERROR!" />
             </div>
             <div class="story-after-photo">
-            <div class="story-text">
-              <p>
-                <span>{{ story.owner.username }}</span> {{ story.txt }}aaaaaaa
-                bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk 
-                llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz
-              </p>
-            </div>
-            <div class="story-three-icons-container">
-              <div class="story-three-icons">
+            <div class="story-four-icons-container">
+              <div class="story-four-icons">
                    <span v-if="!likedByMe(story)" @click="addLike('story', story)">
                   <svg
                     aria-label="Like"
@@ -62,8 +55,7 @@
                     viewBox="0 0 48 48"
                     width="24"
                   >
-                    <path
-                      d="M34.6 6.1c5.7 0 10.4 5.2 10.4 11.5 0 6.8-5.9 11-11.5 16S25 41.3 24 41.9c-1.1-.7-4.7-4-9.5-8.3-5.7-5-11.5-9.2-11.5-16C3 11.3 7.7 6.1 13.4 6.1c4.2 0 6.5 2 8.1 4.3 1.9 2.6 2.2 3.9 2.5 3.9.3 0 .6-1.3 2.5-3.9 1.6-2.3 3.9-4.3 8.1-4.3m0-3c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5.6 0 1.1-.2 1.6-.5 1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"
+                    <path d="M34.6 6.1c5.7 0 10.4 5.2 10.4 11.5 0 6.8-5.9 11-11.5 16S25 41.3 24 41.9c-1.1-.7-4.7-4-9.5-8.3-5.7-5-11.5-9.2-11.5-16C3 11.3 7.7 6.1 13.4 6.1c4.2 0 6.5 2 8.1 4.3 1.9 2.6 2.2 3.9 2.5 3.9.3 0 .6-1.3 2.5-3.9 1.6-2.3 3.9-4.3 8.1-4.3m0-3c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5.6 0 1.1-.2 1.6-.5 1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"
                     ></path>
                     <path
                       d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"
@@ -71,6 +63,7 @@
                   </svg>
                 </span>
                 <!-- COMMENT -->
+                <span>
                 <svg
                   aria-label="Comment"
                   class="story-comment-icon"
@@ -86,43 +79,63 @@
                     fill-rule="evenodd"
                   ></path>
                 </svg>
+                </span>
               <!-- MESSAGE -->
-              <svg aria-label="Direct" class="_8-yf5 " fill="#262626" height="24" role="img" viewBox="0 0 48 48" width="24"><path d="M47.8 3.8c-.3-.5-.8-.8-1.3-.8h-45C.9 3.1.3 3.5.1 4S0 5.2.4 5.7l15.9 15.6 5.5 22.6c.1.6.6 1 1.2 1.1h.2c.5 0 1-.3 1.3-.7l23.2-39c.4-.4.4-1 .1-1.5zM5.2 6.1h35.5L18 18.7 5.2 6.1zm18.7 33.6l-4.4-18.4L42.4 8.6 23.9 39.7z"></path></svg>
+              <span>
+              <svg aria-label="Direct" class="" fill="#262626" height="24" role="img" viewBox="0 0 48 48" width="24"><path d="M47.8 3.8c-.3-.5-.8-.8-1.3-.8h-45C.9 3.1.3 3.5.1 4S0 5.2.4 5.7l15.9 15.6 5.5 22.6c.1.6.6 1 1.2 1.1h.2c.5 0 1-.3 1.3-.7l23.2-39c.4-.4.4-1 .1-1.5zM5.2 6.1h35.5L18 18.7 5.2 6.1zm18.7 33.6l-4.4-18.4L42.4 8.6 23.9 39.7z"></path></svg>
+             </span>
+            <!-- BOOKMARK -->
+            <span class="story-bookmark">
+            <svg aria-label="Save" class="_8-yf5 " fill="#262626" height="24" role="img" viewBox="0 0 48 48" width="24"><path d="M43.5 48c-.4 0-.8-.2-1.1-.4L24 29 5.6 47.6c-.4.4-1.1.6-1.6.3-.6-.2-1-.8-1-1.4v-45C3 .7 3.7 0 4.5 0h39c.8 0 1.5.7 1.5 1.5v45c0 .6-.4 1.2-.9 1.4-.2.1-.4.1-.6.1zM24 26c.8 0 1.6.3 2.2.9l15.8 16V3H6v39.9l15.8-16c.6-.6 1.4-.9 2.2-.9z"></path></svg>
+            </span>
               </div>
             </div>
+            <!-- End of four icons -->
             <div class="story-liked-by">
             <p v-if="story.likedBy">
-                &nbsp;Liked by&nbsp;<span>{{ latestLiker(story) }}</span
+                Liked by&nbsp;<span>{{ latestLiker(story) }}</span
                 >&nbsp;{{ likedByMessage(story) }}
               </p>
             </div>
-            <div class="story-comments">
+            <div class="story-text">
               <p>
-                <span>{{ story.comments[0].by.username }}</span
-                >&nbsp;{{ story.comments[0].txt }}
+                <span>{{ story.owner.username }}</span> {{ story.txt }}aaaaaaa
+                bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk 
+                llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz
               </p>
-              <span v-if="commentByMe(story.comments[0].by.id)" class="delete-comment">
+            </div>
+            <!-- start of comments!!!!!!!!!!!!!!!!!! -->
+            <div class="story-comments">
+            <p class="view-all-comments">
+              View all {{ story.comments.length }} comments
+            </p>
+              <ul v-for="(comment, cidx) in story.comments" :key="comment.id">
+              <li v-if="cidx < numCommentsToShow">
+              <!-- SINGLE COMMENT! -->
+              <p>
+                <span>{{ comment.by.username }}</span
+                >&nbsp;{{ comment.txt }}
+              </p>
+              <span v-if="commentByMe(comment.id)" class="delete-comment">
                 x
               </span>
-              <span v-if="!commentLikedByMe(story)" @click="addLike('comment', story, story.comments[0])" class="comment-like">
+              <span v-if="!commentLikedByMe(story, cidx)" @click="addLike('comment', story, story.comments[cidx])" class="comment-like">
               <svg aria-label="Like" class="" fill="#262626" height="12" role="img" viewBox="0 0 48 48" width="12"><path d="M34.6 6.1c5.7 0 10.4 5.2 10.4 11.5 0 6.8-5.9 11-11.5 16S25 41.3 24 41.9c-1.1-.7-4.7-4-9.5-8.3-5.7-5-11.5-9.2-11.5-16C3 11.3 7.7 6.1 13.4 6.1c4.2 0 6.5 2 8.1 4.3 1.9 2.6 2.2 3.9 2.5 3.9.3 0 .6-1.3 2.5-3.9 1.6-2.3 3.9-4.3 8.1-4.3m0-3c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5.6 0 1.1-.2 1.6-.5 1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path></svg>
               </span>
-              <span v-if="commentLikedByMe(story)" @click="removeLike('comment', story, story.comments[0])" class="comment-unlike">
-              <svg aria-label="Like" class="" fill="red" height="12" role="img" viewBox="0 0 48 48" width="12"><path d="M34.6 6.1c5.7 0 10.4 5.2 10.4 11.5 0 6.8-5.9 11-11.5 16S25 41.3 24 41.9c-1.1-.7-4.7-4-9.5-8.3-5.7-5-11.5-9.2-11.5-16C3 11.3 7.7 6.1 13.4 6.1c4.2 0 6.5 2 8.1 4.3 1.9 2.6 2.2 3.9 2.5 3.9.3 0 .6-1.3 2.5-3.9 1.6-2.3 3.9-4.3 8.1-4.3m0-3c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5.6 0 1.1-.2 1.6-.5 1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path></svg><path d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path>
+              <span v-if="commentLikedByMe(story, cidx)" @click="removeLike('comment', story, story.comments[cidx])" class="comment-unlike">
+              <svg aria-label="unLike" class="" fill="red" height="12" role="img" viewBox="0 0 48 48" width="12"><path d="M34.6 6.1c5.7 0 10.4 5.2 10.4 11.5 0 6.8-5.9 11-11.5 16S25 41.3 24 41.9c-1.1-.7-4.7-4-9.5-8.3-5.7-5-11.5-9.2-11.5-16C3 11.3 7.7 6.1 13.4 6.1c4.2 0 6.5 2 8.1 4.3 1.9 2.6 2.2 3.9 2.5 3.9.3 0 .6-1.3 2.5-3.9 1.6-2.3 3.9-4.3 8.1-4.3m0-3c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5.6 0 1.1-.2 1.6-.5 1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path><path d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"></path></svg>
               </span>
+              <!-- SINGLE COMMENT! -->
+            </li>
+            </ul>
             </div>
-            <p class="view-all-comments">
-              &nbsp;View all {{ story.comments.length }} comments
-            </p>
+            <!-- end of comments!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
             <div class="story-how-long-ago">
               {{ timeDifference(Date.now(), story.createdAt).toUpperCase() }}
             </div>
             <div class="story-add-comment">
-              <!-- <form @submit.prevent="addComment(story, idx)">
-                <input v-model="newCommentInputs[idx]" type="text" placeholder="Add a comment..." />
-              </form> -->
-              <!-- {{idx}} -->
-              <form @submit="addComment(story, idx, $event)" method="POST"><button type="button"><div class="QBdPU "><svg aria-label="Emoji" class="_8-yf5 " fill="#262626" height="24" role="img" viewBox="0 0 48 48" width="24"><path d="M24 48C10.8 48 0 37.2 0 24S10.8 0 24 0s24 10.8 24 24-10.8 24-24 24zm0-45C12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21S35.6 3 24 3z"></path><path d="M34.9 24c0-1.4-1.1-2.5-2.5-2.5s-2.5 1.1-2.5 2.5 1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5zm-21.8 0c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5-2.5-1.1-2.5-2.5zM24 37.3c-5.2 0-8-3.5-8.2-3.7-.5-.6-.4-1.6.2-2.1.6-.5 1.6-.4 2.1.2.1.1 2.1 2.5 5.8 2.5 3.7 0 5.8-2.5 5.8-2.5.5-.6 1.5-.7 2.1-.2.6.5.7 1.5.2 2.1 0 .2-2.8 3.7-8 3.7z"></path></svg></div></button><div class="" style=""></div>
+              <form @submit="addComment(story, idx, $event)" method="POST"><button type="button"><div class=""><svg aria-label="Emoji" class="_8-yf5 " fill="#262626" height="24" role="img" viewBox="0 0 48 48" width="24"><path d="M24 48C10.8 48 0 37.2 0 24S10.8 0 24 0s24 10.8 24 24-10.8 24-24 24zm0-45C12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21S35.6 3 24 3z"></path><path d="M34.9 24c0-1.4-1.1-2.5-2.5-2.5s-2.5 1.1-2.5 2.5 1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5zm-21.8 0c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5-2.5-1.1-2.5-2.5zM24 37.3c-5.2 0-8-3.5-8.2-3.7-.5-.6-.4-1.6.2-2.1.6-.5 1.6-.4 2.1.2.1.1 2.1 2.5 5.8 2.5 3.7 0 5.8-2.5 5.8-2.5.5-.6 1.5-.7 2.1-.2.6.5.7 1.5.2 2.1 0 .2-2.8 3.7-8 3.7z"></path></svg></div></button><div class="" style=""></div>
               <textarea v-model="newCommentInputs[idx]" @keydown.enter="addComment(story, idx, $event)" aria-label="Add a comment…" placeholder="Add a comment…" class="Ypffh" autocomplete="off" autocorrect="off" style=""></textarea>
               <button class="" type="submit" @click="addComment(story, idx, $event)">Post</button>
               </form>
@@ -131,7 +144,6 @@
           </div>
         </li>
       </ul>
-      <!-- <img :src="require(`${photoStoriesToShow[0].imgUrl}`)" alt="" /> -->
     </div>
   </div>
 </template>
@@ -140,43 +152,42 @@
 export default {
   data() {
     return {
-      storyText: this.$store.state.photoStories[0].txt,
+      // storyText: this.$store.state.Stories[0].txt,
       numStoriesToShow: 6,
-      photoStories: [],
-      photoStoriesToShow: [],
+      stories: [],
+      storiesToShow: [],
       users: [],
       newCommentInputs: [],
+      numCommentsToShow: 1,
+      commentsToShow: [],
     };
   },
   methods: {
-    loadPhotoStories() {
-      this.photoStories = this.$store.getters.getPhotoStories;
+    loadStories() {
+      this.stories = this.$store.getters.getStories;
     },
     getStoryImgUrl(idx) {
-      return this.photoStoriesToShow[idx].imgUrl;
+      return this.storiesToShow[idx].imgUrl;
     },
-    getUserForStory(ownerId) {
-      return this.users.find((user) => {
-        user.id === ownerId;
-      });
-    },
-    loadUsers() {
-      this.users = this.$store.getters.getUsers;
-    },
+    // getUserForStory(ownerId) {
+    //   return this.users.find((user) => {
+    //     user.id === ownerId;
+    //   });
+    // },
+    // loadUsers() {
+    //   this.users = this.$store.getters.getUsers;
+    // },
 
-    loadLimitedPhotoStories() {
-      this.photoStoriesToShow = this.photoStories.slice(
+    loadLimitedStories() {
+      this.storiesToShow = this.stories.slice(
         0,
         this.numStoriesToShow
       );
         while (this.newCommentInputs.length < this.numStoriesToShow) {
           this.newCommentInputs.push('')    
         }
-        // console.log(this.newCommentInputs)
-    //  this.photoStoriesToShow.forEach((item, idx)=>{ 
-    //   this.newCommentInputs.splice(idx, 1, '')
-    // })
     },
+
     resetnewCommentsInput(idx){
       this.newCommentInputs[idx] = ''
     },
@@ -227,17 +238,17 @@ export default {
       });
       return likedOrNot;
     },
-    commentLikedByMe(story){
-      if (!story.comments[0].likedBy) return false
-      const likedOrNot = story.comments[0].likedBy.find((item) => {
+    commentLikedByMe(story, idx){
+      if (!story.comments[idx].likedBy) return false
+      const likedOrNot = story.comments[idx].likedBy.find((item) => {
         return item.id === this.$store.state.loggedInUser.id;
       });
       return likedOrNot;
-      // console.log('!!!!!!!!', story)
     },
     addLike(type, story, comment = null) {
       if (type === 'story') {this.$store.commit("addLike", story.id)}
       else if (type === 'comment') {this.$store.commit("addCommentLike", {storyId: story.id, commentId: comment.id})}
+      this.loadLimitedStories()
     },
     removeLike(type, story, comment = null) {
       if (type === 'story'){
@@ -245,7 +256,7 @@ export default {
       } else {
       this.$store.commit("removeCommentLike", {storyId: story.id, commentId: comment.id});
       }
-      this.loadLimitedPhotoStories();
+      this.loadLimitedStories();
     },
     commentByMe(commenterId) {
       if (commenterId === this.$store.state.loggedInUser.id) {
@@ -257,29 +268,28 @@ export default {
     addComment(story, storyIdx, ev) {
       if (ev.shiftKey) return
       ev.preventDefault()
-      // console.log('Add comment func started ', this.newCommentInputs[storyIdx])
       if (!this.newCommentInputs[storyIdx]) {console.log('No text'); return}
       var text = this.newCommentInputs[storyIdx];
-      // console.log(text)
       var idAndTxt = {
         id: story.id,
         txt: text,
       }
       this.$store.commit('addComment', idAndTxt)
       this.resetnewCommentsInput(storyIdx);
-      this.loadLimitedPhotoStories();
+      this.loadLimitedStories();
     },
     removeComment(story, commentId) {
       this.$store.commit("removeComment", story.id, commentId);
-      this.loadLimitedPhotoStories();
+      this.loadLimitedStories();
     },
   },
   // computed: {
   // },
   created() {
-    this.loadPhotoStories();
-    this.loadLimitedPhotoStories();
-    this.loadUsers();
+    this.$store.commit('loadStories')
+    this.loadStories();
+    this.loadLimitedStories();
+    // this.loadUsers();
   },
 };
 </script>

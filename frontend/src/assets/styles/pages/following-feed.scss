@@ -1,15 +1,18 @@
+
+
 .story-list{
     list-style: none;
-    text-align: center;    
+    text-align: center;
+    margin-top: 0.9rem;    
 }
 .single-story-container{
     // max-height: 46.5625rem;
-    max-width: 38.375rem;
-    border: 1px solid lightgray;
+    max-width: 41.15rem;
+    border: 1px solid rgba(219,219,219,1);
     display: inline-block;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    font-size: 0.8rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    // //////font-size: 0.8rem;
     // background-color: rgba(255, 255, 255, 0.829);
     
 }
@@ -20,8 +23,8 @@
     gap: .7rem;
     // margin: 1rem;
     font-weight: 600;
-    font-size: 0.8rem;
-    padding: 0.7rem;
+    // ////font-size: 0.8rem;
+    padding: 1rem;
 
     .small-profile-img-story{
         // border: 0.1rem solid red;
@@ -66,77 +69,106 @@
 
 }
 
-
-.story-text{
-    width: 100%;
-    display: flex;
-    // margin: 0.2rem;
-    padding: 0.3rem;
-    // padding-top: 0.3rem;
-    // padding-bottom: 0.3rem;
-    // padding-left: 0.2rem;
-    // padding-right: 0.2rem;
-    p{
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        word-break: break-word;
-        overflow-wrap: break-word;
-        word-wrap: break-all;
-        text-decoration: none;
-        span{
-            font-weight: 600;
-        }
-    }
+.story-after-photo{
+    padding: 0.3rem 1.068rem;
 }
 
-.story-three-icons-container{
+.story-four-icons-container{
     display: flex;
     align-items: center;
-    // border-top: 1px solid rgb(231, 219, 201);
-    // border-bottom: 1px solid rgb(231, 219, 201);
-    padding: 0.3rem;
-    gap: 0.5rem;
-    // *{
-    //     margin-left: .3rem;
-    //     margin-right: .3rem;
-    // }
-    span{
-        font-weight: 600;
-    }
+    max-width: 100%
+    // padding: 0.3rem;
+    // gap: 0.5rem;
+    
+    
+    
 }
-.story-three-icons{
+.story-four-icons{
     cursor: pointer;
     display: flex;
-    gap: 0.5rem;
+    align-items: center;
+    // gap: 0.5rem;
+    width: 100%;
+    // margin: .2674rem 0rem 0rem;
     // padding: 0.3rem;
+    
+        span{
+            svg{
+                margin: 0.2674rem 0.6rem;
+            }
+        }
+    
+    .story-like-icon, .story-unlike-icon{
+        margin-left: 0;
+        padding-left: 0;
+        
+        span{
+        margin-left: 0;
+        padding-left: 0;            
+        }
+    }
+    .story-bookmark{
+        margin-left: auto;
+        margin-right: 0px;
+        // background-color: pink;
+        padding: 0;
+        svg{
+            margin: 0;
+        }
+    }
+    span{
+        font-weight: 600;
+        padding: 0;
+        margin: 0;
+    }
+    
 }
 
 .story-liked-by{
     display: flex;
+    margin-bottom: 0.5rem;
     span{
         font-weight: 600;
     }
 }
+.story-text{
+    width: 100%;
+    display: flex;
+    margin: 0 0 0.15rem 0;
+        // padding: 0.3rem;
+        p{
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            word-wrap: break-all;
+            text-decoration: none;
+            span{
+                font-weight: 600;
+            }
+        }
+    }
 
-// .story-like-icon,
-// .story-unlike-icon,
-// .story-commment-icon{
-//     max-width: 1rem;
-//     max-height: 1rem;
-//     min-width: 1rem;
-//     min-height: 1rem;
-//     display: inline;
-// }
 
-.story-comments{
+.view-all-comments{
     display: flex;
     align-items: center;
-    gap: .5rem;
+    cursor: pointer;
+    color: #8e8e8e;
+    margin: 0.15rem 0;
+    // text-decoration: underline;
+    // padding: 0.3rem;
+
+}
+.story-comments ul li{
+    display: flex;
     width: 100%;
+    margin: 0.15rem 0;
     // border: 1px solid black;
     // padding: 0.3rem;
     p{
+        // display: flex;
         max-width: 100%;
         text-overflow: ellipsis;
         overflow: hidden;
@@ -149,48 +181,37 @@
             font-weight: 600;
         }
     }
-    .delete-comment{
+    .delete-comment, .comment-like, .comment-unlike{
         // display: none;
+        // background-color: rgba(218, 209, 209, 0.6);
+        // z-index: 1;
         margin-left: auto;
-        background-color: rgba(218, 209, 209, 0.6);
-        z-index: 1;
+        cursor: pointer;
     }   
 }
 .story-comments:hover .delete-comment{
 display: block;
 }
 
-.view-all-comments{
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    color: #8e8e8e;
-    text-decoration: underline;
-    padding: 0.3rem;
-
-}
 .story-how-long-ago{
     display: flex;
     align-items: center;
     color: #8e8e8e;
-    padding: 0.3rem;
-    padding-top: 0.5rem;
+    font-size: 0.725rem;
+
+    margin: 0.3rem 0 .2674rem 0;
+    // padding-top: 0.5rem;
 }
 
 .story-add-comment form{
     width: 100%;
-    padding: .3rem;
     display: flex;
     align-items: center;
     min-height: 1.3rem;
     max-height: 4.4rem;
-    // text-align: center;
     border-top: 1px solid #e8e8e8;
     gap: .5rem;
-    // align-items: stretch;
-    // form{
-    //     width: 100%;
-    // }
+    margin-top: .2674rem;
     button{
         background-color: transparent;
         color: rgba(128, 201, 235, 0.8);
@@ -203,12 +224,11 @@ display: block;
     }
 
     textarea{
-        // font-size: .8rem;
-        font: 400 13.3333px Arial;
+        // //////font-size: .8rem;
+        font: 400 13.3333px ;
         max-width: 100%;
         max-height: 100%;
-        // border: none;
-        padding-top: .8rem;
+        padding-top: .9359rem;
         resize: none;
         outline: 0;
         overflow: hidden;
@@ -221,13 +241,6 @@ display: block;
     textarea:focus+button{
          color: #0095f6;
     }
-    // button{
-    //     margin-left: 1rem;
-    // }
-    // span{
-    //     font-weight: 601;
-    // }
-    
 }
 
 

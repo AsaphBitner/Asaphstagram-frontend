@@ -26,7 +26,7 @@
 
     
     <div class="header-profile-image-container header-icon">
-    <router-link :to="'/profile-page'">
+    <router-link :to="'/profile-page/:userId?'">
     <img :src="this.$store.state.loggedInUser.profileImgUrl" alt="">
     </router-link>
     </div>
