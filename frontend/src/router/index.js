@@ -22,7 +22,7 @@ const routes = [
         component: profilePage
     },
     {
-        path: '/following-feed/',
+        path: '/following-feed/:userId?',
         name: 'following-feed', 
         component: followingFeed
     }, 

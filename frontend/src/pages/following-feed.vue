@@ -62,7 +62,7 @@
                 <div class="story-four-icons">
                   <span
                     v-if="!likedByMe(story)"
-                    @click="addLike('story', story)"
+                    @click="toggleLike('add', 'story', story, idx,)"
                   >
                     <svg
                       aria-label="Like"
@@ -80,7 +80,7 @@
                   </span>
                   <span
                     v-if="likedByMe(story)"
-                    @click="removeLike('story', story)"
+                    @click="removeLike('remove', 'story', story, idx)"
                   >
                     <svg
                       aria-label="unLike"
@@ -296,6 +296,7 @@ export default {
   data() {
     return {
       // storyText: this.$store.state.Stories[0].txt,
+      userId: this.$store.state.loggedInUser.id,
       numStoriesToShow: 6,
       stories: [],
       storiesToShow: [],
@@ -385,10 +386,20 @@ export default {
       });
       return likedOrNot;
     },
-    addLike(type, story, comment = null) {
+    toggleLike(request, type, story, storyIdx, comment = null, commentIdx = null) {
       if (type === "story") {
-        this.$store.commit("addLike", story.id);
-      } else if (type === "comment") {
+        const payload = {
+          story: story,
+          request: request,
+        }
+        this.$store.dispatch("toggleLike", payload);
+//========== ADD INDEXES!!!!!!!!!!!!!!!!!!!! =======================
+
+
+      } 
+      
+      
+      else if (type === "comment") {
         this.$store.commit("addCommentLike", {
           storyId: story.id,
           commentId: comment.id,

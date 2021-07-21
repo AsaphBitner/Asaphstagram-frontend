@@ -1,4 +1,8 @@
 
+// import {store} from '@/store/store.js'
+
+// console.log(store)
+
 export const storageService = {
     query,
     _get,
@@ -7,7 +11,17 @@ export const storageService = {
     put,
     remove,
     _makeId,
-    _loadStories
+    _loadStories,
+    _toggleLike,
+}
+
+var gloggedinUser = {
+    id: 'u11111',
+    username: 'HomerS',
+    password: 'Springfield',
+    fullname: 'Homer Simpson',
+    profileImgUrl: 'img/profile photos/IMG1.jpg',
+
 }
 
 function query(entityType, delay=0) {
@@ -18,6 +32,34 @@ function query(entityType, delay=0) {
         }, delay)
     })
 }
+
+async function _toggleLike(payload){
+    const stories = await query('stories')
+    const storyIdx = stories.findIndex((element) => { return element.id === payload.story.id})
+    var sendBack = {
+        request: payload.request,
+        storyIdx: storyIdx,
+    }
+    if (payload.request = 'add'){
+        const likeToAdd = {
+            id: gloggedinUser.id,
+            fullname: gloggedinUser.fullname,
+            username: gloggedinUser.username,
+            profileImgUrl: gloggedinUser.profileImgUrl,
+        }
+        stories[storyIdx].likedBy.unshift(likeToAdd)
+        sendBack.likeToAdd = likeToAdd
+    }
+    else{
+        const removeIdx = stories[storyIdx].likedBy.findIndex(item => {return item.id === this.$store.this.$store.state.loggedInUser.id})
+        stories[storyIdx].likedBy.splice(removeIdx, 1)
+        sendBack.removeIdx = removeIdx
+    }
+    _save('stories', stories)
+    return sendback
+}
+
+
 
 function _get(entityType, entityId) {
     return query(entityType)
@@ -509,7 +551,7 @@ function _loadStories() {
         },
 
         ]
-        localStorage.setItem(stories, JSON.stringify('stories'))
+        localStorage.setItem('stories', JSON.stringify(stories))
     }
     return Promise.resolve(stories);
 }
