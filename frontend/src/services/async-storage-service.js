@@ -511,5 +511,5 @@ function _loadStories() {
         ]
         localStorage.setItem(stories, JSON.stringify('stories'))
     }
-    return stories;
+    return Promise.resolve(stories);
 }

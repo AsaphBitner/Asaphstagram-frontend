@@ -4,12 +4,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    
     // flex-flow: row-wrap;
     background-color: #fafafa;
     border-bottom: lightgray solid 0.08rem;
     padding: 0.2rem;
     color: #262626;
-    position: sticky;
     
 
     .header-icon{
@@ -21,7 +24,7 @@
     font-family: 'Instagram Logo regular', sans-serif;
     font-weight: 100;
     font-size: 1.5rem;
-    margin: .4rem; 
+    padding: .4rem; 
 }
 
 .header-profile-image-container{
@@ -42,15 +45,18 @@ img{
     // border: rgba(230, 227, 227, 1) solid 0.05rem;
     border: .05rem solid #dbdbdb;
     font-size: 0.9rem;
-    padding: 0.4rem 0 0.4rem 0.5rem;
-    max-width: 15rem;
+    padding: 0.4rem 0;
+    width: 14.39rem;
+    height: 1.88rem;
     color: #262626;
     border-radius: 3px;
     outline: 0;
-    ::placeholder{
-        text-align: center;
-    }
+    text-align: center;
 } 
+.header-search:focus{
+    text-align: left;
+    padding: 0.4rem;
+}
 }
 
     .header-flex-1,
@@ -74,8 +80,8 @@ img{
 @media screen and (max-width: 415px){
  
     .header-container{
-        margin-right: 0.5rem;
-        margin-left: 0.5rem;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
     }
             .header-flex-1,
            .header-flex-3{
@@ -87,8 +93,8 @@ img{
    @media screen and (min-width: 680px){
            
            .header-container{
-               margin-right: 1rem;
-               margin-left: 1rem;
+               padding-right: 1rem;
+               padding-left: 1rem;
                // background-color: black;
            }
            .header-flex-1,
@@ -102,8 +108,8 @@ img{
        @media screen and (max-width: 680px){
            
            .header-container{
-               margin-right: 1rem;
-               margin-left: 1rem;
+               padding-right: 1rem;
+               padding-left: 1rem;
                // background-color: black;
            }
            
@@ -120,3 +126,20 @@ img{
            }
           }
    
+//========
+    @media screen and (max-width: 360px){
+        .header-flex-1{
+            display: none;
+            // background-color: pink;
+
+        }
+        .header-flex-3{
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            padding: 0 1rem
+        }
+        .header-icon{
+            margin: 0.4rem
+        }
+    }

@@ -31,13 +31,19 @@ export const store = new Vuex.Store({
             return users.slice()
         },
         getStories({stories}){
+            // console.log( 'getters: ', stories)
             return stories.slice()
         },
     },
     mutations: {
         loadStories(state){
-            // console.log('!!!!!!!!!!!!!!!!')
-            state.stories = storageService._loadStories()
+            storageService._loadStories()
+            .then(res => {state.stories = res; 
+                // console.log('bla bla: ', state.stories)
+            
+            })
+            // console.log('loadStories: ', state.stories)
+            return state.stories
         },
         removeLike(state, storyId){
             const storyIdx = state.stories.findIndex((element) => { return element.id === storyId})
