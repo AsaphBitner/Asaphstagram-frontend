@@ -33,7 +33,7 @@ export const store = new Vuex.Store({
         },
         getStories({stories}){
             // console.log( 'getters: ', stories)
-            return stories.slice()
+            return stories
         },
     },
     mutations: {
@@ -82,6 +82,10 @@ export const store = new Vuex.Store({
             state.stories[payload.storyIdx].comments.splice(payload.commentIdx, 1)
 
         },
+        deleteStory(state, {payload}){
+            state.stories.splice(payload.idx, 1)
+            // console.log(state.stories[0])
+        }
     },
 
     actions: {
@@ -103,6 +107,10 @@ export const store = new Vuex.Store({
             await storageService.deleteComment(payload)
             await commit({type: 'deleteComment', payload: payload})
         },
+        async deleteStory({commit}, payload){
+            await storageService._delete('stories', payload.story, payload.idx)
+            commit({type: 'deleteStory', payload: payload})
+        }
 
         // async getLoggedInUser({commit}){
         //     var payload = await storageService.query('loggedInUser')

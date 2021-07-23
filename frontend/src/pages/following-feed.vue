@@ -1,13 +1,13 @@
 <template>
   <div class="page-container">
-    <div v-if="this.backgroundDisplayed" class="menu-background" @click="closeBackground()">
-    <div class="delete-menu">
-      <span class="menu-option-delete">Delete</span>
-      <span class="menu-option-cancel">Cancel</span>
+    <div v-if="this.backgroundDisplayed" class="menu-background" @click="closeBackground()" @keydown="closeBackground()">
+    <div v-if="this.deleteMenuDisplayed" class="delete-menu" @keydown="closeBackground()">
+      <span class="menu-option-delete" @click.stop="openComfirmMenu()">Delete {{this.toDeleteEntity}}</span>
+      <span class="menu-option-cancel" @click.stop="closeBackground()">Cancel</span>
     </div>
-    <div class="are-you-sure-menu">
+    <div v-if="confirmMenuDisplayed" class="are-you-sure-menu" @keydown.enter="closeBackground()">
       <span class="confirmation">Are you sure?</span>
-      <span class="yesNo"><span class="yes">Yes</span><span class="no">No</span></span>
+      <span class="yesNo"><span class="yes" @click.stop="deleteConfirmed()">Yes, delete</span><span class="no" @click.stop="closeBackground()">No, cancel</span></span>
     </div>
     </div>
     <!-- :class="{backgroundDisplayed}" -->
@@ -28,7 +28,7 @@
               <router-link to="/profile-page" class="user-name-story">
                 {{ story.owner.username }}
               </router-link>
-              <span class="story-options">
+              <span class="story-options" @click="setToDelete(' story', story, idx)">
                 <svg
                   aria-label="More options"
                   class=""
@@ -181,19 +181,22 @@
                 <p class="view-all-comments">
                   View all {{ story.comments.length }} comments
                 </p>
-                <ul v-for="(comment, cidx) in story.comments" :key="comment.id">
-                  <li v-if="cidx < numCommentsToShow">
+                <ul v-for="(comment, cIdx) in story.comments" :key="comment.id">
+                  <li v-if="cIdx < numCommentsToShow">
                     <!-- SINGLE COMMENT! -->
                     <p>
                       <span>{{ comment.by.username }}</span
                       >&nbsp;{{ comment.txt }}
                     </p>
-                    <span v-if="commentByMe(comment.by.id)" class="delete-comment" @click="deleteComment(story, idx, comment, cidx)">
-                X
+                    <span v-if="commentByMe(comment.by.id)" class="delete-comment" @click="setToDelete(' comment', story, idx, comment, cIdx)">
+                <svg aria-label="Comment Options" class="_8-yf5 " fill="#8e8e8e" height="16" role="img" viewBox="0 0 48 48" width="16"><circle clip-rule="evenodd" cx="8" cy="24" fill-rule="evenodd" r="4.5"></circle><circle clip-rule="evenodd" cx="24" cy="24" fill-rule="evenodd" r="4.5"></circle><circle clip-rule="evenodd" cx="40" cy="24" fill-rule="evenodd" r="4.5"></circle></svg>
+                <circle clip-rule="evenodd" cx="8" cy="24" fill-rule="evenodd" r="4.5"></circle>
+                <circle clip-rule="evenodd" cx="24" cy="24" fill-rule="evenodd" r="4.5"></circle>
+                <circle clip-rule="evenodd" cx="40" cy="24" fill-rule="evenodd" r="4.5"></circle>
               </span>
                     <span
-                      v-if="!commentLikedByMe(story, cidx)"
-                      @click="toggleLike('add', 'comment', story, idx, comment, cidx)"
+                      v-if="!commentLikedByMe(story, cIdx)"
+                      @click="toggleLike('add', 'comment', story, idx, comment, cIdx)"
                       class="comment-like"
                     >
                       <svg
@@ -211,9 +214,9 @@
                       </svg>
                     </span>
                     <span
-                      v-if="commentLikedByMe(story, cidx)"
+                      v-if="commentLikedByMe(story, cIdx)"
                       @click="
-                        toggleLike('remove', 'comment', story, idx, comment, cidx)
+                        toggleLike('remove', 'comment', story, idx, comment, cIdx)
                       "
                       class="comment-unlike"
                     >
@@ -312,17 +315,17 @@ export default {
       newCommentInputs: [],
       numCommentsToShow: 1,
       commentsToShow: [],
-      backgroundDisplayed: true,
+      backgroundDisplayed: false,
       deleteMenuDisplayed: false,
       confirmMenuDisplayed: false,
+      toDeleteEntity: '',
+      commentToDelete: {},
+      storyToDelete: {},
     };
   },
   methods: {
     loadStories() {
       this.stories = this.$store.getters.getStories;
-    },
-    getStoryImgUrl(idx) {
-      return this.storiesToShow[idx].imgUrl;
     },
     // getUserForStory(ownerId) {
     //   return this.users.find((user) => {
@@ -339,6 +342,7 @@ export default {
       while (this.newCommentInputs.length < this.numStoriesToShow) {
         this.newCommentInputs.push("");
       }
+
     },
 
     resetnewCommentsInput(idx) {
@@ -380,7 +384,6 @@ export default {
 
     latestLiker(story) {
       if (!story.likedBy.length) return
-      // console.log('1: ', story.likedBy[0].id,'2: ', this.$store.state.loggedInUser.id)
       if (story.likedBy[0].id === this.$store.state.loggedInUser.id) {
         return "you";
       } else {
@@ -412,11 +415,9 @@ export default {
         }
       
         await this.$store.dispatch("toggleLike", payload)
-        await this.loadStories()
         this.loadLimitedStories()
     },
     commentByMe(commenterId) {
-      // console.log("comment by me?", commenterId);
       if (commenterId === this.$store.state.loggedInUser.id) {
         return true;
       } else {
@@ -439,29 +440,73 @@ export default {
       };
       await this.$store.dispatch('addComment', payload);
       await this.resetnewCommentsInput(storyIdx);
-      await this.loadStories()
       this.loadLimitedStories();
     },
-    async deleteComment(story, storyIdx, comment, commentIdx) {
-      const payload = {
-        story: story,
-        storyIdx: storyIdx,
-        comment: comment,
-        commentIdx: commentIdx,
-      }
+    async deleteComment() {
+      // console.log('comment to Delete: ', this.commentToDelete)
+      const payload = this.commentToDelete
       await this.$store.dispatch("deleteComment", payload);
-      this.loadLimitedStories();
+      this.commentToDelete = {}
+      this.loadLimitedStories()
     },
+    async deleteStory(){
+      const payload = this.storyToDelete
+      await this.$store.dispatch("deleteStory", payload)
+      // console.log(this.storyToDelete)
+      this.storyToDelete = {}
+      this.loadLimitedStories()
+      console.log('loaded limited stories?')
+    },
+    openDeleteMenu(){
+      this.backgroundDisplayed = true
+      this.deleteMenuDisplayed = true
+    },
+    openComfirmMenu(){
+      this.deleteMenuDisplayed = false
+      this.confirmMenuDisplayed = true
+    },
+    closeBackground(){
+      this.backgroundDisplayed = false
+      this.deleteMenuDisplayed = false
+      this.confirmMenuDisplayed = false
+      this.loadLimitedStories()
+    },
+
+    // whatToDelete(entity){
+    //   this.toDeleteEntity = entity
+    //   this.openDeleteMenu()
+    // },
+    deleteConfirmed(){
+      if (this.toDeleteEntity === ' comment'){
+        this.deleteComment()
+        this.closeBackground()
+      }
+      else if (this.toDeleteEntity === ' story') {
+        // console.log('Delete story not ready yet')
+        this.deleteStory()
+        this.closeBackground()
+        }
+      
+    },
+    setToDelete(entityType, story, idx, comment = null, cIdx = null){
+      this.toDeleteEntity = entityType
+      if (entityType === ' comment') {
+        this.commentToDelete = {
+          story: story,
+          storyIdx: idx,
+          comment: comment,
+          commentIdx: cIdx,
+        }}
+        else if (entityType === ' story') {
+        this.storyToDelete = {
+          story: story,
+          idx: idx,
+        }}
+        this.openDeleteMenu()
+    },
+
   },
-  openDeleteMenu(){
-    this.deleteMenuDisplayed = true
-  },
-  closeBackground(){
-    this.backgroundDisplayed = false
-    this.deleteMenuDisplayed = false
-    this.confirmMenuDisplayed = false
-    this.loadLimitedStories()
-  },
+  //======================END OF METHODS=================
   // computed: {
   // },
   async created() {

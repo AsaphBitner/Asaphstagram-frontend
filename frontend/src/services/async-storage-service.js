@@ -16,6 +16,7 @@ export const storageService = {
     gLoggedInUser,
     addComment,
     deleteComment,
+    _delete,
 }
 
 var gLoggedInUser = {
@@ -142,6 +143,19 @@ function remove(entityType, entityId) {
         })
 }
 
+async function _delete(entityType, entity, entityIdx = null){
+    const entities = await query(entityType)
+    if (entityIdx >= 0){
+        entities.splice(entityIdx, 1)
+    }
+    else {entityIdx = entities.findindex(item => item.id === entity.id)
+    entities.splice(entityIdx, 1)
+    }
+    _save(entityType, entities)
+    // console.log
+
+}
+
 
 
 function _makeId(length = 5) {
@@ -162,7 +176,7 @@ function _loadStories() {
                 id: 's111',
                 txt: 'Best trip ever11111111',
                 imgUrl: 'img/Stock photos - NY/NY01.jpg', //Can be an array if decide to support multiple imgs
-                createdAt: 123543452,
+                createdAt: 1624123543452,
                 owner: {
                     id: 'u11111',
                     fullname: 'Homer Simpson',
@@ -224,7 +238,7 @@ function _loadStories() {
                 id: 's222',
                 txt: 'Best trip ever222222',
                 imgUrl: 'img/Stock photos - NY/NY02.jpg', //Can be an array if decide to support multiple imgs
-                createdAt: 123543452,
+                createdAt: 1624123543452,
                 owner: {
                     id: 'u11111',
                     fullname: 'Homer Simpson',
@@ -286,7 +300,7 @@ function _loadStories() {
                 id: 's333',
                 txt: 'Best trip ever333333',
                 imgUrl: 'img/Stock photos - NY/NY03.jpeg', //Can be an array if decide to support multiple imgs
-                createdAt: 123543452,
+                createdAt: 1624123543452,
                 owner: {
                     id: 'u11111',
                     fullname: 'Homer Simpson',
@@ -348,7 +362,7 @@ function _loadStories() {
             id: 's444',
             txt: 'Best trip ever444444',
             imgUrl: 'img/Stock photos - NY/NY04.jpg', //Can be an array if decide to support multiple imgs
-            createdAt: 123543452,
+            createdAt: 1624123543452,
             owner: {
                 id: 'u11111',
                 fullname: 'Homer Simpson',
@@ -410,7 +424,7 @@ function _loadStories() {
             id: 's555',
             txt: 'Best trip ever5555555',
             imgUrl: 'img/Stock photos - NY/NY05.jpeg', //Can be an array if decide to support multiple imgs
-            createdAt: 123543452,
+            createdAt: 1624123543452,
             owner: {
                 id: 'u11111',
                 fullname: 'Homer Simpson',
@@ -472,7 +486,7 @@ function _loadStories() {
             id: 's666',
             txt: 'Best trip ever666666666',
             imgUrl: 'img/Stock photos - NY/NY06.jpg', //Can be an array if decide to support multiple imgs
-            createdAt: 123543452,
+            createdAt: 1624123543452,
             owner: {
                 id: 'u11111',
                 fullname: 'Homer Simpson',
@@ -534,7 +548,7 @@ function _loadStories() {
             id: 's777',
             txt: 'Best trip ever77777777',
             imgUrl: 'img/Stock photos - NY/NY07.jpg', //Can be an array if decide to support multiple imgs
-            createdAt: 123543452,
+            createdAt: 1624123543452,
             owner: {
                 id: 'u11111',
                 fullname: 'Homer Simpson',
