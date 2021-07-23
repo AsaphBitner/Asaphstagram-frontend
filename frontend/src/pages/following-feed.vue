@@ -1,8 +1,16 @@
 <template>
   <div class="page-container">
-    <!-- <app-header /> -->
-    <!-- <h1>FOLLOWING FEED!!!</h1> -->
-
+    <div v-if="this.backgroundDisplayed" class="menu-background" @click="closeBackground()">
+    <div class="delete-menu">
+      <span class="menu-option-delete">Delete</span>
+      <span class="menu-option-cancel">Cancel</span>
+    </div>
+    <div class="are-you-sure-menu">
+      <span class="confirmation">Are you sure?</span>
+      <span class="yesNo"><span class="yes">Yes</span><span class="no">No</span></span>
+    </div>
+    </div>
+    <!-- :class="{backgroundDisplayed}" -->
     <div class="stories-container">
       <ul
         class="story-list"
@@ -62,7 +70,7 @@
                 <div class="story-four-icons">
                   <span
                     v-if="!likedByMe(story)"
-                    @click="toggleLike('add', 'story', story, idx,)"
+                    @click="toggleLike('add', 'story', story, idx)"
                   >
                     <svg
                       aria-label="Like"
@@ -80,7 +88,7 @@
                   </span>
                   <span
                     v-if="likedByMe(story)"
-                    @click="removeLike('remove', 'story', story, idx)"
+                    @click="toggleLike('remove', 'story', story, idx)"
                   >
                     <svg
                       aria-label="unLike"
@@ -180,12 +188,12 @@
                       <span>{{ comment.by.username }}</span
                       >&nbsp;{{ comment.txt }}
                     </p>
-                    <!-- <span v-if="commentByMe(comment.id)" class="delete-comment">
-                x
-              </span> -->
+                    <span v-if="commentByMe(comment.by.id)" class="delete-comment" @click="deleteComment(story, idx, comment, cidx)">
+                X
+              </span>
                     <span
                       v-if="!commentLikedByMe(story, cidx)"
-                      @click="addLike('comment', story, story.comments[cidx])"
+                      @click="toggleLike('add', 'comment', story, idx, comment, cidx)"
                       class="comment-like"
                     >
                       <svg
@@ -205,7 +213,7 @@
                     <span
                       v-if="commentLikedByMe(story, cidx)"
                       @click="
-                        removeLike('comment', story, story.comments[cidx])
+                        toggleLike('remove', 'comment', story, idx, comment, cidx)
                       "
                       class="comment-unlike"
                     >
@@ -296,7 +304,7 @@ export default {
   data() {
     return {
       // storyText: this.$store.state.Stories[0].txt,
-      userId: this.$store.state.loggedInUser.id,
+      // userId: this.$store.state.loggedInUser.id,
       numStoriesToShow: 6,
       stories: [],
       storiesToShow: [],
@@ -304,6 +312,9 @@ export default {
       newCommentInputs: [],
       numCommentsToShow: 1,
       commentsToShow: [],
+      backgroundDisplayed: true,
+      deleteMenuDisplayed: false,
+      confirmMenuDisplayed: false,
     };
   },
   methods: {
@@ -322,7 +333,8 @@ export default {
     //   this.users = this.$store.getters.getUsers;
     // },
 
-    loadLimitedStories() {
+    async loadLimitedStories() {
+      await this.loadStories()
       this.storiesToShow = this.stories.slice(0, this.numStoriesToShow);
       while (this.newCommentInputs.length < this.numStoriesToShow) {
         this.newCommentInputs.push("");
@@ -356,6 +368,7 @@ export default {
       }
     },
     likedByMessage(story) {
+      if (!story.likedBy.length) return
       if (story.likedBy.length === 1) {
         return "";
       } else if (story.likedBy.length === 2) {
@@ -366,6 +379,8 @@ export default {
     },
 
     latestLiker(story) {
+      if (!story.likedBy.length) return
+      // console.log('1: ', story.likedBy[0].id,'2: ', this.$store.state.loggedInUser.id)
       if (story.likedBy[0].id === this.$store.state.loggedInUser.id) {
         return "you";
       } else {
@@ -386,83 +401,75 @@ export default {
       });
       return likedOrNot;
     },
-    toggleLike(request, type, story, storyIdx, comment = null, commentIdx = null) {
-      if (type === "story") {
-        const payload = {
-          story: story,
-          request: request,
+    async toggleLike(request, entityType, story, storyIdx, comment = null, commentIdx = null) {
+      const payload = {
+        request: request,
+        entityType: entityType,
+        story: story,
+        storyIdx: storyIdx,
+        comment: comment,
+        commentIdx: commentIdx,
         }
-        this.$store.dispatch("toggleLike", payload);
-//========== ADD INDEXES!!!!!!!!!!!!!!!!!!!! =======================
-
-
-      } 
       
-      
-      else if (type === "comment") {
-        this.$store.commit("addCommentLike", {
-          storyId: story.id,
-          commentId: comment.id,
-        });
-      }
-      this.loadLimitedStories();
-    },
-    removeLike(type, story, comment = null) {
-      if (type === "story") {
-        this.$store.commit("removeLike", story.id);
-      } else {
-        this.$store.commit("removeCommentLike", {
-          storyId: story.id,
-          commentId: comment.id,
-        });
-      }
-      this.loadLimitedStories();
+        await this.$store.dispatch("toggleLike", payload)
+        await this.loadStories()
+        this.loadLimitedStories()
     },
     commentByMe(commenterId) {
-      console.log("comment by me?", commenterId);
-      // if (commenterId === this.$store.state.loggedInUser.id) {
-      //   return true;
-      // } else {
-      //   return false;
-      // }
-      return true;
+      // console.log("comment by me?", commenterId);
+      if (commenterId === this.$store.state.loggedInUser.id) {
+        return true;
+      } else {
+        return false;
+      }
+      
     },
-    addComment(story, storyIdx, ev) {
+    async addComment(story, storyIdx, ev) {
       if (ev.shiftKey) return;
       ev.preventDefault();
       if (!this.newCommentInputs[storyIdx]) {
         console.log("No text");
         return;
       }
-      var text = this.newCommentInputs[storyIdx];
-      var idAndTxt = {
-        id: story.id,
-        txt: text,
+      const text = this.newCommentInputs[storyIdx];
+      const payload = {
+        story: story,
+        storyIdx: storyIdx,
+        text: text,
       };
-      this.$store.commit("addComment", idAndTxt);
-      this.resetnewCommentsInput(storyIdx);
+      await this.$store.dispatch('addComment', payload);
+      await this.resetnewCommentsInput(storyIdx);
+      await this.loadStories()
       this.loadLimitedStories();
     },
-    removeComment(story, commentId) {
-      this.$store.commit("removeComment", story.id, commentId);
+    async deleteComment(story, storyIdx, comment, commentIdx) {
+      const payload = {
+        story: story,
+        storyIdx: storyIdx,
+        comment: comment,
+        commentIdx: commentIdx,
+      }
+      await this.$store.dispatch("deleteComment", payload);
       this.loadLimitedStories();
     },
   },
+  openDeleteMenu(){
+    this.deleteMenuDisplayed = true
+  },
+  closeBackground(){
+    this.backgroundDisplayed = false
+    this.deleteMenuDisplayed = false
+    this.confirmMenuDisplayed = false
+    this.loadLimitedStories()
+  },
   // computed: {
   // },
-  created() {
-    const waitForIt = new Promise((res, rej) => { 
-     res(
-      this.$store.commit("loadStories"),
-      // console.log('SUCCESS')
-      )
-      // rej(console.log('ERROR!11111'))
-    })
-    .then(()=>{
-        this.loadStories(),
-        this.loadLimitedStories()
-      }
-    )
+  async created() {
+    await localStorage.clear()
+    await this.$store.commit("loadStories"),
+    // await this.$store.dispatch('getLoggedInUser')
+    this.loadLimitedStories()
+    
     
       
     

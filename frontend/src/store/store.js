@@ -10,7 +10,8 @@ export const store = new Vuex.Store({
 
 
     state: {
-        loggedInUser: {
+        loggedInUser: 
+        {
             id: 'u11111',
             username: 'HomerS',
             password: 'Springfield',
@@ -42,95 +43,71 @@ export const store = new Vuex.Store({
             // console.log('loadStories: ', state.stories)
             return state.stories
         },
+        // setLoggedInUser(state, payload){
+        //     state.loggedInUser = payload
+        // },
 
-        toggleLike(state, payload){
-            if (payload.details.request === 'add'){
-                state.stories[payload.details.storyIdx].likedBy.unshift(payload.details.likeToAdd)
+        toggleLike(state, payloadInitial){
+            // const details = payload.details
+            const payload = payloadInitial.payload
+            // console.log('payload ',payload)
+            const storyIdx = payload.storyIdx
+            const commentIdx = payload.commentIdx
+            if (payload.request === 'add'){
+                if (payload.entityType === 'story'){ 
+                    state.stories[storyIdx].likedBy.unshift(payload.likeToAdd)
+                }
+                else {
+                    // console.log(commentIdx)
+                    state.stories[storyIdx].comments[commentIdx].likedBy.unshift(payload.likeToAdd)
+                }
             }
             else {
-                state.stories[payload.details.storyIdx].likedBy[payload.details.removeIdx].splice(payload.details.removeIdx, 1)
+                const removeIdx = payload.removeIdx
+                if (payload.entityType === 'story'){
+                    state.stories[storyIdx].likedBy.splice(removeIdx, 1)
+                }
+                else {
+                    // console.log(state.stories[storyIdx].comments[commentIdx].likedBy)
+                    state.stories[storyIdx].comments[commentIdx].likedBy.splice(removeIdx, 1)
+                }
             }
-        },
-    //     sendBack.request = 'add'
-    //     sendBack.storyIdx = storyIdx
-    //     sendBack.likeToAdd = likeToAdd
-    // }
-    // else{
-    //     const removeIdx = stories[storyIdx].likedBy.findIndex(item => {return item.id === this.$store.this.$store.state.loggedInUser.id})
-    //     stories[storyIdx].likedBy.splice(removeIdx, 1)
-    //     sendBack.request = 'remove'
-    //     sendBack.storyIdx = storyIdx
-    //     sendBack.removeIdx = removeIdx
-            
-            // const storyIdx = state.stories.findIndex((element) => { return element.id === storyId})
-            // if (removeOrAdd = 'add'){
-            //     const likeToAdd = {
-            //         id: state.loggedInUser.id,
-            //         fullname: state.loggedInUser.fullname,
-            //         username: state.loggedInUser.username,
-            //         profileImgUrl: state.loggedInUser.profileImgUrl,
-            //     }
-            //     state.stories[storyIdx].likedBy.unshift(likeToAdd)
-            // }
-            // else{
-            //     const toRemove = state.stories[storyIdx].likedBy.findIndex(item => {return item.id === state.loggedInUser.id})
-            //     state.stories[storyIdx].likedBy.splice(toRemove, 1)
-            // }
-            
-
-        
-        addCommentLike(state, payload){
-            const likeToAdd = {
-                id: state.loggedInUser.id,
-                fullname: state.loggedInUser.fullname,
-                username: state.loggedInUser.username,
-                profileImgUrl: state.loggedInUser.profileImgUrl,
-            }
-
-            const storyIdx = state.stories.findIndex((element) => { return element.id === payload.storyId})
-            const commentIdx = state.stories[storyIdx].comments.findIndex((element) => { return element.id === payload.commentId})
-            if (!state.stories[storyIdx].comments[commentIdx].likedBy){
-                state.stories[storyIdx].comments[commentIdx].likedBy = []
-            }
-            state.stories[storyIdx].comments[commentIdx].likedBy.unshift(likeToAdd)
-            // console.log('added ', state.stories[0].comments[0].likedBy)
-        },
-        removeCommentLike(state, payload){
-            // console.log('to remove ', state.stories[0].comments[0].likedBy)
-            const storyIdx = state.stories.findIndex((element) => { return element.id === payload.storyId})
-            const commentIdx = state.stories[storyIdx].comments.findIndex((element) => { return element.id === payload.commentId})
-            const likeIdx = state.stories[storyIdx].comments[commentIdx].likedBy.findIndex((element) => { return element.id === state.loggedInUser.id})
-            state.stories[storyIdx].comments[commentIdx].likedBy.splice(likeIdx, 1)
         },
 
-        addComment(state, payload){
-            
-            var commentToAdd = {
-                id: storageService._makeId(),
-                by: {
-                    id: state.loggedInUser.id,
-                    fullname: state.loggedInUser.fullname,
-                    username: state.loggedInUser.username,
-                    profileImgUrl: state.loggedInUser.profileImgUrl,
-                },
-                txt: payload.txt,
-            }
-            // console.log(commentText)
-            const storyIdx = state.stories.findIndex((element) => { return element.id === payload.id})
-            state.stories[storyIdx].comments.unshift(commentToAdd)
+        addComment(state, {payload}){
+            const storyIdx = payload.storyIdx
+            state.stories[storyIdx].comments.unshift(payload.newComment)
         },
-        removeComment(state, storyId, commentId){
-            const storyIdx = state.stories.findIndex((element) => { return element.id === storyId})
-            const commentIdx = state.stories[storyIdx].comments.find((element) => { return element.id === commentId})
-            state.stories[storyIdx].comments.splice(commentIdx, 1)
+        deleteComment(state, {payload}){
+            state.stories[payload.storyIdx].comments.splice(payload.commentIdx, 1)
+
         },
     },
 
     actions: {
         async toggleLike({commit}, payload){
             const details = await storageService._toggleLike(payload)
-            commit({type: 'toggleLike', details: details})
+            commit({type: 'toggleLike', payload: details})
         },
+
+        async addComment({commit}, payload){
+            // console.log('in actions, payload: ', payload)
+
+         const newComment = await storageService.addComment(payload)
+         payload.newComment = newComment
+         commit({ type: 'addComment', payload: payload})
+
+        }, 
+
+        async deleteComment({commit}, payload){
+            await storageService.deleteComment(payload)
+            await commit({type: 'deleteComment', payload: payload})
+        },
+
+        // async getLoggedInUser({commit}){
+        //     var payload = await storageService.query('loggedInUser')
+        //     commit({type: 'setLoggedInUser', payload: payload})
+        // },
     }
 })
 

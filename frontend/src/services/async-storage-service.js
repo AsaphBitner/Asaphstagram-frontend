@@ -13,9 +13,12 @@ export const storageService = {
     _makeId,
     _loadStories,
     _toggleLike,
+    gLoggedInUser,
+    addComment,
+    deleteComment,
 }
 
-var gloggedinUser = {
+var gLoggedInUser = {
     id: 'u11111',
     username: 'HomerS',
     password: 'Springfield',
@@ -23,6 +26,10 @@ var gloggedinUser = {
     profileImgUrl: 'img/profile photos/IMG1.jpg',
 
 }
+
+_save('loggedInUser', gLoggedInUser)
+
+
 
 function query(entityType, delay=0) {
     var entities = JSON.parse(localStorage.getItem(entityType)) || []
@@ -35,30 +42,65 @@ function query(entityType, delay=0) {
 
 async function _toggleLike(payload){
     const stories = await query('stories')
-    const storyIdx = stories.findIndex((element) => { return element.id === payload.story.id})
-    var sendBack = {
-        request: payload.request,
-        storyIdx: storyIdx,
-    }
-    if (payload.request = 'add'){
-        const likeToAdd = {
-            id: gloggedinUser.id,
-            fullname: gloggedinUser.fullname,
-            username: gloggedinUser.username,
-            profileImgUrl: gloggedinUser.profileImgUrl,
+    // const storyIdx = stories.findIndex((element) => { return element.id === payload.story.id})
+    var sendBack = payload
+    
+    if (payload.request === 'add'){
+        var likeToAdd = {
+            id: gLoggedInUser.id,
+            fullname: gLoggedInUser.fullname,
+            username: gLoggedInUser.username,
+            profileImgUrl: gLoggedInUser.profileImgUrl,
         }
-        stories[storyIdx].likedBy.unshift(likeToAdd)
         sendBack.likeToAdd = likeToAdd
+        if (payload.entityType === 'story'){
+            stories[payload.storyIdx].likedBy.unshift(likeToAdd)
+        }
+        else {
+            stories[payload.storyIdx].comments[payload.commentIdx].likedBy.unshift(likeToAdd)
+        }
     }
     else{
-        const removeIdx = stories[storyIdx].likedBy.findIndex(item => {return item.id === this.$store.this.$store.state.loggedInUser.id})
-        stories[storyIdx].likedBy.splice(removeIdx, 1)
+        var removeIdx = -100
+        if (payload.entityType === 'story'){
+            removeIdx = stories[payload.storyIdx].likedBy.findIndex(item => {return item.id === gLoggedInUser.id})
+            stories[payload.storyIdx].likedBy.splice(removeIdx, 1)
+        }
+        else{
+            removeIdx = stories[payload.storyIdx].comments[payload.commentIdx].likedBy.findIndex(item => {return item.id === gLoggedInUser.id})
+            stories[payload.storyIdx].comments[payload.commentIdx].likedBy.splice(removeIdx, 1)
+        }
+
         sendBack.removeIdx = removeIdx
     }
     _save('stories', stories)
-    return sendback
+    return sendBack
 }
 
+async function addComment(payload){
+    const newComment = await {
+        id: _makeId(),
+        by: {
+            id: gLoggedInUser.id,
+            fullname: gLoggedInUser.fullname,
+            username: gLoggedInUser.username,
+            imgUrl: gLoggedInUser.profileImgUrl
+        },
+        txt: payload.text,
+        likedBy: [],
+    }
+    const stories = await query('stories')
+    // console.log(payload.story.comments, stories)
+    stories[payload.storyIdx].comments.unshift(newComment)
+    _save('stories', stories)
+    return newComment
+}
+
+async function deleteComment(payload){
+    const stories = await query('stories')
+    stories[payload.storyIdx].comments.splice(payload.commentIdx, 1)
+    _save('stories', stories)
+}
 
 
 function _get(entityType, entityId) {
