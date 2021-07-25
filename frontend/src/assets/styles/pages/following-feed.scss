@@ -1,5 +1,10 @@
 
 
+.page-container{
+    width: 100%;
+    height: 100%;
+}
+
 .menu-background{
     background: rgba(0,0,0,.6);
     position: fixed;
@@ -92,7 +97,8 @@
 .story-list{
     list-style: none;
     text-align: center;
-    margin-top: 0.9rem;    
+    margin-top: 0.9rem;
+    margin-bottom: .9rem;    
 }
 .single-story-container{
     // max-height: 46.5625rem;

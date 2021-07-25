@@ -37,11 +37,9 @@ export const store = new Vuex.Store({
         },
     },
     mutations: {
-        async loadStories(state){
-            const stories = await storageService._loadStories()
-            state.stories = stories; 
-            // console.log('loadStories: ', state.stories)
-            return state.stories
+        loadStories(state, payload){
+            console.log(payload)
+            state.stories = payload.stories; 
         },
         // setLoggedInUser(state, payload){
         //     state.loggedInUser = payload
@@ -85,10 +83,19 @@ export const store = new Vuex.Store({
         deleteStory(state, {payload}){
             state.stories.splice(payload.idx, 1)
             // console.log(state.stories[0])
-        }
+        },
+        addStory(state, {payload}){
+            state.stories.unshift(payload)
+        },
     },
 
     actions: {
+        async loadStories({commit}){
+            const stories = await storageService._loadStories()
+            console.log(stories)
+
+            commit({type: 'loadStories', payload: stories})
+        },
         async toggleLike({commit}, payload){
             const details = await storageService._toggleLike(payload)
             commit({type: 'toggleLike', payload: details})
@@ -110,7 +117,14 @@ export const store = new Vuex.Store({
         async deleteStory({commit}, payload){
             await storageService._delete('stories', payload.story, payload.idx)
             commit({type: 'deleteStory', payload: payload})
-        }
+        },
+
+        async addStory({commit}, payload){
+            const newStory = await storageService.addStory(payload)
+            console.log(newStory)
+            commit({type: 'addStory', payload: newStory})
+        },
+        
 
         // async getLoggedInUser({commit}){
         //     var payload = await storageService.query('loggedInUser')

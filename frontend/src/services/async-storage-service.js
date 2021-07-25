@@ -17,6 +17,7 @@ export const storageService = {
     addComment,
     deleteComment,
     _delete,
+    addStory,
 }
 
 var gLoggedInUser = {
@@ -156,7 +157,14 @@ async function _delete(entityType, entity, entityIdx = null){
 
 }
 
-
+async function addStory(newStory){
+    var stories = await query('stories')
+    // console.log(stories)
+    newStory.id = _makeId()
+    stories.unshift(newStory)
+    _save('stories', stories)
+    return newStory
+}
 
 function _makeId(length = 5) {
     var text = ''
@@ -167,8 +175,9 @@ function _makeId(length = 5) {
     return text
 }
 
-function _loadStories() {
-    var stories = JSON.parse(localStorage.getItem('stories'))
+async function _loadStories() {
+    // var stories = JSON.parse(localStorage.getItem('stories'))
+    var stories = await query('stories')
     if (!stories || !stories.length) {
         stories = [
             //=================================PHOTO STORY 1=========================================================

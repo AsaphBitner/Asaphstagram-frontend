@@ -1,11 +1,13 @@
 <template>
   
   <div class="new-story-menus-container">
+    <div v-if="background" class="menu-background" @click="closeMenu">
+    </div>
       <div v-if="screen1" class="story-upload-image screen1">
         <div class="story-upload-image-header">
           <span></span>
           New Post
-          <span>
+          <span class="close-menu" @click="closeMenu">
             <svg aria-label="Close" class="_8-yf5 " fill="#262626" height="24" role="img" viewBox="0 0 48 48" width="24"><path clip-rule="evenodd" d="M41.1 9.1l-15 15L41 39c.6.6.6 1.5 0 2.1s-1.5.6-2.1 0L24 26.1l-14.9 15c-.6.6-1.5.6-2.1 0-.6-.6-.6-1.5 0-2.1l14.9-15-15-15c-.6-.6-.6-1.5 0-2.1s1.5-.6 2.1 0l15 15 15-15c.6-.6 1.5-.6 2.1 0 .6.6.6 1.6 0 2.2z" fill-rule="evenodd"></path></svg>
           </span>
         </div>
@@ -29,11 +31,29 @@
 
       <div v-if="screen2" class="story-add-caption screen2">
         <div class="add-caption-header">
-          <span></span>
-          <h1>1111</h1>
-          <span>
+          <span class="new-story-back">
+            <svg aria-label="Back" class="_8-yf5 " fill="#262626" height="24" role="img" viewBox="0 0 48 48" width="24"><path d="M40 33.5c-.4 0-.8-.1-1.1-.4L24 18.1l-14.9 15c-.6.6-1.5.6-2.1 0s-.6-1.5 0-2.1l16-16c.6-.6 1.5-.6 2.1 0l16 16c.6.6.6 1.5 0 2.1-.3.3-.7.4-1.1.4z"></path></svg>
+          </span>
+          <h1>Compose</h1>
+          <span class="close-menu" @click="closeMenu">
             <svg aria-label="Close" class="_8-yf5 " fill="#262626" height="24" role="img" viewBox="0 0 48 48" width="24"><path clip-rule="evenodd" d="M41.1 9.1l-15 15L41 39c.6.6.6 1.5 0 2.1s-1.5.6-2.1 0L24 26.1l-14.9 15c-.6.6-1.5.6-2.1 0-.6-.6-.6-1.5 0-2.1l14.9-15-15-15c-.6-.6-.6-1.5 0-2.1s1.5-.6 2.1 0l15 15 15-15c.6-.6 1.5-.6 2.1 0 .6.6.6 1.6 0 2.2z" fill-rule="evenodd"></path></svg>
           </span>
+
+        </div>
+        <!-- ============== END OF HEADER ========= -->
+        <div class="add-caption-body">
+          <div class="img-container">
+            <img :src="this.newImgUrl" alt="">
+          </div>
+          <div class="caption-container">
+            <textarea v-model="newStoryText" name="" id="caption-text" cols="30" rows="10" placeholder="Add a caption...">
+            </textarea>
+              <!-- <span>
+                <svg aria-label="Emoji" class="_8-yf5 " fill="#262626" height="24" role="img" viewBox="0 0 48 48" width="24"><path d="M24 48C10.8 48 0 37.2 0 24S10.8 0 24 0s24 10.8 24 24-10.8 24-24 24zm0-45C12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21S35.6 3 24 3z"></path><path d="M34.9 24c0-1.4-1.1-2.5-2.5-2.5s-2.5 1.1-2.5 2.5 1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5zm-21.8 0c0-1.4 1.1-2.5 2.5-2.5s2.5 1.1 2.5 2.5-1.1 2.5-2.5 2.5-2.5-1.1-2.5-2.5zM24 37.3c-5.2 0-8-3.5-8.2-3.7-.5-.6-.4-1.6.2-2.1.6-.5 1.6-.4 2.1.2.1.1 2.1 2.5 5.8 2.5 3.7 0 5.8-2.5 5.8-2.5.5-.6 1.5-.7 2.1-.2.6.5.7 1.5.2 2.1 0 .2-2.8 3.7-8 3.7z"></path></svg>
+              </span> -->
+            <button @click="addStory()">Publish</button>
+          </div>
+
         </div>
       </div>
   </div>
@@ -52,9 +72,13 @@ export default {
 //===========================
 data(){
   return{
+    loggedInUser: this.$store.state.loggedInUser,
     isLoading: false,
-    screen1: false,
-    screen2: true,
+    background: true,
+    screen1: true,
+    screen2: false,
+    newStoryText: '',
+    newImgUrl: '',
   }
 },
 //===========================
@@ -63,16 +87,49 @@ async onUploadImg(ev){
 this.isLoading = true
 const res = await uploadImg(ev)
 this.isLoading = false
-console.log(res)
+// console.log(res)
+this.newImgUrl = res.url
+this.switchToScreen('2')
 },
 
+switchToScreen(screen){
+  if (screen === '1') {
+    this.screen1 = true
+    this.screen2 = false
+    this.newImgUrl = ''
+    }
+  else{
+    this.screen1 = false 
+    this.screen2 = true
+    this.newStoryText = ''
+  }
+},
+closeMenu(){
+this.$emit('close')
+},
 async addStory(){
-      
+  const payload = {
+    id: '',
+    txt: this.newStoryText,
+    imgUrl: this.newImgUrl,
+    createdAt: Date.now(),
+    owner: {
+      id: this.loggedInUser.id,
+      fullname: this.loggedInUser.fullname,
+      username: this.loggedInUser.username,
+      imgUrl: this.loggedInUser.profileImgUrl,
+    },
+    comments: [],
+    likedby: [],
+  }
+  await this.$store.dispatch('addStory', payload)
+  this.$emit('saved')    
 },
 
-  
-
-
+created(){
+  this.background = true
+  this.screen1 = true
+}
 
 }
 }

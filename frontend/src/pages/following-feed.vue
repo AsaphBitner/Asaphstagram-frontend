@@ -1,8 +1,13 @@
 <template>
   <div class="page-container">
-    <app-header />
-      <!-- v-if="this.backgroundDisplayed" -->
+    <app-header @openNewStory="openNewStory()" />
+    <new-story 
+    v-if="newStoryOn"
+    @close="closeNewStory('no update')"
+    @saved="closeNewStory('yes update')"
+     />
     <div
+    v-if="this.backgroundDisplayed"
       class="menu-background"
       @click="closeBackground()"
       @keydown="closeBackground()"
@@ -33,7 +38,6 @@
         >
       </div>
       <!-- ======= END OF DELETE COMMENT OR STORY ======== -->
-      <new-story />
     </div>
     <!-- :class="{backgroundDisplayed}" -->
     <div class="stories-container">
@@ -206,7 +210,7 @@
               </div>
               <!-- start of comments!!!!!!!!!!!!!!!!!! -->
               <div class="story-comments">
-                <p class="view-all-comments">
+                <p class="view-all-comments" v-if="story.comments">
                   View all {{ story.comments.length }} comments
                 </p>
                 <ul v-for="(comment, cIdx) in story.comments" :key="comment.id">
@@ -400,7 +404,7 @@ export default {
 
   data() {
     return {
-      // userId: this.$store.state.loggedInUser.id,
+      loggedInUserr: this.$store.state.loggedInUser,
       numStoriesToShow: 6,
       stories: [],
       storiesToShow: [],
@@ -414,9 +418,13 @@ export default {
       toDeleteEntity: "",
       commentToDelete: {},
       storyToDelete: {},
+      newStoryOn: false,
     };
   },
   methods: {
+    setStories(){
+      this.$store.dispatch('loadStories')
+    },
     loadStories() {
       this.stories = this.$store.getters.getStories;
     },
@@ -484,6 +492,7 @@ export default {
     },
 
     likedByMe(story) {
+      if (!story.likedBy) return
       const likedOrNot = story.likedBy.find((item) => {
         return item.id === this.$store.state.loggedInUser.id;
       });
@@ -553,7 +562,7 @@ export default {
       // console.log(this.storyToDelete)
       this.storyToDelete = {};
       this.loadLimitedStories();
-      console.log("loaded limited stories?");
+      
     },
     openDeleteMenu() {
       this.backgroundDisplayed = true;
@@ -601,14 +610,24 @@ export default {
       }
       this.openDeleteMenu();
     },
+
+  openNewStory(){
+    this.newStoryOn = true
+  },
+  closeNewStory(result){
+    this.newStoryOn = false
+    if (result === 'yes update') this.loadLimitedStories()
+  },
+  
+  //======================END OF METHODS=================
     
   },
-  //======================END OF METHODS=================
   // computed: {
   // },
   async created() {
-    await localStorage.clear();
-    await this.$store.commit("loadStories"),
+    await this.setStories()
+    await localStorage.clear()
+    await this.$store.commit("loadStories")
       // await this.$store.dispatch('getLoggedInUser')
       this.loadLimitedStories();
 
