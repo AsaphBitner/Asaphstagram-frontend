@@ -1,5 +1,6 @@
 @import 'cmps/app-header.scss';
 @import 'pages/following-feed.scss';
+@import 'cmps/new-story.scss';
 
 @font-face {
     font-family: 'Instagram Logo regular';
@@ -37,15 +38,15 @@ input, textarea{
      max-height: 100%;
  }
  //////////temporary, for testing
-.img-container{
-    max-height: 25rem;
-    max-width: 25rem;
-    // height: 1rem;
-    img{
-    object-fit: cover;
+// .img-container{
+//     max-height: 25rem;
+//     max-width: 25rem;
+//     // height: 1rem;
+//     img{
+//     object-fit: cover;
 
-    }
-}
+//     }
+// }
 
 button {
     cursor: pointer;

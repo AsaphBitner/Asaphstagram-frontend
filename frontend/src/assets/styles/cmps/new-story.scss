@@ -1,0 +1,114 @@
+
+
+.new-story-menus-container{
+    margin: auto;
+    position: sticky;
+    margin-top: 4rem;
+    max-width: 90%;
+    height: 78%;
+    .story-upload-image, .screen1, .story-add-caption, .screen2{
+    width: 100%;
+    height:100%;
+    background-color: #fafafa;
+    color: #262626;
+    border-radius: .5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // justify-content: center;
+    text-align: center;
+    z-index: 2;
+    font-weight: 500;
+
+    *{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100%;
+    
+    }
+
+    .story-upload-image-header{
+        // position: absolute;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        top: 0px;
+        height: 4rem;
+        width: 100%;
+        border-bottom: 1px solid rgba(219,219,219,1);
+        font-size: 1.35rem;
+        span{
+            // 48x54
+            width: 3.67rem;
+            padding: .5rem;
+            :last-child{
+                cursor:  pointer;
+            }
+        } 
+    }
+    .story-upload-image-body{
+        display: flex;
+        padding: 3.6rem 0 12rem;
+
+        span{
+           font-size: 1.33rem; 
+           max-height: 2.5rem;
+        }
+        label{
+            margin: 0;
+            padding: 0;
+            max-height: 8.3rem;
+            cursor: pointer;
+            input{
+                height: 0;
+                width: 0;
+            }
+            svg{
+                height: 6rem;
+                margin: .2rem;
+                padding: 0;
+            }
+            h2{
+                background-color: #0095f6;
+                color: #fafafa;
+                font-size: .94rem;
+                padding: 0;
+                margin: 0;
+                max-height: 2rem;
+                padding: .45rem;
+                border-radius: .5rem;
+                
+            }
+        }
+        .loading-gif{
+            height: 6rem;
+            margin: .2rem;
+            padding: 0;
+            // display: none;
+        }
+    }
+    .add-caption-header{
+        display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    top: 0px;
+    height: 4rem;
+    width: 100%;
+    border-bottom: 1px solid rgba(219,219,219,1);
+    font-size: 1.35rem;
+    span{
+        width: 3.67rem;
+        padding: .5rem;
+
+
+    }
+    :last-child{
+    cursor: pointer;
+    } 
+    
+}
+}
+}

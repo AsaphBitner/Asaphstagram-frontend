@@ -1,14 +1,39 @@
 <template>
   <div class="page-container">
-    <div v-if="this.backgroundDisplayed" class="menu-background" @click="closeBackground()" @keydown="closeBackground()">
-    <div v-if="this.deleteMenuDisplayed" class="delete-menu" @keydown="closeBackground()">
-      <span class="menu-option-delete" @click.stop="openComfirmMenu()">Delete {{this.toDeleteEntity}}</span>
-      <span class="menu-option-cancel" @click.stop="closeBackground()">Cancel</span>
-    </div>
-    <div v-if="confirmMenuDisplayed" class="are-you-sure-menu" @keydown.enter="closeBackground()">
-      <span class="confirmation">Are you sure?</span>
-      <span class="yesNo"><span class="yes" @click.stop="deleteConfirmed()">Yes, delete</span><span class="no" @click.stop="closeBackground()">No, cancel</span></span>
-    </div>
+    <app-header />
+      <!-- v-if="this.backgroundDisplayed" -->
+    <div
+      class="menu-background"
+      @click="closeBackground()"
+      @keydown="closeBackground()"
+    >
+      <div
+        v-if="this.deleteMenuDisplayed"
+        class="delete-menu"
+        @keydown="closeBackground()"
+      >
+        <span class="menu-option-delete" @click.stop="openComfirmMenu()"
+          >Delete {{ this.toDeleteEntity }}</span
+        >
+        <span class="menu-option-cancel" @click.stop="closeBackground()"
+          >Cancel</span
+        >
+      </div>
+      <div
+        v-if="confirmMenuDisplayed"
+        class="are-you-sure-menu"
+        @keydown.enter="closeBackground()"
+      >
+        <span class="confirmation">Are you sure?</span>
+        <span class="yesNo"
+          ><span class="yes" @click.stop="deleteConfirmed()">Yes, delete</span
+          ><span class="no" @click.stop="closeBackground()"
+            >No, cancel</span
+          ></span
+        >
+      </div>
+      <!-- ======= END OF DELETE COMMENT OR STORY ======== -->
+      <new-story />
     </div>
     <!-- :class="{backgroundDisplayed}" -->
     <div class="stories-container">
@@ -28,7 +53,10 @@
               <router-link to="/profile-page" class="user-name-story">
                 {{ story.owner.username }}
               </router-link>
-              <span class="story-options" @click="setToDelete(' story', story, idx)">
+              <span
+                class="story-options"
+                @click="setToDelete(' story', story, idx)"
+              >
                 <svg
                   aria-label="More options"
                   class=""
@@ -188,15 +216,71 @@
                       <span>{{ comment.by.username }}</span
                       >&nbsp;{{ comment.txt }}
                     </p>
-                    <span v-if="commentByMe(comment.by.id)" class="delete-comment" @click="setToDelete(' comment', story, idx, comment, cIdx)">
-                <svg aria-label="Comment Options" class="_8-yf5 " fill="#8e8e8e" height="16" role="img" viewBox="0 0 48 48" width="16"><circle clip-rule="evenodd" cx="8" cy="24" fill-rule="evenodd" r="4.5"></circle><circle clip-rule="evenodd" cx="24" cy="24" fill-rule="evenodd" r="4.5"></circle><circle clip-rule="evenodd" cx="40" cy="24" fill-rule="evenodd" r="4.5"></circle></svg>
-                <circle clip-rule="evenodd" cx="8" cy="24" fill-rule="evenodd" r="4.5"></circle>
-                <circle clip-rule="evenodd" cx="24" cy="24" fill-rule="evenodd" r="4.5"></circle>
-                <circle clip-rule="evenodd" cx="40" cy="24" fill-rule="evenodd" r="4.5"></circle>
-              </span>
+                    <span
+                      v-if="commentByMe(comment.by.id)"
+                      class="delete-comment"
+                      @click="
+                        setToDelete(' comment', story, idx, comment, cIdx)
+                      "
+                    >
+                      <svg
+                        aria-label="Comment Options"
+                        class="_8-yf5"
+                        fill="#8e8e8e"
+                        height="16"
+                        role="img"
+                        viewBox="0 0 48 48"
+                        width="16"
+                      >
+                        <circle
+                          clip-rule="evenodd"
+                          cx="8"
+                          cy="24"
+                          fill-rule="evenodd"
+                          r="4.5"
+                        ></circle>
+                        <circle
+                          clip-rule="evenodd"
+                          cx="24"
+                          cy="24"
+                          fill-rule="evenodd"
+                          r="4.5"
+                        ></circle>
+                        <circle
+                          clip-rule="evenodd"
+                          cx="40"
+                          cy="24"
+                          fill-rule="evenodd"
+                          r="4.5"
+                        ></circle>
+                      </svg>
+                      <circle
+                        clip-rule="evenodd"
+                        cx="8"
+                        cy="24"
+                        fill-rule="evenodd"
+                        r="4.5"
+                      ></circle>
+                      <circle
+                        clip-rule="evenodd"
+                        cx="24"
+                        cy="24"
+                        fill-rule="evenodd"
+                        r="4.5"
+                      ></circle>
+                      <circle
+                        clip-rule="evenodd"
+                        cx="40"
+                        cy="24"
+                        fill-rule="evenodd"
+                        r="4.5"
+                      ></circle>
+                    </span>
                     <span
                       v-if="!commentLikedByMe(story, cIdx)"
-                      @click="toggleLike('add', 'comment', story, idx, comment, cIdx)"
+                      @click="
+                        toggleLike('add', 'comment', story, idx, comment, cIdx)
+                      "
                       class="comment-like"
                     >
                       <svg
@@ -216,7 +300,14 @@
                     <span
                       v-if="commentLikedByMe(story, cIdx)"
                       @click="
-                        toggleLike('remove', 'comment', story, idx, comment, cIdx)
+                        toggleLike(
+                          'remove',
+                          'comment',
+                          story,
+                          idx,
+                          comment,
+                          cIdx
+                        )
                       "
                       class="comment-unlike"
                     >
@@ -297,16 +388,18 @@
 </template>
 
 <script>
-// import appHeader from '@/components/app-header.vue'
+import appHeader from "@/components/app-header.vue";
+import newStory from '@/components/new-story.vue'
+
 
 export default {
-  // components: {
-  //   appHeader,
-  // },
+  components: {
+    appHeader,
+    newStory,
+  },
 
   data() {
     return {
-      // storyText: this.$store.state.Stories[0].txt,
       // userId: this.$store.state.loggedInUser.id,
       numStoriesToShow: 6,
       stories: [],
@@ -318,7 +411,7 @@ export default {
       backgroundDisplayed: false,
       deleteMenuDisplayed: false,
       confirmMenuDisplayed: false,
-      toDeleteEntity: '',
+      toDeleteEntity: "",
       commentToDelete: {},
       storyToDelete: {},
     };
@@ -337,12 +430,11 @@ export default {
     // },
 
     async loadLimitedStories() {
-      await this.loadStories()
+      await this.loadStories();
       this.storiesToShow = this.stories.slice(0, this.numStoriesToShow);
       while (this.newCommentInputs.length < this.numStoriesToShow) {
         this.newCommentInputs.push("");
       }
-
     },
 
     resetnewCommentsInput(idx) {
@@ -372,7 +464,7 @@ export default {
       }
     },
     likedByMessage(story) {
-      if (!story.likedBy.length) return
+      if (!story.likedBy.length) return;
       if (story.likedBy.length === 1) {
         return "";
       } else if (story.likedBy.length === 2) {
@@ -383,7 +475,7 @@ export default {
     },
 
     latestLiker(story) {
-      if (!story.likedBy.length) return
+      if (!story.likedBy.length) return;
       if (story.likedBy[0].id === this.$store.state.loggedInUser.id) {
         return "you";
       } else {
@@ -404,7 +496,14 @@ export default {
       });
       return likedOrNot;
     },
-    async toggleLike(request, entityType, story, storyIdx, comment = null, commentIdx = null) {
+    async toggleLike(
+      request,
+      entityType,
+      story,
+      storyIdx,
+      comment = null,
+      commentIdx = null
+    ) {
       const payload = {
         request: request,
         entityType: entityType,
@@ -412,10 +511,10 @@ export default {
         storyIdx: storyIdx,
         comment: comment,
         commentIdx: commentIdx,
-        }
-      
-        await this.$store.dispatch("toggleLike", payload)
-        this.loadLimitedStories()
+      };
+
+      await this.$store.dispatch("toggleLike", payload);
+      this.loadLimitedStories();
     },
     commentByMe(commenterId) {
       if (commenterId === this.$store.state.loggedInUser.id) {
@@ -423,7 +522,6 @@ export default {
       } else {
         return false;
       }
-      
     },
     async addComment(story, storyIdx, ev) {
       if (ev.shiftKey) return;
@@ -438,86 +536,82 @@ export default {
         storyIdx: storyIdx,
         text: text,
       };
-      await this.$store.dispatch('addComment', payload);
+      await this.$store.dispatch("addComment", payload);
       await this.resetnewCommentsInput(storyIdx);
       this.loadLimitedStories();
     },
     async deleteComment() {
       // console.log('comment to Delete: ', this.commentToDelete)
-      const payload = this.commentToDelete
+      const payload = this.commentToDelete;
       await this.$store.dispatch("deleteComment", payload);
-      this.commentToDelete = {}
-      this.loadLimitedStories()
+      this.commentToDelete = {};
+      this.loadLimitedStories();
     },
-    async deleteStory(){
-      const payload = this.storyToDelete
-      await this.$store.dispatch("deleteStory", payload)
+    async deleteStory() {
+      const payload = this.storyToDelete;
+      await this.$store.dispatch("deleteStory", payload);
       // console.log(this.storyToDelete)
-      this.storyToDelete = {}
-      this.loadLimitedStories()
-      console.log('loaded limited stories?')
+      this.storyToDelete = {};
+      this.loadLimitedStories();
+      console.log("loaded limited stories?");
     },
-    openDeleteMenu(){
-      this.backgroundDisplayed = true
-      this.deleteMenuDisplayed = true
+    openDeleteMenu() {
+      this.backgroundDisplayed = true;
+      this.deleteMenuDisplayed = true;
     },
-    openComfirmMenu(){
-      this.deleteMenuDisplayed = false
-      this.confirmMenuDisplayed = true
+    openComfirmMenu() {
+      this.deleteMenuDisplayed = false;
+      this.confirmMenuDisplayed = true;
     },
-    closeBackground(){
-      this.backgroundDisplayed = false
-      this.deleteMenuDisplayed = false
-      this.confirmMenuDisplayed = false
-      this.loadLimitedStories()
+    closeBackground() {
+      this.backgroundDisplayed = false;
+      this.deleteMenuDisplayed = false;
+      this.confirmMenuDisplayed = false;
+      this.loadLimitedStories();
     },
 
     // whatToDelete(entity){
     //   this.toDeleteEntity = entity
     //   this.openDeleteMenu()
     // },
-    deleteConfirmed(){
-      if (this.toDeleteEntity === ' comment'){
-        this.deleteComment()
-        this.closeBackground()
-      }
-      else if (this.toDeleteEntity === ' story') {
+    deleteConfirmed() {
+      if (this.toDeleteEntity === " comment") {
+        this.deleteComment();
+        this.closeBackground();
+      } else if (this.toDeleteEntity === " story") {
         // console.log('Delete story not ready yet')
-        this.deleteStory()
-        this.closeBackground()
-        }
-      
+        this.deleteStory();
+        this.closeBackground();
+      }
     },
-    setToDelete(entityType, story, idx, comment = null, cIdx = null){
-      this.toDeleteEntity = entityType
-      if (entityType === ' comment') {
+    setToDelete(entityType, story, idx, comment = null, cIdx = null) {
+      this.toDeleteEntity = entityType;
+      if (entityType === " comment") {
         this.commentToDelete = {
           story: story,
           storyIdx: idx,
           comment: comment,
           commentIdx: cIdx,
-        }}
-        else if (entityType === ' story') {
+        };
+      } else if (entityType === " story") {
         this.storyToDelete = {
           story: story,
           idx: idx,
-        }}
-        this.openDeleteMenu()
+        };
+      }
+      this.openDeleteMenu();
     },
-
+    
   },
   //======================END OF METHODS=================
   // computed: {
   // },
   async created() {
-    await localStorage.clear()
+    await localStorage.clear();
     await this.$store.commit("loadStories"),
-    // await this.$store.dispatch('getLoggedInUser')
-    this.loadLimitedStories()
-    
-    
-      
-    
+      // await this.$store.dispatch('getLoggedInUser')
+      this.loadLimitedStories();
+
     // this.loadUsers();
   },
 };

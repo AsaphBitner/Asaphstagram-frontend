@@ -1,5 +1,6 @@
 <template>
   <div class="header-container">
+    <div class="header-flex-wide-left"></div>
     <div class="header-flex-1">
     <h3 class="header-logo">Asaphstagram</h3> 
     </div>
@@ -31,6 +32,7 @@
     </router-link>
     </div>
     </div>
+    <div class="header-flex-wide-right"></div>
     
     
     
