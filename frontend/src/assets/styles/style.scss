@@ -1,3 +1,9 @@
+//============= IMPORTS ==================
+
+@import 'cmps/app-header.scss';
+@import 'pages/following-feed.scss';
+@import 'cmps/new-story.scss';
+
 
 
 @font-face {
@@ -68,8 +74,3 @@ span{
 
 
 
-//============= IMPORTS ==================
-
-@import 'cmps/app-header.scss';
-@import 'pages/following-feed.scss';
-@import 'cmps/new-story.scss';

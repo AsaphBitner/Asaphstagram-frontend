@@ -7,6 +7,14 @@
     max-width: 90%;
     height: 70vh;
     z-index: 2;
+    @media screen and (max-width: 680px){
+        // max-width: 96%;
+        // top: 1rem;
+    }
+    @media screen and (max-width: 380px) {
+        max-height: 95%;
+        max-width: 98%;
+        }
     *{
         z-index: 3;
         display: flex;
@@ -128,22 +136,31 @@
 .add-caption-body{
     width: 100%;
     height: 100%;
-    background-color: #fafafa;
+    // background-color: #fafafa;
     border-radius: 0 0 .5rem .5rem;
     display: flex;
     flex-direction: row;
     // justify-content: ;
+    
     *{
         max-width: 100%;
         height: 100%;
         padding: .5rem;
         // border:  1px solid rgba(219,219,219,1);
     }
+    @media screen and (max-width: 680px){
+        flex-direction: column;
+    }
     .img-container{
         // flex: 4.5 1 auto;
         width: 66.7%;
         border-radius: 0 0 0 .5rem;
         padding-bottom: 2rem;
+        @media screen and (max-width: 680px){
+            width: 100%;
+            padding: .2rem;
+            height: 65%;
+        }
         img{
             object-fit: contain;
             max-width: 100%;
@@ -152,14 +169,25 @@
         }
         
     }
-    .caption-container{
-        // flex: 1 1 auto;
+    
+    .new-story-caption-container{
+        flex: 1 1 auto;
         width: 33.3%;
         border-radius: 0 0 .5rem 0;
         justify-content: flex-start;
         padding-top: .2rem;
         background-color: rgb(226, 222, 222);
-        // background-color: black;
+        @media screen and (max-width: 680px){
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            border-radius: inherit;
+            height: 35%;
+            }
+
+
         textarea{
             font: 400 13.3333px ;
             width: 100%;
@@ -177,6 +205,11 @@
             text-align: left;
             border-radius: .5rem;
             border-bottom: 0;
+            @media screen and (max-width: 680px){
+                max-height: 95%;
+                margin: 0.2rem;
+                
+            }
         }
         span{
             width: 100%;
@@ -196,6 +229,15 @@
             font-size: 2.4rem;
             font-weight: 500;
             margin-top: 1rem;
+            @media screen and (max-width: 680px) {
+                margin: 0 0.2rem;
+                // width: 90%;
+                max-height: 95%;
+                width: 40%;
+            }
+            @media screen and (max-width: 380px) {
+            font-size: 1.7rem;
+            }
         }
         button:hover{
         background-color: rgb(26, 121, 26);
@@ -221,38 +263,55 @@
 }
 
 //============ MEDIA QUERIES =======================
-// @media screen and (max-width: 680px)
 @media screen and (max-width: 680px){
-
-    .add-caption-body{
-        display: flex;
-        flex-direction: column;
-        // height: 0.1rem;
-        display: none;
-        background-color: pink;
-    }
-    .img-container, .caption-container{
-        display: flex;
-        width: 100%;
-        height: 1px;
-        background-color: pink;
-    }
-    .caption-container{
-    // flex-direction: row;
-    // color:pink;
-    background-color: pink;
-    // display: none;
-    
-    button{
-        background-color: pink;
-        color: red;
-    }
-    }
-
-    
+    .new-story-caption-container{
+        background: brown;
+        
+        // display: none;
+        width: 111rem;
+        }
+    // .new-story-menus-container{
+    //     margin: auto;
+    //     position: sticky;
+    //     top: 4rem;
+    //     max-width: 90%;
+    //     height: 70vh;
+    //     z-index: 2;
+    //     background-color: #fafafa;
+    //     *{
+    //         z-index: 3;
+    //         display: flex;
+    //         flex-direction: column;
+    //         justify-content: center;
+    //         align-items: center;
+    //         text-align: center;
+    //         height: 100%;
+    //         background-color: #fafafa;
+    //         color: #262626;
+            
+    //     }
+    //     .story-upload-image, .story-add-caption{
+    //     width: 100%;
+    //     height:100%;
+    //     background-color: #fafafa;
+    //     color: #262626;
+    //     border-radius: .5rem;
+    //     display: flex;
+    //     flex-direction: column;
+    //     align-items: center;
+    //     // justify-content: center;
+    //     text-align: center;
+    //     font-weight: 500;
+    //     }
+    //     .add-caption-body{
+    //         background-color: plum;
+    //         // width: 110rem;
+            
+    //     }
+    // }    
 
 }
 
-@media screen and (max-width: 480px){
+// @media screen and (max-width: 480px){
 
-}
+// }
