@@ -29,7 +29,7 @@ export const store = new Vuex.Store({
         // },
 
         getUsers({users}){
-            return users.slice()
+            return users
         },
         getStories({stories}){
             // console.log( 'getters: ', stories)
@@ -37,18 +37,20 @@ export const store = new Vuex.Store({
         },
     },
     mutations: {
-        loadStories(state, payload){
-            console.log(payload)
-            state.stories = payload.stories; 
+        loadStories(state, {payload}){
+            state.stories = payload.slice(); 
+            // console.log('mutations: ', state.stories)
         },
         // setLoggedInUser(state, payload){
         //     state.loggedInUser = payload
         // },
+        loadUsers(state, {users}){
+            state.users = users.slice()
+            // console.log('USERS: ', state.users)
+        },
 
         toggleLike(state, payloadInitial){
-            // const details = payload.details
             const payload = payloadInitial.payload
-            // console.log('payload ',payload)
             const storyIdx = payload.storyIdx
             const commentIdx = payload.commentIdx
             if (payload.request === 'add'){
@@ -56,7 +58,6 @@ export const store = new Vuex.Store({
                     state.stories[storyIdx].likedBy.unshift(payload.likeToAdd)
                 }
                 else {
-                    // console.log(commentIdx)
                     state.stories[storyIdx].comments[commentIdx].likedBy.unshift(payload.likeToAdd)
                 }
             }
@@ -66,7 +67,6 @@ export const store = new Vuex.Store({
                     state.stories[storyIdx].likedBy.splice(removeIdx, 1)
                 }
                 else {
-                    // console.log(state.stories[storyIdx].comments[commentIdx].likedBy)
                     state.stories[storyIdx].comments[commentIdx].likedBy.splice(removeIdx, 1)
                 }
             }
@@ -82,19 +82,22 @@ export const store = new Vuex.Store({
         },
         deleteStory(state, {payload}){
             state.stories.splice(payload.idx, 1)
-            // console.log(state.stories[0])
         },
         addStory(state, {payload}){
             state.stories.unshift(payload)
         },
+       
     },
 
     actions: {
         async loadStories({commit}){
             const stories = await storageService._loadStories()
-            console.log(stories)
 
             commit({type: 'loadStories', payload: stories})
+        },
+        async loadUsers(){
+            const users = await storageService._loadUsers()
+            this.commit({type: 'loadUsers', users: users})
         },
         async toggleLike({commit}, payload){
             const details = await storageService._toggleLike(payload)
@@ -102,7 +105,6 @@ export const store = new Vuex.Store({
         },
 
         async addComment({commit}, payload){
-            // console.log('in actions, payload: ', payload)
 
          const newComment = await storageService.addComment(payload)
          payload.newComment = newComment
@@ -121,7 +123,6 @@ export const store = new Vuex.Store({
 
         async addStory({commit}, payload){
             const newStory = await storageService.addStory(payload)
-            console.log(newStory)
             commit({type: 'addStory', payload: newStory})
         },
         

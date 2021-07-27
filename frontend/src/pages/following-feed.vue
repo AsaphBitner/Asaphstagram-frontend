@@ -10,14 +10,12 @@
     v-if="this.backgroundDisplayed"
       class="menu-background"
       @click="closeBackground()"
-      @keydown="closeBackground()"
     >
       <div
         v-if="this.deleteMenuDisplayed"
         class="delete-menu"
-        @keydown="closeBackground()"
       >
-        <span class="menu-option-delete" @click.stop="openComfirmMenu()"
+        <span v-if="storyByMe()" class="menu-option-delete" @click.stop="openComfirmMenu()"
           >Delete {{ this.toDeleteEntity }}</span
         >
         <span class="menu-option-cancel" @click.stop="closeBackground()"
@@ -194,18 +192,14 @@
               </div>
               <!-- End of four icons -->
               <div class="story-liked-by">
-                <p v-if="story.likedBy">
+                <p v-if="story.likedBy.length ">
                   Liked by&nbsp;<span>{{ latestLiker(story) }}</span
                   >&nbsp;{{ likedByMessage(story) }}
                 </p>
               </div>
               <div class="story-text">
                 <p>
-                  <span>{{ story.owner.username }}</span> {{ story.txt }}aaaaaaa
-                  bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh
-                  iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn
-                  oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww
-                  xxxxx yyyy zzzzz
+                  <span>{{ story.owner.username }}</span> {{ story.txt }}
                 </p>
               </div>
               <!-- start of comments!!!!!!!!!!!!!!!!!! -->
@@ -404,7 +398,7 @@ export default {
 
   data() {
     return {
-      loggedInUserr: this.$store.state.loggedInUser,
+      loggedInUser: this.$store.state.loggedInUser,
       numStoriesToShow: 6,
       stories: [],
       storiesToShow: [],
@@ -422,23 +416,24 @@ export default {
     };
   },
   methods: {
-    setStories(){
-      this.$store.dispatch('loadStories')
+    async setStories(){
+      await this.$store.dispatch('loadStories')
+      
+      // console.log('in set stories: ', this.$store.state.stories)
+    },
+    async setUsers(){
+      await this.$store.dispatch('loadUsers')
     },
     loadStories() {
       this.stories = this.$store.getters.getStories;
     },
-    // getUserForStory(ownerId) {
-    //   return this.users.find((user) => {
-    //     user.id === ownerId;
-    //   });
-    // },
-    // loadUsers() {
-    //   this.users = this.$store.getters.getUsers;
-    // },
+    
+    loadUsers() {
+      this.users = this.$store.getters.getUsers;
+    },
 
     async loadLimitedStories() {
-      await this.loadStories();
+      await this.loadStories()
       this.storiesToShow = this.stories.slice(0, this.numStoriesToShow);
       while (this.newCommentInputs.length < this.numStoriesToShow) {
         this.newCommentInputs.push("");
@@ -492,7 +487,7 @@ export default {
     },
 
     likedByMe(story) {
-      if (!story.likedBy) return
+      if (!story.likedBy || !story.likedBy.length) return false 
       const likedOrNot = story.likedBy.find((item) => {
         return item.id === this.$store.state.loggedInUser.id;
       });
@@ -618,6 +613,13 @@ export default {
     this.newStoryOn = false
     if (result === 'yes update') this.loadLimitedStories()
   },
+  storyByMe(){
+    // console.log(this.storyToDelete.owner.id, this.loggedInUser.id)
+    if (this.storyToDelete.story.owner.id === this.loggedInUser.id)
+    {return true}
+    else 
+    {return false}
+  },
   
   //======================END OF METHODS=================
     
@@ -625,13 +627,11 @@ export default {
   // computed: {
   // },
   async created() {
+    localStorage.clear()
     await this.setStories()
-    await localStorage.clear()
-    await this.$store.commit("loadStories")
-      // await this.$store.dispatch('getLoggedInUser')
-      this.loadLimitedStories();
-
-    // this.loadUsers();
+    this.loadLimitedStories()
+    await this.setUsers()
+    this.loadUsers()
   },
 };
 </script>

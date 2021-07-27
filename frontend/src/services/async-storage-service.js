@@ -18,6 +18,7 @@ export const storageService = {
     deleteComment,
     _delete,
     addStory,
+    _loadUsers
 }
 
 var gLoggedInUser = {
@@ -46,7 +47,9 @@ async function _toggleLike(payload){
     const stories = await query('stories')
     // const storyIdx = stories.findIndex((element) => { return element.id === payload.story.id})
     var sendBack = payload
-    
+    var users = await _loadUsers()
+    var userIdx = users.findIndex(item => {return item.id === gLoggedInUser.id})
+
     if (payload.request === 'add'){
         var likeToAdd = {
             id: gLoggedInUser.id,
@@ -57,6 +60,8 @@ async function _toggleLike(payload){
         sendBack.likeToAdd = likeToAdd
         if (payload.entityType === 'story'){
             stories[payload.storyIdx].likedBy.unshift(likeToAdd)
+            users[userIdx].likesGiven.unshift(payload.story.id)
+
         }
         else {
             stories[payload.storyIdx].comments[payload.commentIdx].likedBy.unshift(likeToAdd)
@@ -67,6 +72,8 @@ async function _toggleLike(payload){
         if (payload.entityType === 'story'){
             removeIdx = stories[payload.storyIdx].likedBy.findIndex(item => {return item.id === gLoggedInUser.id})
             stories[payload.storyIdx].likedBy.splice(removeIdx, 1)
+            var removeFromUserIdx = users[userIdx].likesGiven.findIndex(item => {return item === payload.story.id}) 
+            users[userIdx].likesGiven.splice(removeFromUserIdx, 1)
         }
         else{
             removeIdx = stories[payload.storyIdx].comments[payload.commentIdx].likedBy.findIndex(item => {return item.id === gLoggedInUser.id})
@@ -76,6 +83,7 @@ async function _toggleLike(payload){
         sendBack.removeIdx = removeIdx
     }
     _save('stories', stories)
+    _save('users', users)
     return sendBack
 }
 
@@ -150,7 +158,15 @@ async function _delete(entityType, entity, entityIdx = null){
         entities.splice(entityIdx, 1)
     }
     else {entityIdx = entities.findindex(item => item.id === entity.id)
+
     entities.splice(entityIdx, 1)
+    }
+    if (entityType === 'story'){
+        var users = await query('users')
+        var loggedInIdx = users.findIndex(user => {return user.id === gLoggedInUser.id})
+        var deleteFromUserIdx = users[loggedInIdx].ownedStories.findIndex(item => {item === entity.id} )
+        users[loggedInIdx].ownedStories.splice(deleteFromUserIdx, 1)
+        _save('users', users)
     }
     _save(entityType, entities)
     // console.log
@@ -163,6 +179,12 @@ async function addStory(newStory){
     newStory.id = _makeId()
     stories.unshift(newStory)
     _save('stories', stories)
+
+    var users = await query('users')
+    var loggedInIdx = users.findIndex(user => {return user.id === gLoggedInUser.id})
+    users[loggedInIdx].ownedStories.unshift(newStory.id)
+    _save('users', users)
+
     return newStory
 }
 
@@ -183,7 +205,7 @@ async function _loadStories() {
             //=================================PHOTO STORY 1=========================================================
             {
                 id: 's111',
-                txt: 'Best trip ever11111111',
+                txt: 'Best trip ever11111111 aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
                 imgUrl: 'img/Stock photos - NY/NY01.jpg', //Can be an array if decide to support multiple imgs
                 createdAt: 1624123543452,
                 owner: {
@@ -245,7 +267,7 @@ async function _loadStories() {
               //=================================PHOTO STORY 2=========================================================
               {
                 id: 's222',
-                txt: 'Best trip ever222222',
+                txt: 'Best trip ever222222  aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
                 imgUrl: 'img/Stock photos - NY/NY02.jpg', //Can be an array if decide to support multiple imgs
                 createdAt: 1624123543452,
                 owner: {
@@ -307,7 +329,7 @@ async function _loadStories() {
               //=================================PHOTO STORY 3=========================================================
               {
                 id: 's333',
-                txt: 'Best trip ever333333',
+                txt: 'Best trip ever333333  aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
                 imgUrl: 'img/Stock photos - NY/NY03.jpeg', //Can be an array if decide to support multiple imgs
                 createdAt: 1624123543452,
                 owner: {
@@ -369,7 +391,7 @@ async function _loadStories() {
            //=================================PHOTO STORY 4=========================================================
            {
             id: 's444',
-            txt: 'Best trip ever444444',
+            txt: 'Best trip ever444444 aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
             imgUrl: 'img/Stock photos - NY/NY04.jpg', //Can be an array if decide to support multiple imgs
             createdAt: 1624123543452,
             owner: {
@@ -431,7 +453,7 @@ async function _loadStories() {
            //=================================PHOTO STORY 5=========================================================
            {
             id: 's555',
-            txt: 'Best trip ever5555555',
+            txt: 'Best trip ever5555555  aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
             imgUrl: 'img/Stock photos - NY/NY05.jpeg', //Can be an array if decide to support multiple imgs
             createdAt: 1624123543452,
             owner: {
@@ -493,7 +515,7 @@ async function _loadStories() {
            //=================================PHOTO STORY 6=========================================================
            {
             id: 's666',
-            txt: 'Best trip ever666666666',
+            txt: 'Best trip ever666666666  aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
             imgUrl: 'img/Stock photos - NY/NY06.jpg', //Can be an array if decide to support multiple imgs
             createdAt: 1624123543452,
             owner: {
@@ -555,7 +577,7 @@ async function _loadStories() {
            //=================================PHOTO STORY 7=========================================================
            {
             id: 's777',
-            txt: 'Best trip ever77777777',
+            txt: 'Best trip ever77777777 aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
             imgUrl: 'img/Stock photos - NY/NY07.jpg', //Can be an array if decide to support multiple imgs
             createdAt: 1624123543452,
             owner: {
@@ -616,7 +638,125 @@ async function _loadStories() {
         },
 
         ]
-        localStorage.setItem('stories', JSON.stringify(stories))
+        // localStorage.setItem('stories', JSON.stringify(stories))
+        _save('stories', stories)
     }
     return Promise.resolve(stories);
+}
+
+
+
+
+
+async function _loadUsers(){
+    var users = await query('users')
+    if (!users || !users.length) {
+        users = [
+            {
+                id: 'u11111',
+                username: 'HomerS',
+                password: 'Springfield',
+                fullname: 'Homer Simpson',
+                birthDate: 410273492,
+                profileImgUrl: 'img/profile photos/IMG1.jpg',
+                likesGiven: ['p36788', 'p00845'],
+                following: [
+                    {
+                        id: 'u22222',
+                        fullname: 'Tony Soprano',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    },
+                    {
+                        id: 'u33333',
+                        fullname: 'James T. Kirk',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    },
+                ],
+                followers: [
+                    {
+                        id: 'u22222',
+                        fullname: 'Tony Soprano',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    },
+                    {
+                        id: 'u33333',
+                        fullname: 'James T. Kirk',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    }
+                ],
+                ownedStories: ['s111', 's222', 's333', 's444', 's555', 's666', 's777'],
+            },
+            {
+                id: 'u22222',
+                username: 'TonyS',
+                password: 'NewJersey',
+                fullname: 'Tony Soprano',
+                birthDate: 410273421,
+                profileImgUrl: 'img/profile photos/IMG1.jpg',
+                likesGiven: ['p36788', 'p00845'],
+                following: [
+                    {
+                        id: 'u11111',
+                        fullname: 'Homer Simpson',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    },
+                    {
+                        id: 'u33333',
+                        fullname: 'James T. Kirk',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    }
+                ],
+                followers: [
+                    {
+                        id: 'u11111',
+                        fullname: 'Homer Simpson',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    },
+                    {
+                        id: 'u33333',
+                        fullname: 'James T. Kirk',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    },
+                ],
+                ownedStories: ['s221', 's222', 's223'],
+            },
+            {
+                id: 'u33333',
+                username: 'JamesTK',
+                password: 'Enterprise',
+                fullname: 'James T. Kirk',
+                birthDate: 510273421,
+                profileImgUrl: 'img/profile photos/IMG1.jpg',
+                likesGiven: ['p36788', 'p00845'],
+                following: [
+                    {
+                        id: 'u11111',
+                        fullname: 'Homer Simpson',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    },
+                    {
+                        id: 'u22222',
+                        fullname: 'Tony Soprano',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    }
+                ],
+                followers: [
+                    {
+                        id: 'u11111',
+                        fullname: 'Homer Simpson',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    },
+                    {
+                        id: 'u22222',
+                        fullname: 'Tony Soprano',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    },
+                ],
+                ownedStories: ['s331', 's332', 's333'],
+            }
+        ]
+
+}
+_save('users', users)
+return Promise.resolve(users);
 }

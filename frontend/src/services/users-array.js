@@ -33,7 +33,7 @@ var users = [
                 imgUrl: 'img/profile photos/IMG1.jpg'
             }
         ],
-        savedstoryIds: ['s111', 's112', 's113'],
+        ownedStories: ['s111', 's222', 's333', 's444', 's555', 's666', 's777'],
     },
     {
         id: 'u22222',
@@ -67,7 +67,7 @@ var users = [
                 imgUrl: 'img/profile photos/IMG1.jpg'
             },
         ],
-        savedstoryIds: ['s221', 's222', 's223'],
+        ownedStories: ['s221', 's222', 's223'],
     },
     {
         id: 'u33333',
@@ -101,6 +101,6 @@ var users = [
                 imgUrl: 'img/profile photos/IMG1.jpg'
             },
         ],
-        savedstoryIds: ['s331', 's332', 's333'],
+        ownedStories: ['s331', 's332', 's333'],
     }
 ],
