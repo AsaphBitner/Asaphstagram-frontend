@@ -1,5 +1,7 @@
 <template>
   <div>
+        <app-header @openNewStory="openNewStory()" />
+
     <h1>Explore Feed!!!</h1>
     <div class="img-container">
       <img
@@ -11,7 +13,14 @@
 </template>
 
 <script>
-export default {};
+import appHeader from '../components/app-header.vue'
+
+export default {
+components:{
+appHeader,
+}
+
+}
 </script>
 
 <style>

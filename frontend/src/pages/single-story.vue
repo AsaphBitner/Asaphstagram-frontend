@@ -1,7 +1,12 @@
 <template>
-  <div class="page-container">
+  <div class="single-page-story-container">
     <app-header @openNewStory="openNewStory()" />
-     <new-story 
+    <single-story v-if="singleStoryFocus" :storyObj="singleStoryFocus" 
+    @close="closeSingleStory('')" 
+    @closeAndReload="closeSingleStory('reload')"
+    />
+
+    <new-story 
     v-if="newStoryOn"
     @close="closeNewStory('no update')"
     @saved="closeNewStory('yes update')"
@@ -38,13 +43,6 @@
       <!-- ======= END OF DELETE COMMENT OR STORY ======== -->
     </div>
     <div class="stories-container">
-      <ul
-        class="story-list"
-        v-for="(story, idx) in this.storiesToShow"
-        :key="story.id"
-      >
-        <li>
-          <div class="single-story-container">
             <div class="story-user-photo-name">
               <router-link to="/profile-page">
                 <div class="small-profile-img-story">
@@ -378,11 +376,12 @@
               </div>
             </div>
           </div>
-        </li>
-      </ul>
     </div>
-  </div>
 </template>
+
+
+//  =========== END OF TEMPLATE!!! ================================================
+
 
 <script>
 import appHeader from "@/components/app-header.vue";
@@ -632,16 +631,17 @@ export default {
   },
   // computed: {
   // },
-  
   async created() {
-    localStorage.clear()
     await this.setStories()
-    this.loadLimitedStories()
     await this.setUsers()
     this.loadUsers()
   },
 };
+
 </script>
+
+
 
 <style>
 </style>
+

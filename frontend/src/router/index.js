@@ -5,6 +5,7 @@ import exploreFeed from '../pages/explore-feed.vue'
 import followingFeed from '../pages/following-feed.vue'
 import loginSignup from '../pages/login-signup.vue'
 import profilePage from '../pages/profile-page.vue'
+import singleStory from '../pages/single-story.vue'
 
 Vue.use(VueRouter)
 
@@ -17,17 +18,17 @@ const routes = [
         component: landingPage
     },
     {
-        path: '/profile-page/:userId?',
+        path: '/profile-page/:userId',
         name: 'profile-page',
         component: profilePage
     },
     {
-        path: '/following-feed/:userId?',
+        path: '/following-feed/:userId',
         name: 'following-feed', 
         component: followingFeed
     }, 
     {
-        path: '/explore-feed',
+        path: '/explore-feed/:userId',
         name: 'explore-feed', 
         component: exploreFeed
     },
@@ -35,6 +36,11 @@ const routes = [
         path: '/login-signup',
         name: 'login-signup', 
         component: loginSignup
+    },
+    {
+        path: '/single-story/:userId',
+        name: 'single-story', 
+        component: singleStory
     },
 ]
 

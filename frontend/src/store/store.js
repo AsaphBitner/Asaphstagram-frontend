@@ -117,6 +117,7 @@ export const store = new Vuex.Store({
             await commit({type: 'deleteComment', payload: payload})
         },
         async deleteStory({commit}, payload){
+            // if (!payload.idx) {payload.idx === null}
             await storageService._delete('stories', payload.story, payload.idx)
             commit({type: 'deleteStory', payload: payload})
         },
@@ -126,7 +127,7 @@ export const store = new Vuex.Store({
             commit({type: 'addStory', payload: newStory})
         },
         
-
+ 
         // async getLoggedInUser({commit}){
         //     var payload = await storageService.query('loggedInUser')
         //     commit({type: 'setLoggedInUser', payload: payload})
