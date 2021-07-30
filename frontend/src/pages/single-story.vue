@@ -93,18 +93,18 @@
               </span>
             </div>
             <!-- START OF TEXT AND COMMENTS -->
-            <span class="small-profile-img-story-2">
+              <div class="single-story-text">
+                <div class="small-profile-img-story-2">
                   <img :src="this.story.owner.imgUrl" alt="ERROR!" />
-                </span>
-              <div class="story-text">
+                </div>
                 <p>
-                  <span @click="sendToProfilePage(comment.by.id)">{{ story.owner.username }}</span> {{ story.txt }}
+                  <span class="story-text-user-name" @click="sendToProfilePage(story.owner.id)">{{ story.owner.username }}</span> {{ story.txt }}
                 </p>
               </div>
               <!-- start of comments!!!!!!!!!!!!!!!!!! -->
-              <div class="story-comments">
+              <div class="single-story-comments">
                 <ul v-for="(comment, cIdx) in story.comments" :key="comment.id">
-                  <li class="single-comment">
+                  <li class="single-story-single-comment">
                     <!-- SINGLE COMMENT! -->
                     <span class="small-profile-img-comment" @click="sendToProfilePage(comment.by.id)">
                       <img :src="getUserImgForComment(comment.by.id)" alt="" >
@@ -113,6 +113,8 @@
                       <span @click="sendToProfilePage(comment.by.id)">{{ comment.by.username }}</span
                       >&nbsp;{{ comment.txt }}
                     </p>
+                    <!-- DELETE COMMENT -->
+                    <div class="delete-like-unlike-comment">
                     <span
                       v-if="commentByMe(comment.by.id)"
                       class="delete-comment"
@@ -225,12 +227,13 @@
                         ></path>
                       </svg>
                     </span>
+                    </div>
                     <!-- SINGLE COMMENT! -->
                   </li>
                 </ul>
               </div>
-            <div class="story-after-photo">
-              <div class="story-four-icons-container">
+            <div class="story-after-comments">
+              <!-- <div class="story-four-icons-container"> -->
                 <div class="story-four-icons">
                   <span
                     v-if="!likedByMe(story)"
@@ -273,6 +276,8 @@
                     </svg>
                   </span>
                   <!-- COMMENT -->
+                                <!-- end of comments!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
                   <span class="story-comment-icon">
                     <svg
                       aria-label="Comment"
@@ -323,7 +328,7 @@
                     </svg>
                   </span>
                 </div>
-              </div>
+              <!-- </div> -->
               <!-- End of four icons -->
               <div class="story-liked-by">
                 <p v-if="story.likedBy.length ">
@@ -332,7 +337,6 @@
                 </p>
               </div>
               
-              <!-- end of comments!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
               <div class="story-how-long-ago">
                 {{ timeDifference(Date.now(), story.createdAt).toUpperCase() }}
@@ -433,10 +437,10 @@ export default {
       this.users = this.$store.getters.getUsers;
     },
 
-    async loadLimitedStories() {
-      await this.loadStories()
-      this.storiesToShow = this.stories.slice(0, this.numStoriesToShow);
-    },
+    // async loadLimitedStories() {
+    //   await this.loadStories()
+    //   this.storiesToShow = this.stories.slice(0, this.numStoriesToShow);
+    // },
 
     resetnewCommentsInput() {
       this.newCommentInput = '';
@@ -631,6 +635,7 @@ export default {
   // computed: {
   // },
   async created() {
+    localStorage.clear()
     await this.setStories()
     const storyId = this.$route.params.storyId
     this.story = this.$store.state.stories.find(item => {return item.id === storyId})
