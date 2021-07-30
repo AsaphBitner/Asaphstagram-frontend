@@ -101,7 +101,7 @@ async function addComment(payload){
     }
     const stories = await query('stories')
     // console.log(payload.story.comments, stories)
-    stories[payload.storyIdx].comments.unshift(newComment)
+    stories[payload.storyIdx].comments.push(newComment)
     _save('stories', stories)
     return newComment
 }
@@ -246,7 +246,7 @@ async function _loadStories() {
                             username: 'JamesTK',
                             imgUrl: 'img/profile photos/IMG1.jpg'
                         },
-                        txt: 'not good!',
+                        txt: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
                     }
                 ],
                 likedBy: [
@@ -308,7 +308,7 @@ async function _loadStories() {
                             username: 'JamesTK',
                             imgUrl: 'img/profile photos/IMG1.jpg'
                         },
-                        txt: 'not good!',
+                        txt: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
                     }
                 ],
                 likedBy: [
@@ -370,7 +370,7 @@ async function _loadStories() {
                             username: 'JamesTK',
                             imgUrl: 'img/profile photos/IMG1.jpg'
                         },
-                        txt: 'not good!',
+                        txt: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
                     }
                 ],
                 likedBy: [
@@ -432,7 +432,7 @@ async function _loadStories() {
                         username: 'JamesTK',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
-                    txt: 'not good!',
+                    txt: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
                 }
             ],
             likedBy: [
@@ -494,7 +494,7 @@ async function _loadStories() {
                         username: 'JamesTK',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
-                    txt: 'not good!',
+                    txt: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
                 }
             ],
             likedBy: [
@@ -556,7 +556,7 @@ async function _loadStories() {
                         username: 'JamesTK',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
-                    txt: 'not good!',
+                    txt: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
                 }
             ],
             likedBy: [
@@ -618,7 +618,7 @@ async function _loadStories() {
                         username: 'JamesTK',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
-                    txt: 'not good!',
+                    txt: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
                 }
             ],
             likedBy: [

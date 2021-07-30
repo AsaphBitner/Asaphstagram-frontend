@@ -5,7 +5,7 @@
     <div class="img-container">
     <!-- <img src="img/Stock photos - NY/NY02.jpg" alt="Sorry, no image here" /> -->
   <router-link :to="'/following-feed/'+userId">FEED</router-link>
-
+  <!-- this.$router.push('/car') -->
 
 
     </div>
@@ -29,6 +29,10 @@ data(){
 created(){
   // this.$store.dispatch.loadUsers()
   // this.$store.dispatch.loadStories()
+  // const userId = this.$store.state.loggedInUser.id
+  // setTimeout(() => {
+  //   this.$router.push('/following-feed/'+userId)
+  // }, 2000);
 }
 
 }

@@ -1,0 +1,33 @@
+
+.single-story-on-page-container{
+    margin: auto;
+    max-width: 40rem;
+    max-height: 41rem;
+display: flex;
+// flex-direction: row;
+
+.single-story-main-image{
+max-width: 67%;
+max-height: 100%;
+img{
+    width: 100%;
+    height: 100%;
+
+}
+}
+.single-story-not-the-image{
+    max-width: 33%;
+    max-height: 100%;
+    img{
+        max-width: 1rem;
+    }
+
+}
+
+    
+}
+//===== END OF SINGLE PAGE STORY CONTAINER ============
+
+
+
+

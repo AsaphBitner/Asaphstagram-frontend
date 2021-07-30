@@ -74,7 +74,7 @@ export const store = new Vuex.Store({
 
         addComment(state, {payload}){
             const storyIdx = payload.storyIdx
-            state.stories[storyIdx].comments.unshift(payload.newComment)
+            state.stories[storyIdx].comments.push(payload.newComment)
         },
         deleteComment(state, {payload}){
             state.stories[payload.storyIdx].comments.splice(payload.commentIdx, 1)

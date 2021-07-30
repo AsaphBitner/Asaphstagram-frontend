@@ -91,7 +91,7 @@
                 </svg>
               </span>
             </div>
-            <div class="main-image-story" @click="openSingleStory(story, idx)">
+            <div class="main-image-story" @click="openSingleStory(story)">
               <img :src="story.imgUrl" alt="ERROR!" />
             </div>
             <div class="story-after-photo">
@@ -138,7 +138,7 @@
                     </svg>
                   </span>
                   <!-- COMMENT -->
-                  <span>
+                  <span class="story-comment-icon" @click="openSingleStory(story)">
                     <svg
                       aria-label="Comment"
                       class="story-comment-icon"
@@ -156,7 +156,7 @@
                     </svg>
                   </span>
                   <!-- MESSAGE -->
-                  <span>
+                  <span class="story-message-icon">
                     <svg
                       aria-label="Direct"
                       class=""
@@ -203,14 +203,14 @@
               </div>
               <!-- start of comments!!!!!!!!!!!!!!!!!! -->
               <div class="story-comments">
-                <p class="view-all-comments" v-if="story.comments">
+                <p @click="openSingleStory(story)" class="view-all-comments" v-if="story.comments">
                   View all {{ story.comments.length }} comments
                 </p>
                 <ul v-for="(comment, cIdx) in story.comments" :key="comment.id">
-                  <li v-if="cIdx < numCommentsToShow">
+                  <li v-if="cIdx > (story.comments.length - 2)">
                     <!-- SINGLE COMMENT! -->
                     <p>
-                      <span>{{ comment.by.username }}</span
+                      <span >{{ comment.by.username }}</span
                       >&nbsp;{{ comment.txt }}
                     </p>
                     <span
@@ -616,11 +616,8 @@ export default {
     else 
     {return false}
   },
-  openSingleStory(story, idx){
-    this.singleStoryFocus = {
-      stroy: story,
-      idx: idx,
-    }
+  openSingleStory(story){
+    this.$router.push('/single-story/'+story.id)
   },
   closeSingleStory(instruction){
     this.singleStoryFocus = {}
@@ -634,6 +631,12 @@ export default {
   // },
   
   async created() {
+    const userId = this.$route.params.userId
+    const loggedInId = this.$store.state.loggedInUser.id
+    if (userId !== loggedInId){
+      this.$router.push('/')
+      // console.log(userId, loggedInId)
+      }
     localStorage.clear()
     await this.setStories()
     this.loadLimitedStories()

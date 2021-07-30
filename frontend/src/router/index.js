@@ -38,7 +38,7 @@ const routes = [
         component: loginSignup
     },
     {
-        path: '/single-story/:userId',
+        path: '/single-story/:storyId',
         name: 'single-story', 
         component: singleStory
     },
