@@ -47,14 +47,12 @@
 
             
             <div class="story-user-photo-name">
-              <router-link to="/profile-page">
-                <div class="small-profile-img-story-2">
-                  <img :src="this.story.owner.imgUrl" alt="ERROR!" />
-                </div>
-              </router-link>
-              <router-link to="/profile-page" class="user-name-story">
+               <div class="small-profile-img-story-2" @click="sendToProfilePage(story.owner.id)">
+                  <img :src="this.story.owner.imgUrl" alt="ERROR!" />              
+              <span @click="sendToProfilePage(story.owner.id)">
                 {{ story.owner.username }}
-              </router-link>
+              </span>
+                </div>
               <span
                 class="story-options"
                 @click="setToDelete(' story', story, idx)"
@@ -94,7 +92,7 @@
             </div>
             <!-- START OF TEXT AND COMMENTS -->
               <div class="single-story-text">
-                <div class="small-profile-img-story-2">
+                <div class="small-profile-img-story-2" @click="sendToProfilePage(story.owner.id)">
                   <img :src="this.story.owner.imgUrl" alt="ERROR!" />
                 </div>
                 <p>
@@ -106,6 +104,7 @@
                 <ul v-for="(comment, cIdx) in story.comments" :key="comment.id">
                   <li class="single-story-single-comment">
                     <!-- SINGLE COMMENT! -->
+                    <div class="comment-everything-but-like-counter">
                     <span class="small-profile-img-comment" @click="sendToProfilePage(comment.by.id)">
                       <img :src="getUserImgForComment(comment.by.id)" alt="" >
                     </span>
@@ -227,6 +226,10 @@
                         ></path>
                       </svg>
                     </span>
+                    </div>
+                  </div>
+                    <div v-if="comment.likedBy.length" class="comment-how-many-likes">
+                      {{commentLikeMessage(comment)}}
                     </div>
                     <!-- SINGLE COMMENT! -->
                   </li>
@@ -520,7 +523,6 @@ export default {
       };
 
       await this.$store.dispatch("toggleLike", payload);
-      this.loadLimitedStories();
     },
     commentByMe(commenterId) {
       if (commenterId === this.$store.state.loggedInUser.id) {
@@ -544,21 +546,18 @@ export default {
       }
       await this.$store.dispatch("addComment", payload);
       await this.resetnewCommentsInput();
-      this.loadLimitedStories();
     },
     async deleteComment() {
       // console.log('comment to Delete: ', this.commentToDelete)
       const payload = this.commentToDelete;
       await this.$store.dispatch("deleteComment", payload);
       this.commentToDelete = {};
-      this.loadLimitedStories();
     },
     async deleteStory() {
       const payload = this.storyToDelete;
       await this.$store.dispatch("deleteStory", payload);
       // console.log(this.storyToDelete)
       this.storyToDelete = {};
-      this.loadLimitedStories();
       
     },
     openDeleteMenu() {
@@ -573,7 +572,6 @@ export default {
       this.backgroundDisplayed = false;
       this.deleteMenuDisplayed = false;
       this.confirmMenuDisplayed = false;
-      this.loadLimitedStories();
     },
 
     deleteConfirmed() {
@@ -626,6 +624,11 @@ export default {
   },
   sendToProfilePage(id){
     this.$router.push('/profile-page/'+id)
+  },
+  commentLikeMessage(comment){
+    if (!comment.likedBy.length) {return 'ERROR'}
+    else if  (comment.likedBy.length === 1) {return '1 like'}
+    else if  (comment.likedBy.length > 1) {return `${comment.likedBy.length} likes`}
   },
 
   

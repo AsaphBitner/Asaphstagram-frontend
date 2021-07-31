@@ -180,7 +180,7 @@
     
 }
 .story-four-icons{
-    cursor: pointer;
+    // cursor: pointer;
     display: flex;
     align-items: center;
     // gap: 0.5rem;
@@ -195,6 +195,7 @@
         }
     
     .story-like-icon, .story-unlike-icon{
+        cursor: pointer;
         margin-left: 0;
         padding-left: 0;
         
@@ -202,6 +203,9 @@
         margin-left: 0;
         padding-left: 0;            
         }
+    }
+    .story-comment-icon{
+        cursor: pointer;
     }
     .story-bookmark{
         margin-left: auto;
