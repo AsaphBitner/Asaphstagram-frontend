@@ -45,8 +45,9 @@ function query(entityType, delay=0) {
 
 async function _toggleLike(payload){
     const stories = await query('stories')
-    // const storyIdx = stories.findIndex((element) => { return element.id === payload.story.id})
+    const storyIdx = stories.findIndex((element) => { return element.id === payload.story.id})
     var sendBack = payload
+    sendBack.storyIdx = storyIdx
     var users = await _loadUsers()
     var userIdx = users.findIndex(item => {return item.id === gLoggedInUser.id})
 
@@ -59,25 +60,25 @@ async function _toggleLike(payload){
         }
         sendBack.likeToAdd = likeToAdd
         if (payload.entityType === 'story'){
-            stories[payload.storyIdx].likedBy.unshift(likeToAdd)
+            stories[storyIdx].likedBy.unshift(likeToAdd)
             users[userIdx].likesGiven.unshift(payload.story.id)
 
         }
         else {
-            stories[payload.storyIdx].comments[payload.commentIdx].likedBy.unshift(likeToAdd)
+            stories[storyIdx].comments[payload.commentIdx].likedBy.unshift(likeToAdd)
         }
     }
     else{
         var removeIdx = -100
         if (payload.entityType === 'story'){
-            removeIdx = stories[payload.storyIdx].likedBy.findIndex(item => {return item.id === gLoggedInUser.id})
-            stories[payload.storyIdx].likedBy.splice(removeIdx, 1)
+            removeIdx = stories[storyIdx].likedBy.findIndex(item => {return item.id === gLoggedInUser.id})
+            stories[storyIdx].likedBy.splice(removeIdx, 1)
             var removeFromUserIdx = users[userIdx].likesGiven.findIndex(item => {return item === payload.story.id}) 
             users[userIdx].likesGiven.splice(removeFromUserIdx, 1)
         }
         else{
-            removeIdx = stories[payload.storyIdx].comments[payload.commentIdx].likedBy.findIndex(item => {return item.id === gLoggedInUser.id})
-            stories[payload.storyIdx].comments[payload.commentIdx].likedBy.splice(removeIdx, 1)
+            removeIdx = stories[storyIdx].comments[payload.commentIdx].likedBy.findIndex(item => {return item.id === gLoggedInUser.id})
+            stories[storyIdx].comments[payload.commentIdx].likedBy.splice(removeIdx, 1)
         }
 
         sendBack.removeIdx = removeIdx
@@ -100,15 +101,16 @@ async function addComment(payload){
         likedBy: [],
     }
     const stories = await query('stories')
-    // console.log(payload.story.comments, stories)
-    stories[payload.storyIdx].comments.push(newComment)
+    const storyIdx = stories.findIndex((element) => { return element.id === payload.story.id})
+    stories[storyIdx].comments.push(newComment)
     _save('stories', stories)
     return newComment
 }
 
 async function deleteComment(payload){
     const stories = await query('stories')
-    stories[payload.storyIdx].comments.splice(payload.commentIdx, 1)
+    const storyIdx = stories.findIndex((element) => { return element.id === payload.story.id})
+    stories[storyIdx].comments.splice(payload.commentIdx, 1)
     _save('stories', stories)
 }
 
@@ -154,13 +156,10 @@ function remove(entityType, entityId) {
 
 async function _delete(entityType, entity, entityIdx = null){
     const entities = await query(entityType)
-    if (entityIdx >= 0){
-        entities.splice(entityIdx, 1)
-    }
-    else {entityIdx = entities.findindex(item => item.id === entity.id)
+    entityIdx = entities.findIndex(item => item.id === entity.id)
 
     entities.splice(entityIdx, 1)
-    }
+    
     if (entityType === 'story'){
         var users = await query('users')
         var loggedInIdx = users.findIndex(user => {return user.id === gLoggedInUser.id})
@@ -665,29 +664,35 @@ async function _loadUsers(){
                 password: 'Springfield',
                 fullname: 'Homer Simpson',
                 birthDate: 410273492,
+                profileText: 'Hello hi everybody, Homer Simpson here, I live in Springfield USA, my wiffe is marge and my kids are bart, lisa and maggie',
                 profileImgUrl: 'img/profile photos/IMG1.jpg',
                 likesGiven: ['p36788', 'p00845'],
                 following: [
                     {
+                        id: 'u11111',
+                        username: 'HomerS',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    },
+                    {
                         id: 'u22222',
-                        fullname: 'Tony Soprano',
+                        username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u33333',
-                        fullname: 'James T. Kirk',
+                        username: 'JamesTK',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
                 followers: [
                     {
                         id: 'u22222',
-                        fullname: 'Tony Soprano',
+                        username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u33333',
-                        fullname: 'James T. Kirk',
+                        username: 'JamesTK',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     }
                 ],
@@ -699,33 +704,39 @@ async function _loadUsers(){
                 password: 'NewJersey',
                 fullname: 'Tony Soprano',
                 birthDate: 410273421,
+                profileText: 'Hello hi I am Tony Soprano humble construction/garbage disposal businessman fron New Jersey',
                 profileImgUrl: 'img/profile photos/IMG1.jpg',
                 likesGiven: ['p36788', 'p00845'],
                 following: [
                     {
                         id: 'u11111',
-                        fullname: 'Homer Simpson',
+                        username: 'HomerS',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    },
+                    {
+                        id: 'u22222',
+                        username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u33333',
-                        fullname: 'James T. Kirk',
+                        username: 'JamesTK',
                         imgUrl: 'img/profile photos/IMG1.jpg'
-                    }
+                    },
                 ],
                 followers: [
                     {
                         id: 'u11111',
-                        fullname: 'Homer Simpson',
+                        username: 'HomerS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u33333',
-                        fullname: 'James T. Kirk',
+                        username: 'JamesTK',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
-                ownedStories: ['s221', 's222', 's223'],
+                ownedStories: ['s001', 's002', 's003'],
             },
             {
                 id: 'u33333',
@@ -733,33 +744,39 @@ async function _loadUsers(){
                 password: 'Enterprise',
                 fullname: 'James T. Kirk',
                 birthDate: 510273421,
+                profileText: 'Hello Hello I am James Kirk Starfleet Enterprize captain hi hows it going?',
                 profileImgUrl: 'img/profile photos/IMG1.jpg',
                 likesGiven: ['p36788', 'p00845'],
                 following: [
                     {
                         id: 'u11111',
-                        fullname: 'Homer Simpson',
+                        username: 'HomerS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u22222',
-                        fullname: 'Tony Soprano',
+                        username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
-                    }
+                    },
+                    {
+                        id: 'u33333',
+                        username: 'JamesTK',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    },
                 ],
                 followers: [
                     {
                         id: 'u11111',
-                        fullname: 'Homer Simpson',
+                        username: 'HomerS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
                         id: 'u22222',
-                        fullname: 'Tony Soprano',
+                        username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
-                ownedStories: ['s331', 's332', 's333'],
+                ownedStories: ['004', 's005', 's006'],
             }
         ]
 

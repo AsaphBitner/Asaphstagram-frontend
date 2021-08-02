@@ -3,7 +3,7 @@
     margin: auto;
     margin-top: 1.5rem;
     max-width: 68rem;
-    max-height: 40.625rem;
+    height: 40.625rem;
     display: flex;
     // flex-direction: row;
     
@@ -154,16 +154,17 @@ img{
             // margin-left: auto;
             text-align: center;
             justify-content: center;
-    
             display: none;
             }
         }
     }
-    .single-story-single-comment:hover{
-        .delete-comment{
+    // .single-story-single-comment
+    .comment-everything-but-like-counter:hover .delete-comment{
             display: block;
+            // background-color: gold;
         }
-    }
+        
+    
     .comment-how-many-likes{
     padding: 0 3rem;
     font-size: 0.84rem;

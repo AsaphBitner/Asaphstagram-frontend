@@ -29,9 +29,9 @@
       >
         <span class="confirmation">Are you sure?</span>
         <span class="yesNo"
-          ><span class="yes" @click.stop="deleteConfirmed()">Yes, delete</span
+          ><span class="yes" @click.stop="deleteConfirmed()">Yes, Delete</span
           ><span class="no" @click.stop="closeBackground()"
-            >No, cancel</span
+            >No, Cancel</span
           ></span
         >
       </div>
@@ -48,14 +48,14 @@
             
             <div class="story-user-photo-name">
                <div class="small-profile-img-story-2" @click="sendToProfilePage(story.owner.id)">
-                  <img :src="this.story.owner.imgUrl" alt="ERROR!" />              
+                  <img :src="story.owner.imgUrl" alt="ERROR!" />              
               <span @click="sendToProfilePage(story.owner.id)">
                 {{ story.owner.username }}
               </span>
                 </div>
               <span
                 class="story-options"
-                @click="setToDelete(' story', story, idx)"
+                @click="setToDelete(' Post', story, idx)"
               >
                 <svg
                   aria-label="More options"
@@ -93,7 +93,7 @@
             <!-- START OF TEXT AND COMMENTS -->
               <div class="single-story-text">
                 <div class="small-profile-img-story-2" @click="sendToProfilePage(story.owner.id)">
-                  <img :src="this.story.owner.imgUrl" alt="ERROR!" />
+                  <img :src="story.owner.imgUrl" alt="ERROR!" />
                 </div>
                 <p>
                   <span class="story-text-user-name" @click="sendToProfilePage(story.owner.id)">{{ story.owner.username }}</span> {{ story.txt }}
@@ -118,7 +118,7 @@
                       v-if="commentByMe(comment.by.id)"
                       class="delete-comment"
                       @click="
-                        setToDelete(' comment', story, idx, comment, cIdx)
+                        setToDelete(' Comment', story, idx, comment, cIdx)
                       "
                     >
                       <svg
@@ -433,7 +433,7 @@ export default {
       await this.$store.dispatch('loadUsers')
     },
     // loadStories() {
-    //   this.stories = this.$store.getters.getStories;
+      //   this.stories = this.$store.getters.getStories;
     // },
     
     loadUsers() {
@@ -558,6 +558,7 @@ export default {
       await this.$store.dispatch("deleteStory", payload);
       // console.log(this.storyToDelete)
       this.storyToDelete = {};
+
       
     },
     openDeleteMenu() {
@@ -575,25 +576,27 @@ export default {
     },
 
     deleteConfirmed() {
-      if (this.toDeleteEntity === " comment") {
+      if (this.toDeleteEntity === " Comment") {
         this.deleteComment();
         this.closeBackground();
-      } else if (this.toDeleteEntity === " story") {
+      } else if (this.toDeleteEntity === " Post") {
         // console.log('Delete story not ready yet')
         this.deleteStory();
         this.closeBackground();
+        this.$router.push('/following-feed/'+this.loggedInUser.id)
+
       }
     },
     setToDelete(entityType, story, idx, comment = null, cIdx = null) {
       this.toDeleteEntity = entityType;
-      if (entityType === " comment") {
+      if (entityType === " Comment") {
         this.commentToDelete = {
           story: story,
           storyIdx: idx,
           comment: comment,
           commentIdx: cIdx,
         };
-      } else if (entityType === " story") {
+      } else if (entityType === " Post") {
         this.storyToDelete = {
           story: story,
           idx: idx,
@@ -618,7 +621,9 @@ export default {
   },
   getUserImgForComment(id){
     const user = this.users.find(item => {return item.id === id})
+
     const imgUrl = user.profileImgUrl
+      console.log(user.profileImgUrl)
     // console.log('user: ', user, 'imgUrel: ', imgUrl)
     return imgUrl
   },

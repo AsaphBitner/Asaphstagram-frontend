@@ -14,17 +14,18 @@
     padding: 0.2rem;
     color: #262626;
     
+    .header-logo{
+        font-family: 'Instagram Logo regular', sans-serif;
+        font-weight: 100;
+        font-size: 1.5rem;
+        padding: .4rem;
+        cursor: pointer; 
+    }
 
     .header-icon{
     max-width: 1.5rem;
     max-height: 1.5rem;
     cursor: pointer;
-}
-.header-logo{
-    font-family: 'Instagram Logo regular', sans-serif;
-    font-weight: 100;
-    font-size: 1.5rem;
-    padding: .4rem; 
 }
 
 .header-profile-image-container{

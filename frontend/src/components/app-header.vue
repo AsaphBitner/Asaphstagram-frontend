@@ -2,7 +2,7 @@
   <div class="header-container">
     <div class="header-flex-wide-left"></div>
     <div class="header-flex-1">
-    <h3 class="header-logo">Asaphstagram</h3> 
+    <h3 class="header-logo" @click="sendToFeed()">Asaphstagram</h3> 
     </div>
     <div class="header-flex-2">
     <input autocapitalize="none" type="search" class="header-search" placeholder="Search"> 
@@ -29,7 +29,7 @@
     
     <div class="header-profile-image-container header-icon">
     <router-link :to="'/profile-page/'+userId">
-    <img :src="this.$store.state.loggedInUser.profileImgUrl" alt="">
+    <img :src="this.loggedInUser.profileImgUrl" alt="">
     </router-link>
     </div>
     </div>
@@ -51,17 +51,21 @@ export default {
 
   data(){
     return{
-      loggedInUser: this.$store.state.loggedInUser
-
+      loggedInUser: {},
+      userId: '',
     }
   },
   methods:{
     addStory(){
       this.$emit('openNewStory')
+    },
+    sendToFeed(){
+      this.$router.push('/following-feed/'+this.userId)
     }
 
   },
   created(){
+    this.loggedInUser = this.$store.state.loggedInUser
     this.userId = this.$store.state.loggedInUser.id
 
   },

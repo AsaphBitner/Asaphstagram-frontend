@@ -49,9 +49,10 @@ export const store = new Vuex.Store({
             // console.log('USERS: ', state.users)
         },
 
-        toggleLike(state, payloadInitial){
-            const payload = payloadInitial.payload
-            const storyIdx = payload.storyIdx
+        toggleLike(state, {payload}){
+            // const payload = payloadInitial.payload
+            const storyIdx = state.stories.findIndex((element) => { return element.id === payload.story.id})
+
             const commentIdx = payload.commentIdx
             if (payload.request === 'add'){
                 if (payload.entityType === 'story'){ 
@@ -73,15 +74,17 @@ export const store = new Vuex.Store({
         },
 
         addComment(state, {payload}){
-            const storyIdx = payload.storyIdx
-            state.stories[storyIdx].comments.push(payload.newComment)
+           const storyIdx = state.stories.findIndex((element) => { return element.id === payload.story.id})
+           state.stories[storyIdx].comments.push(payload.newComment)
         },
         deleteComment(state, {payload}){
-            state.stories[payload.storyIdx].comments.splice(payload.commentIdx, 1)
+           const storyIdx = state.stories.findIndex((element) => { return element.id === payload.story.id})
+           state.stories[storyIdx].comments.splice(payload.commentIdx, 1)
 
         },
         deleteStory(state, {payload}){
-            state.stories.splice(payload.idx, 1)
+            const storyIdx = state.stories.findIndex((element) => { return element.id === payload.story.id})
+            state.stories.splice(storyIdx, 1)
         },
         addStory(state, {payload}){
             state.stories.unshift(payload)
