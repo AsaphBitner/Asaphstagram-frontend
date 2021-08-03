@@ -124,7 +124,7 @@
                       <svg
                         aria-label="Comment Options"
                         class="_8-yf5"
-                        fill="#8e8e8e"
+                        fill="#262626"
                         height="16"
                         role="img"
                         viewBox="0 0 48 48"

@@ -664,7 +664,7 @@ async function _loadUsers(){
                 password: 'Springfield',
                 fullname: 'Homer Simpson',
                 birthDate: 410273492,
-                profileText: 'Hello hi everybody, Homer Simpson here, I live in Springfield USA, my wiffe is marge and my kids are bart, lisa and maggie',
+                profileText: 'Hello hi everybody, Homer Simpson here, I live in Springfield USA, my wife is marge and my kids are bart, lisa and maggie',
                 profileImgUrl: 'img/profile photos/IMG1.jpg',
                 likesGiven: ['p36788', 'p00845'],
                 following: [
@@ -686,6 +686,11 @@ async function _loadUsers(){
                 ],
                 followers: [
                     {
+                        id: 'u11111',
+                        username: 'HomerS',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    },
+                    {
                         id: 'u22222',
                         username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
@@ -694,7 +699,7 @@ async function _loadUsers(){
                         id: 'u33333',
                         username: 'JamesTK',
                         imgUrl: 'img/profile photos/IMG1.jpg'
-                    }
+                    },
                 ],
                 ownedStories: ['s111', 's222', 's333', 's444', 's555', 's666', 's777'],
             },
@@ -728,6 +733,11 @@ async function _loadUsers(){
                     {
                         id: 'u11111',
                         username: 'HomerS',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    },
+                    {
+                        id: 'u22222',
+                        username: 'TonyS',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
@@ -773,6 +783,11 @@ async function _loadUsers(){
                     {
                         id: 'u22222',
                         username: 'TonyS',
+                        imgUrl: 'img/profile photos/IMG1.jpg'
+                    },
+                    {
+                        id: 'u33333',
+                        username: 'JamesTK',
                         imgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],

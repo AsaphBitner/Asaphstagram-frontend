@@ -1,0 +1,319 @@
+
+.profile-page-container{
+    .menu-background{
+        background: rgba(0,0,0,.6);
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        align-items: center;
+        z-index: 1;
+        // display: none;
+        
+    }
+    .delete-menu, .are-you-sure-menu{
+        margin: auto;
+        position: sticky;
+        margin-top: 15rem;
+        background-color: #fafafa;
+        max-width: 26.75rem;
+        border-radius: .5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        z-index: 2;
+        color: #262626;
+        font-weight: 450;
+        *{
+            display: flex;
+            width: 100%;
+            border: none;   
+            border-bottom: 1px solid rgba(219,219,219,1);
+            border-radius: .5rem;
+            height: 3.4rem;
+            font-size: .967rem;
+            padding: .3rem .6rem;
+            align-items: center;
+            justify-content: center;
+            object-fit: cover;
+            font-weight: 500;
+            
+            // background-color: black;
+            
+        }
+        *:hover{
+            cursor: pointer;
+            background-color: #ebe6e6;
+        }
+        :last-child{
+        border-bottom: none;
+        }
+        .yesNo{
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    
+        // border-bottom: none;
+            
+            // gap: 100%;
+            .yes{
+                background-color: rgba(255, 0, 0, 0.2);
+                max-width: 100%;
+                max-height: 100%;
+                border-right: 1px solid rgba(219,219,219,1);
+                border-bottom: none;
+                border-radius: 0 0 0 .5rem;
+            }
+            .no{
+                background-color: rgba(7, 81, 219, 0.2);
+                max-width: 100%;
+                max-height: 100%;
+                border-radius: 0 0 .5rem 0;
+    
+            }
+        }
+        .yesNo:hover{
+            background-color: #fafafa;
+        }
+        .yes:hover{
+            color: whitesmoke;
+            background-color: rgb(197, 7, 7);
+        }
+        .no:hover{
+            color: whitesmoke;
+            background-color: rgb(36, 36, 253);
+        }
+    }
+
+    //============ END OF BACKGROUND MENU =================
+
+.profile-page-upper-part{
+    margin: 3rem auto;
+    max-width: 48.06rem;
+    display: flex;
+    
+
+    .profile-page-profile-photo{
+        min-width: 10.02rem;
+        max-width: 10.02rem;
+        max-height: 10rem;
+        min-height: 10rem;
+        border-radius: 50%;
+        margin-left: 0.4rem;
+        margin-right: 2rem;
+        img{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+
+    .profile-page-texts-container{
+        // display: flex;
+        // flex-direction: column;
+        // width: inherit;
+        padding: 0.5rem 1rem;
+        *{
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-page-username-options{
+            margin-bottom: 1.336rem;
+            .profile-page-username{
+                font-size: 1.88rem;
+            }
+            .profile-page-options{
+                margin-left: auto;
+            }
+        }
+        .post-follower-following-count{
+            margin-bottom: 1.336rem;
+            *{
+                margin-right: 4rem;
+            }
+            div{
+                font-size: 1.3rem;
+                span{
+                    font-size: 1.3rem;
+                    font-weight: 600;
+                    margin-right: .35rem;
+                }
+            }
+        }
+        .fullname{
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        .profile-text{
+        margin-bottom: 0.9365rem;
+        font-size: 1.0688rem;
+        }
+
+
+
+    }
+    .followers-detailed{
+        display: flex;
+        *{
+            font-size: 0.81rem;
+        }
+        span{
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+    }
+
+    
+    
+    
+}
+
+
+
+// ========== END OF UPPER PART =============
+.profile-page-lower-part{
+    .dividing-line{
+        border-top: 1px solid rgba(219,219,219,1);
+        margin: 0 1rem;
+    }
+    .profile-page-lower-part-title{
+        // display: flex;
+        // align-items: center;
+        text-align: center;
+        justify-content: center;
+        margin: auto;
+        margin-top: .5rem;
+        margin-bottom: 1rem;
+        span{
+            text-transform: uppercase;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #8e8e8e;
+            svg{
+                fill: #8e8e8e;
+            }
+        }
+    }
+    
+    .no-posts-yet{
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #8e8e8e;
+        margin: auto;
+        margin-top: 1rem;
+        text-align: center; 
+    }
+
+    .profile-page-story-list{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 19.555rem);
+        // grid-template-rows: repeat(25px, 25px);
+        grid-gap: 1rem;
+        justify-content: center;
+        align-items: center;
+        .profile-page-story-tile{
+            position: relative;
+            width: 19.555rem;
+            height: 19.555rem;
+            .tile-background{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                z-index: 1;
+                background: rgba(0,0,0,.6);
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                cursor: pointer;
+                display: none;
+                
+                *{
+                    color: #fafafa;
+                    
+                }
+                svg{
+                    fill: #fafafa;
+                }
+                .tile-background-options{
+                    position: absolute;
+                    top: 0.3rem;
+                    right: 0.3rem;
+                    border-radius: .5rem;
+                    // padding: 1rem;
+                    :hover{
+                    border: .1rem solid #fafafa;
+                }
+
+                }
+                .tile-background-likes{
+                    margin-right: .4rem;
+                }
+
+            }
+        }
+            .profile-page-story-tile:hover{
+                .tile-background{
+                    display: flex;
+                }
+            }
+
+            .tile-image{
+                width: 100%;
+                height: 100%;
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+
+}
+
+
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
