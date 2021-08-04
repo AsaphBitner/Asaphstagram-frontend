@@ -8,7 +8,7 @@
         height: 100vh;
         width: 100vw;
         align-items: center;
-        z-index: 1;
+        z-index: 4;
         // display: none;
         
     }
@@ -24,7 +24,7 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        z-index: 2;
+        z-index: 5;
         color: #262626;
         font-weight: 450;
         *{
@@ -95,6 +95,12 @@
     margin: 3rem auto;
     max-width: 48.06rem;
     display: flex;
+    @media screen and (max-width: 680px) {
+            flex-direction: column;
+            max-width: 100%;
+            align-items: center;
+            margin: 1rem;
+        }
     
 
     .profile-page-profile-photo{
@@ -111,6 +117,17 @@
             border-radius: 50%;
             object-fit: cover;
         }
+        @media screen and (max-width: 680px) {
+                    margin: 0;
+                    margin: auto;
+                    padding: 0;
+                    img{
+                        max-width: 10.2rem;
+                        min-width: 10.2rem;
+                        max-height: 10.2rem;
+                        min-height: 10.2rem;
+                    }
+                }
     }
 
     .profile-page-texts-container{
@@ -118,9 +135,17 @@
         // flex-direction: column;
         // width: inherit;
         padding: 0.5rem 1rem;
+        @media screen and (max-width: 680px) {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+
         *{
             display: flex;
             align-items: center;
+            max-width: 100%;
         }
 
         .profile-page-username-options{
@@ -134,8 +159,12 @@
         }
         .post-follower-following-count{
             margin-bottom: 1.336rem;
+            display: flex;
             *{
                 margin-right: 4rem;
+                @media screen and (max-width: 480px) {
+                    margin-right: .5rem;
+                }
             }
             div{
                 font-size: 1.3rem;
@@ -145,6 +174,7 @@
                     margin-right: .35rem;
                 }
             }
+
         }
         .fullname{
             font-size: 1rem;
@@ -153,6 +183,10 @@
         .profile-text{
         margin-bottom: 0.9365rem;
         font-size: 1.0688rem;
+        // display: flex;
+        // flex-direction: column;
+        width: 100%;
+        max-height: 100%;
         }
 
 
@@ -179,10 +213,13 @@
 
 // ========== END OF UPPER PART =============
 .profile-page-lower-part{
+    margin-bottom: 2rem;
     .dividing-line{
         border-top: 1px solid rgba(219,219,219,1);
         margin: 0 1rem;
     }
+    
+
     .profile-page-lower-part-title{
         // display: flex;
         // align-items: center;
@@ -219,10 +256,19 @@
         grid-gap: 1rem;
         justify-content: center;
         align-items: center;
+        @media screen and (max-width: 480px) {
+            width: 100%;
+            grid-template-columns: repeat(auto-fill, 100%);
+
+        }
+
         .profile-page-story-tile{
             position: relative;
             width: 19.555rem;
             height: 19.555rem;
+            @media screen and (max-width: 480px) {
+                width: 100%;
+            }
             .tile-background{
                 position: absolute;
                 top: 0;
@@ -257,7 +303,7 @@
 
                 }
                 .tile-background-likes{
-                    margin-right: .4rem;
+                    margin-right: .9rem;
                 }
 
             }
@@ -285,7 +331,35 @@
 
 // }
 
+// =========== MEDIA QUERIES ===================
 
+// @media screen and (max-width: 680px) {
+//     .profile-page-upper-part{
+//         flex-direction: column;
+//         max-width: 100%;
+//         align-items: center;
+//         margin-top: 0;
+//         margin-bottom: 0;
+//         ;
+//     }
+//     .profile-page-profile-photo{
+//         margin: 0;
+//         margin: auto;
+//         padding: 0;
+//         img{
+//             max-width: 10.2rem;
+//             min-width: 10.2rem;
+//             max-height: 10.2rem;
+//             min-height: 10.2rem;
+//         }
+//     }
+
+//     .profile-page-story-list{
+//         margin-left: 0;
+//         margin-right: 0;
+//     }
+    
+// }
 
 
 

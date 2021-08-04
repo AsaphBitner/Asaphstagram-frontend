@@ -83,7 +83,7 @@ export const store = new Vuex.Store({
 
         },
         deleteStory(state, {payload}){
-            const storyIdx = state.stories.findIndex((element) => { return element.id === payload.story.id})
+            const storyIdx = state.stories.findIndex((element) => { return element.id === payload.id})
             state.stories.splice(storyIdx, 1)
         },
         addStory(state, {payload}){
@@ -120,8 +120,8 @@ export const store = new Vuex.Store({
             await commit({type: 'deleteComment', payload: payload})
         },
         async deleteStory({commit}, payload){
-            // if (!payload.idx) {payload.idx === null}
-            await storageService._delete('stories', payload.story, payload.idx)
+            if (!payload.idx) {payload.idx = null}
+            await storageService.deleteStory('stories', payload)
             commit({type: 'deleteStory', payload: payload})
         },
 

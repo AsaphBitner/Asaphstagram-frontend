@@ -18,6 +18,7 @@ export const storageService = {
     deleteComment,
     _delete,
     addStory,
+    deleteStory,
     _loadUsers
 }
 
@@ -154,9 +155,9 @@ function remove(entityType, entityId) {
         })
 }
 
-async function _delete(entityType, entity, entityIdx = null){
+async function _delete(entityType, entity){
     const entities = await query(entityType)
-    entityIdx = entities.findIndex(item => item.id === entity.id)
+    const entityIdx = entities.findIndex(item => item.id === entity.id)
 
     entities.splice(entityIdx, 1)
     
@@ -169,7 +170,20 @@ async function _delete(entityType, entity, entityIdx = null){
     }
     _save(entityType, entities)
     // console.log
+}
 
+async function deleteStory(payload){
+    const stories = await query('stories')
+    const storyIdx = stories.findIndex(item => item.id === payload.id)
+    stories.splice(storyIdx, 1)
+    _save('stories', stories)
+
+    var users = await query('users')
+    var loggedInIdx = users.findIndex(user => {return user.id === gLoggedInUser.id})
+    var deleteFromUserIdx = users[loggedInIdx].ownedStories.findIndex(item => {item === payload.id} )
+    users[loggedInIdx].ownedStories.splice(deleteFromUserIdx, 1)
+    _save('users', users)
+    
 }
 
 async function addStory(newStory){

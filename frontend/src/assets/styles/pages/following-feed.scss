@@ -13,7 +13,7 @@
     height: 100vh;
     width: 100vw;
     align-items: center;
-    z-index: 1;
+    z-index: 4;
     // display: none;
     
 }
@@ -29,7 +29,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    z-index: 2;
+    z-index: 5;
     color: #262626;
     font-weight: 450;
     *{
@@ -285,9 +285,6 @@
         }
     }
     .delete-comment, .comment-like, .comment-unlike{
-        // display: block;
-        // background-color: rgba(218, 209, 209, 0.6);
-        // z-index: 1;
         cursor: pointer;
     }   
     .comment-like, .comment-unlike{

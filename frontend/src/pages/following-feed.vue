@@ -51,7 +51,7 @@
                 {{ story.owner.username }}
               <span
                 class="story-options"
-                @click="setToDelete(' Post', story, idx)"
+                @click="setToDelete(' Post', story)"
               >
                 <svg
                   aria-label="More options"
@@ -213,7 +213,7 @@
                       v-if="commentByMe(comment.by.id)"
                       class="delete-comment"
                       @click="
-                        setToDelete(' Comment', story, idx, comment, cIdx)
+                        setToDelete(' Comment', story, comment, cIdx)
                       "
                     >
                       <svg
@@ -553,21 +553,7 @@ export default {
       await this.resetnewCommentsInput(storyIdx);
       this.loadLimitedStories();
     },
-    async deleteComment() {
-      // console.log('comment to Delete: ', this.commentToDelete)
-      const payload = this.commentToDelete;
-      await this.$store.dispatch("deleteComment", payload);
-      this.commentToDelete = {};
-      this.loadLimitedStories();
-    },
-    async deleteStory() {
-      const payload = this.storyToDelete;
-      await this.$store.dispatch("deleteStory", payload);
-      // console.log(this.storyToDelete)
-      this.storyToDelete = {};
-      this.loadLimitedStories();
-      
-    },
+    
     openDeleteMenu() {
       this.backgroundDisplayed = true;
       this.deleteMenuDisplayed = true;
@@ -593,22 +579,32 @@ export default {
         this.closeBackground();
       }
     },
-    setToDelete(entityType, story, idx, comment = null, cIdx = null) {
+    setToDelete(entityType, story, comment = null, cIdx = null) {
       this.toDeleteEntity = entityType;
       if (entityType === " Comment") {
         this.commentToDelete = {
           story: story,
-          storyIdx: idx,
           comment: comment,
           commentIdx: cIdx,
         };
       } else if (entityType === " Post") {
-        this.storyToDelete = {
-          story: story,
-          idx: idx,
-        };
+        this.storyToDelete = story
       }
       this.openDeleteMenu();
+    },
+
+    async deleteComment() {
+      // console.log('comment to Delete: ', this.commentToDelete)
+      const payload = this.commentToDelete;
+      await this.$store.dispatch("deleteComment", payload);
+      this.commentToDelete = {};
+      this.loadLimitedStories();
+    },
+    async deleteStory() {
+      const payload = this.storyToDelete;
+      await this.$store.dispatch("deleteStory", payload);
+      this.storyToDelete = {};
+      this.loadLimitedStories();
     },
 
   openNewStory(){

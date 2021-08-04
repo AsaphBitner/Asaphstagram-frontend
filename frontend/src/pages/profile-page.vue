@@ -76,12 +76,12 @@
       </div>
         
 
-      <div class="no-posts-yet" v-if="!this.storiesToShow">No Posts yet...</div>
+      <div class="no-posts-yet" v-if="!this.storiesToShow.length">No Posts yet...</div>
       <ul v-if="this.storiesToShow.length" class="profile-page-story-list">
         <li v-for="story in this.storiesToShow" :key="story.id">
-          <div class="profile-page-story-tile">
+          <div class="profile-page-story-tile" @click="sendToSingleStory(story.id)">
             <div class="tile-background">
-              <span class="tile-background-options">
+              <span class="tile-background-options" @click.stop="setToDelete(story)">
                 <svg aria-label="Comment Options" class="_8-yf5 " fill="#262626" height="16" role="img" viewBox="0 0 48 48" width="16"><circle clip-rule="evenodd" cx="8" cy="24" fill-rule="evenodd" r="4.5"></circle><circle clip-rule="evenodd" cx="24" cy="24" fill-rule="evenodd" r="4.5"></circle><circle clip-rule="evenodd" cx="40" cy="24" fill-rule="evenodd" r="4.5"></circle></svg>
               </span>
 
@@ -165,7 +165,7 @@ methods: {
 
     // openBackground(){
     //   },
-    closebackground(){
+    closeBackground(){
       this.backgroundDisplayed = false
       this.deleteMenuDisplayed = false
       this.confirmMenuDisplayed = false
@@ -207,6 +207,21 @@ methods: {
   this.loadStories()
   this.filterFollowers()
     this.$router.push('/profile-page/'+id)
+  },
+
+  deleteConfirmed() {
+        this.deleteStory();
+        this.closeBackground();
+      },
+
+  async deleteStory() {
+      const payload = this.storyToDelete;
+      await this.$store.dispatch("deleteStory", payload);
+      this.storyToDelete = {};
+      this.loadStories();      
+    },
+  sendToSingleStory(id){
+    this.$router.push('/single-story/'+id)
   },
 
 },
