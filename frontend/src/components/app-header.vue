@@ -61,12 +61,16 @@ export default {
     },
     sendToFeed(){
       this.$router.push('/following-feed/'+this.userId)
-    }
+    }, 
+    async getLoggedInUser(){
+        this.loggedInUser = await this.$store.dispatch('getLoggedInUser')
+    },
+
 
   },
-  created(){
-    this.loggedInUser = this.$store.state.loggedInUser
-    this.userId = this.$store.state.loggedInUser.id
+  async created(){
+    await this.getLoggedInUser()
+    this.userId = this.loggedInUser.id
 
   },
 }

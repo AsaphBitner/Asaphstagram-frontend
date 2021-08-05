@@ -6,7 +6,6 @@
     top: 4rem;
     max-width: 90%;
     height: 70vh;
-    z-index: 2;
     @media screen and (max-width: 680px){
         // max-width: 96%;
         // top: 1rem;
@@ -16,7 +15,7 @@
         max-width: 98%;
         }
     *{
-        z-index: 3;
+        z-index: 5;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -221,7 +220,9 @@
             align-items: center;
         }
         button{
-            background-color: rgb(114, 241, 114);
+            // background-color: rgb(114, 241, 114);
+            background: #fafafa;
+            border: 1px solid black;
             color: #262626;
             width: 90%;
             max-height: 7rem;
@@ -242,6 +243,7 @@
         button:hover{
         background-color: rgb(26, 121, 26);
         color: #fafafa;
+        border: 0;
         }
 
     }

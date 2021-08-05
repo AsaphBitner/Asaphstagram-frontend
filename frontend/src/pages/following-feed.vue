@@ -15,7 +15,7 @@
         v-if="this.deleteMenuDisplayed"
         class="delete-menu"
       >
-        <span v-if="(storyByMe() && this.storyToDelete.story) || this.commentToDelete.comment" class="menu-option-delete" @click.stop="openComfirmMenu()"
+        <span v-if="(storyByMe() && this.storyToDelete) || this.commentToDelete.comment" class="menu-option-delete" @click.stop="openComfirmMenu()"
           >Delete {{ this.toDeleteEntity }}</span>
         <span class="menu-option-cancel" @click.stop="closeBackground()"
           >Cancel</span
@@ -44,11 +44,13 @@
       >
         <li>
           <div class="single-story-container">
-            <div class="story-user-photo-name">
-                <div class="small-profile-img-story">
+            <div class="story-user-photo-name" >
+                <div class="small-profile-img-story" @click="sendToProfilePage(story.owner.id)">
                   <img :src="story.owner.imgUrl" alt="ERROR!" />
                 </div>
-                {{ story.owner.username }}
+                  <div class="story-owner-username" @click="sendToProfilePage(story.owner.id)">
+                  {{ story.owner.username }}
+                  </div>
               <span
                 class="story-options"
                 @click="setToDelete(' Post', story)"
@@ -193,7 +195,7 @@
               </div>
               <div class="story-text">
                 <p>
-                  <span>{{ story.owner.username }}</span> {{ story.txt }}
+                  <span @click="sendToProfilePage(story.owner.id)">{{ story.owner.username }}</span> {{ story.txt }}
                 </p>
               </div>
               <!-- start of comments!!!!!!!!!!!!!!!!!! -->
@@ -205,7 +207,7 @@
                   <li v-if="cIdx >= (story.comments.length - 2)">
                     <!-- SINGLE COMMENT! -->
                     <p>
-                      <span >{{ comment.by.username }}</span
+                      <span @click="sendToProfilePage(comment.by.id)">{{ comment.by.username }}</span
                       >&nbsp;{{ comment.txt }}
                     </p>
 
@@ -393,7 +395,7 @@ export default {
 
   data() {
     return {
-      loggedInUser: this.$store.state.loggedInUser,
+      loggedInUser: {},
       numStoriesToShow: 6,
       stories: [],
       storiesToShow: [],
@@ -408,7 +410,6 @@ export default {
       commentToDelete: {},
       storyToDelete: {},
       newStoryOn: false,
-      singleStoryFocus: {},
     };
   },
   methods: {
@@ -433,11 +434,13 @@ export default {
       await this.loadStories()
       // this.storiesToShow = this.stories.slice(0, this.numStoriesToShow)
       // this.storiesToShow = this.storiesToShowComputed
-        // console.log('current user ',currentUser, 'users: ', this.users)
 //////////////////////////////
+
       const storiesCut = this.stories.slice(0, this.numStoriesToShow)
-      const storiesNew = storiesCut.filter(item=> {
       const currentUser = this.users.find(item => { return item.id === this.loggedInUser.id})
+      const storiesNew = storiesCut.filter(item=> {
+        // console.log('logged in user ',this.loggedInUser,  )
+        // console.log('current user ',currentUser, 'users: ', this.users)
       const followingOwner = currentUser.following.find(user => user.id === item.owner.id)
       if (followingOwner) {return true}
       else {return false}
@@ -447,6 +450,10 @@ export default {
       while (this.newCommentInputs.length < this.numStoriesToShow) {
         this.newCommentInputs.push("");
       }
+    },
+
+    async getLoggedInUser(){
+        this.loggedInUser = await this.$store.dispatch('getLoggedInUser')
     },
 
     resetnewCommentsInput(idx) {
@@ -615,8 +622,8 @@ export default {
     if (result === 'yes update') this.loadLimitedStories()
   },
   storyByMe(){
-    if (!this.storyToDelete.story) return false
-    if (this.storyToDelete.story.owner.id === this.loggedInUser.id)
+    if (!this.storyToDelete) return false
+    if (this.storyToDelete.owner.id === this.loggedInUser.id)
     {return true}
     else 
     {return false}
@@ -624,6 +631,9 @@ export default {
   openSingleStory(story){
     this.$router.push('/single-story/'+story.id)
   },
+  sendToProfilePage(id){
+    this.$router.push('/profile-page/'+id)
+  }
   // closeSingleStory(instruction){
   //   this.singleStoryFocus = {}
   //   if (instruction === 'reload') {this.loadLimitedStories}
@@ -633,30 +643,17 @@ export default {
     
   },
   // computed: {
-  // storiesToShowComputed(){
-  //   // await this.created()
-  //   // console.log(this.users)
-  //   // const users = this.$store.state.users
-  //   const storiesCut = this.stories.slice(0, this.numStoriesToShow)
-  //   const currentUser = this.users.find(item => { return item.id === this.loggedInUser.id})
-  //   const storiesNew = storiesCut.filter(item=> {
-  //       // console.log('current user ',currentUser, 'users: ', this.$store.state.users)
-  //       const followingOwner = currentUser.following.find(user => user.id === item.owner.id)
-  //       if (followingOwner) {return true}
-  //       else {return false}
-  //   })
-  //   return storiesNew
-  // }
   // },
   
   async created() {
-    const userId = this.$route.params.userId
-    const loggedInId = this.$store.state.loggedInUser.id
-    if (userId !== loggedInId){
-      this.$router.push('/')
-      // console.log(userId, loggedInId)
-      }
     localStorage.clear()
+    await this.getLoggedInUser()
+    const userId = this.$route.params.userId
+    const loggedInId = this.loggedInUser.id
+    if (userId !== loggedInId){
+      console.log('user ID: ', userId, 'logged in ID: ', loggedInId)
+      this.$router.push('/')
+      }
     await this.setUsers()
     this.loadUsers()
     await this.setStories()

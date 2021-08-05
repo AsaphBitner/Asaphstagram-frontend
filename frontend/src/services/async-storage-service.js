@@ -13,7 +13,7 @@ export const storageService = {
     _makeId,
     _loadStories,
     _toggleLike,
-    gLoggedInUser,
+    getLoggedInUser,
     addComment,
     deleteComment,
     _delete,
@@ -42,6 +42,10 @@ function query(entityType, delay=0) {
             resolve(entities)
         }, delay)
     })
+}
+
+function getLoggedInUser(){
+    return gLoggedInUser
 }
 
 async function _toggleLike(payload){

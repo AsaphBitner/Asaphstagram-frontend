@@ -10,15 +10,15 @@ export const store = new Vuex.Store({
 
 
     state: {
-        loggedInUser: 
-        {
-            id: 'u11111',
-            username: 'HomerS',
-            password: 'Springfield',
-            fullname: 'Homer Simpson',
-            profileImgUrl: 'img/profile photos/IMG1.jpg',
+        // loggedInUser: 
+        // {
+        //     id: 'u11111',
+        //     username: 'HomerS',
+        //     password: 'Springfield',
+        //     fullname: 'Homer Simpson',
+        //     profileImgUrl: 'img/profile photos/IMG1.jpg',
 
-        },
+        // },
         
     },
 
@@ -89,7 +89,9 @@ export const store = new Vuex.Store({
         addStory(state, {payload}){
             state.stories.unshift(payload)
         },
-       
+        getLoggedInUser(state, {payload}){
+            state.loggedInUser = payload
+        },
     },
 
     actions: {
@@ -121,7 +123,7 @@ export const store = new Vuex.Store({
         },
         async deleteStory({commit}, payload){
             if (!payload.idx) {payload.idx = null}
-            await storageService.deleteStory('stories', payload)
+            await storageService.deleteStory(payload)
             commit({type: 'deleteStory', payload: payload})
         },
 
@@ -129,7 +131,11 @@ export const store = new Vuex.Store({
             const newStory = await storageService.addStory(payload)
             commit({type: 'addStory', payload: newStory})
         },
-        
+        async getLoggedInUser({commit}){
+            const loggedInUser = await storageService.getLoggedInUser()
+            commit({type: 'getLoggedInUser', payload: loggedInUser})
+            return loggedInUser
+        },
  
         // async getLoggedInUser({commit}){
         //     var payload = await storageService.query('loggedInUser')

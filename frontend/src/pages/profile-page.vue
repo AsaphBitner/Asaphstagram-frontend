@@ -165,6 +165,10 @@ methods: {
 
     // openBackground(){
     //   },
+
+    async getLoggedInUser(){
+        this.loggedInUser = await this.$store.dispatch('getLoggedInUser')
+    },
     closeBackground(){
       this.backgroundDisplayed = false
       this.deleteMenuDisplayed = false
@@ -234,7 +238,7 @@ methods: {
 
 async created(){
   localStorage.clear()
-  this.loggedInUser = this.$store.state.loggedInUser
+  await this.getLoggedInUser()
   this.userId = this.$route.params.userId
   await this.setUsers()
   await this.setStories()

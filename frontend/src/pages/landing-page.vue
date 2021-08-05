@@ -21,12 +21,25 @@ export default {
 },
 data(){
   return{
-    userId: this.$store.state.loggedInUser.id,
+    loggedInUser: {},
+    userId: '',
 
   }
 },
 
-created(){
+methods:{
+async getLoggedInUser(){
+        this.loggedInUser = await this.$store.dispatch('getLoggedInUser')
+
+    },
+
+},
+
+async created(){
+  localStorage.clear()
+  await this.getLoggedInUser()
+  this.userId = this.loggedInUser.id
+  // console.log(this.loggedInUser)
   // this.$store.dispatch.loadUsers()
   // this.$store.dispatch.loadStories()
   // const userId = this.$store.state.loggedInUser.id

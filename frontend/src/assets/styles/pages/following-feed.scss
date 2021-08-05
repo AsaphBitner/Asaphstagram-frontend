@@ -102,7 +102,7 @@
 }
 .single-story-container{
     // max-height: 46.5625rem;
-    max-width: 41.15rem;
+    width: 41.15rem;
     border: 1px solid rgba(219,219,219,1);
     display: inline-block;
     margin-top: .5rem;
@@ -120,6 +120,9 @@
     font-weight: 600;
     // ////font-size: 0.8rem;
     padding: 1rem;
+    *{
+        cursor: pointer;
+    }
 
     .small-profile-img-story{
         // border: 0.1rem solid red;
@@ -247,8 +250,10 @@
             word-wrap: break-all;
             text-decoration: none;
             height: 100%;
+            text-align: start;  
             span{
                 font-weight: 600;
+                cursor: pointer;
             }
         }
     }
@@ -282,6 +287,7 @@
         text-decoration: none;
         span{
             font-weight: 600;
+            cursor: pointer;
         }
     }
     .delete-comment, .comment-like, .comment-unlike{

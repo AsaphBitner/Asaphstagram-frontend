@@ -1,11 +1,21 @@
+.single-page-story-container{
+    height: 100%;
+    width: 100%;
+}
 
 .single-story-on-page-container{
     margin: auto;
     margin-top: 1.5rem;
+    // margin-bottom: 11.5rem;
     max-width: 68rem;
     height: 40.625rem;
     display: flex;
-    // flex-direction: row;
+    @media screen and (max-width: 680px){
+        width: 100%;
+        height: 100%;
+        // margin-bottom: 30.5rem;
+        // background: blue;
+    }
     
 
 .single-story-main-image{
@@ -22,28 +32,28 @@ img{
 }
 .single-story-not-the-image{
     width: 38%;
-    min-height: 100%;
-    max-height: 100%;
+    height: 100%;
     // height: 100%;
     display: flex;
     flex-direction: column;
     // align-items:stretch;
     
     border: 1px solid rgba(219,219,219,1);
-        
-    .story-user-photo-name{
+    @media screen and (max-width:680px){
+        display: block;
+        width: 100%;
+        margin-bottom: 1.2rem;
+        // height: 1rem;
+        // background: rosybrown;
+    }
+    
+    .story-user-photo-name-2{
     height: 4.8rem;
     display: flex;
-    // flex-direction: row;
-    // align-items: center;
-    // justify-content: center;
     gap: .7rem;
     font-weight: 600;
     padding: 1.065rem;
     border-bottom: 1px solid rgba(219,219,219,1);
-    *{
-        cursor: pointer;
-    }
 
         .small-profile-img-story-2{
         display: flex;
@@ -59,8 +69,18 @@ img{
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
+            cursor: pointer;
         }    
+        span{
+            cursor: pointer;
         }
+        }
+        .story-options{
+            align-self: center;
+            margin-left: auto;
+            cursor: pointer;
+        }
+        
     }
 
 .single-story-text{
@@ -68,13 +88,13 @@ img{
     gap: 0.4rem;
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;
-    .small-profile-img-story-2{
+    .small-profile-img-story-2-comment{
         // display: inline-block;
         border-radius: 50%;
         width: 2rem;
         min-width: 2rem;
         height: 2rem;
-        cursor: pointer;
+        // cursor: pointer;
         // align-self: center;
         // padding: 0 0.6rem;
         img{
@@ -86,7 +106,8 @@ img{
     }
     p{
         // text-decoration: none;
-        height: 100%;   
+        height: 100%; 
+        overflow-y: scroll;  
     }
     span{
         font-weight: 600;
@@ -99,6 +120,8 @@ img{
     overflow-y: scroll;
     // scrollbar-width: thin;
     // height: 100%;
+    // overflow: scroll;
+    // overflow-wrap:normal;
     // background-color: pink;
     // overflow: hidden;
     .single-story-single-comment{
@@ -215,11 +238,13 @@ img{
             justify-content: center;
             background: transparent;
             width: 100%;
+            // margin-bottom: 111.5rem;
+            // background: blue;
         }
         textarea:focus+button{
              color: #0095f6;
         }
-
+        
     }
 
 }
@@ -231,17 +256,17 @@ img{
 //========= MEDIA QUERIES =============================
 
 @media screen and (max-width: 680px){
+    // *{border: 0;}
     .single-story-on-page-container{
     
-    display: block;
-    max-width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    // max-width: 100% !important;
     // max-width: none;
     // max-height: none;
     .single-story-main-image{
-        max-width: 100%;
+    
         width: 100%;
-        // min-height: 20rem;
-        // max-height: 29rem;
         height: 26rem;
         img{
             width: 100%;
@@ -249,26 +274,7 @@ img{
         }
     }
     }
-.single-story-not-the-image{
-    display: block !important;
-    width: 100% !important;
-    // background-color: ;
-    // align-items: stretch;
-    // flex-direction: row;
-    // width: 600px;
-    // margin-right: 0px;
-    // display: block;
-    // max-height: none;
-    // max-width: 100%;
-    // width: 100rem;
-    // height: 1000px;
-    // background-color: pink;
-    // border: 10px solid black;
-    //  *{
-    //     max-width: none !important;
-    // }
-    
-}
+
 
 
 

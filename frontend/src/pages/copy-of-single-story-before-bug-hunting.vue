@@ -35,26 +35,20 @@
           ></span
         >
       </div>
-
+      <!-- ======= END OF DELETE COMMENT OR STORY ======== -->
     </div>
-
-
-
-
-    
     <div class="single-story-on-page-container" :story="this.story">
-
+            <!-- ========== IMAGE! ============ -->
             <div class="single-story-main-image">
               <img :src="story.imgUrl" alt="ERROR!" />
             </div>
-
-             <div class="single-story-not-the-image">
+            <!-- ========== IMAGE! ============ -->
+            <div class="single-story-not-the-image">
 
             
-            <div class="story-user-photo-name-2">
+            <div class="story-user-photo-name">
                <div class="small-profile-img-story-2" @click="sendToProfilePage(story.owner.id)">
-                  <img :src="story.owner.imgUrl" alt="ERROR!" />
-
+                  <img :src="story.owner.imgUrl" alt="ERROR!" />              
               <span @click="sendToProfilePage(story.owner.id)">
                 {{ story.owner.username }}
               </span>
@@ -96,20 +90,20 @@
                 </svg>
               </span>
             </div>
-
-              <!--  <div class="single-story-text">
-                <div class="small-profile-img-story-2-comment" @click="sendToProfilePage(story.owner.id)">
+            <!-- START OF TEXT AND COMMENTS -->
+              <div class="single-story-text">
+                <div class="small-profile-img-story-2" @click="sendToProfilePage(story.owner.id)">
                   <img :src="story.owner.imgUrl" alt="ERROR!" />
                 </div>
                 <p>
                   <span class="story-text-user-name" @click="sendToProfilePage(story.owner.id)">{{ story.owner.username }}</span> {{ story.txt }}
                 </p>
               </div>
-
+              <!-- start of comments!!!!!!!!!!!!!!!!!! -->
               <div class="single-story-comments">
                 <ul v-for="(comment, cIdx) in story.comments" :key="comment.id">
                   <li class="single-story-single-comment">
-
+                    <!-- SINGLE COMMENT! -->
                     <div class="comment-everything-but-like-counter">
                     <span class="small-profile-img-comment" @click="sendToProfilePage(comment.by.id)">
                       <img :src="getUserImgForComment(comment.by.id)" alt="" >
@@ -118,7 +112,7 @@
                       <span @click="sendToProfilePage(comment.by.id)">{{ comment.by.username }}</span
                       >&nbsp;{{ comment.txt }}
                     </p>
-
+                    <!-- DELETE COMMENT -->
                     <div class="delete-like-unlike-comment">
                     <span
                       v-if="commentByMe(comment.by.id)"
@@ -237,12 +231,12 @@
                     <div v-if="comment.likedBy.length" class="comment-how-many-likes">
                       {{commentLikeMessage(comment)}}
                     </div>
-
+                    <!-- SINGLE COMMENT! -->
                   </li>
                 </ul>
               </div>
             <div class="story-after-comments">
-
+              <!-- <div class="story-four-icons-container"> -->
                 <div class="story-four-icons">
                   <span
                     v-if="!likedByMe(story)"
@@ -284,6 +278,8 @@
                       ></path>
                     </svg>
                   </span>
+                  <!-- COMMENT -->
+                                <!-- end of comments!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
                   <span class="story-comment-icon">
                     <svg
@@ -302,8 +298,7 @@
                       ></path>
                     </svg>
                   </span>
-
-
+                  <!-- MESSAGE -->
                   <span class="story-message-icon">
                     <svg
                       aria-label="Direct"
@@ -319,8 +314,7 @@
                       ></path>
                     </svg>
                   </span>
-
-
+                  <!-- BOOKMARK -->
                   <span class="story-bookmark">
                     <svg
                       aria-label="Save"
@@ -337,7 +331,8 @@
                     </svg>
                   </span>
                 </div>
-
+              <!-- </div> -->
+              <!-- End of four icons -->
               <div class="story-liked-by">
                 <p v-if="story.likedBy.length ">
                   Liked by&nbsp;<span>{{ latestLiker(story) }}</span
@@ -391,9 +386,9 @@
                   </button>
                 </form>
               </div>
-            </div>-->
+            </div>
           </div>
-        </div> 
+        </div>
     </div>
 </template>
 
@@ -442,7 +437,7 @@ export default {
     // },
     
     loadUsers() {
-      this.users = this.$store.state.users;
+      this.users = this.$store.getters.getUsers;
     },
 
     // async loadLimitedStories() {
@@ -451,16 +446,6 @@ export default {
     // },
     async getLoggedInUser(){
         this.loggedInUser = await this.$store.dispatch('getLoggedInUser')
-    },
-
-    getStory(){
-      const storyId = this.$route.params.storyId
-      const stories = this.$store.state.stories   
-      // console.log('HELLO')
-      // console.log(stories)
-    this.story = stories.find(item => {return item.id === storyId})
-    console.log(this.story)
-    console.log(this.story.owner.imgUrl)
     },
 
     resetnewCommentsInput() {
@@ -527,7 +512,7 @@ export default {
       request,
       entityType,
       story,
-      storyIdx = null,
+      storyIdx,
       comment = null,
       commentIdx = null
     ) {
@@ -549,7 +534,7 @@ export default {
         return false;
       }
     },
-    async addComment(story, storyIdx = null, ev) {
+    async addComment(story, storyIdx, ev) {
       if (ev.type==="keydown" && ev.shiftKey) return;
       ev.preventDefault();
       if (!this.newCommentInput) {
@@ -661,16 +646,15 @@ sendToProfilePage(id){
   // computed: {
   // },
   async created() {
-    // localStorage.clear()
+    localStorage.clear()
     await this.getLoggedInUser()
     await this.setStories()
-    // const storyId = this.$route.params.storyId
-    // this.story = this.$store.state.stories.find(item => {return item.id === storyId})
-    // this.idx = this.$store.state.stories.findIndex(item => {return item.id === storyId})
+    const storyId = this.$route.params.storyId
+    this.story = this.$store.state.stories.find(item => {return item.id === storyId})
+    this.idx = this.$store.state.stories.findIndex(item => {return item.id === storyId})
     // console.log(this.story, this.idx)
     await this.setUsers()
     this.loadUsers()
-    this.getStory()
   },
 };
 
