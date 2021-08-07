@@ -1,6 +1,6 @@
 <template>
-  <div class="single-page-story-container">
-    <app-header @openNewStory="openNewStory()" />
+  <div class="single-page-story-container" @click="headerProfileMenuChange(false)">
+    <app-header @openNewStory="openNewStory()" @headerProfileTrue="headerProfileMenuChange(true)" @headerProfileFalse="headerProfileMenuChange(false)" :headerMenuShown="headerMenuShown" />
 
     <new-story 
     v-if="newStoryOn"
@@ -426,6 +426,7 @@ export default {
       commentToDelete: {},
       storyToDelete: {},
       newStoryOn: false,
+      headerMenuShown: false,
     };
   },
   methods: {
@@ -652,6 +653,9 @@ sendToProfilePage(id){
     if (!comment.likedBy.length) {return 'ERROR'}
     else if  (comment.likedBy.length === 1) {return '1 like'}
     else if  (comment.likedBy.length > 1) {return `${comment.likedBy.length} likes`}
+  },
+  headerProfileMenuChange(status){
+    this.headerMenuShown = status
   },
 
   

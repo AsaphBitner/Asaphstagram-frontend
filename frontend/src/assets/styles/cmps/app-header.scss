@@ -36,6 +36,7 @@
     img{
         object-fit: cover;
     }
+
     .profile-triangle{
         position: absolute;
         top: 1.8rem;
@@ -92,7 +93,23 @@
             // border-bottom: 0.05px solid black;
         }
     }
+    .header-profile-img-input{
+        // width: 4rem;
+        // height: 4rem;
+        // background: peru;
+        // position: absolute;
+        // top: 0;
+        // left: 0;
+        height: 0;
+        width: 0;
+        border: 0;
+        outline: none;
+        // visibility: hidden;
+    }
+  
 }
+
+
 
 img{
     width: 100%;

@@ -1,6 +1,6 @@
 <template>
-  <div class="profile-page-container">
-    <app-header @openNewStory="openNewStory()" />
+  <div class="profile-page-container" @click="headerProfileMenuChange(false)">
+    <app-header @openNewStory="openNewStory()" @headerProfileTrue="headerProfileMenuChange(true)" @headerProfileFalse="headerProfileMenuChange(false)" :headerMenuShown="headerMenuShown" />
     <new-story v-if="newStoryOn" @close="closeNewStory('no update')" @saved="closeNewStory('yes update')"
      />
     <div v-if="backgroundDisplayed" class="menu-background"
@@ -131,6 +131,7 @@ data(){
     deleteMenuDisplayed: false,
     confirmMenuDisplayed: false,
     storyToDelete: {},
+    headerMenuShown: false,
   }
 },
 
@@ -226,6 +227,9 @@ methods: {
     },
   sendToSingleStory(id){
     this.$router.push('/single-story/'+id)
+  },
+  headerProfileMenuChange(status){
+    this.headerMenuShown = status
   },
 
 },

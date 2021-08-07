@@ -1,6 +1,6 @@
 <template>
-  <div class="page-container">
-    <app-header @openNewStory="openNewStory()" />
+  <div class="page-container" @click="headerProfileMenuChange(false)">
+    <app-header @openNewStory="openNewStory()" @headerProfileTrue="headerProfileMenuChange(true)" @headerProfileFalse="headerProfileMenuChange(false)" :headerMenuShown="headerMenuShown" />
      <new-story 
     v-if="newStoryOn"
     @close="closeNewStory('no update')"
@@ -135,7 +135,7 @@
                     </svg>
                   </span>
                   <!-- COMMENT -->
-                  <span class="story-comment-icon" @click="openSingleStory(story)">
+                  <span class="story-comment-icon" @click="sendToProfilePage(story.owner.id)">
                     <svg
                       aria-label="Comment"
                       class="story-comment-icon"
@@ -360,7 +360,7 @@
                     @keydown.enter="addComment(story, idx, $event)"
                     aria-label="Add a comment…"
                     placeholder="Add a comment…"
-                    class="Ypffh"
+                    class="comment-text-area"
                     autocomplete="off"
                     autocorrect="off"
                     style=""
@@ -410,6 +410,7 @@ export default {
       commentToDelete: {},
       storyToDelete: {},
       newStoryOn: false,
+      headerMenuShown: false,
     };
   },
   methods: {
@@ -633,11 +634,17 @@ export default {
   },
   sendToProfilePage(id){
     this.$router.push('/profile-page/'+id)
-  }
-  // closeSingleStory(instruction){
-  //   this.singleStoryFocus = {}
-  //   if (instruction === 'reload') {this.loadLimitedStories}
+  },
+  headerProfileMenuChange(status){
+    this.headerMenuShown = status
+  },
+  // switchFocus(id){
+  //   console.log(this.$refs)
+  //   // const text = `commentTextArea${id}` 
+  //   this.$refs.commentTextArea+id.$el.focus()
+    
   // },
+  
   
   //======================END OF METHODS=================
     
