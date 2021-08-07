@@ -97,7 +97,7 @@
               </span>
             </div>
 
-              <!--  <div class="single-story-text">
+               <div class="single-story-text">
                 <div class="small-profile-img-story-2-comment" @click="sendToProfilePage(story.owner.id)">
                   <img :src="story.owner.imgUrl" alt="ERROR!" />
                 </div>
@@ -391,7 +391,7 @@
                   </button>
                 </form>
               </div>
-            </div>-->
+            </div>
           </div>
         </div> 
     </div>

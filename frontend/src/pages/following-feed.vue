@@ -15,7 +15,7 @@
         v-if="this.deleteMenuDisplayed"
         class="delete-menu"
       >
-        <span v-if="(storyByMe() && this.storyToDelete) || this.commentToDelete.comment" class="menu-option-delete" @click.stop="openComfirmMenu()"
+        <span v-if="(storyByMe && storyToDelete) || commentToDelete.comment" class="menu-option-delete" @click.stop="openComfirmMenu()"
           >Delete {{ this.toDeleteEntity }}</span>
         <span class="menu-option-cancel" @click.stop="closeBackground()"
           >Cancel</span

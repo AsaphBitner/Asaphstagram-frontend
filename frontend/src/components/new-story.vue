@@ -24,12 +24,17 @@
         </span>
       </div>
       <div class="story-upload-image-body">
-        <span v-if="!isLoading"> Drag Photos Here </span>
+        <span v-if="!isLoading">Drag A Photo Here</span>
         <div v-if="isLoading" class="loading-gif">
           <img src="img/img-loading-circle-of-circles-gif.gif" alt="" />
         </div>
-        <label v-if="!isLoading" for="img-upload">
+        <label v-if="!isLoading" for="img-upload" 
+        @drop.prevent="handleFile"
+        @dragover.prevent="isDragOver = true"
+        @dragleave="isDragOver = false"
+        :class="{ drag: isDragOver }">
           <svg
+            v-if="!isDragOver"
             aria-label="Icon to represent media such as images or videos"
             class="_8-yf5"
             fill="#262626"
@@ -48,12 +53,13 @@
               d="M78.2 41.6L61.3 30.5c-2.1-1.4-4.9-.8-6.2 1.3-.4.7-.7 1.4-.7 2.2l-1.2 20.1c-.1 2.5 1.7 4.6 4.2 4.8h.3c.7 0 1.4-.2 2-.5l18-9c2.2-1.1 3.1-3.8 2-6-.4-.7-.9-1.3-1.5-1.8zm-1.4 6l-18 9c-.4.2-.8.3-1.3.3-.4 0-.9-.2-1.2-.4-.7-.5-1.2-1.3-1.1-2.2l1.2-20.1c.1-.9.6-1.7 1.4-2.1.8-.4 1.7-.3 2.5.1L77 43.3c1.2.8 1.5 2.3.7 3.4-.2.4-.5.7-.9.9z"
             ></path>
           </svg>
-          <h2>Or Select Files Directly</h2>
+          <h2 v-if="!isDragOver">Or Select A File Directly</h2>
+          <h2 v-if="isDragOver"> Drop File Here</h2>
           <input
             type="file"
             class="upload-img"
             id="img-upload"
-            @change="onUploadImg"
+            @change="handleFile"
           />
         </label>
       </div>
@@ -140,18 +146,19 @@ export default {
       screen2: false,
       newStoryText: "",
       newImgUrl: "",
+      isDragOver: false,
     };
   },
   //===========================
   methods: {
-    async onUploadImg(ev) {
-      this.isLoading = true;
-      const res = await uploadImg(ev);
-      this.isLoading = false;
-      // console.log(res)
-      this.newImgUrl = res.url;
-      this.switchToScreen("2");
-    },
+    // async onUploadImg(ev) {
+    //   this.isLoading = true;
+    //   const res = await uploadImg(ev);
+    //   this.isLoading = false;
+    //   // console.log(res)
+    //   this.newImgUrl = res.url;
+    //   this.switchToScreen("2");
+    // },
 
     switchToScreen(screen) {
       if (screen === "1") {
@@ -186,11 +193,37 @@ export default {
       this.$emit("saved");
     },
 
+    handleFile(ev) {
+      let file;
+      if (ev.type === "change") file = ev.target.files[0];
+      else if (ev.type === "drop") file = ev.dataTransfer.files[0];
+      this.onUploadImg(file);
+    },
+
+    async onUploadImg(file) {
+      this.isLoading = true;
+      this.isDragOver = false;
+      const res = await uploadImg(file);
+      // this.$emit("save", res.url);
+      // console.log('Res: ', res)
+      this.newImgUrl = res.url;
+      this.isLoading = false;
+      this.switchToScreen("2");
+    },
+     // async onUploadImg(ev) {
+    //   this.isLoading = true;
+    //   const res = await uploadImg(ev);
+    //   this.isLoading = false;
+    //   // console.log(res)
+    //   this.newImgUrl = res.url;
+    //   this.switchToScreen("2");
+    // },
+
+  },
     created() {
       this.background = true;
       this.screen1 = true;
     },
-  },
 };
 </script>
 
