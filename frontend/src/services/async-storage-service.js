@@ -54,7 +54,7 @@ async function _toggleLike(payload){
     var sendBack = payload
     sendBack.storyIdx = storyIdx
     var users = await _loadUsers()
-    var userIdx = users.findIndex(item => {return item.id === gLoggedInUser.id})
+    // var userIdx = users.findIndex(item => {return item.id === gLoggedInUser.id})
 
     if (payload.request === 'add'){
         var likeToAdd = {
@@ -66,7 +66,7 @@ async function _toggleLike(payload){
         sendBack.likeToAdd = likeToAdd
         if (payload.entityType === 'story'){
             stories[storyIdx].likedBy.unshift(likeToAdd)
-            users[userIdx].likesGiven.unshift(payload.story.id)
+            // users[userIdx].likesGiven.unshift(payload.story.id)
 
         }
         else {
@@ -78,8 +78,8 @@ async function _toggleLike(payload){
         if (payload.entityType === 'story'){
             removeIdx = stories[storyIdx].likedBy.findIndex(item => {return item.id === gLoggedInUser.id})
             stories[storyIdx].likedBy.splice(removeIdx, 1)
-            var removeFromUserIdx = users[userIdx].likesGiven.findIndex(item => {return item === payload.story.id}) 
-            users[userIdx].likesGiven.splice(removeFromUserIdx, 1)
+            // var removeFromUserIdx = users[userIdx].likesGiven.findIndex(item => {return item === payload.story.id}) 
+            // users[userIdx].likesGiven.splice(removeFromUserIdx, 1)
         }
         else{
             removeIdx = stories[storyIdx].comments[payload.commentIdx].likedBy.findIndex(item => {return item.id === gLoggedInUser.id})

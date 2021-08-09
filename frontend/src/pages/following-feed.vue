@@ -193,8 +193,8 @@
                   >&nbsp;{{ likedByMessage(story) }}
                 </p>
               </div>
-              <div class="story-text">
-                <p>
+              <div class="story-text" >
+                <p @click="testingElement($el)">
                   <span @click="sendToProfilePage(story.owner.id)">{{ story.owner.username }}</span> {{ story.txt }}
                 </p>
               </div>
@@ -379,6 +379,7 @@
         </li>
       </ul>
     </div>
+    <div v-if="storiesFollowing.length > numStoriesToShow" @click="LoadMoreStoreis" class="load-more-storeis"><h1>Load More Posts</h1></div>
   </div>
 </template>
 
@@ -398,6 +399,7 @@ export default {
       loggedInUser: {},
       numStoriesToShow: 6,
       stories: [],
+      storiesFollowing: [],
       storiesToShow: [],
       users: [],
       newCommentInputs: [],
@@ -433,24 +435,24 @@ export default {
 
     async loadLimitedStories() {
       await this.loadStories()
-      // this.storiesToShow = this.stories.slice(0, this.numStoriesToShow)
-      // this.storiesToShow = this.storiesToShowComputed
-//////////////////////////////
-
-      const storiesCut = this.stories.slice(0, this.numStoriesToShow)
+      // const storiesCut = this.stories.slice(0, this.numStoriesToShow)
       const currentUser = this.users.find(item => { return item.id === this.loggedInUser.id})
-      const storiesNew = storiesCut.filter(item=> {
-        // console.log('logged in user ',this.loggedInUser,  )
-        // console.log('current user ',currentUser, 'users: ', this.users)
+      this.storiesFollowing = this.stories.filter(item=> {
       const followingOwner = currentUser.following.find(user => user.id === item.owner.id)
       if (followingOwner) {return true}
       else {return false}
     })
+    const storiesNew = this.stories.slice(0, this.numStoriesToShow)
     this.storiesToShow = storiesNew.slice()
       /////////////////////////////////////
       while (this.newCommentInputs.length < this.numStoriesToShow) {
         this.newCommentInputs.push("");
       }
+    },
+
+    LoadMoreStoreis(){
+      this.numStoriesToShow += 6
+      this.loadLimitedStories()
     },
 
     async getLoggedInUser(){
@@ -637,6 +639,12 @@ export default {
   },
   headerProfileMenuChange(status){
     this.headerMenuShown = status
+  },
+
+  testingElement(el){
+    console.log(el.style)
+    // if (el.style)
+    // console.log('Yes, text overflow')
   },
   // switchFocus(id){
   //   console.log(this.$refs)
