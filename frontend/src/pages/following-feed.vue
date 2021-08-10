@@ -40,15 +40,15 @@
       <ul
         class="story-list"
         v-for="(story, idx) in this.storiesToShow"
-        :key="story.id"
+        :key="story._id"
       >
         <li>
           <div class="single-story-container">
             <div class="story-user-photo-name" >
-                <div class="small-profile-img-story" @click="sendToProfilePage(story.owner.id)">
-                  <img :src="story.owner.imgUrl" alt="ERROR!" />
+                <div class="small-profile-img-story" @click="sendToProfilePage(story.owner._id)">
+                  <img :src="story.owner.profileImgUrl" alt="ERROR!" />
                 </div>
-                  <div class="story-owner-username" @click="sendToProfilePage(story.owner.id)">
+                  <div class="story-owner-username" @click="sendToProfilePage(story.owner._id)">
                   {{ story.owner.username }}
                   </div>
               <span
@@ -135,7 +135,7 @@
                     </svg>
                   </span>
                   <!-- COMMENT -->
-                  <span class="story-comment-icon" @click="sendToProfilePage(story.owner.id)">
+                  <span class="story-comment-icon" @click="sendToProfilePage(story.owner._id)">
                     <svg
                       aria-label="Comment"
                       class="story-comment-icon"
@@ -195,7 +195,7 @@
               </div>
               <div class="story-text" >
                 <p @click="testingElement($el)">
-                  <span @click="sendToProfilePage(story.owner.id)">{{ story.owner.username }}</span> {{ story.txt }}
+                  <span @click="sendToProfilePage(story.owner._id)">{{ story.owner.username }}</span> {{ story.text }}
                 </p>
               </div>
               <!-- start of comments!!!!!!!!!!!!!!!!!! -->
@@ -203,16 +203,16 @@
                 <p @click="openSingleStory(story)" class="view-all-comments" v-if="story.comments">
                   View all {{ story.comments.length }} comments
                 </p>
-                <ul v-for="(comment, cIdx) in story.comments" :key="comment.id">
+                <ul v-for="(comment, cIdx) in story.comments" :key="comment._id">
                   <li v-if="cIdx >= (story.comments.length - 2)">
                     <!-- SINGLE COMMENT! -->
                     <p>
-                      <span @click="sendToProfilePage(comment.by.id)">{{ comment.by.username }}</span
-                      >&nbsp;{{ comment.txt }}
+                      <span @click="sendToProfilePage(comment.by._id)">{{ comment.by.username }}</span
+                      >&nbsp;{{ comment.text }}
                     </p>
 
                     <span
-                      v-if="commentByMe(comment.by.id)"
+                      v-if="commentByMe(comment.by._id)"
                       class="delete-comment"
                       @click="
                         setToDelete(' Comment', story, comment, cIdx)
@@ -436,9 +436,9 @@ export default {
     async loadLimitedStories() {
       await this.loadStories()
       // const storiesCut = this.stories.slice(0, this.numStoriesToShow)
-      const currentUser = this.users.find(item => { return item.id === this.loggedInUser.id})
+      const currentUser = this.users.find(item => { return item._id === this.loggedInUser._id})
       this.storiesFollowing = this.stories.filter(item=> {
-      const followingOwner = currentUser.following.find(user => user.id === item.owner.id)
+      const followingOwner = currentUser.following.find(user => user._id === item.owner._id)
       if (followingOwner) {return true}
       else {return false}
     })
@@ -498,7 +498,7 @@ export default {
 
     latestLiker(story) {
       if (!story.likedBy.length) return;
-      if (story.likedBy[0].id === this.$store.state.loggedInUser.id) {
+      if (story.likedBy[0]._id === this.$store.state.loggedInUser._id) {
         return "you";
       } else {
         return story.likedBy[0].username;
@@ -508,14 +508,14 @@ export default {
     likedByMe(story) {
       if (!story.likedBy || !story.likedBy.length) return false 
       const likedOrNot = story.likedBy.find((item) => {
-        return item.id === this.$store.state.loggedInUser.id;
+        return item._id === this.$store.state.loggedInUser._id;
       });
       return likedOrNot;
     },
     commentLikedByMe(story, idx) {
       if (!story.comments[idx].likedBy) return false;
       const likedOrNot = story.comments[idx].likedBy.find((item) => {
-        return item.id === this.$store.state.loggedInUser.id;
+        return item._id === this.$store.state.loggedInUser._id;
       });
       return likedOrNot;
     },
@@ -540,7 +540,7 @@ export default {
       this.loadLimitedStories();
     },
     commentByMe(commenterId) {
-      if (commenterId === this.$store.state.loggedInUser.id) {
+      if (commenterId === this.$store.state.loggedInUser._id) {
         return true;
       } else {
         return false;
@@ -626,16 +626,16 @@ export default {
   },
   storyByMe(){
     if (!this.storyToDelete) return false
-    if (this.storyToDelete.owner.id === this.loggedInUser.id)
+    if (this.storyToDelete.owner._id === this.loggedInUser._id)
     {return true}
     else 
     {return false}
   },
   openSingleStory(story){
-    this.$router.push('/single-story/'+story.id)
+    this.$router.push('/single-story/'+story._id)
   },
-  sendToProfilePage(id){
-    this.$router.push('/profile-page/'+id)
+  sendToProfilePage(_id){
+    this.$router.push('/profile-page/'+_id)
   },
   headerProfileMenuChange(status){
     this.headerMenuShown = status
@@ -664,7 +664,7 @@ export default {
     localStorage.clear()
     await this.getLoggedInUser()
     const userId = this.$route.params.userId
-    const loggedInId = this.loggedInUser.id
+    const loggedInId = this.loggedInUser._id
     if (userId !== loggedInId){
       console.log('user ID: ', userId, 'logged in ID: ', loggedInId)
       this.$router.push('/')

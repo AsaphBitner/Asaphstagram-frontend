@@ -55,12 +55,12 @@
         <div class="profile-text">{{pageOwner.profileText}}</div>
 
       <div class="followers-detailed">
-        <div v-if="pageOwnerFollowers.length">Followed by&nbsp;<span @click="sendToProfilePage(pageOwnerFollowers[0].id)">{{pageOwnerFollowers[0].username}}</span> 
+        <div v-if="pageOwnerFollowers.length">Followed by&nbsp;<span @click="sendToProfilePage(pageOwnerFollowers[0]._id)">{{pageOwnerFollowers[0].username}}</span> 
         </div>
-        <div v-if="pageOwnerFollowers.length === 2">&nbsp;and&nbsp;<span @click="sendToProfilePage(pageOwnerFollowers[1].id)">{{pageOwnerFollowers[1].username}}</span></div>
+        <div v-if="pageOwnerFollowers.length === 2">&nbsp;and&nbsp;<span @click="sendToProfilePage(pageOwnerFollowers[1]._id)">{{pageOwnerFollowers[1].username}}</span></div>
 
-        <div v-if="pageOwnerFollowers.length === 3">&nbsp;, <span @click="sendToProfilePage(pageOwnerFollowers[1].id)">{{pageOwnerFollowers[1].username}}</span>, and 1 other</div>
-        <div v-if="pageOwnerFollowers.length > 3">&nbsp;, <span @click="sendToProfilePage(pageOwnerFollowers[1].id)">{{pageOwnerFollowers[1].username}}</span>, and <span>{{pageOwnerFollowers.length - 2}}</span> others</div> 
+        <div v-if="pageOwnerFollowers.length === 3">&nbsp;, <span @click="sendToProfilePage(pageOwnerFollowers[1]._id)">{{pageOwnerFollowers[1].username}}</span>, and 1 other</div>
+        <div v-if="pageOwnerFollowers.length > 3">&nbsp;, <span @click="sendToProfilePage(pageOwnerFollowers[1]._id)">{{pageOwnerFollowers[1].username}}</span>, and <span>{{pageOwnerFollowers.length - 2}}</span> others</div> 
       </div>
     </div>
     </div>
@@ -78,8 +78,8 @@
 
       <div class="no-posts-yet" v-if="!this.storiesToShow.length">No Posts yet...</div>
       <ul v-if="this.storiesToShow.length" class="profile-page-story-list">
-        <li v-for="story in this.storiesToShow" :key="story.id">
-          <div class="profile-page-story-tile" @click="sendToSingleStory(story.id)">
+        <li v-for="story in this.storiesToShow" :key="story._id">
+          <div class="profile-page-story-tile" @click="sendToSingleStory(story._id)">
             <div class="tile-background">
               <span class="tile-background-options" @click.stop="setToDelete(story)">
                 <svg aria-label="Comment Options" class="_8-yf5 " fill="#262626" height="16" role="img" viewBox="0 0 48 48" width="16"><circle clip-rule="evenodd" cx="8" cy="24" fill-rule="evenodd" r="4.5"></circle><circle clip-rule="evenodd" cx="24" cy="24" fill-rule="evenodd" r="4.5"></circle><circle clip-rule="evenodd" cx="40" cy="24" fill-rule="evenodd" r="4.5"></circle></svg>
@@ -149,12 +149,12 @@ methods: {
     loadStories() {
       this.stories = this.$store.state.stories;
       // console.log(this.stories)
-      this.storiesToShow = this.stories.filter(item => {return item.owner.id === this.userId})
+      this.storiesToShow = this.stories.filter(item => {return item.owner._id === this.userId})
     },
 
     filterFollowers(){
     // console.log(this.pageOwner.followers)
-    this.pageOwnerFollowers = this.pageOwner.followers.filter(item => {return item.id !== this.pageOwner.id})
+    this.pageOwnerFollowers = this.pageOwner.followers.filter(item => {return item._id !== this.pageOwner._id})
     
     // if (!followerList.length) {return ''}
     // else if (followerList.length === 1) {return `Followed by ${followerList[0].username}`}
@@ -176,7 +176,7 @@ methods: {
       this.confirmMenuDisplayed = false
     },
     storyByMe(){
-      return (this.loggedInUser.id === this.pageOwner.id)
+      return (this.loggedInUser._id === this.pageOwner._id)
     },
     openDeleteMenu(){
       this.backgroundDisplayed = true
@@ -203,7 +203,7 @@ methods: {
    async sendToProfilePage(id){
     // this.$router.reload()
     localStorage.clear()
-  this.pageOwner = this.users.find(user => {return user.id === id})
+  this.pageOwner = this.users.find(user => {return user._id === id})
   this.loggedInUser = this.$store.state.loggedInUser
   this.userId = id
   await this.setUsers()
@@ -248,7 +248,7 @@ async created(){
   await this.setStories()
   this.loadUsers()
   this.loadStories()
-  this.pageOwner = this.users.find(user => {return user.id === this.userId})
+  this.pageOwner = this.users.find(user => {return user._id === this.userId})
   this.filterFollowers()
 }
 

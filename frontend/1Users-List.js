@@ -128,7 +128,7 @@
 //=============================================================================================================
 {
     // id: 'u11111', MongoDB will give _id
-    username: 'HomerS',
+    username: 'Super_Mario',
     password: 'supermariopassword',
     fullname: 'Mario Mario',
     profileText: 'It\'s a-me, Mario! Just a humble plumber who occasionally eats a star to become invincible for a short while. Bro to Luigi, spouce to Peach, friend to Yoshi and others',

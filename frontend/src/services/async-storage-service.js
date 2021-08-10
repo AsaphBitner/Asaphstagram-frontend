@@ -23,7 +23,7 @@ export const storageService = {
 }
 
 var gLoggedInUser = {
-    id: 'u11111',
+    _id: 'u11111',
     username: 'HomerS',
     password: 'Springfield',
     fullname: 'Homer Simpson',
@@ -50,23 +50,22 @@ function getLoggedInUser(){
 
 async function _toggleLike(payload){
     const stories = await query('stories')
-    const storyIdx = stories.findIndex((element) => { return element.id === payload.story.id})
+    const storyIdx = stories.findIndex((element) => { return element._id === payload.story._id})
     var sendBack = payload
     sendBack.storyIdx = storyIdx
     var users = await _loadUsers()
-    // var userIdx = users.findIndex(item => {return item.id === gLoggedInUser.id})
+    // var userIdx = users.findIndex(item => {return item._id === gLoggedInUser._id})
 
     if (payload.request === 'add'){
         var likeToAdd = {
-            id: gLoggedInUser.id,
-            fullname: gLoggedInUser.fullname,
+            _id: gLoggedInUser._id,
             username: gLoggedInUser.username,
             profileImgUrl: gLoggedInUser.profileImgUrl,
         }
         sendBack.likeToAdd = likeToAdd
         if (payload.entityType === 'story'){
             stories[storyIdx].likedBy.unshift(likeToAdd)
-            // users[userIdx].likesGiven.unshift(payload.story.id)
+            // users[userIdx].likesGiven.unshift(payload.story._id)
 
         }
         else {
@@ -76,13 +75,13 @@ async function _toggleLike(payload){
     else{
         var removeIdx = -100
         if (payload.entityType === 'story'){
-            removeIdx = stories[storyIdx].likedBy.findIndex(item => {return item.id === gLoggedInUser.id})
+            removeIdx = stories[storyIdx].likedBy.findIndex(item => {return item._id === gLoggedInUser._id})
             stories[storyIdx].likedBy.splice(removeIdx, 1)
-            // var removeFromUserIdx = users[userIdx].likesGiven.findIndex(item => {return item === payload.story.id}) 
+            // var removeFromUserIdx = users[userIdx].likesGiven.findIndex(item => {return item === payload.story._id}) 
             // users[userIdx].likesGiven.splice(removeFromUserIdx, 1)
         }
         else{
-            removeIdx = stories[storyIdx].comments[payload.commentIdx].likedBy.findIndex(item => {return item.id === gLoggedInUser.id})
+            removeIdx = stories[storyIdx].comments[payload.commentIdx].likedBy.findIndex(item => {return item._id === gLoggedInUser._id})
             stories[storyIdx].comments[payload.commentIdx].likedBy.splice(removeIdx, 1)
         }
 
@@ -95,18 +94,18 @@ async function _toggleLike(payload){
 
 async function addComment(payload){
     const newComment = await {
-        id: _makeId(),
+        _id: _makeId(),
         by: {
-            id: gLoggedInUser.id,
+            _id: gLoggedInUser._id,
             fullname: gLoggedInUser.fullname,
             username: gLoggedInUser.username,
             imgUrl: gLoggedInUser.profileImgUrl
         },
-        txt: payload.text,
+        text: payload.text,
         likedBy: [],
     }
     const stories = await query('stories')
-    const storyIdx = stories.findIndex((element) => { return element.id === payload.story.id})
+    const storyIdx = stories.findIndex((element) => { return element._id === payload.story._id})
     stories[storyIdx].comments.push(newComment)
     _save('stories', stories)
     return newComment
@@ -114,7 +113,7 @@ async function addComment(payload){
 
 async function deleteComment(payload){
     const stories = await query('stories')
-    const storyIdx = stories.findIndex((element) => { return element.id === payload.story.id})
+    const storyIdx = stories.findIndex((element) => { return element._id === payload.story._id})
     stories[storyIdx].comments.splice(payload.commentIdx, 1)
     _save('stories', stories)
 }
@@ -161,14 +160,14 @@ function remove(entityType, entityId) {
 
 async function _delete(entityType, entity){
     const entities = await query(entityType)
-    const entityIdx = entities.findIndex(item => item.id === entity.id)
+    const entityIdx = entities.findIndex(item => item._id === entity._id)
 
     entities.splice(entityIdx, 1)
     
     if (entityType === 'story'){
         var users = await query('users')
-        var loggedInIdx = users.findIndex(user => {return user.id === gLoggedInUser.id})
-        var deleteFromUserIdx = users[loggedInIdx].ownedStories.findIndex(item => {item === entity.id} )
+        var loggedInIdx = users.findIndex(user => {return user._id === gLoggedInUser._id})
+        var deleteFromUserIdx = users[loggedInIdx].ownedStories.findIndex(item => {item === entity._id} )
         users[loggedInIdx].ownedStories.splice(deleteFromUserIdx, 1)
         _save('users', users)
     }
@@ -178,13 +177,13 @@ async function _delete(entityType, entity){
 
 async function deleteStory(payload){
     const stories = await query('stories')
-    const storyIdx = stories.findIndex(item => item.id === payload.id)
+    const storyIdx = stories.findIndex(item => item._id === payload._id)
     stories.splice(storyIdx, 1)
     _save('stories', stories)
 
     var users = await query('users')
-    var loggedInIdx = users.findIndex(user => {return user.id === gLoggedInUser.id})
-    var deleteFromUserIdx = users[loggedInIdx].ownedStories.findIndex(item => {item === payload.id} )
+    var loggedInIdx = users.findIndex(user => {return user._id === gLoggedInUser._id})
+    var deleteFromUserIdx = users[loggedInIdx].ownedStories.findIndex(item => {item === payload._id} )
     users[loggedInIdx].ownedStories.splice(deleteFromUserIdx, 1)
     _save('users', users)
     
@@ -193,13 +192,13 @@ async function deleteStory(payload){
 async function addStory(newStory){
     var stories = await query('stories')
     // console.log(stories)
-    newStory.id = _makeId()
+    newStory._id = _makeId()
     stories.unshift(newStory)
     _save('stories', stories)
 
     var users = await query('users')
-    var loggedInIdx = users.findIndex(user => {return user.id === gLoggedInUser.id})
-    users[loggedInIdx].ownedStories.unshift(newStory.id)
+    var loggedInIdx = users.findIndex(user => {return user._id === gLoggedInUser._id})
+    users[loggedInIdx].ownedStories.unshift(newStory._id)
     _save('users', users)
 
     return newStory
@@ -221,15 +220,15 @@ async function _loadStories() {
         stories = [
             //=================================PHOTO STORY 1=========================================================
             {
-                id: 's111',
-                txt: 'Best trip ever11111111 aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
-                imgUrl: 'img/Stock photos - NY/NY01.jpg', //Can be an array if decide to support multiple imgs
+                _id: 's111',
+                text: 'Best trip ever11111111 aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
+                imgUrl: 'img/Stock photos - NY/NY01.jpg', //Can be an array if dec_ide to support multiple imgs
                 createdAt: 1624123543452,
                 owner: {
-                    id: 'u11111',
+                    _id: 'u11111',
                     fullname: 'Homer Simpson',
                     username: 'HomerS',
-                    imgUrl: 'img/profile photos/IMG1.jpg'
+                    profileImgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 loc: {
                     lat: 40.75249545209201, 
@@ -238,61 +237,59 @@ async function _loadStories() {
                 },
                 comments: [
                     {
-                        id: 'c1111',
+                        _id: 'c1111',
                         by: {
-                            id: 'u22222',
-                            fullname: 'Tony Soprano',
+                            _id: 'u22222',
                             username: 'TonyS',
-                            imgUrl: 'img/profile photos/IMG1.jpg'
+                            profileImgUrl: 'img/profile photos/IMG1.jpg'
                         },
-                        txt: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
+                        text: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
                         likedBy: [ // Optional
                            {
-                            id: 'u33333',
-                            fullname: 'James T. Kirk',
+                            _id: 'u33333',
                             username: 'JamesTK',
-                            imgUrl: 'img/profile photos/IMG1.jpg'
+                            profileImgUrl: 'img/profile photos/IMG1.jpg'
                         },
                         ],
                     },
                     {
-                        id: 'c22222',
+                        _id: 'c22222',
                         by: {
-                            id: 'u33333',
+                            _id: 'u33333',
                             fullname: 'James T. Kirk',
                             username: 'JamesTK',
-                            imgUrl: 'img/profile photos/IMG1.jpg'
+                            profileImgUrl: 'img/profile photos/IMG1.jpg'
                         },
-                        txt: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
+                        text: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
                         likedBy: [],                        
                     }
                 ],
                 likedBy: [
                     {
-                        id: 'u22222',
+                        _id: 'u22222',
                         fullname: 'Tony Soprano',
                         username: 'TonyS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
-                        id: 'u33333',
+                        _id: 'u33333',
                         fullname: 'James T. Kirk',
                         username: 'JamesTK',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
             },
               //=================================PHOTO STORY 2=========================================================
               {
-                id: 's222',
-                txt: 'Best trip ever222222  aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
-                imgUrl: 'img/Stock photos - NY/NY02.jpg', //Can be an array if decide to support multiple imgs
+                _id: 's222',
+                text: 'Best trip ever222222  aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
+                imgUrl: 'img/Stock photos - NY/NY02.jpg', //Can be an array if dec_ide to support multiple imgs
                 createdAt: 1624123543452,
                 owner: {
-                    id: 'u11111',
+                    _id: 'u11111',
                     fullname: 'Homer Simpson',
                     username: 'HomerS',
-                    imgUrl: 'img/profile photos/IMG1.jpg'
+                    profileImgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 loc: {
                     lat: 40.75249545209201, 
@@ -301,61 +298,61 @@ async function _loadStories() {
                 },
                 comments: [
                     {
-                        id: 'c1111',
+                        _id: 'c1111',
                         by: {
-                            id: 'u22222',
+                            _id: 'u22222',
                             fullname: 'Tony Soprano',
                             username: 'TonyS',
-                            imgUrl: 'img/profile photos/IMG1.jpg'
+                            profileImgUrl: 'img/profile photos/IMG1.jpg'
                         },
-                        txt: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
+                        text: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
                         likedBy: [ // Optional
                            {
-                            id: 'u33333',
+                            _id: 'u33333',
                             fullname: 'James T. Kirk',
                             username: 'JamesTK',
-                            imgUrl: 'img/profile photos/IMG1.jpg'
+                            profileImgUrl: 'img/profile photos/IMG1.jpg'
                         },
                         ],
                     },
                     {
-                        id: 'c22222',
+                        _id: 'c22222',
                         by: {
-                            id: 'u33333',
+                            _id: 'u33333',
                             fullname: 'James T. Kirk',
                             username: 'JamesTK',
-                            imgUrl: 'img/profile photos/IMG1.jpg'
+                            profileImgUrl: 'img/profile photos/IMG1.jpg'
                         },
-                        txt: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
+                        text: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
                         likedBy: [],
                     }
                 ],
                 likedBy: [
                     {
-                        id: 'u22222',
+                        _id: 'u22222',
                         fullname: 'Tony Soprano',
                         username: 'TonyS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
-                        id: 'u33333',
+                        _id: 'u33333',
                         fullname: 'James T. Kirk',
                         username: 'JamesTK',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
             },
               //=================================PHOTO STORY 3=========================================================
               {
-                id: 's333',
-                txt: 'Best trip ever333333  aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
-                imgUrl: 'img/Stock photos - NY/NY03.jpeg', //Can be an array if decide to support multiple imgs
+                _id: 's333',
+                text: 'Best trip ever333333  aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
+                imgUrl: 'img/Stock photos - NY/NY03.jpeg', //Can be an array if dec_ide to support multiple imgs
                 createdAt: 1624123543452,
                 owner: {
-                    id: 'u11111',
+                    _id: 'u11111',
                     fullname: 'Homer Simpson',
                     username: 'HomerS',
-                    imgUrl: 'img/profile photos/IMG1.jpg'
+                    profileImgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 loc: {
                     lat: 40.75249545209201, 
@@ -364,61 +361,61 @@ async function _loadStories() {
                 },
                 comments: [
                     {
-                        id: 'c1111',
+                        _id: 'c1111',
                         by: {
-                            id: 'u22222',
+                            _id: 'u22222',
                             fullname: 'Tony Soprano',
                             username: 'TonyS',
-                            imgUrl: 'img/profile photos/IMG1.jpg'
+                            profileImgUrl: 'img/profile photos/IMG1.jpg'
                         },
-                        txt: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
+                        text: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
                         likedBy: [ // Optional
                            {
-                            id: 'u33333',
+                            _id: 'u33333',
                             fullname: 'James T. Kirk',
                             username: 'JamesTK',
-                            imgUrl: 'img/profile photos/IMG1.jpg'
+                            profileImgUrl: 'img/profile photos/IMG1.jpg'
                         },
                         ],
                     },
                     {
-                        id: 'c22222',
+                        _id: 'c22222',
                         by: {
-                            id: 'u33333',
+                            _id: 'u33333',
                             fullname: 'James T. Kirk',
                             username: 'JamesTK',
-                            imgUrl: 'img/profile photos/IMG1.jpg'
+                            profileImgUrl: 'img/profile photos/IMG1.jpg'
                         },
-                        txt: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
+                        text: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
                         likedBy: [],
                     }
                 ],
                 likedBy: [
                     {
-                        id: 'u22222',
+                        _id: 'u22222',
                         fullname: 'Tony Soprano',
                         username: 'TonyS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
-                        id: 'u33333',
+                        _id: 'u33333',
                         fullname: 'James T. Kirk',
                         username: 'JamesTK',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
             },
            //=================================PHOTO STORY 4=========================================================
            {
-            id: 's444',
-            txt: 'Best trip ever444444 aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
-            imgUrl: 'img/Stock photos - NY/NY04.jpg', //Can be an array if decide to support multiple imgs
+            _id: 's444',
+            text: 'Best trip ever444444 aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
+            imgUrl: 'img/Stock photos - NY/NY04.jpg', //Can be an array if dec_ide to support multiple imgs
             createdAt: 1624123543452,
             owner: {
-                id: 'u11111',
+                _id: 'u11111',
                 fullname: 'Homer Simpson',
                 username: 'HomerS',
-                imgUrl: 'img/profile photos/IMG1.jpg'
+                profileImgUrl: 'img/profile photos/IMG1.jpg'
             },
             loc: {
                 lat: 40.75249545209201, 
@@ -427,61 +424,61 @@ async function _loadStories() {
             },
             comments: [
                 {
-                    id: 'c1111',
+                    _id: 'c1111',
                     by: {
-                        id: 'u22222',
+                        _id: 'u22222',
                         fullname: 'Tony Soprano',
                         username: 'TonyS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
-                    txt: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
+                    text: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
                     likedBy: [ // Optional
                         {
-                            id: 'u11111',
+                            _id: 'u11111',
                             fullname: 'Homer Simpson',
                             username: 'HomerS',
-                            imgUrl: 'img/profile photos/IMG1.jpg'
+                            profileImgUrl: 'img/profile photos/IMG1.jpg'
                         }
                     ]
                 },
                 {
-                    id: 'c22222',
+                    _id: 'c22222',
                     by: {
-                        id: 'u33333',
+                        _id: 'u33333',
                         fullname: 'James T. Kirk',
                         username: 'JamesTK',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
-                    txt: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
+                    text: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
                     likedBy: [],
                 }
             ],
             likedBy: [
                 {
-                    id: 'u22222',
+                    _id: 'u22222',
                     fullname: 'Tony Soprano',
                     username: 'TonyS',
-                    imgUrl: 'img/profile photos/IMG1.jpg'
+                    profileImgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 {
-                    id: 'u33333',
+                    _id: 'u33333',
                     fullname: 'James T. Kirk',
                     username: 'JamesTK',
-                    imgUrl: 'img/profile photos/IMG1.jpg'
+                    profileImgUrl: 'img/profile photos/IMG1.jpg'
                 },
             ],
         },
            //=================================PHOTO STORY 5=========================================================
            {
-            id: 's555',
-            txt: 'Best trip ever5555555  aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
-            imgUrl: 'img/Stock photos - NY/NY05.jpeg', //Can be an array if decide to support multiple imgs
+            _id: 's555',
+            text: 'Best trip ever5555555  aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
+            imgUrl: 'img/Stock photos - NY/NY05.jpeg', //Can be an array if dec_ide to support multiple imgs
             createdAt: 1624123543452,
             owner: {
-                id: 'u11111',
+                _id: 'u11111',
                 fullname: 'Homer Simpson',
                 username: 'HomerS',
-                imgUrl: 'img/profile photos/IMG1.jpg'
+                profileImgUrl: 'img/profile photos/IMG1.jpg'
             },
             loc: {
                 lat: 40.75249545209201, 
@@ -490,61 +487,61 @@ async function _loadStories() {
             },
             comments: [
                 {
-                    id: 'c1111',
+                    _id: 'c1111',
                     by: {
-                        id: 'u22222',
+                        _id: 'u22222',
                         fullname: 'Tony Soprano',
                         username: 'TonyS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
-                    txt: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
+                    text: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
                     likedBy: [ // Optional
                         {
-                            id: 'u11111',
+                            _id: 'u11111',
                             fullname: 'Homer Simpson',
                             username: 'HomerS',
-                            imgUrl: 'img/profile photos/IMG1.jpg'
+                            profileImgUrl: 'img/profile photos/IMG1.jpg'
                         }
                     ]
                 },
                 {
-                    id: 'c22222',
+                    _id: 'c22222',
                     by: {
-                        id: 'u33333',
+                        _id: 'u33333',
                         fullname: 'James T. Kirk',
                         username: 'JamesTK',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
-                    txt: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
+                    text: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
                     likedBy: [],
                 }
             ],
             likedBy: [
                 {
-                    id: 'u22222',
+                    _id: 'u22222',
                     fullname: 'Tony Soprano',
                     username: 'TonyS',
-                    imgUrl: 'img/profile photos/IMG1.jpg'
+                    profileImgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 {
-                    id: 'u33333',
+                    _id: 'u33333',
                     fullname: 'James T. Kirk',
                     username: 'JamesTK',
-                    imgUrl: 'img/profile photos/IMG1.jpg'
+                    profileImgUrl: 'img/profile photos/IMG1.jpg'
                 },
             ],
         },
            //=================================PHOTO STORY 6=========================================================
            {
-            id: 's666',
-            txt: 'Best trip ever666666666  aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
-            imgUrl: 'img/Stock photos - NY/NY06.jpg', //Can be an array if decide to support multiple imgs
+            _id: 's666',
+            text: 'Best trip ever666666666  aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
+            imgUrl: 'img/Stock photos - NY/NY06.jpg', //Can be an array if dec_ide to support multiple imgs
             createdAt: 1624123543452,
             owner: {
-                id: 'u11111',
+                _id: 'u11111',
                 fullname: 'Homer Simpson',
                 username: 'HomerS',
-                imgUrl: 'img/profile photos/IMG1.jpg'
+                profileImgUrl: 'img/profile photos/IMG1.jpg'
             },
             loc: {
                 lat: 40.75249545209201, 
@@ -553,61 +550,61 @@ async function _loadStories() {
             },
             comments: [
                 {
-                    id: 'c1111',
+                    _id: 'c1111',
                     by: {
-                        id: 'u22222',
+                        _id: 'u22222',
                         fullname: 'Tony Soprano',
                         username: 'TonyS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
-                    txt: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
+                    text: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
                     likedBy: [ // Optional
                         {
-                            id: 'u11111',
+                            _id: 'u11111',
                             fullname: 'Homer Simpson',
                             username: 'HomerS',
-                            imgUrl: 'img/profile photos/IMG1.jpg'
+                            profileImgUrl: 'img/profile photos/IMG1.jpg'
                         }
                     ]
                 },
                 {
-                    id: 'c22222',
+                    _id: 'c22222',
                     by: {
-                        id: 'u33333',
+                        _id: 'u33333',
                         fullname: 'James T. Kirk',
                         username: 'JamesTK',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
-                    txt: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
+                    text: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
                     likedBy: [],
                 }
             ],
             likedBy: [
                 {
-                    id: 'u22222',
+                    _id: 'u22222',
                     fullname: 'Tony Soprano',
                     username: 'TonyS',
-                    imgUrl: 'img/profile photos/IMG1.jpg'
+                    profileImgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 {
-                    id: 'u33333',
+                    _id: 'u33333',
                     fullname: 'James T. Kirk',
                     username: 'JamesTK',
-                    imgUrl: 'img/profile photos/IMG1.jpg'
+                    profileImgUrl: 'img/profile photos/IMG1.jpg'
                 },
             ],
         },
            //=================================PHOTO STORY 7=========================================================
            {
-            id: 's777',
-            txt: 'Best trip ever77777777 aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
-            imgUrl: 'img/Stock photos - NY/NY07.jpg', //Can be an array if decide to support multiple imgs
+            _id: 's777',
+            text: 'Best trip ever77777777 aaaaaaa bbbbbbbbbbbbb cccc ddd eeeeeee ffffff ggggggg hhhhhhhh iiiiiiiii jjjjjjj kkkkkkk llllllll mmmmmmmmmm nnnnnnn oooooooooo pppppppppppp qqqqq rrr sss ttttt uuuu vvvv wwww xxxxx yyyy zzzzz',
+            imgUrl: 'img/Stock photos - NY/NY07.jpg', //Can be an array if dec_ide to support multiple imgs
             createdAt: 1624123543452,
             owner: {
-                id: 'u11111',
+                _id: 'u11111',
                 fullname: 'Homer Simpson',
                 username: 'HomerS',
-                imgUrl: 'img/profile photos/IMG1.jpg'
+                profileImgUrl: 'img/profile photos/IMG1.jpg'
             },
             loc: {
                 lat: 40.75249545209201, 
@@ -616,47 +613,47 @@ async function _loadStories() {
             },
             comments: [
                 {
-                    id: 'c1111',
+                    _id: 'c1111',
                     by: {
-                        id: 'u22222',
+                        _id: 'u22222',
                         fullname: 'Tony Soprano',
                         username: 'TonyS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
-                    txt: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
+                    text: 'good one! wow great so great amazing wow wow wow love it amazing wonderful wow 11111 222222 333333 4444444 555555 66666 77777 8888 9999999',
                     likedBy: [ // Optional
                         {
-                            id: 'u11111',
+                            _id: 'u11111',
                             fullname: 'Homer Simpson',
                             username: 'HomerS',
-                            imgUrl: 'img/profile photos/IMG1.jpg'
+                            profileImgUrl: 'img/profile photos/IMG1.jpg'
                         }
                     ]
                 },
                 {
-                    id: 'c22222',
+                    _id: 'c22222',
                     by: {
-                        id: 'u33333',
+                        _id: 'u33333',
                         fullname: 'James T. Kirk',
                         username: 'JamesTK',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
-                    txt: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
+                    text: 'not good! no not at all not good bad very bad wowo so bad oh no 11111 22222 33333 4444444 55555 6666666 77777777 8888888 9999999!',
                     likedBy: [],
                 }
             ],
             likedBy: [
                 {
-                    id: 'u22222',
+                    _id: 'u22222',
                     fullname: 'Tony Soprano',
                     username: 'TonyS',
-                    imgUrl: 'img/profile photos/IMG1.jpg'
+                    profileImgUrl: 'img/profile photos/IMG1.jpg'
                 },
                 {
-                    id: 'u33333',
+                    _id: 'u33333',
                     fullname: 'James T. Kirk',
                     username: 'JamesTK',
-                    imgUrl: 'img/profile photos/IMG1.jpg'
+                    profileImgUrl: 'img/profile photos/IMG1.jpg'
                 },
             ],
         },
@@ -677,52 +674,52 @@ async function _loadUsers(){
     if (!users || !users.length) {
         users = [
             {
-                id: 'u11111',
+                _id: 'u11111',
                 username: 'HomerS',
                 password: 'Springfield',
                 fullname: 'Homer Simpson',
                 birthDate: 410273492,
-                profileText: 'Hello hi everybody, Homer Simpson here, I live in Springfield USA, my wife is marge and my kids are bart, lisa and maggie',
+                profileText: 'Hello hi everybody, Homer Simpson here, I live in Springfield USA, my wife is marge and my k_ids are bart, lisa and maggie',
                 profileImgUrl: 'img/profile photos/IMG1.jpg',
                 likesGiven: ['p36788', 'p00845'],
                 following: [
                     {
-                        id: 'u11111',
+                        _id: 'u11111',
                         username: 'HomerS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
-                        id: 'u22222',
+                        _id: 'u22222',
                         username: 'TonyS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
-                        id: 'u33333',
+                        _id: 'u33333',
                         username: 'JamesTK',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
                 followers: [
                     {
-                        id: 'u11111',
+                        _id: 'u11111',
                         username: 'HomerS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
-                        id: 'u22222',
+                        _id: 'u22222',
                         username: 'TonyS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
-                        id: 'u33333',
+                        _id: 'u33333',
                         username: 'JamesTK',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
                 ownedStories: ['s111', 's222', 's333', 's444', 's555', 's666', 's777'],
             },
             {
-                id: 'u22222',
+                _id: 'u22222',
                 username: 'TonyS',
                 password: 'NewJersey',
                 fullname: 'Tony Soprano',
@@ -732,42 +729,42 @@ async function _loadUsers(){
                 likesGiven: ['p36788', 'p00845'],
                 following: [
                     {
-                        id: 'u11111',
+                        _id: 'u11111',
                         username: 'HomerS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
-                        id: 'u22222',
+                        _id: 'u22222',
                         username: 'TonyS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
-                        id: 'u33333',
+                        _id: 'u33333',
                         username: 'JamesTK',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
                 followers: [
                     {
-                        id: 'u11111',
+                        _id: 'u11111',
                         username: 'HomerS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
-                        id: 'u22222',
+                        _id: 'u22222',
                         username: 'TonyS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
-                        id: 'u33333',
+                        _id: 'u33333',
                         username: 'JamesTK',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
                 ownedStories: ['s001', 's002', 's003'],
             },
             {
-                id: 'u33333',
+                _id: 'u33333',
                 username: 'JamesTK',
                 password: 'Enterprise',
                 fullname: 'James T. Kirk',
@@ -777,36 +774,36 @@ async function _loadUsers(){
                 likesGiven: ['p36788', 'p00845'],
                 following: [
                     {
-                        id: 'u11111',
+                        _id: 'u11111',
                         username: 'HomerS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
-                        id: 'u22222',
+                        _id: 'u22222',
                         username: 'TonyS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
-                        id: 'u33333',
+                        _id: 'u33333',
                         username: 'JamesTK',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
                 followers: [
                     {
-                        id: 'u11111',
+                        _id: 'u11111',
                         username: 'HomerS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
-                        id: 'u22222',
+                        _id: 'u22222',
                         username: 'TonyS',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                     {
-                        id: 'u33333',
+                        _id: 'u33333',
                         username: 'JamesTK',
-                        imgUrl: 'img/profile photos/IMG1.jpg'
+                        profileImgUrl: 'img/profile photos/IMG1.jpg'
                     },
                 ],
                 ownedStories: ['004', 's005', 's006'],

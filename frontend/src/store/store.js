@@ -51,7 +51,7 @@ export const store = new Vuex.Store({
 
         toggleLike(state, {payload}){
             // const payload = payloadInitial.payload
-            const storyIdx = state.stories.findIndex((element) => { return element.id === payload.story.id})
+            const storyIdx = state.stories.findIndex((element) => { return element._id === payload.story._id})
 
             const commentIdx = payload.commentIdx
             if (payload.request === 'add'){
@@ -74,16 +74,16 @@ export const store = new Vuex.Store({
         },
 
         addComment(state, {payload}){
-           const storyIdx = state.stories.findIndex((element) => { return element.id === payload.story.id})
+           const storyIdx = state.stories.findIndex((element) => { return element._id === payload.story._id})
            state.stories[storyIdx].comments.push(payload.newComment)
         },
         deleteComment(state, {payload}){
-           const storyIdx = state.stories.findIndex((element) => { return element.id === payload.story.id})
+           const storyIdx = state.stories.findIndex((element) => { return element._id === payload.story._id})
            state.stories[storyIdx].comments.splice(payload.commentIdx, 1)
 
         },
         deleteStory(state, {payload}){
-            const storyIdx = state.stories.findIndex((element) => { return element.id === payload.id})
+            const storyIdx = state.stories.findIndex((element) => { return element._id === payload._id})
             state.stories.splice(storyIdx, 1)
         },
         addStory(state, {payload}){
@@ -122,7 +122,7 @@ export const store = new Vuex.Store({
             await commit({type: 'deleteComment', payload: payload})
         },
         async deleteStory({commit}, payload){
-            if (!payload.idx) {payload.idx = null}
+            if (!payload._idx) {payload._idx = null}
             await storageService.deleteStory(payload)
             commit({type: 'deleteStory', payload: payload})
         },

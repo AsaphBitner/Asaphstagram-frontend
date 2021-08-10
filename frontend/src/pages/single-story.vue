@@ -52,10 +52,10 @@
 
             
             <div class="story-user-photo-name-2">
-               <div class="small-profile-img-story-2" @click="sendToProfilePage(story.owner.id)">
-                  <img :src="story.owner.imgUrl" alt="ERROR!" />
+               <div class="small-profile-img-story-2" @click="sendToProfilePage(story.owner._id)">
+                  <img :src="story.owner.profileImgUrl" alt="ERROR!" />
 
-              <span @click="sendToProfilePage(story.owner.id)">
+              <span @click="sendToProfilePage(story.owner._id)">
                 {{ story.owner.username }}
               </span>
                 </div>
@@ -98,30 +98,30 @@
             </div>
 
                <div class="single-story-text">
-                <div class="small-profile-img-story-2-comment" @click="sendToProfilePage(story.owner.id)">
-                  <img :src="story.owner.imgUrl" alt="ERROR!" />
+                <div class="small-profile-img-story-2-comment" @click="sendToProfilePage(story.owner._id)">
+                  <img :src="story.owner.profileImgUrl" alt="ERROR!" />
                 </div>
                 <p>
-                  <span class="story-text-user-name" @click="sendToProfilePage(story.owner.id)">{{ story.owner.username }}</span> {{ story.txt }}
+                  <span class="story-text-user-name" @click="sendToProfilePage(story.owner._id)">{{ story.owner.username }}</span> {{ story.text }}
                 </p>
               </div>
 
               <div class="single-story-comments">
-                <ul v-for="(comment, cIdx) in story.comments" :key="comment.id">
+                <ul v-for="(comment, cIdx) in story.comments" :key="comment._id">
                   <li class="single-story-single-comment">
 
                     <div class="comment-everything-but-like-counter">
-                    <span class="small-profile-img-comment" @click="sendToProfilePage(comment.by.id)">
-                      <img :src="getUserImgForComment(comment.by.id)" alt="" >
+                    <span class="small-profile-img-comment" @click="sendToProfilePage(comment.by._id)">
+                      <img :src="getUserImgForComment(comment.by._id)" alt="" >
                     </span>
                     <p>
-                      <span @click="sendToProfilePage(comment.by.id)">{{ comment.by.username }}</span
-                      >&nbsp;{{ comment.txt }}
+                      <span @click="sendToProfilePage(comment.by._id)">{{ comment.by.username }}</span
+                      >&nbsp;{{ comment.text }}
                     </p>
 
                     <div class="delete-like-unlike-comment">
                     <span
-                      v-if="commentByMe(comment.by.id)"
+                      v-if="commentByMe(comment.by._id)"
                       class="delete-comment"
                       @click="
                         setToDelete(' Comment', story, idx, comment, cIdx)
@@ -459,9 +459,9 @@ export default {
       const stories = this.$store.state.stories   
       // console.log('HELLO')
       // console.log(stories)
-    this.story = stories.find(item => {return item.id === storyId})
+    this.story = stories.find(item => {return item._id === storyId})
     console.log(this.story)
-    console.log(this.story.owner.imgUrl)
+    console.log(this.story.owner.profileImgUrl)
     },
 
     resetnewCommentsInput() {
@@ -503,7 +503,7 @@ export default {
 
     latestLiker(story) {
       if (!story.likedBy.length) return;
-      if (story.likedBy[0].id === this.$store.state.loggedInUser.id) {
+      if (story.likedBy[0]._id === this.$store.state.loggedInUser._id) {
         return "you";
       } else {
         return story.likedBy[0].username;
@@ -513,14 +513,14 @@ export default {
     likedByMe(story) {
       if (!story.likedBy || !story.likedBy.length) return false 
       const likedOrNot = story.likedBy.find((item) => {
-        return item.id === this.$store.state.loggedInUser.id;
+        return item._id === this.$store.state.loggedInUser._id;
       });
       return likedOrNot;
     },
     commentLikedByMe(story, idx) {
       if (!story.comments[idx].likedBy) return false;
       const likedOrNot = story.comments[idx].likedBy.find((item) => {
-        return item.id === this.$store.state.loggedInUser.id;
+        return item._id === this.$store.state.loggedInUser._id;
       });
       return likedOrNot;
     },
@@ -544,7 +544,7 @@ export default {
       await this.$store.dispatch("toggleLike", payload);
     },
     commentByMe(commenterId) {
-      if (commenterId === this.$store.state.loggedInUser.id) {
+      if (commenterId === this.$store.state.loggedInUser._id) {
         return true;
       } else {
         return false;
@@ -602,7 +602,7 @@ export default {
         // console.log('Delete story not ready yet')
         this.deleteStory();
         this.closeBackground();
-        this.$router.push('/following-feed/'+this.loggedInUser.id)
+        this.$router.push('/following-feed/'+this.loggedInUser._id)
 
       }
     },
@@ -629,17 +629,17 @@ export default {
   },
   closeNewStory(result){
     this.newStoryOn = false
-    if (result === 'yes update') {this.$router.push('/following-feed/'+this.loggedInUser.id)}
+    if (result === 'yes update') {this.$router.push('/following-feed/'+this.loggedInUser._id)}
   },
   storyByMe(){
-    // console.log(this.storyToDelete.owner.id, this.loggedInUser.id)
-    if (this.story.owner.id === this.loggedInUser.id)
+    // console.log(this.storyToDelete.owner._id, this.loggedInUser._id)
+    if (this.story.owner._id === this.loggedInUser._id)
     {return true}
     else 
     {return false}
   },
   getUserImgForComment(id){
-    const user = this.users.find(item => {return item.id === id})
+    const user = this.users.find(item => {return item._id === id})
 
     const imgUrl = user.profileImgUrl
       console.log(user.profileImgUrl)
@@ -669,9 +669,9 @@ sendToProfilePage(id){
     await this.getLoggedInUser()
     await this.setStories()
     // const storyId = this.$route.params.storyId
-    // this.story = this.$store.state.stories.find(item => {return item.id === storyId})
-    // this.idx = this.$store.state.stories.findIndex(item => {return item.id === storyId})
-    // console.log(this.story, this.idx)
+    // this.story = this.$store.state.stories.find(item => {return item._id === storyId})
+    // this._idx = this.$store.state.stories.findIndex(item => {return item._id === storyId})
+    // console.log(this.story, this._idx)
     await this.setUsers()
     this.loadUsers()
     this.getStory()
