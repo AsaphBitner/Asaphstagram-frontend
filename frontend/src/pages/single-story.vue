@@ -351,7 +351,7 @@
               </div>
               <div class="story-add-comment">
                 <form @submit="addComment(story, idx, $event)" method="POST">
-                  <button type="button">
+                  <button type="button" class="comment-imoji-icon">
                     <div class="">
                       <svg
                         aria-label="Emoji"

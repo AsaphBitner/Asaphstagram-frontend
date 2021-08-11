@@ -372,9 +372,13 @@
         justify-content: center;
         background: transparent;
         width: 100%;
+        
     }
     textarea:focus+button{
          color: #0095f6;
+    }
+    .comment-imoji-icon{
+        cursor: default;
     }
 }
 
