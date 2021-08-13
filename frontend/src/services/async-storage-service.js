@@ -1,22 +1,22 @@
-
+// import axios from "axios"
 // import {store} from '@/store/store.js'
 
 // console.log(store)
 
 export const storageService = {
+    // _get,
+    // post,
+    // put,
+    // remove,
+    // _delete,
     query,
-    _get,
     _save,
-    post,
-    put,
-    remove,
     _makeId,
     _loadStories,
     _toggleLike,
     getLoggedInUser,
     addComment,
     deleteComment,
-    _delete,
     addStory,
     deleteStory,
     _loadUsers
@@ -69,7 +69,7 @@ async function _toggleLike(payload){
 
         }
         else {
-            stories[storyIdx].comments[payload.commentIdx].likedBy.unshift(likeToAdd)
+            stories[storyIdx].comments[payload.commentIdx].likedBy.unshift(likeToAdd._id)
         }
     }
     else{
@@ -97,7 +97,6 @@ async function addComment(payload){
         _id: _makeId(),
         by: {
             _id: gLoggedInUser._id,
-            fullname: gLoggedInUser.fullname,
             username: gLoggedInUser.username,
             imgUrl: gLoggedInUser.profileImgUrl
         },
@@ -119,61 +118,61 @@ async function deleteComment(payload){
 }
 
 
-function _get(entityType, entityId) {
-    return query(entityType)
-    .then(entities => entities.find(entity => entity._id === entityId))
-}
+// function _get(entityType, entityId) {
+//     return query(entityType)
+//     .then(entities => entities.find(entity => entity._id === entityId))
+// }
 
 function _save(entityType, entities) {
     localStorage.setItem(entityType, JSON.stringify(entities))
 }
 
-function post(entityType, newEntity) {
-    newEntity._id = _makeId()
-    return query(entityType)
-    .then(entities => {
-            entities.push(newEntity)
-            _save(entityType, entities)
-            return newEntity
-        })
-}
+// function post(entityType, newEntity) {
+//     newEntity._id = _makeId()
+//     return query(entityType)
+//     .then(entities => {
+//             entities.push(newEntity)
+//             _save(entityType, entities)
+//             return newEntity
+//         })
+// }
 
-function put(entityType, updatedEntity) {
-    return query(entityType)
-        .then(entities => {
-            const idx = entities.findIndex(entity => entity._id === updatedEntity._id)
-            entities.splice(idx, 1, updatedEntity)
-            _save(entityType, entities)
-            return updatedEntity
-        })
-}
+// function put(entityType, updatedEntity) {
+//     return query(entityType)
+//         .then(entities => {
+//             const idx = entities.findIndex(entity => entity._id === updatedEntity._id)
+//             entities.splice(idx, 1, updatedEntity)
+//             _save(entityType, entities)
+//             return updatedEntity
+//         })
+// }
 
-function remove(entityType, entityId) {
-    return query(entityType)
-        .then(entities => {
-            const idx = entities.findIndex(entity => entity._id === entityId)
-            if (idx < 0) throw new Error(`Unknown Entity ${entityId}`)
-            entities.splice(idx, 1)
-            _save(entityType, entities)
-        })
-}
+// function remove(entityType, entityId) {
+//     return query(entityType)
+//         .then(entities => {
+//             const idx = entities.findIndex(entity => entity._id === entityId)
+//             if (idx < 0) throw new Error(`Unknown Entity ${entityId}`)
+//             entities.splice(idx, 1)
+//             _save(entityType, entities)
+//         })
+// }
 
-async function _delete(entityType, entity){
-    const entities = await query(entityType)
-    const entityIdx = entities.findIndex(item => item._id === entity._id)
+// async function _delete(entityType, entity){
+//     const entities = await query(entityType)
+//     const entityIdx = entities.findIndex(item => item._id === entity._id)
 
-    entities.splice(entityIdx, 1)
+//     entities.splice(entityIdx, 1)
     
-    if (entityType === 'story'){
-        var users = await query('users')
-        var loggedInIdx = users.findIndex(user => {return user._id === gLoggedInUser._id})
-        var deleteFromUserIdx = users[loggedInIdx].ownedStories.findIndex(item => {item === entity._id} )
-        users[loggedInIdx].ownedStories.splice(deleteFromUserIdx, 1)
-        _save('users', users)
-    }
-    _save(entityType, entities)
-    // console.log
-}
+//     if (entityType === 'story'){
+//         var users = await query('users')
+//         var loggedInIdx = users.findIndex(user => {return user._id === gLoggedInUser._id})
+//         var deleteFromUserIdx = users[loggedInIdx].ownedStories.findIndex(item => {item === entity._id} )
+//         users[loggedInIdx].ownedStories.splice(deleteFromUserIdx, 1)
+//         _save('users', users)
+//     }
+//     _save(entityType, entities)
+//     // console.log
+// }
 
 async function deleteStory(payload){
     const stories = await query('stories')

@@ -212,7 +212,7 @@ likedBy: [
     ],
     comments: [
         {
-            _id: '',
+            _id: _makeId(),
             by: {
                 _id: '6112f6126376cf1087265296',
                 username: 'Spider-Man',
@@ -374,26 +374,36 @@ const Lt_Uhura_Posts = [
     imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445921/Nyota%20Uhura/St1-cast_publicity_shot_r7d3lv.png', 
     createdAt: Date.now()-10,
     owner: {
-        // id: 'u11111', ID will be known after uploading Users array to Mongo
+        _id: '6112f6126376cf1087265294',
         username: 'Lt_Uhura',
         profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg'
     },
 likedBy: [
-        {
-            _id: '',
-            username: '',
-            profileImgUrl: ''
-        },
+    {
+        _id: '6112f6126376cf1087265297',
+        username: 'Superman',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
+    },
+    {
+        _id: '6112f6126376cf1087265298',
+        username: 'Bugs_Bunny',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
+    },
+    {
+        _id: '6112f6136376cf108726529b',
+        username: 'Yoda',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png',  
+    },
     ],
     comments: [
         {
-            _id: '',
+            _id: _makeId(),
             by: {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
             },
-            text: '',
+            text: 'A group of great professionals, and great people!',
                 likedBy: [],
         },
     ],
@@ -408,22 +418,34 @@ likedBy: [
     imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445919/Nyota%20Uhura/STIn_Beauty_s7ct0k.jpg', 
     createdAt: Date.now()-100,
     owner: {
-        // id: 'u11111', ID will be known after uploading Users array to Mongo
+        _id: '6112f6126376cf1087265294',
         username: 'Lt_Uhura',
         profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg'
     },
 likedBy: [
-        {
-            _id: '',
-            username: '',
-            profileImgUrl: ''
-        },
+    {
+        _id: '6112f6126376cf1087265299',
+        username: 'Super_Mario',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
+    },
+
+    {
+        _id: '6112f6136376cf108726529a',
+        username: 'Godfather_Corleone',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',  
+    },
+    
+    {
+        _id: '6112f6136376cf108726529b',
+        username: 'Yoda',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png',  
+    },
     ],
     comments: [
         {
-            _id: '',
+            _id: _makeId(),
             by: {
-                _id: '',
+                _id: _makeId(),
                 username: '',
                 profileImgUrl: ''
             },
@@ -441,26 +463,41 @@ likedBy: [
     imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445923/Nyota%20Uhura/Gene_Roddenberry_crop_raci3w.jpg', 
     createdAt: Date.now()-1000,
     owner: {
-        // id: 'u11111', ID will be known after uploading Users array to Mongo
+        _id: '6112f6126376cf1087265294',
         username: 'Lt_Uhura',
         profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg'
     },
 likedBy: [
-        {
-            _id: '',
-            username: '',
-            profileImgUrl: ''
-        },
+    {
+        _id: '6112f6136376cf108726529c',
+        username: 'Wonder_Woman',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg', 
+    },
+    {
+        _id: '6112f6116376cf1087265293',
+        username: 'Homer_Simpson',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
+    },
+    {
+        _id: '6112f6126376cf1087265295',
+        username: 'Wolverine',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
+    },
+    {
+        _id: '6112f6126376cf1087265296',
+        username: 'Spider-Man',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+    },
     ],
     comments: [
         {
-            _id: '',
+            _id: _makeId(),
             by: {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265296',
+                username: 'Spider-Man',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
             },
-            text: '',
+            text: 'A real great one, and he actually gave us a bright, optimistic future to aspire to!',
                 likedBy: [],
         },
     ],
@@ -473,26 +510,53 @@ likedBy: [
     imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445918/Nyota%20Uhura/Plato_s_Stepchildren_kiss_eczaqv.jpg', 
     createdAt: Date.now()-2000,
     owner: {
-        // id: 'u11111', ID will be known after uploading Users array to Mongo
+        _id: '6112f6126376cf1087265294',
         username: 'Lt_Uhura',
         profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg'
     },
 likedBy: [
-        {
-            _id: '',
-            username: '',
-            profileImgUrl: ''
-        },
+    {
+        _id: '6112f6126376cf1087265297',
+        username: 'Superman',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
+    },
+    {
+        _id: '6112f6126376cf1087265298',
+        username: 'Bugs_Bunny',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
+    },
+
+    {
+        _id: '6112f6126376cf1087265299',
+        username: 'Super_Mario',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
+    },
+
+    {
+        _id: '6112f6136376cf108726529a',
+        username: 'Godfather_Corleone',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',  
+    },
     ],
     comments: [
         {
-            _id: '',
+            _id: _makeId(),
             by: {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6136376cf108726529c',
+                username: 'Wonder_Woman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg', 
             },
-            text: '',
+            text: 'Television history!',
+                likedBy: [],
+        },
+        {
+            _id: _makeId(),
+            by:  {
+                _id: '6112f6126376cf1087265299',
+                username: 'Super_Mario',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
+            },
+            text: 'Racial harmony -- another way in which Star Trek was showing us a vision of a better future',
                 likedBy: [],
         },
     ],
@@ -505,26 +569,53 @@ likedBy: [
     imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628558185/Nyota%20Uhura/Nichelle_Nichols_120329-F-OW661-001640px_owjnd6.jpg', 
     createdAt: Date.now()-3000,
     owner: {
-        // id: 'u11111', ID will be known after uploading Users array to Mongo
+        _id: '6112f6126376cf1087265294',
         username: 'Lt_Uhura',
         profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg'
     },
 likedBy: [
         {
-            _id: '',
-            username: '',
-            profileImgUrl: ''
+            _id: '6112f6136376cf108726529c',
+            username: 'Wonder_Woman',
+            profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg', 
+        },
+        {
+            _id: '6112f6116376cf1087265293',
+            username: 'Homer_Simpson',
+            profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
+        },
+        {
+            _id: '6112f6126376cf1087265295',
+            username: 'Wolverine',
+            profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
+        },
+    
+        {
+            _id: '6112f6126376cf1087265296',
+            username: 'Spider-Man',
+            profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+        },
+    
+        {
+            _id: '6112f6126376cf1087265297',
+            username: 'Superman',
+            profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
+        },
+        {
+            _id: '6112f6126376cf1087265298',
+            username: 'Bugs_Bunny',
+            profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
         },
     ],
     comments: [
         {
-            _id: '',
+            _id: _makeId(),
             by: {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6136376cf108726529c',
+                username: 'Wonder_Woman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg', 
             },
-            text: '',
+            text: 'Better than ever :)',
                 likedBy: [],
         },
     ],
@@ -543,28 +634,30 @@ const Wolverine_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445994/Wolverine/Giant-Size_X-Men__no._1_-_cover_zj2uny.jpg', 
         createdAt: Date.now()-10,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6126376cf1087265295',
             username: 'Wolverine',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265296',
+                username: 'Spider-Man',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
+            },
+            {
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
             },
         ],
         comments: [
-            {
-                _id: '',
-                by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
-                },
-                text: '',
-                likedBy: [],
-            },
+        
         ],
     },
     // =============================================================
@@ -575,26 +668,38 @@ const Wolverine_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445994/Wolverine/Shirtless_Wolverine_mdkwpp.jpg', 
         createdAt: Date.now()-100,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6126376cf1087265295',
             username: 'Wolverine',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265299',
+                username: 'Super_Mario',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
+            },
+        
+            {
+                _id: '6112f6136376cf108726529a',
+                username: 'Godfather_Corleone',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',  
+            },
+            
+            {
+                _id: '6112f6136376cf108726529b',
+                username: 'Yoda',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png',  
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                    _id: '6112f6136376cf108726529a',
+                username: 'Godfather_Corleone',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',
                 },
-                text: '',
+                text: 'I do like how I was written, but I share your appreciation for good acting',
                 likedBy: [],
             },
     ],
@@ -609,26 +714,47 @@ const Wolverine_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445995/Wolverine/Old_Man_Logan__Earth-807128_by_Mile_Deodato_Jr_ydp4pi.png', 
         createdAt: Date.now()-1000,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6126376cf1087265295',
             username: 'Wolverine',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6136376cf108726529c',
+                username: 'Wonder_Woman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg', 
+            },
+            {
+                _id: '6112f6126376cf1087265296',
+                username: 'Spider-Man',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                    _id: '6112f6126376cf1087265296',
+                    username: 'Spider-Man',
+                    profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
                 },
-                text: '',
+                text: 'if I look half as good at half your age - I\'ll be thrilled',
+                likedBy: ['6112f6126376cf1087265297',],
+            },
+            {
+                _id: _makeId(),
+                by: {
+                    _id: '6112f6136376cf108726529c',
+                    username: 'Wonder_Woman',
+                    profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg', 
+                },
+                text: 'As a fellow slow-ager, I think you look great!',
                 likedBy: [],
             },
         ],
@@ -641,28 +767,35 @@ const Wolverine_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445994/Wolverine/Inchulk181_cghqlo.jpg', 
         createdAt: Date.now()-2000,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6126376cf1087265295',
             username: 'Wolverine',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6116376cf1087265293',
+                username: 'Homer_Simpson',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
+            },
+            {
+                _id: '6112f6126376cf1087265294',
+                username: 'Lt_Uhura',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
+            },
+            {
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265299',
+                username: 'Super_Mario',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
             },
         ],
         comments: [
-            {
-                _id: '',
-                by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
-                },
-                text: '',
-                likedBy: [],
-            },
+            
         ],
     },
 ]
@@ -678,27 +811,49 @@ const Spider_Man_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445923/Spider-Man/Amazing_Fantasy_15_myzfdp.jpg', 
         createdAt: Date.now()-10,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6126376cf1087265296',
             username: 'Spider-Man',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6116376cf1087265293',
+                username: 'Homer_Simpson',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
+            },
+        
+            {
+                _id: '6112f6126376cf1087265294',
+                username: 'Lt_Uhura',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
+            },
+        
+            {
+                _id: '6112f6126376cf1087265295',
+                username: 'Wolverine',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
+            },
+            {
+                _id: '6112f6136376cf108726529c',
+                username: 'Wonder_Woman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg', 
+            },
+            {
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                    _id: '6112f6126376cf1087265297',
+                    username: 'Superman',
+                    profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
                 },
-                text: '',
-                likedBy: [],
+                text: 'Legend! :-)',
+                likedBy: ['6112f6136376cf108726529c',],
             },
         ],
     },
@@ -709,28 +864,34 @@ const Spider_Man_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445987/Spider-Man/Jacob_Batalon_by_Gage_Skidmore_hykj8k.jpg', 
         createdAt: Date.now()-100,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6126376cf1087265296',
             username: 'Spider-Man',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6116376cf1087265293',
+                username: 'Homer_Simpson',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
+            },
+        
+            {
+                _id: '6112f6126376cf1087265294',
+                username: 'Lt_Uhura',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
             },
         ],
         comments: [
             {
-                _id: '',
-                by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
-                },
-                text: '',
-                likedBy: [],
+            _id: _makeId(),
+            by: {
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
             },
+            text: 'He\'s great! And I sould know, I got some funny friends myself',
+            likedBy: [],
+        }
         ],
     },
     {
@@ -739,26 +900,60 @@ const Spider_Man_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445924/Spider-Man/Issue252_nbcx9z.jpg', 
         createdAt: Date.now()-1000,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6126376cf1087265296',
             username: 'Spider-Man',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265299',
+                username: 'Super_Mario',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
+            },
+        
+            {
+                _id: '6112f6136376cf108726529a',
+                username: 'Godfather_Corleone',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',  
+            },
+            
+            {
+                _id: '6112f6136376cf108726529b',
+                username: 'Yoda',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png',  
+            },
+        
+            {
+                _id: '6112f6136376cf108726529c',
+                username: 'Wonder_Woman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg', 
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                _id: '6112f6136376cf108726529b',
+                username: 'Yoda',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png', 
                 },
-                text: '',
+                text: 'Cool it looks, this new suit, but bat vibes I get from it...',
+                likedBy: [],
+            },
+            {
+                _id: _makeId(),
+                by: {
+                    _id: '6112f6126376cf1087265299',
+                    username: 'Super_Mario',
+                    profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png', 
+                },
+                text: 'I also like changing my wardrobe sometimes! Just make sure the suit doesn\'t slowly start turning you evil or something',
                 likedBy: [],
             },
         ],
@@ -769,28 +964,30 @@ const Spider_Man_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445933/Spider-Man/Tom_Holland_as_Spider-Man_cxy42b.jpg', 
         createdAt: Date.now()-2000,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6126376cf1087265296',
             username: 'Spider-Man',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6136376cf108726529a',
+                username: 'Godfather_Corleone',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',  
+            },
+            {
+                _id: '6112f6126376cf1087265294',
+                username: 'Lt_Uhura',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
+            },
+        
+            {
+                _id: '6112f6126376cf1087265295',
+                username: 'Wolverine',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
             },
         ],
         comments: [
-            {
-                _id: '',
-                by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
-                },
-                text: '',
-                likedBy: [],
-            },
+            
         ],
     },
 ] 
@@ -801,30 +998,61 @@ const Superman_Posts = [
 
     {
         // id: 's111', ID will be generated by Mongo
-        text: 'Christopher Reeve was jsut so great',
+        text: 'Christopher Reeve was just so great',
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445985/Superman/Superman__Christopher_Reeve_nt23xb.jpg', 
         createdAt: Date.now()-10,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6126376cf1087265297',
             username: 'Superman',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6116376cf1087265293',
+                username: 'Homer_Simpson',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
             },
+        
+            {
+                _id: '6112f6126376cf1087265294',
+                username: 'Lt_Uhura',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
+            },
+        
+            {
+                _id: '6112f6126376cf1087265295',
+                username: 'Wolverine',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265296',
+                username: 'Spider-Man',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265299',
+                username: 'Super_Mario',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
+            },
+        
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                    _id: '6112f6126376cf1087265295',
+                    username: 'Wolverine',
+                    profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
                 },
-                text: '',
+                text: 'Amazing actor, amazing performances',
                 likedBy: [],
             },
         ],
@@ -835,27 +1063,51 @@ const Superman_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445972/Superman/JLA-AlexRoss_uabiwk.jpg', 
         createdAt: Date.now()-100,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6126376cf1087265297',
             username: 'Superman',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265299',
+                username: 'Super_Mario',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
+            },
+        
+            {
+                _id: '6112f6136376cf108726529a',
+                username: 'Godfather_Corleone',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',  
+            },
+            
+            {
+                _id: '6112f6136376cf108726529b',
+                username: 'Yoda',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png',  
+            },
+        
+            {
+                _id: '6112f6136376cf108726529c',
+                username: 'Wonder_Woman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg', 
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                    _id: '6112f6136376cf108726529c',
+                    username: 'Wonder_Woman',
+                    profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg',
                 },
-                text: '',
-                likedBy: [],
+                text: 'Hi there!',
+                likedBy: ['6112f6126376cf1087265296', '6112f6126376cf1087265299', '6112f6126376cf1087265298',],
             },
         ],
     },
@@ -865,28 +1117,30 @@ const Superman_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/LoisLane-1_rw2hi7.png', 
         createdAt: Date.now()-1000,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6126376cf1087265297',
             username: 'Superman',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6136376cf108726529a',
+                username: 'Godfather_Corleone',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',  
             },
+            {
+                _id: '6112f6116376cf1087265293',
+                username: 'Homer_Simpson',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
+            },
+        
+            {
+                _id: '6112f6126376cf1087265294',
+                username: 'Lt_Uhura',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
+            },        
         ],
         comments: [
-            {
-                _id: '',
-                by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
-                },
-                text: '',
-                likedBy: [],
-            },
+           
         ],
     },
     
@@ -899,32 +1153,35 @@ const Bugs_Bunny_Posts = [
 
 {
     // id: 's111', ID will be generated by Mongo
-    text: 'A good freind and my personal favorite Duck -- Daffy!',
+    text: 'A good friend and my personal favorite Duck -- Daffy!',
     imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445910/Bugs%20Bunny/Duck-rabbit-duck_gwmep9.jpg', 
     createdAt: Date.now()-10,
     owner: {
-        // id: 'u11111', ID will be known after uploading Users array to Mongo
+        _id: '6112f6126376cf1087265298',
         username: 'Bugs_Bunny',
         profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg'
     },
 likedBy: [
-        {
-            _id: '',
-            username: '',
-            profileImgUrl: ''
-        },
+    {
+        _id: '6112f6126376cf1087265294',
+        username: 'Lt_Uhura',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
+    },
+
+    {
+        _id: '6112f6126376cf1087265295',
+        username: 'Wolverine',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
+    },
+
+    {
+        _id: '6112f6126376cf1087265296',
+        username: 'Spider-Man',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+    },
     ],
     comments: [
-        {
-            _id: '',
-            by: {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
-            },
-            text: '',
-                likedBy: [],
-        },
+        
     ],
 },
 
@@ -934,26 +1191,27 @@ likedBy: [
     imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445923/Bugs%20Bunny/Mel_Blanc_-_1959_dwcmpg.jpg', 
     createdAt: Date.now()-100,
     owner: {
-        // id: 'u11111', ID will be known after uploading Users array to Mongo
+        _id: '6112f6126376cf1087265298',
         username: 'Bugs_Bunny',
         profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg'
     },
 likedBy: [
-        {
-            _id: '',
-            username: '',
-            profileImgUrl: ''
-        },
+    {
+        _id: '6112f6126376cf1087265294',
+        username: 'Lt_Uhura',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
+    },
+
     ],
     comments: [
         {
-            _id: '',
+            _id: _makeId(),
             by: {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265294',
+                username: 'Lt_Uhura',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
             },
-            text: '',
+            text: 'A legend of classic animation!',
                 likedBy: [],
         },
     ],
@@ -964,26 +1222,88 @@ likedBy: [
     imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445910/Bugs%20Bunny/Mickey-mouse-bugs-bunny-113_qv5j8a.jpg', 
     createdAt: Date.now()-1000,
     owner: {
-        // id: 'u11111', ID will be known after uploading Users array to Mongo
+        _id: '6112f6126376cf1087265298',
         username: 'Bugs_Bunny',
         profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg'
     },
 likedBy: [
-        {
-            _id: '',
-            username: '',
-            profileImgUrl: ''
-        },
+    {
+        _id: '6112f6116376cf1087265293',
+        username: 'Homer_Simpson',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
+    },
+
+    {
+        _id: '6112f6126376cf1087265294',
+        username: 'Lt_Uhura',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
+    },
+
+    {
+        _id: '6112f6126376cf1087265295',
+        username: 'Wolverine',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
+    },
+
+    {
+        _id: '6112f6126376cf1087265296',
+        username: 'Spider-Man',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+    },
+
+    {
+        _id: '6112f6126376cf1087265297',
+        username: 'Superman',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
+    },
+
+    {
+        _id: '6112f6126376cf1087265299',
+        username: 'Super_Mario',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
+    },
+
+    {
+        _id: '6112f6136376cf108726529a',
+        username: 'Godfather_Corleone',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',  
+    },
+    
+    {
+        _id: '6112f6136376cf108726529b',
+        username: 'Yoda',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png',  
+    },
     ],
     comments: [
         {
-            _id: '',
+            _id: _makeId(),
             by: {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265296',
+        username: 'Spider-Man',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
             },
-            text: '',
+            text: 'It\'s kind of amazing to me that they actually made this collaboration happen. Historical!',
+                likedBy: ['6112f6126376cf1087265299', '6112f6116376cf1087265293', '6112f6126376cf1087265298', ],
+        },
+        {
+            _id: _makeId(),
+            by: {
+                _id: '6112f6126376cf1087265299',
+                username: 'Super_Mario',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png', 
+            },
+            text: 'Mama mia! It\'s like if Sonic and I were in a game together!',
+                likedBy: ['6112f6126376cf1087265296', '6112f6136376cf108726529a',],
+        },
+        {
+            _id: _makeId(),
+            by: {
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png', 
+            },
+            text: 'A classic!',
                 likedBy: [],
         },
     ],
@@ -994,28 +1314,30 @@ likedBy: [
     imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445911/Bugs%20Bunny/Space_jam_nb6nfg.jpg', 
     createdAt: Date.now()-2000,
     owner: {
-        // id: 'u11111', ID will be known after uploading Users array to Mongo
+        _id: '6112f6126376cf1087265298',
         username: 'Bugs_Bunny',
         profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg'
     },
 likedBy: [
-        {
-            _id: '',
-            username: '',
-            profileImgUrl: ''
-        },
+    {
+        _id: '6112f6136376cf108726529c',
+        username: 'Wonder_Woman',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg', 
+    },
+    {
+        _id: '6112f6126376cf1087265295',
+        username: 'Wolverine',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
+    },
+
+    {
+        _id: '6112f6126376cf1087265296',
+        username: 'Spider-Man',
+        profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+    },
     ],
     comments: [
-        {
-            _id: '',
-            by: {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
-            },
-            text: '',
-                likedBy: [],
-        },
+        
     ],
 },
 
@@ -1026,122 +1348,203 @@ likedBy: [
 // ==========================================================================
 const Super_Mario_Posts = [
     {
-        // id: 's111', ID will be generated by Mongo
+        // _id: '6112f6126376cf1087265299',
         text: 'Here I am in action, in the classic era. Try those games -- a lot of them still hold up!',
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445953/Super%20Mario/Mario_Fireball_power-up_rfhdga.png', 
         createdAt: Date.now()-10,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6126376cf1087265299',
             username: 'Super_Mario',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6116376cf1087265293',
+                username: 'Homer_Simpson',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
+            },
+        
+            {
+                _id: '6112f6126376cf1087265294',
+                username: 'Lt_Uhura',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
+            },
+        
+            {
+                _id: '6112f6126376cf1087265295',
+                username: 'Wolverine',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
+            },
+            {
+                _id: '6112f6126376cf1087265296',
+                username: 'Spider-Man',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                    _id: '6112f6126376cf1087265296',
+                    username: 'Spider-Man',
+                    profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
                 },
-                text: '',
-                    likedBy: [],
+                text: 'Those games TOTALLY still hold up and are great!',
+                    likedBy: ['6112f6126376cf1087265299',],
             },
         ],
     },
     {
-        // id: 's111', ID will be generated by Mongo
+        // _id: '6112f6126376cf1087265299',
         text: 'Here\'s some more modern gameplay -- in 3D!',
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445968/Super%20Mario/Super_Mario_Odyssey_Gameplay_z0ssi7.jpg', 
         createdAt: Date.now()-100,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6126376cf1087265299',
             username: 'Super_Mario',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265296',
+                username: 'Spider-Man',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
             },
+            {
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
+            },
+            {
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
+            },
+       
         ],
         comments: [
-            {
-                _id: '',
-                by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
-                },
-                text: '',
-                    likedBy: [],
-            },
+        
         ],
     },
     {
-        // id: 's111', ID will be generated by Mongo
+        // _id: '6112f6126376cf1087265299',
         text: 'Luigi! Is he the greatest partner a video game character has ever had? Love you bro!',
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445940/Super%20Mario/Luigi_NSMBUDX_xnaeiv.png', 
         createdAt: Date.now()-1000,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6126376cf1087265299',
             username: 'Super_Mario',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265296',
+                username: 'Spider-Man',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+            },
+            {
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
+            },
+            {
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
+            },
+        
+            {
+                _id: '6112f6136376cf108726529a',
+                username: 'Godfather_Corleone',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',  
+            },
+            
+            {
+                _id: '6112f6136376cf108726529b',
+                username: 'Yoda',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png',  
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                _id: '6112f6136376cf108726529b',
+                username: 'Yoda',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png',
                 },
-                text: '',
+                text: 'A gret partnership indeed! ',
                     likedBy: [],
             },
         ],
     },
     {
-        // id: 's111', ID will be generated by Mongo
+        // _id: '6112f6126376cf1087265299',
         text: 'Legend! The great Shigeru Miyamoto, who created both me and Link from the Zelda games!',
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445964/Super%20Mario/Shigeru_Miyamoto_cropped_3_Shigeru_Miyamoto_201911_hw7ewa.jpg', 
         createdAt: Date.now()-10,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6126376cf1087265299',
             username: 'Super_Mario',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6136376cf108726529b',
+                username: 'Yoda',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png',  
+            },
+        
+            {
+                _id: '6112f6136376cf108726529c',
+                username: 'Wonder_Woman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg', 
+            },
+            {
+                _id: '6112f6116376cf1087265293',
+                username: 'Homer_Simpson',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
+            },
+        
+            {
+                _id: '6112f6126376cf1087265294',
+                username: 'Lt_Uhura',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
+            },
+        
+            {
+                _id: '6112f6126376cf1087265295',
+                username: 'Wolverine',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265296',
+                username: 'Spider-Man',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
+            },
+            {
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                    _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',
                 },
-                text: '',
-                    likedBy: [],
+                text: 'The amount of joy this guy\'s given to so many people around the world is remarkable',
+                    likedBy: ['6112f6126376cf1087265298', '6112f6126376cf1087265296', '6112f6116376cf1087265293', '6112f6136376cf108726529a',],
             },
         ],
     },
@@ -1156,28 +1559,31 @@ const Godfather_Corleone_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445992/Vito%20Corleone/TheGodfatherAlPacinoMarlonBrando_u7d2xn.jpg', 
         createdAt: Date.now()-10,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6136376cf108726529a',
             username: 'Godfather_Corleone',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6116376cf1087265293',
+                username: 'Homer_Simpson',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
+            },
+        
+            {
+                _id: '6112f6126376cf1087265294',
+                username: 'Lt_Uhura',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
+            },
+        
+            {
+                _id: '6112f6126376cf1087265295',
+                username: 'Wolverine',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
             },
         ],
         comments: [
-            {
-                _id: '',
-                by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
-                },
-                text: '',
-                    likedBy: [],
-            },
+            
         ],
     },
     {
@@ -1186,27 +1592,64 @@ const Godfather_Corleone_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445992/Vito%20Corleone/Tn2_godfather_the_II_1_ootzlg.jpg', 
         createdAt: Date.now()-100,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6136376cf108726529a',
             username: 'Godfather_Corleone',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265294',
+                username: 'Lt_Uhura',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
+            },
+        
+            {
+                _id: '6112f6126376cf1087265295',
+                username: 'Wolverine',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
+            },
+            {
+                _id: '6112f6136376cf108726529b',
+                username: 'Yoda',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png',  
+            },
+        
+            {
+                _id: '6112f6136376cf108726529c',
+                username: 'Wonder_Woman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg', 
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                    _id: '6112f6126376cf1087265295',
+                username: 'Wolverine',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',
                 },
-                text: '',
-                    likedBy: [],
+                text: 'Soldiers know this well -- hope for peace, prepare for war',
+                    likedBy: ['6112f6136376cf108726529c', '6112f6136376cf108726529b', '6112f6126376cf1087265294', '6112f6136376cf108726529a',],
+            },
+            {
+                _id: _makeId(),
+                by: {
+                    _id: '6112f6136376cf108726529c',
+                username: 'Wonder_Woman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg',
+                },
+                text: 'Indeed, as do Amazons',
+                    likedBy: [ '6112f6126376cf1087265295', '6112f6126376cf1087265294', '6112f6136376cf108726529a',],
+            },
+            {
+                _id: _makeId(),
+                by: {
+                    _id: '6112f6126376cf1087265294',
+                    username: 'Lt_Uhura',
+                    profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg',
+                },
+                text: '...As do Starfleet officers',
+                    likedBy: ['6112f6126376cf1087265294', '6112f6136376cf108726529a',],
             },
         ],
     },
@@ -1216,28 +1659,36 @@ const Godfather_Corleone_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628473843/Vito%20Corleone/Ellis_Island_arrivals_1904_cpviwn.jpg', 
         createdAt: Date.now()-1000,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6136376cf108726529a',
             username: 'Godfather_Corleone',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265296',
+                username: 'Spider-Man',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
+            },
+            {
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265299',
+                username: 'Super_Mario',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
             },
         ],
         comments: [
-            {
-                _id: '',
-                by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
-                },
-                text: '',
-                    likedBy: [],
-            },
+            
         ],
     },
     {
@@ -1246,26 +1697,71 @@ const Godfather_Corleone_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628473843/Vito%20Corleone/Corleone_Sicily_Italy_pmnc7q.jpg', 
         createdAt: Date.now()-2000,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6136376cf108726529a',
             username: 'Godfather_Corleone',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6116376cf1087265293',
+                username: 'Homer_Simpson',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
+            },
+        
+            {
+                _id: '6112f6126376cf1087265294',
+                username: 'Lt_Uhura',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
+            },
+        
+            {
+                _id: '6112f6126376cf1087265295',
+                username: 'Wolverine',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265296',
+                username: 'Spider-Man',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
+            },
+            {
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265299',
+                username: 'Super_Mario',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                _id: '6112f6126376cf1087265299',
+                username: 'Super_Mario',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',
                 },
-                text: '',
+                text: 'Beautiful!',
+                    likedBy: [],
+            },
+            {
+                _id: _makeId(),
+                by: {
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',
+                },
+                text: 'Beautiful indeed!',
                     likedBy: [],
             },
         ],
@@ -1276,22 +1772,22 @@ const Godfather_Corleone_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628473843/Vito%20Corleone/Corleone_Sicily_Italy_pmnc7q.jpg', 
         createdAt: Date.now()-3000,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6136376cf108726529a',
             username: 'Godfather_Corleone',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg'
         },
         likedBy: [
             {
-                _id: '',
+                _id: _makeId(),
                 username: '',
                 profileImgUrl: ''
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
+                    _id: _makeId(),
                     username: '',
                     profileImgUrl: ''
                 },
@@ -1311,26 +1807,50 @@ const Yoda_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446008/Yoda/Yoda_Attack_of_the_Clones_gxl5dl.png', 
         createdAt: Date.now()-100,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6136376cf108726529b',
             username: 'Yoda',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265294',
+                username: 'Lt_Uhura',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
             },
+        
+            {
+                _id: '6112f6126376cf1087265295',
+                username: 'Wolverine',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265296',
+                username: 'Spider-Man',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
+            },
+            {
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
+            },
+        
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                    _id: '6112f6126376cf1087265296',
+                    username: 'Spider-Man',
+                    profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',
                 },
-                text: '',
+                text: 'Total bada**!',
                     likedBy: [],
             },
         ],
@@ -1341,28 +1861,47 @@ const Yoda_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446008/Yoda/Mace_Windu_kihy8i.png', 
         createdAt: Date.now()-1000,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6136376cf108726529b',
             username: 'Yoda',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6116376cf1087265293',
+                username: 'Homer_Simpson',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
+            },
+            {
+                _id: '6112f6126376cf1087265295',
+                username: 'Wolverine',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265296',
+                username: 'Spider-Man',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+            },
+            {
+                _id: '6112f6136376cf108726529a',
+                username: 'Godfather_Corleone',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',  
+            },
+            
+            {
+                _id: '6112f6136376cf108726529b',
+                username: 'Yoda',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png',  
+            },
+        
+            {
+                _id: '6112f6136376cf108726529c',
+                username: 'Wonder_Woman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg', 
             },
         ],
         comments: [
-            {
-                _id: '',
-                by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
-                },
-                text: '',
-                    likedBy: [],
-            },
+        
         ],
     },
     {
@@ -1371,27 +1910,39 @@ const Yoda_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446006/Yoda/Ben_Kenobi_z8qnll.png', 
         createdAt: Date.now()-2000,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6136376cf108726529b',
             username: 'Yoda',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265299',
+                username: 'Super_Mario',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
+            },
+        
+            {
+                _id: '6112f6136376cf108726529a',
+                username: 'Godfather_Corleone',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',  
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                    _id: '6112f6136376cf108726529a',
+                username: 'Godfather_Corleone',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',
                 },
-                text: '',
-                    likedBy: [],
+                text: 'An honorable man, who resorted to war only when he had to',
+                    likedBy: ['6112f6136376cf108726529b',],
             },
         ],
     },
@@ -1401,27 +1952,62 @@ const Yoda_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446007/Yoda/George_Lucas_cropped_2009_nrbvgf.jpg', 
         createdAt: Date.now()-3000,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6136376cf108726529b',
             username: 'Yoda',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6116376cf1087265293',
+                username: 'Homer_Simpson',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
+            },
+        
+            {
+                _id: '6112f6126376cf1087265294',
+                username: 'Lt_Uhura',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
+            },
+        
+            {
+                _id: '6112f6126376cf1087265295',
+                username: 'Wolverine',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265296',
+                username: 'Spider-Man',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
+            },
+            {
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265299',
+                username: 'Super_Mario',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                _id: '6112f6116376cf1087265293',
+                username: 'Homer_Simpson',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
                 },
-                text: '',
-                    likedBy: [],
+                text: 'Yeah, not all of his decisions were the best maybe, but he did a lot of good and clearly cares a ton about Star Wars',
+                    likedBy: ['6112f6126376cf1087265299', '6112f6126376cf1087265296', '6112f6136376cf108726529b',],
             },
         ],
     },
@@ -1436,28 +2022,51 @@ const Wonder_Woman_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446005/Wonder%20Woman/Wonder_Woman_Vol_5_16_kayh5l.png', 
         createdAt: Date.now()-10,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6136376cf108726529c',
             username: 'Wonder_Woman',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265299',
+                username: 'Super_Mario',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
+            },
+        
+            {
+                _id: '6112f6136376cf108726529a',
+                username: 'Godfather_Corleone',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',  
+            },
+            
+            {
+                _id: '6112f6136376cf108726529b',
+                username: 'Yoda',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png',  
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                    _id: '6112f6126376cf1087265295',
+                    username: 'Wolverine',
+                    profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',
                 },
-                text: '',
-                    likedBy: [],
+                text: 'As a warior should be',
+                    likedBy: ['6112f6136376cf108726529c',],
             },
+            {
+                _id: _makeId(),
+                by: {
+                    _id: '6112f6136376cf108726529b',
+                    username: 'Yoda',
+                    profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png',
+                },
+                text: 'Regrettable it is, but sometimes -- fight we must',
+                    likedBy: ['6112f6126376cf1087265295', '6112f6136376cf108726529c',],
+            },
+            
         ],
     },
     {
@@ -1466,26 +2075,43 @@ const Wonder_Woman_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446005/Wonder%20Woman/Lynda_Carter_Wonder_Woman_qv6rab.jpg', 
         createdAt: Date.now()-100,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6136376cf108726529c',
             username: 'Wonder_Woman',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265296',
+                username: 'Spider-Man',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
+            },
+            {
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265299',
+                username: 'Super_Mario',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                    _id: '6112f6126376cf1087265297',
+                    username: 'Superman',
+                    profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',
                 },
-                text: '',
+                text: 'A ton of respect!',
                     likedBy: [],
             },
         ],
@@ -1496,28 +2122,52 @@ const Wonder_Woman_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446001/Wonder%20Woman/Wonder_Woman_Annual_Vol_5_1_a00h1m.png', 
         createdAt: Date.now()-1000,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6136376cf108726529c',
             username: 'Wonder_Woman',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
+            },
+            {
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265299',
+                username: 'Super_Mario',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
+            },
+        
+            {
+                _id: '6112f6136376cf108726529a',
+                username: 'Godfather_Corleone',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',  
+            },
+            
+            {
+                _id: '6112f6136376cf108726529b',
+                username: 'Yoda',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446011/Yoda/Yoda_Empire_Strikes_Back_z5ed0w.png'
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                    _id: '6112f6126376cf1087265297',
+                    username: 'Superman',
+                    profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
                 },
-                text: '',
-                    likedBy: [],
+                text: 'Love you WW!',
+                    likedBy: ['6112f6136376cf108726529c', '6112f6136376cf108726529b', '6112f6126376cf1087265298','6112f6126376cf1087265296',],
             },
+            
         ],
     },
     {
@@ -1526,27 +2176,44 @@ const Wonder_Woman_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628446001/Wonder%20Woman/Wonder_Woman_lasso__circa_2017_ca5x4m.jpg', 
         createdAt: Date.now()-2000,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6136376cf108726529c',
             username: 'Wonder_Woman',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
             },
+            {
+                _id: '6112f6126376cf1087265298',
+                username: 'Bugs_Bunny',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445914/Bugs%20Bunny/Bugs_Bunny_qwdwtt.svg',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265299',
+                username: 'Super_Mario',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445952/Super%20Mario/MarioNSMBUDeluxe_o9m18v.png',  
+            },
+        
+            {
+                _id: '6112f6136376cf108726529a',
+                username: 'Godfather_Corleone',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',  
+            },   
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
-                },
-                text: '',
-                    likedBy: [],
+                    _id: '6112f6136376cf108726529a',
+                    username: 'Godfather_Corleone',
+                    profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445991/Vito%20Corleone/Godfather15_flip_rurkpq.jpg',  
+                },  
+                text: 'I know personally that the world is filled with deception. A tool like this can be a powerful asset',
+                    likedBy: ['6112f6126376cf1087265299',],
             },
         ],
     },
@@ -1556,27 +2223,71 @@ const Wonder_Woman_Posts = [
         imgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Themyscira-floating_ko23yy.jpg', 
         createdAt: Date.now()-3000,
         owner: {
-            // id: 'u11111', ID will be known after uploading Users array to Mongo
+            _id: '6112f6136376cf108726529c',
             username: 'Wonder_Woman',
             profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg'
         },
         likedBy: [
             {
-                _id: '',
-                username: '',
-                profileImgUrl: ''
+                _id: '6112f6116376cf1087265293',
+                username: 'Homer_Simpson',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
+            },
+        
+            {
+                _id: '6112f6126376cf1087265294',
+                username: 'Lt_Uhura',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
+            },
+        
+            {
+                _id: '6112f6126376cf1087265295',
+                username: 'Wolverine',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445997/Wolverine/Wolverine__James__Logan__Howlett_ijn1tu.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265296',
+                username: 'Spider-Man',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',  
+            },
+        
+            {
+                _id: '6112f6126376cf1087265297',
+                username: 'Superman',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445986/Superman/Supermanflying_q6bprf.png',  
             },
         ],
         comments: [
             {
-                _id: '',
+                _id: _makeId(),
                 by: {
-                    _id: '',
-                    username: '',
-                    profileImgUrl: ''
+                _id: '6112f6116376cf1087265293',
+                username: 'Homer_Simpson',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
                 },
-                text: '',
-                    likedBy: [],
+                text: 'Beautiful!',
+                    likedBy: ['6112f6136376cf108726529c',],
+            },
+            {
+                _id: _makeId(),
+                by: {
+                    _id: '6112f6126376cf1087265296',
+                username: 'Spider-Man',
+                profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445937/Spider-Man/Web_of_Spider-Man_Vol_1_129-1_wps1tt.png',
+                },
+                text: 'Looks amazing! (I mean it\'s not Queens, but....)',
+                    likedBy: ['6112f6136376cf108726529c',],
+            },
+            {
+                _id: _makeId(),
+                by: {
+                    _id: '6112f6126376cf1087265294',
+                    username: 'Lt_Uhura',
+                    profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg', 
+                },
+                text: 'I\'ve traveled the universe, but rarely have I seen a place this impressive',
+                    likedBy: ['6112f6136376cf108726529c', '6112f6116376cf1087265293', '6112f6126376cf1087265296',],
             },
         ],
     },
