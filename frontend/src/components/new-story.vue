@@ -176,18 +176,16 @@ export default {
     },
     async addStory() {
       const payload = {
-        id: "",
-        txt: this.newStoryText,
+        text: this.newStoryText,
         imgUrl: this.newImgUrl,
         createdAt: Date.now(),
         owner: {
           id: this.loggedInUser.id,
-          fullname: this.loggedInUser.fullname,
           username: this.loggedInUser.username,
           imgUrl: this.loggedInUser.profileImgUrl,
         },
-        comments: [],
         likedBy: [],
+        comments: [],
       };
       await this.$store.dispatch("addStory", payload);
       this.$emit("saved");
