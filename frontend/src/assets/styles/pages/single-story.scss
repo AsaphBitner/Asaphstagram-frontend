@@ -214,6 +214,9 @@ img{
     .story-liked-by{
         padding-left: .7rem;
         padding-right: 1rem;
+        span{
+            cursor: pointer;
+        }
     }    
     .story-how-long-ago{
         padding-left: .7rem;

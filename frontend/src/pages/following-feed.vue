@@ -135,7 +135,7 @@
                     </svg>
                   </span>
                   <!-- COMMENT -->
-                  <span class="story-comment-icon" @click="sendToProfilePage(story.owner._id)">
+                  <span class="story-comment-icon" @click="openSingleStory(story)">
                     <svg
                       aria-label="Comment"
                       class="story-comment-icon"
@@ -189,7 +189,7 @@
               <!-- End of four icons -->
               <div class="story-liked-by">
                 <p v-if="story.likedBy.length ">
-                  Liked by&nbsp;<span>{{ latestLiker(story) }}</span
+                  Liked by&nbsp;<span @click="sendToProfilePage(story.likedBy[0])">{{ latestLiker(story) }}</span
                   >&nbsp;{{ likedByMessage(story) }}
                 </p>
               </div>
@@ -379,6 +379,7 @@
         </li>
       </ul>
     </div>
+<!-- v-if="storiesFollowing.length > numStoriesToShow" -->
     <div v-if="storiesFollowing.length > numStoriesToShow" @click="LoadMoreStoreis" class="load-more-storeis"><h1>Load More Posts</h1></div>
   </div>
 </template>
@@ -434,11 +435,12 @@ export default {
     
 
     async loadLimitedStories() {
+      // await this.setStories()
       await this.loadStories()
       // const storiesCut = this.stories.slice(0, this.numStoriesToShow)
       const currentUser = this.users.find(item => { return item._id === this.loggedInUser._id})
       this.storiesFollowing = this.stories.filter(item=> {
-      const followingOwner = currentUser.following.find(user => user._id === item.owner._id)
+      const followingOwner = currentUser.following.find(user => user === item.owner._id)
       if (followingOwner) {return true}
       else {return false}
     })
@@ -641,11 +643,11 @@ export default {
     this.headerMenuShown = status
   },
 
-  testingElement(el){
-    console.log(el.style)
-    // if (el.style)
-    // console.log('Yes, text overflow')
-  },
+  // testingElement(el){
+  //   console.log(el.style)
+  //   // if (el.style)
+  //   // console.log('Yes, text overflow')
+  // },
   // switchFocus(id){
   //   console.log(this.$refs)
   //   // const text = `commentTextArea${id}` 
@@ -664,6 +666,7 @@ export default {
     localStorage.clear()
     await this.getLoggedInUser()
     const userId = this.$route.params.userId
+    // console.log(userId)
     const loggedInId = this.loggedInUser._id
     if (userId !== loggedInId){
       console.log('user ID: ', userId, 'logged in ID: ', loggedInId)

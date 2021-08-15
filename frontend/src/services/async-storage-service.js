@@ -26,9 +26,8 @@ export const storageService = {
 }
 
 var gLoggedInUser = {
-    userId: '6112f6116376cf1087265293',
+    _id: '6112f6116376cf1087265293',
     username: 'Homer_Simpson',
-    password: 'homersimpsonpassword',
     fullname: 'Homer Simpson',
     profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
 
@@ -50,7 +49,8 @@ async function query(entityType, payload = null) {
     //         resolve(entities)
     //     }, delay)
     // })
-    return Promise.resolve(entities)
+    // console.log('Query: ', entities)
+    return Promise.resolve(entities.data)
 }
 
 function getLoggedInUser(){
@@ -66,28 +66,29 @@ async function _toggleLike(payload){
     // var userIdx = users.findIndex(item => {return item._id === gLoggedInUser.userId})
 
     if (payload.request === 'add'){
-        var likeToAdd = {
-            _id: gLoggedInUser.userId,
-            username: gLoggedInUser.username,
-            profileImgUrl: gLoggedInUser.profileImgUrl,
-        }
+        // var likeToAdd = {
+        //     _id: gLoggedInUser.userId,
+        //     username: gLoggedInUser.username,
+        //     profileImgUrl: gLoggedInUser.profileImgUrl,
+        var likeToAdd = gLoggedInUser._id
+        
         sendBack.likeToAdd = likeToAdd
-        // if (payload.entityType === '/story'){
-        //     stories[storyIdx].likedBy.unshift(likeToAdd)
-        // }
-        // else {
-        //     stories[storyIdx].comments[payload.commentIdx].likedBy.unshift(likeToAdd._id)
-    //     }
+        if (payload.entityType === '/story'){
+            stories[storyIdx].likedBy.unshift(likeToAdd)
+        }
+        else {
+            stories[storyIdx].comments[payload.commentIdx].likedBy.unshift(likeToAdd)
+        }
     }
     else{
         var removeIdx = -100
         if (payload.entityType === 'story'){
-            removeIdx = stories[storyIdx].likedBy.findIndex(item => {return item._id === gLoggedInUser.userId})
-            // stories[storyIdx].likedBy.splice(removeIdx, 1)
+            removeIdx = stories[storyIdx].likedBy.findIndex(item => {return item._id === gLoggedInUser._id})
+            stories[storyIdx].likedBy.splice(removeIdx, 1)
         }
         else{
-            removeIdx = stories[storyIdx].comments[payload.commentIdx].likedBy.findIndex(item => {return item._id === gLoggedInUser.userId})
-            // stories[storyIdx].comments[payload.commentIdx].likedBy.splice(removeIdx, 1)
+            removeIdx = stories[storyIdx].comments[payload.commentIdx].likedBy.findIndex(item => {return item._id === gLoggedInUser._id})
+            stories[storyIdx].comments[payload.commentIdx].likedBy.splice(removeIdx, 1)
         }
 
         sendBack.removeIdx = removeIdx
@@ -95,6 +96,7 @@ async function _toggleLike(payload){
     await axios.put('/story', stories[storyIdx])
     return sendBack
 }
+
 
 async function addComment(payload){
     const newComment =  {
@@ -137,7 +139,7 @@ async function deleteStory(payload){
     await axios.delete('story', payload._id)
 
     var users = await query('/userAll')
-    var loggedInIdx = users.findIndex(user => {return user._id === gLoggedInUser.userId})
+    var loggedInIdx = users.data.findIndex(user => {return user._id === gLoggedInUser.userId})
     var deleteFromUserIdx = users[loggedInIdx].ownedStories.findIndex(item => {item === payload._id} )
     users[loggedInIdx].ownedStories.splice(deleteFromUserIdx, 1)
     const userToUpdate = users[loggedInIdx]
@@ -160,7 +162,7 @@ async function addStory(story){
     user.ownedStories.unshift(newStory._id)
     // _save('/users', users[loggedInIdx])
     await axios.put('/user', user)
-    return newStory
+    return newStory.data
 }
 
 async function _loadStories() {
@@ -169,8 +171,12 @@ async function _loadStories() {
     return stories
 }
 
+
+
+
 async function _loadUsers(){
         let users = await query('/userAll')
+        // console.log('Frontend loadUsers: ', users.data)
         return users
 }
 

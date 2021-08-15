@@ -232,6 +232,7 @@
     margin-bottom: 0.5rem;
     span{
         font-weight: 600;
+        cursor: pointer;
     }
 }
 .story-text{
@@ -313,13 +314,13 @@
         display: none;
     }
 }
-.story-comments:hover{
+.story-comments ul li:hover{
     .delete-comment{
     display: block;
     }
-    .comment-like, .comment-unlike{
-        margin-left: 0;
-    }
+    // .comment-like, .comment-unlike{
+    //     margin-left: 0;
+    // }
 } 
 
 .story-how-long-ago{

@@ -133,6 +133,7 @@ export const store = new Vuex.Store({
         },
         async getLoggedInUser({commit}){
             const loggedInUser = await storageService.getLoggedInUser()
+            // console.log('STORE: ', loggedInUser)
             commit({type: 'getLoggedInUser', payload: loggedInUser})
             return loggedInUser
         },

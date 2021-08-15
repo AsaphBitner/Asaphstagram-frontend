@@ -52,7 +52,7 @@
 
             
             <div class="story-user-photo-name-2">
-               <div class="small-profile-img-story-2" @click="sendToProfilePage(story.owner._id)">
+               <div class="small-profile-img-story-2" @click="sendToProfilePage(story.likedBy[0])">
                   <img :src="story.owner.profileImgUrl" alt="ERROR!" />
 
               <span @click="sendToProfilePage(story.owner._id)">
@@ -340,7 +340,7 @@
 
               <div class="story-liked-by">
                 <p v-if="story.likedBy.length ">
-                  Liked by&nbsp;<span>{{ latestLiker(story) }}</span
+                  Liked by&nbsp;<span @click="sendToProfilePage(story.likedBy[0])">{{ latestLiker(story) }}</span
                   >&nbsp;{{ likedByMessage(story) }}
                 </p>
               </div>
