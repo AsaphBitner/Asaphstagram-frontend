@@ -52,14 +52,14 @@ export const store = new Vuex.Store({
         toggleLike(state, {payload}){
             // const payload = payloadInitial.payload
             const storyIdx = state.stories.findIndex((element) => { return element._id === payload.story._id})
-
+            
             const commentIdx = payload.commentIdx
             if (payload.request === 'add'){
                 if (payload.entityType === 'story'){ 
                     state.stories[storyIdx].likedBy.unshift(payload.likeToAdd)
                 }
                 else {
-                    state.stories[storyIdx].comments[commentIdx].likedBy.unshift(payload.likeToAdd)
+                    state.stories[storyIdx].comments[commentIdx].likedBy.unshift(payload.likeToAdd._id)
                 }
             }
             else {
@@ -85,6 +85,10 @@ export const store = new Vuex.Store({
         deleteStory(state, {payload}){
             const storyIdx = state.stories.findIndex((element) => { return element._id === payload._id})
             state.stories.splice(storyIdx, 1)
+            const userIdx = state.users.findIndex((item)=> {return item._id === state.loggedInUser._id})
+            // console.log(state.users)
+            const removeFromUserIdx = state.users[userIdx].ownedstories.findIndex(item => {return item === payload._id})
+            state.users[userIdx].ownedstories.splice(removeFromUserIdx, 1)
         },
         addStory(state, {payload}){
             state.stories.unshift(payload)
@@ -122,7 +126,7 @@ export const store = new Vuex.Store({
             await commit({type: 'deleteComment', payload: payload})
         },
         async deleteStory({commit}, payload){
-            if (!payload._idx) {payload._idx = null}
+            if (!payload.idx) {payload.idx = null}
             await storageService.deleteStory(payload)
             commit({type: 'deleteStory', payload: payload})
         },

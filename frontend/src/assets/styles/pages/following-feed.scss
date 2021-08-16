@@ -298,9 +298,9 @@
     .delete-comment, .comment-like, .comment-unlike{
         cursor: pointer;
     }   
-    .comment-like, .comment-unlike{
-        margin-left: auto;
-    }
+    // .comment-like, .comment-unlike{
+    //     margin-left: auto;
+    // }
     .delete-comment{
         background-color: rgba(20, 18, 18, 0.1);
         border-radius: 50%;
@@ -309,19 +309,20 @@
         color: black;
         // align-self: center;
         margin-right: .4rem;
-        margin-left: auto;
+        // margin-left: auto;
+        max-height: 1.2rem;
 
         display: none;
     }
+    .comment-like-unlike-delete{
+        display: flex;
+        margin-left: auto;
+    }
 }
-.story-comments ul li:hover{
-    .delete-comment{
+.story-comments ul li:hover .delete-comment{
     display: block;
     }
-    // .comment-like, .comment-unlike{
-    //     margin-left: 0;
-    // }
-} 
+
 
 .story-how-long-ago{
     display: flex;

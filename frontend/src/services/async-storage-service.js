@@ -2,7 +2,8 @@
 // import {store} from '@/store/store.js'
 
 import axios from "axios"
-// import { promised } from "q"
+axios.defaults.baseURL = 'http://localhost:3000';
+
 
 // console.log(store)
 
@@ -33,7 +34,7 @@ var gLoggedInUser = {
 
 }
 
-_save('loggedInUser', gLoggedInUser)
+// _save('loggedInUser', gLoggedInUser)
 
 
 
@@ -50,7 +51,20 @@ async function query(entityType, payload = null) {
     //     }, delay)
     // })
     // console.log('Query: ', entities)
-    return Promise.resolve(entities.data)
+    if (entityType === '/storyAll'){
+        const sort = JSON.parse(JSON.stringify(entities.data)).sort((a,b)=> {
+            // console.log(typeof a.createdAt , typeof b.createdAt)
+            // console.log(a.createdAt > b.createdAt)
+            return a.createdAt < b.createdAt ? 1 : -1
+        })
+        
+        // sort.forEach(element => {
+        //     console.log(element.createdAt)
+        // });
+        return Promise.resolve(JSON.parse(JSON.stringify(sort)))
+    }
+
+    return Promise.resolve(JSON.parse(JSON.stringify(entities.data)))
 }
 
 function getLoggedInUser(){
@@ -59,25 +73,26 @@ function getLoggedInUser(){
 
 async function _toggleLike(payload){
     const stories = await query('/storyAll')
+    // console.log('PAYLOAD :', payload)
     const storyIdx = stories.findIndex((element) => { return element._id === payload.story._id})
     var sendBack = payload
     sendBack.storyIdx = storyIdx
-    // var users = await query('/userAll')
-    // var userIdx = users.findIndex(item => {return item._id === gLoggedInUser.userId})
 
     if (payload.request === 'add'){
-        // var likeToAdd = {
-        //     _id: gLoggedInUser.userId,
-        //     username: gLoggedInUser.username,
-        //     profileImgUrl: gLoggedInUser.profileImgUrl,
-        var likeToAdd = gLoggedInUser._id
+        var likeToAdd = {
+            _id: gLoggedInUser._id,
+            username: gLoggedInUser.username,
+            profileImgUrl: gLoggedInUser.profileImgUrl,
+        }
+        
+        // var likeToAdd = gLoggedInUser._id
         
         sendBack.likeToAdd = likeToAdd
-        if (payload.entityType === '/story'){
-            stories[storyIdx].likedBy.unshift(likeToAdd)
+        if (payload.entityType === 'story'){
+            stories[storyIdx].likedBy.unshift(JSON.parse(JSON.stringify(likeToAdd)))
         }
         else {
-            stories[storyIdx].comments[payload.commentIdx].likedBy.unshift(likeToAdd)
+            stories[storyIdx].comments[payload.commentIdx].likedBy.unshift(likeToAdd._id)
         }
     }
     else{
@@ -87,13 +102,14 @@ async function _toggleLike(payload){
             stories[storyIdx].likedBy.splice(removeIdx, 1)
         }
         else{
-            removeIdx = stories[storyIdx].comments[payload.commentIdx].likedBy.findIndex(item => {return item._id === gLoggedInUser._id})
+            removeIdx = stories[storyIdx].comments[payload.commentIdx].likedBy.findIndex(item => {return item === gLoggedInUser._id})
             stories[storyIdx].comments[payload.commentIdx].likedBy.splice(removeIdx, 1)
         }
 
         sendBack.removeIdx = removeIdx
     }
-    await axios.put('/story', stories[storyIdx])
+    const storyToSend = JSON.parse(JSON.stringify(stories[storyIdx]))
+    await axios.put('/story', storyToSend)
     return sendBack
 }
 
@@ -102,7 +118,7 @@ async function addComment(payload){
     const newComment =  {
         _id: _makeId(),
         by: {
-            _id: gLoggedInUser.userId,
+            _id: gLoggedInUser._id,
             username: gLoggedInUser.username,
             imgUrl: gLoggedInUser.profileImgUrl
         },
@@ -118,7 +134,7 @@ async function addComment(payload){
 }
 
 async function deleteComment(payload){
-    const stories = await query('storyAll')
+    const stories = await query('/storyAll')
     const storyIdx = stories.findIndex((element) => { return element._id === payload.story._id})
     stories[storyIdx].comments.splice(payload.commentIdx, 1)
     await axios.put('/story', stories[storyIdx])
@@ -132,18 +148,19 @@ function _save(entityType, entities) {
 
 
 async function deleteStory(payload){
-    const stories = await query('/storyAll')
-    const storyIdx = stories.findIndex(item => item._id === payload._id)
-    stories.splice(storyIdx, 1)
+    // let x = await axios.get('/story'+'?storyId='+'611489856c7bd25886f70f54')
+    // console.log('X Data: ', x.data)
+    // const stories = await query('/storyAll')
+    // const storyIdx = stories.findIndex(item => item._id === payload._id)
+    // stories.splice(storyIdx, 1)
     // _save('stories', stories)
-    await axios.delete('story', payload._id)
+    await axios.delete('/story'+'/'+payload._id)
 
-    var users = await query('/userAll')
-    var loggedInIdx = users.data.findIndex(user => {return user._id === gLoggedInUser.userId})
-    var deleteFromUserIdx = users[loggedInIdx].ownedStories.findIndex(item => {item === payload._id} )
-    users[loggedInIdx].ownedStories.splice(deleteFromUserIdx, 1)
-    const userToUpdate = users[loggedInIdx]
-    await axios.put('/user', userToUpdate)
+    var currentUser = await query('/user', gLoggedInUser._id)
+    // var loggedInIdx = users.data.findIndex(user => {return user._id === gLoggedInUser._id})
+    var deleteFromUserIdx = currentUser.ownedStories.findIndex(item => {item === payload._id} )
+    currentUser.ownedStories.splice(deleteFromUserIdx, 1)
+    await axios.put('/user', currentUser)
     // _save('/users', users)
     
 }
@@ -155,11 +172,12 @@ async function addStory(story){
     // _save('stories', stories)
     // stories.unshift(newStory)
     let newStory = await axios.post('/story', story)
+    console.log(newStory.data)
 
-    var user = await query('/user', newStory.owner._id)
-    // var loggedInIdx = users.findIndex(user => {return user._id === gLoggedInUser.userId})
+    var user = await query(`/user/${newStory.data.owner._id}`)
+    // var loggedInIdx = users.findIndex(user => {return user._id === gLoggedInUser._id})
     // users[loggedInIdx].ownedStories.unshift(newStory._id)
-    user.ownedStories.unshift(newStory._id)
+    user.ownedStories.unshift(newStory.data._id)
     // _save('/users', users[loggedInIdx])
     await axios.put('/user', user)
     return newStory.data
@@ -235,7 +253,7 @@ function _makeId(length = 7) {
     
 //     if (entityType === '/story'){
 //         var users = await query('/users')
-//         var loggedInIdx = users.findIndex(user => {return user._id === gLoggedInUser.userId})
+//         var loggedInIdx = users.findIndex(user => {return user._id === gLoggedInUser._id})
 //         var deleteFromUserIdx = users[loggedInIdx].ownedStories.findIndex(item => {item === entity._id} )
 //         users[loggedInIdx].ownedStories.splice(deleteFromUserIdx, 1)
 //         _save('/users', users)

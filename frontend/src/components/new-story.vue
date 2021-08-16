@@ -139,7 +139,7 @@ export default {
   //===========================
   data() {
     return {
-      loggedInUser: this.$store.state.loggedInUser,
+      loggedInUser: {},
       isLoading: false,
       background: true,
       screen1: true,
@@ -180,7 +180,7 @@ export default {
         imgUrl: this.newImgUrl,
         createdAt: Date.now(),
         owner: {
-          id: this.loggedInUser.id,
+          id: this.loggedInUser._id,
           username: this.loggedInUser.username,
           imgUrl: this.loggedInUser.profileImgUrl,
         },
@@ -208,6 +208,10 @@ export default {
       this.isLoading = false;
       this.switchToScreen("2");
     },
+    
+    async getLoggedInUser(){
+        this.loggedInUser = await this.$store.dispatch('getLoggedInUser')
+    },
      // async onUploadImg(ev) {
     //   this.isLoading = true;
     //   const res = await uploadImg(ev);
@@ -219,6 +223,7 @@ export default {
 
   },
     created() {
+      this.getLoggedInUser()
       this.background = true;
       this.screen1 = true;
     },

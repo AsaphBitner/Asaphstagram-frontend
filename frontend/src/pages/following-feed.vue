@@ -16,7 +16,7 @@
         class="delete-menu"
       >
         <span v-if="(storyByMe && storyToDelete) || commentToDelete.comment" class="menu-option-delete" @click.stop="openComfirmMenu()"
-          >Delete {{ this.toDeleteEntity }}</span>
+          >Delete&nbsp;{{ this.toDeleteEntity }}</span>
         <span class="menu-option-cancel" @click.stop="closeBackground()"
           >Cancel</span
         >
@@ -24,7 +24,6 @@
       <div
         v-if="confirmMenuDisplayed"
         class="are-you-sure-menu"
-        @keydown.enter="closeBackground()"
       >
         <span class="confirmation">Are you sure?</span>
         <span class="yesNo"
@@ -53,7 +52,7 @@
                   </div>
               <span
                 class="story-options"
-                @click="setToDelete(' Post', story)"
+                @click="setToDelete('Post', story)"
               >
                 <svg
                   aria-label="More options"
@@ -194,7 +193,7 @@
                 </p>
               </div>
               <div class="story-text" >
-                <p @click="testingElement($el)">
+                <p>
                   <span @click="sendToProfilePage(story.owner._id)">{{ story.owner.username }}</span> {{ story.text }}
                 </p>
               </div>
@@ -211,11 +210,12 @@
                       >&nbsp;{{ comment.text }}
                     </p>
 
+                    <span class="comment-like-unlike-delete">   
                     <span
-                      v-if="commentByMe(comment.by._id)"
+                    v-if="commentByMe(comment.by._id)"
                       class="delete-comment"
                       @click="
-                        setToDelete(' Comment', story, comment, cIdx)
+                        setToDelete('Comment', story, comment, cIdx)
                       "
                     >
                       <svg
@@ -272,7 +272,7 @@
                       ></circle>
                     </span>
                     <span
-                      v-if="!commentLikedByMe(story, cIdx)"
+                      v-if="!commentLikedByMe(comment)"
                       @click="
                         toggleLike('add', 'comment', story, idx, comment, cIdx)
                       "
@@ -293,7 +293,7 @@
                       </svg>
                     </span>
                     <span
-                      v-if="commentLikedByMe(story, cIdx)"
+                      v-if="commentLikedByMe(comment)"
                       @click="
                         toggleLike(
                           'remove',
@@ -322,6 +322,7 @@
                           d="M34.6 3.1c-4.5 0-7.9 1.8-10.6 5.6-2.7-3.7-6.1-5.5-10.6-5.5C6 3.1 0 9.6 0 17.6c0 7.3 5.4 12 10.6 16.5.6.5 1.3 1.1 1.9 1.7l2.3 2c4.4 3.9 6.6 5.9 7.6 6.5.5.3 1.1.5 1.6.5s1.1-.2 1.6-.5c1-.6 2.8-2.2 7.8-6.8l2-1.8c.7-.6 1.3-1.2 2-1.7C42.7 29.6 48 25 48 17.6c0-8-6-14.5-13.4-14.5z"
                         ></path>
                       </svg>
+                    </span>
                     </span>
                     <!-- SINGLE COMMENT! -->
                   </li>
@@ -514,11 +515,13 @@ export default {
       });
       return likedOrNot;
     },
-    commentLikedByMe(story, idx) {
-      if (!story.comments[idx].likedBy) return false;
-      const likedOrNot = story.comments[idx].likedBy.find((item) => {
-        return item._id === this.$store.state.loggedInUser._id;
+    commentLikedByMe(comment) {
+      if (!comment.likedBy.length) return false;
+      // console.log(comment.by.username, comment.likedBy)
+      const likedOrNot = comment.likedBy.find((item) => {
+        return item === this.loggedInUser._id
       });
+      // console.log(likedOrNot)
       return likedOrNot;
     },
     async toggleLike(
@@ -542,7 +545,8 @@ export default {
       this.loadLimitedStories();
     },
     commentByMe(commenterId) {
-      if (commenterId === this.$store.state.loggedInUser._id) {
+      // console.log(commenterId, this.loggedInUser._id)
+      if (commenterId === this.loggedInUser._id) {
         return true;
       } else {
         return false;
@@ -578,28 +582,29 @@ export default {
       this.backgroundDisplayed = false;
       this.deleteMenuDisplayed = false;
       this.confirmMenuDisplayed = false;
+      this.toDeleteEntity = ''
       this.loadLimitedStories();
     },
 
     deleteConfirmed() {
-      if (this.toDeleteEntity === " Comment") {
+      if (this.toDeleteEntity === "Comment") {
         this.deleteComment();
-        this.closeBackground();
-      } else if (this.toDeleteEntity === " Post") {
+      } else if (this.toDeleteEntity === "Post") {
         // console.log('Delete story not ready yet')
         this.deleteStory();
-        this.closeBackground();
       }
+        this.closeBackground();
+        this.toDeleteEntity = ''
     },
     setToDelete(entityType, story, comment = null, cIdx = null) {
       this.toDeleteEntity = entityType;
-      if (entityType === " Comment") {
+      if (entityType === "Comment") {
         this.commentToDelete = {
           story: story,
           comment: comment,
           commentIdx: cIdx,
         };
-      } else if (entityType === " Post") {
+      } else if (entityType === "Post") {
         this.storyToDelete = story
       }
       this.openDeleteMenu();
@@ -663,7 +668,7 @@ export default {
   // },
   
   async created() {
-    localStorage.clear()
+    // localStorage.clear()
     await this.getLoggedInUser()
     const userId = this.$route.params.userId
     // console.log(userId)

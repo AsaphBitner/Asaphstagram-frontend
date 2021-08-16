@@ -517,11 +517,13 @@ export default {
       });
       return likedOrNot;
     },
-    commentLikedByMe(story, idx) {
-      if (!story.comments[idx].likedBy) return false;
-      const likedOrNot = story.comments[idx].likedBy.find((item) => {
-        return item._id === this.$store.state.loggedInUser._id;
+    commentLikedByMe(comment) {
+      if (!comment.likedBy.length) return false;
+      console.log(comment.by.username, comment.likedBy)
+      const likedOrNot = comment.likedBy.find((item) => {
+        return item === this.loggedInUser._id
       });
+      // console.log(likedOrNot)
       return likedOrNot;
     },
     async toggleLike(
