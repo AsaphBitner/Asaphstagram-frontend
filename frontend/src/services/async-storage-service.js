@@ -154,14 +154,18 @@ async function deleteStory(payload){
     // const storyIdx = stories.findIndex(item => item._id === payload._id)
     // stories.splice(storyIdx, 1)
     // _save('stories', stories)
-    await axios.delete('/story'+'/'+payload._id)
-
-    var currentUser = await query('/user', gLoggedInUser._id)
     // var loggedInIdx = users.data.findIndex(user => {return user._id === gLoggedInUser._id})
-    var deleteFromUserIdx = currentUser.ownedStories.findIndex(item => {item === payload._id} )
-    currentUser.ownedStories.splice(deleteFromUserIdx, 1)
-    await axios.put('/user', currentUser)
     // _save('/users', users)
+    // console.log('IDX: ',deleteFromUserIdx)
+    // console.log('USER: ',currentUser.username)
+    await axios.delete('/story/'+payload._id)
+    
+    var currentUser = await query('/user', gLoggedInUser._id)
+    var deleteFromUserIdx = currentUser.ownedStories.findIndex(item => {return item === payload._id})
+    if (deleteFromUserIdx < 0 || deleteFromUserIdx === undefined){console.log('ERROR! CANNOT DELETE FROM USER OWNED STORIES!!!'); return}
+    currentUser.ownedStories.splice(deleteFromUserIdx, 1)
+    
+    await axios.put('/user', currentUser)
     
 }
 
@@ -171,14 +175,15 @@ async function addStory(story){
     // newStory._id = _makeId()
     // _save('stories', stories)
     // stories.unshift(newStory)
-    let newStory = await axios.post('/story', story)
-    console.log(newStory.data)
-
-    var user = await query(`/user/${newStory.data.owner._id}`)
+    // console.log(newStory.data)
+    // console.log(newStory.data.owner._id)
     // var loggedInIdx = users.findIndex(user => {return user._id === gLoggedInUser._id})
     // users[loggedInIdx].ownedStories.unshift(newStory._id)
-    user.ownedStories.unshift(newStory.data._id)
     // _save('/users', users[loggedInIdx])
+    
+    let newStory = await axios.post('/story', story)
+    var user = await query('/user', newStory.data.owner._id)
+    user.ownedStories.unshift(newStory.data._id)
     await axios.put('/user', user)
     return newStory.data
 }

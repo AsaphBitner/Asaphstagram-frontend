@@ -25,7 +25,7 @@
     _id: '6112f6126376cf1087265294',
     username: 'Lt_Uhura',
     password: 'ltuhurapassword',
-    fullname: 'Nyota Uhura',
+    fullname: 'Nyota Uhura',    
     profileText: 'I\'m Lieutenant Uhura of Starfleet, chief communications officer of the USS Enterprise',
     profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445984/Nyota%20Uhura/Nichelle_Nichols__NASA_Recruiter_-_GPN-2004-00017_gtpazg.jpg',
     oldProfileImgs: [
@@ -275,3 +275,27 @@ let allUsers = [
         profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445998/Wonder%20Woman/Wonder_Woman_fp43lf.jpg', 
     },
 ]
+
+
+
+
+
+
+
+
+// =====================================================================
+
+
+
+
+// async function tempemp(){
+//     const x =  [
+//         '611489806c7bd25886f70f34', '611489816c7bd25886f70f3e', '611489836c7bd25886f70f48', '611489846c7bd25886f70f50', '611489856c7bd25886f70f55', '611489866c7bd25886f70f56', '611489866c7bd25886f70f57',
+//      ]
+//      const user = await userService.getUserByName('Homer_Simpson')
+//      console.log(user)
+//      user.ownedStories = x
+//      await userService.update(user)
+// }
+
+// tempemp()

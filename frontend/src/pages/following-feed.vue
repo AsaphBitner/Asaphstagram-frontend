@@ -199,7 +199,7 @@
               </div>
               <!-- start of comments!!!!!!!!!!!!!!!!!! -->
               <div class="story-comments">
-                <p @click="openSingleStory(story)" class="view-all-comments" v-if="story.comments">
+                <p  @click="openSingleStory(story)" class="view-all-comments" v-if="story.comments.length">
                   View all {{ story.comments.length }} comments
                 </p>
                 <ul v-for="(comment, cIdx) in story.comments" :key="comment._id">

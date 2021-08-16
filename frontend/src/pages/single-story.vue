@@ -16,8 +16,8 @@
         v-if="this.deleteMenuDisplayed"
         class="delete-menu"
       >
-        <span v-if="storyByMe()" class="menu-option-delete" @click.stop="openComfirmMenu()"
-          >Delete {{ this.toDeleteEntity }}</span
+        <span v-if="storyByMe() || commentToDelete.comment" class="menu-option-delete" @click.stop="openComfirmMenu()"
+          >Delete&nbsp;{{ this.toDeleteEntity }}</span
         >
         <span class="menu-option-cancel" @click.stop="closeBackground()"
           >Cancel</span
@@ -61,7 +61,7 @@
                 </div>
               <span
                 class="story-options"
-                @click="setToDelete(' Post', story, idx)"
+                @click="setToDelete('Post', story, idx)"
               >
                 <svg
                   aria-label="More options"
@@ -124,7 +124,7 @@
                       v-if="commentByMe(comment.by._id)"
                       class="delete-comment"
                       @click="
-                        setToDelete(' Comment', story, idx, comment, cIdx)
+                        setToDelete('Comment', story, idx, comment, cIdx)
                       "
                     >
                       <svg
@@ -181,7 +181,7 @@
                       ></circle>
                     </span>
                     <span
-                      v-if="!commentLikedByMe(story, cIdx)"
+                      v-if="!commentLikedByMe(comment)"
                       @click="
                         toggleLike('add', 'comment', story, idx, comment, cIdx)
                       "
@@ -202,7 +202,7 @@
                       </svg>
                     </span>
                     <span
-                      v-if="commentLikedByMe(story, cIdx)"
+                      v-if="commentLikedByMe(comment)"
                       @click="
                         toggleLike(
                           'remove',
@@ -460,8 +460,8 @@ export default {
       // console.log('HELLO')
       // console.log(stories)
     this.story = stories.find(item => {return item._id === storyId})
-    console.log(this.story)
-    console.log(this.story.owner.profileImgUrl)
+    // console.log(this.story)
+    // console.log(this.story.owner.profileImgUrl)
     },
 
     resetnewCommentsInput() {
@@ -597,27 +597,28 @@ export default {
     },
 
     deleteConfirmed() {
-      if (this.toDeleteEntity === " Comment") {
+      if (this.toDeleteEntity === "Comment") {
         this.deleteComment();
         this.closeBackground();
-      } else if (this.toDeleteEntity === " Post") {
+      } else if (this.toDeleteEntity === "Post") {
         // console.log('Delete story not ready yet')
         this.deleteStory();
         this.closeBackground();
+        this.toDeleteEntity = ''
         this.$router.push('/following-feed/'+this.loggedInUser._id)
 
       }
     },
     setToDelete(entityType, story, idx, comment = null, cIdx = null) {
       this.toDeleteEntity = entityType;
-      if (entityType === " Comment") {
+      if (entityType === "Comment") {
         this.commentToDelete = {
           story: story,
           storyIdx: idx,
           comment: comment,
           commentIdx: cIdx,
         };
-      } else if (entityType === " Post") {
+      } else if (entityType === "Post") {
         this.storyToDelete = {
           story: story,
           idx: idx,
@@ -640,11 +641,11 @@ export default {
     else 
     {return false}
   },
-  getUserImgForComment(id){
-    const user = this.users.find(item => {return item._id === id})
+  getUserImgForComment(_id){
+    const user = this.users.find(item => {return item._id === _id})
 
     const imgUrl = user.profileImgUrl
-      console.log(user.profileImgUrl)
+      // console.log(user.profileImgUrl)
     // console.log('user: ', user, 'imgUrel: ', imgUrl)
     return imgUrl
   },

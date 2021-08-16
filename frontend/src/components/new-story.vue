@@ -180,9 +180,9 @@ export default {
         imgUrl: this.newImgUrl,
         createdAt: Date.now(),
         owner: {
-          id: this.loggedInUser._id,
+          _id: this.loggedInUser._id,
           username: this.loggedInUser.username,
-          imgUrl: this.loggedInUser.profileImgUrl,
+          profileImgUrl: this.loggedInUser.profileImgUrl,
         },
         likedBy: [],
         comments: [],

@@ -154,7 +154,10 @@ methods: {
 
     filterFollowers(){
     // console.log(this.pageOwner.followers)
-    this.pageOwnerFollowers = this.pageOwner.followers.filter(item => {return item._id !== this.pageOwner._id})
+    const followers = this.users.filter(item=>{ 
+    return item.following.find(item2=> item2 === this.pageOwner._id)
+    })
+    this.pageOwnerFollowers = followers.filter(item => {return item._id !== this.pageOwner._id})
     
     // if (!followerList.length) {return ''}
     // else if (followerList.length === 1) {return `Followed by ${followerList[0].username}`}
@@ -250,6 +253,7 @@ async created(){
   this.loadStories()
   this.pageOwner = this.users.find(user => {return user._id === this.userId})
   this.filterFollowers()
+  console.log(this.pageOwnerFollowers)
 }
 
 }

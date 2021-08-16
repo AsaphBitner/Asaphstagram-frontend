@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import landingPage from '../pages/landing-page.vue'
+// import landingPage from '../pages/landing-page.vue'
 import exploreFeed from '../pages/explore-feed.vue'
 import followingFeed from '../pages/following-feed.vue'
 import loginSignup from '../pages/login-signup.vue'
@@ -14,8 +14,8 @@ Vue.use(VueRouter)
 const routes = [
     {
         path: '/',
-        name: 'landing-page',
-        component: landingPage
+        name: 'login-signup',
+        component: loginSignup
     },
     {
         path: '/profile-page/:userId',
@@ -31,11 +31,6 @@ const routes = [
         path: '/explore-feed/:userId',
         name: 'explore-feed', 
         component: exploreFeed
-    },
-    {
-        path: '/login-signup',
-        name: 'login-signup', 
-        component: loginSignup
     },
     {
         path: '/single-story/:storyId',

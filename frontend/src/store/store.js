@@ -87,8 +87,8 @@ export const store = new Vuex.Store({
             state.stories.splice(storyIdx, 1)
             const userIdx = state.users.findIndex((item)=> {return item._id === state.loggedInUser._id})
             // console.log(state.users)
-            const removeFromUserIdx = state.users[userIdx].ownedstories.findIndex(item => {return item === payload._id})
-            state.users[userIdx].ownedstories.splice(removeFromUserIdx, 1)
+            const removeFromUserIdx = state.users[userIdx].ownedStories.findIndex(item => {return item === payload._id})
+            state.users[userIdx].ownedStories.splice(removeFromUserIdx, 1)
         },
         addStory(state, {payload}){
             state.stories.unshift(payload)
