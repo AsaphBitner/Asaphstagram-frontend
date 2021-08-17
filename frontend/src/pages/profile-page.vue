@@ -52,7 +52,15 @@
           {{pageOwner.fullname}}
         </div>
 
-        <div class="profile-text">{{pageOwner.profileText}}</div>
+        <div v-if="!editingNow" class="profile-text">
+          {{pageOwner.profileText}}
+          <span v-if="pageOwner._id === loggedInUser._id" class="edit-profile-text" @click="editingNow = true">Edit Text</span>
+        </div>
+        <div class="profile-text-editing-area" v-if="editingNow">
+          <textarea name="" id="" v-model="profileTextEdit"></textarea>
+          <span v-if="pageOwner.profileText !== profileTextEdit" class="save-edit-profile-text" @click="saveNewProfileText(profileTextEdit)">Save</span>
+          <span v-if="pageOwner.profileText === profileTextEdit" class="cancel-edit-profile-text" @click="editingNow = false">Cancel</span>
+        </div>
 
       <div class="followers-detailed">
         <div v-if="pageOwnerFollowers.length">Followed by&nbsp;<span @click="sendToProfilePage(pageOwnerFollowers[0]._id)">{{pageOwnerFollowers[0].username}}</span> 
@@ -132,6 +140,8 @@ data(){
     confirmMenuDisplayed: false,
     storyToDelete: {},
     headerMenuShown: false,
+    editingNow: true,
+    profileTextEdit: '',
   }
 },
 
@@ -154,11 +164,10 @@ methods: {
 
     filterFollowers(){
     // console.log(this.pageOwner.followers)
-    const followers = this.users.filter(item=>{ 
-    return item.following.find(item2=> item2 === this.pageOwner._id)
-    })
-    this.pageOwnerFollowers = followers.filter(item => {return item._id !== this.pageOwner._id})
+    const followerIds = this.pageOwner.followers.filter(item=>{ 
+    return item !== this.pageOwner._id})
     
+    this.pageOwnerFollowers = this.users.filter(user => {return followerIds.find(item=>item === user._id)})
     // if (!followerList.length) {return ''}
     // else if (followerList.length === 1) {return `Followed by ${followerList[0].username}`}
     // else if (followerList.length === 2) {return `Followed by ${followerList[0].username} and ${followerList[1].username}`}
@@ -205,7 +214,7 @@ methods: {
     },
    async sendToProfilePage(id){
     // this.$router.reload()
-    localStorage.clear()
+    // localStorage.clear()
   this.pageOwner = this.users.find(user => {return user._id === id})
   this.loggedInUser = this.$store.state.loggedInUser
   this.userId = id
@@ -235,7 +244,16 @@ methods: {
     this.headerMenuShown = status
   },
 
+  async saveNewProfileText(newText){
+    let user = this.pageOwner
+    user.profileText = newText
+    const checkSuccess = await this.$store.dispatch('saveNewProfileText', user)
+    if (checkSuccess === 'SUCCESS') {this.pageOwner.profileText = newText;} else {console.log('PROBLEM WITH SAVING TEXT!')}
+    this.editingNow = false
+  },
+
 },
+
 
 
 // computed: {
@@ -244,7 +262,7 @@ methods: {
 // },
 
 async created(){
-  localStorage.clear()
+  // localStorage.clear()
   await this.getLoggedInUser()
   this.userId = this.$route.params.userId
   await this.setUsers()
@@ -253,7 +271,8 @@ async created(){
   this.loadStories()
   this.pageOwner = this.users.find(user => {return user._id === this.userId})
   this.filterFollowers()
-  console.log(this.pageOwnerFollowers)
+  this.profileTextEdit = this.pageOwner.profileText
+  // console.log(this.pageOwnerFollowers)
 }
 
 }

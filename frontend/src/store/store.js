@@ -96,6 +96,10 @@ export const store = new Vuex.Store({
         getLoggedInUser(state, {payload}){
             state.loggedInUser = payload
         },
+        saveNewProfileText(state, {user}){
+            const userIdx = state.users.findIndex(item => item._id === user._id)
+            state.users[userIdx].profileText = user.profileText 
+        },
     },
 
     actions: {
@@ -140,6 +144,13 @@ export const store = new Vuex.Store({
             // console.log('STORE: ', loggedInUser)
             commit({type: 'getLoggedInUser', payload: loggedInUser})
             return loggedInUser
+        },
+
+        async saveNewProfileText({commit}, user){
+            const saveText = await storageService.saveNewProfileText(user)
+            if (saveText === 'SUCCESS')
+            {commit({type: 'saveNewProfileText', user: user})
+            return 'SUCCESS'}
         },
  
         // async getLoggedInUser({commit}){

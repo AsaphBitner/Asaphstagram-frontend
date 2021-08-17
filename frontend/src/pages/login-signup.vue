@@ -1,13 +1,9 @@
 <template>
-  <div>
+  <div class="login-page-container">
       <app-header />
-    <h1>LANDING PAGE!!!</h1>
-    <div class="img-container">
-    <!-- <img src="img/Stock photos - NY/NY02.jpg" alt="Sorry, no image here" /> -->
-  <router-link :to="'/following-feed/'+userId">FEED</router-link>
-  <!-- this.$router.push('/car') -->
-
-
+    <h1>login!!!!!</h1>
+    <div class="login-page-img-container">
+    <img src="https://res.cloudinary.com/asaphstagram2021/image/upload/v1629150338/Stock%20photos%20-%20NY/NY03_tl8jz8.jpg" alt="Sorry, no image here" />
     </div>
   </div>
 </template>
@@ -36,7 +32,7 @@ async getLoggedInUser(){
 },
 
 async created(){
-  localStorage.clear()
+  // localStorage.clear()
   await this.getLoggedInUser()
   this.userId = this.loggedInUser._id
   // console.log(this.loggedInUser)

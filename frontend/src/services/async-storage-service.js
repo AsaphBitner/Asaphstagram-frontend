@@ -23,7 +23,9 @@ export const storageService = {
     deleteComment,
     addStory,
     deleteStory,
-    _loadUsers
+    _loadUsers,
+    getRandomIntInclusive,
+    saveNewProfileText,
 }
 
 var gLoggedInUser = {
@@ -34,7 +36,7 @@ var gLoggedInUser = {
 
 }
 
-// _save('loggedInUser', gLoggedInUser)
+_save('loggedInUser', gLoggedInUser)
 
 
 
@@ -68,10 +70,12 @@ async function query(entityType, payload = null) {
 }
 
 function getLoggedInUser(){
-    return gLoggedInUser
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'))
+    return loggedInUser
 }
 
 async function _toggleLike(payload){
+    const loggedInUser = getLoggedInUser()
     const stories = await query('/storyAll')
     // console.log('PAYLOAD :', payload)
     const storyIdx = stories.findIndex((element) => { return element._id === payload.story._id})
@@ -80,9 +84,9 @@ async function _toggleLike(payload){
 
     if (payload.request === 'add'){
         var likeToAdd = {
-            _id: gLoggedInUser._id,
-            username: gLoggedInUser.username,
-            profileImgUrl: gLoggedInUser.profileImgUrl,
+            _id: loggedInUser._id,
+            username: loggedInUser.username,
+            profileImgUrl: loggedInUser.profileImgUrl,
         }
         
         // var likeToAdd = gLoggedInUser._id
@@ -98,11 +102,11 @@ async function _toggleLike(payload){
     else{
         var removeIdx = -100
         if (payload.entityType === 'story'){
-            removeIdx = stories[storyIdx].likedBy.findIndex(item => {return item._id === gLoggedInUser._id})
+            removeIdx = stories[storyIdx].likedBy.findIndex(item => {return item._id === loggedInUser._id})
             stories[storyIdx].likedBy.splice(removeIdx, 1)
         }
         else{
-            removeIdx = stories[storyIdx].comments[payload.commentIdx].likedBy.findIndex(item => {return item === gLoggedInUser._id})
+            removeIdx = stories[storyIdx].comments[payload.commentIdx].likedBy.findIndex(item => {return item === loggedInUser._id})
             stories[storyIdx].comments[payload.commentIdx].likedBy.splice(removeIdx, 1)
         }
 
@@ -115,12 +119,13 @@ async function _toggleLike(payload){
 
 
 async function addComment(payload){
+    const loggedInUser = getLoggedInUser()
     const newComment =  {
         _id: _makeId(),
         by: {
-            _id: gLoggedInUser._id,
-            username: gLoggedInUser.username,
-            imgUrl: gLoggedInUser.profileImgUrl
+            _id: loggedInUser._id,
+            username: loggedInUser.username,
+            imgUrl: loggedInUser.profileImgUrl
         },
         text: payload.text,
         likedBy: [],
@@ -158,9 +163,10 @@ async function deleteStory(payload){
     // _save('/users', users)
     // console.log('IDX: ',deleteFromUserIdx)
     // console.log('USER: ',currentUser.username)
+    const loggedInUser = getLoggedInUser()
     await axios.delete('/story/'+payload._id)
     
-    var currentUser = await query('/user', gLoggedInUser._id)
+    var currentUser = await query('/user', loggedInUser._id)
     var deleteFromUserIdx = currentUser.ownedStories.findIndex(item => {return item === payload._id})
     if (deleteFromUserIdx < 0 || deleteFromUserIdx === undefined){console.log('ERROR! CANNOT DELETE FROM USER OWNED STORIES!!!'); return}
     currentUser.ownedStories.splice(deleteFromUserIdx, 1)
@@ -212,7 +218,16 @@ function _makeId(length = 7) {
     return text
 }
 
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+  }
 
+async function saveNewProfileText(user){
+    const updateUser = await axios.put('/user', user)
+    if(updateUser.status === 200){return 'SUCCESS'}
+}
 
 
 // function _get(entityType, entityId) {

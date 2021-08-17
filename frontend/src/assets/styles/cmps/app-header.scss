@@ -149,7 +149,7 @@ img{
     border-radius: .5rem;
     z-index: 3;
     overflow-y: scroll;
-    display: none;
+    // display: none;
     ul li{
         display: flex;
         padding: .5rem 1rem;
@@ -181,10 +181,10 @@ img{
     
 }
 }
-.header-search:focus+.app-header-search-results{
-        display: block
+// .header-search:focus+.app-header-search-results{
+//         display: block
     
-}
+// }
 
     .header-flex-1,
     .header-flex-2,

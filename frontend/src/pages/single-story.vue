@@ -52,7 +52,7 @@
 
             
             <div class="story-user-photo-name-2">
-               <div class="small-profile-img-story-2" @click="sendToProfilePage(story.likedBy[0])">
+               <div class="small-profile-img-story-2" @click="sendToProfilePage(story.owner._id)">
                   <img :src="story.owner.profileImgUrl" alt="ERROR!" />
 
               <span @click="sendToProfilePage(story.owner._id)">

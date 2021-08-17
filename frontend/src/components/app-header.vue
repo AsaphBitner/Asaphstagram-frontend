@@ -7,15 +7,15 @@
     <div class="header-flex-2">
     <input autocapitalize="none" type="search" class="header-search" placeholder="Search" @keyup="searchDiv()" v-model="searchBarContent"> 
     <!-- <input  class="XTCLo x3qfX" placeholder="Search" type="text" value=""></input> -->
-  <div v-if="searchBarContent" class="app-header-search-results">
-    <div class="search-triangle"></div>
+  <div v-if="searchBarContent.length" class="app-header-search-results">
+    <!-- <div class="search-triangle"></div> -->
     <div v-if="!searchResultUsers.length" class="header-search-nothing">Nothing Found...</div>
     <ul v-if="searchResultUsers.length">
-      <li v-for="user in searchResultUsers" :key="user._id" @click="sendToProfilePage(user._id)">
-        <div class="search-results-profile-img">
+      <li v-for="user in searchResultUsers" :key="user._id" @click.stop="sendToProfilePage(user._id)">
+        <div class="search-results-profile-img" @click.stop="sendToProfilePage(user._id)"> 
           <img :src="user.profileImgUrl" alt="">
         </div>
-        <div class="search-results-names">
+        <div class="search-results-names" @click.stop="sendToProfilePage(user._id)">
         <span>{{user.username}}</span>
         {{user.fullname}}
         </div>

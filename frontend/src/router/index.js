@@ -18,11 +18,6 @@ const routes = [
         component: loginSignup
     },
     {
-        path: '/profile-page/:userId',
-        name: 'profile-page',
-        component: profilePage
-    },
-    {
         path: '/following-feed/:userId',
         name: 'following-feed', 
         component: followingFeed
@@ -31,6 +26,16 @@ const routes = [
         path: '/explore-feed/:userId',
         name: 'explore-feed', 
         component: exploreFeed
+    },
+    // {
+    //     path: '/liked-stories-page/:userId',
+    //     name: 'liked-stories-page',
+    //     component: profilePage
+    // },
+    {
+        path: '/profile-page/:userId',
+        name: 'profile-page',
+        component: profilePage
     },
     {
         path: '/single-story/:storyId',
