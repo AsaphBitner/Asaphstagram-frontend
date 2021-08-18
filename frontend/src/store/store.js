@@ -100,6 +100,35 @@ export const store = new Vuex.Store({
             const userIdx = state.users.findIndex(item => item._id === user._id)
             state.users[userIdx].profileText = user.profileText 
         },
+        addFollow(state, {payload}){
+        const loggedInIdx = state.users.findIndex(item=>item._id === payload.follower._id)
+        const pageOwnerIdx = state.users.findIndex(item=>item._id === payload.following._id)
+        state.users[loggedInIdx].following.unshift(payload.following._id)
+        state.users[pageOwnerIdx].followers.unshift(payload.follower._id)
+        },
+        deleteFollow(state, {payload}){
+        const loggedInIdx = state.users.findIndex(item=>item._id === payload.follower._id)
+        const pageOwnerIdx = state.users.findIndex(item=>item._id === payload.following._id)
+        const removeIdxFollow = state.users[loggedInIdx].following.findIndex(item=>item === payload.following._id)
+        const removeIdxFollowing = state.users[pageOwnerIdx].followers.findIndex(item=>item === payload.follower._id)
+        state.users[loggedInIdx].following.splice(removeIdxFollow, 1)
+        state.users[pageOwnerIdx].followers.splice(removeIdxFollowing, 1)
+        },
+        login(state, {payload}){
+            // console.log(payload)
+            state.loggedInUser._id = payload._id
+            state.loggedInUser.username = payload.username
+            state.loggedInUser.fullname = payload.fullname
+            state.loggedInUser.profileImgUrl = payload.profileImgUrl
+        },
+        logout(state){
+            state.loggedInUser._id = ''
+            state.loggedInUser.username = ''
+            state.loggedInUser.fullname = ''
+            state.loggedInUser.profileImgUrl = ''
+        },
+          
+
     },
 
     actions: {
@@ -152,7 +181,31 @@ export const store = new Vuex.Store({
             {commit({type: 'saveNewProfileText', user: user})
             return 'SUCCESS'}
         },
- 
+        async addFollow({commit}, payload){
+            const updateConfirm = await storageService.updateFollow(payload)
+            if (updateConfirm === 'SUCCESS')
+            {commit({type: 'addFollow', payload: payload})
+            return 'SUCCESS'}
+        },
+        async deleteFollow({commit}, payload){
+            const updateConfirm = await storageService.updateFollow(payload)
+            if (updateConfirm === 'SUCCESS')
+            {commit({type: 'deleteFollow', payload: payload})
+            return 'SUCCESS'}
+        },
+        async login({commit}, payload){
+            const loggedInUser = await storageService.login(payload)
+            if (loggedInUser) {
+                commit({type: 'login', payload: loggedInUser})
+                return loggedInUser
+            }
+            else {return ''}
+        },
+        async logout({commit}){
+            await storageService.logout()
+            commit({type: 'logout'})
+        },
+
         // async getLoggedInUser({commit}){
         //     var payload = await storageService.query('loggedInUser')
         //     commit({type: 'setLoggedInUser', payload: payload})

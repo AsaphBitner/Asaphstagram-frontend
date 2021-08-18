@@ -670,6 +670,7 @@ sendToProfilePage(id){
   async created() {
     // localStorage.clear()
     await this.getLoggedInUser()
+    if(!this.loggedInUser._id){this.$router.push('/')}
     await this.setStories()
     // const storyId = this.$route.params.storyId
     // this.story = this.$store.state.stories.find(item => {return item._id === storyId})

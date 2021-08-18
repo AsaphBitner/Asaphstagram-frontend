@@ -26,17 +26,24 @@ export const storageService = {
     _loadUsers,
     getRandomIntInclusive,
     saveNewProfileText,
+    updateFollow,
+    login,
+    logout
 }
 
-var gLoggedInUser = {
-    _id: '6112f6116376cf1087265293',
-    username: 'Homer_Simpson',
-    fullname: 'Homer Simpson',
-    profileImgUrl: 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
+// var gLoggedInUser = {
+//     _id: '',
+//     // '6112f6116376cf1087265293',
+//     username: '',
+//     // 'Homer_Simpson',
+//     fullname: '', 
+//     // 'Homer Simpson',
+//     profileImgUrl: '', 
+//     // 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
 
-}
+// }
 
-_save('loggedInUser', gLoggedInUser)
+// _save('loggedInUser', gLoggedInUser)
 
 
 
@@ -228,6 +235,35 @@ async function saveNewProfileText(user){
     const updateUser = await axios.put('/user', user)
     if(updateUser.status === 200){return 'SUCCESS'}
 }
+
+async function updateFollow(payload){
+    const update1 = await axios.put('/user', payload.follower)
+    const update2 = await axios.put('/user', payload.following)
+
+    if(update1.status === 200 && update2.status === 200){return 'SUCCESS'}
+}
+
+async function login(attempt){
+    const verified = await axios.post('/login', attempt)
+    if (verified.status === 200) {
+        let loggedInUser = getLoggedInUser()
+        loggedInUser._id = verified.data._id
+        loggedInUser.username = verified.data.username
+        loggedInUser.fullname = verified.data.fullname
+        loggedInUser.profileImgUrl = verified.data.profileImgUrl
+        _save('loggedInUser', loggedInUser)
+        return verified.data}
+    else {return null}
+}
+function logout(){
+    let loggedInUser = getLoggedInUser()
+    loggedInUser._id = ''
+    loggedInUser.username = ''
+    loggedInUser.fullname = ''
+    loggedInUser.profileImgUrl = ''
+    _save('loggedInUser', loggedInUser)
+}
+
 
 
 // function _get(entityType, entityId) {

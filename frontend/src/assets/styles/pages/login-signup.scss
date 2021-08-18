@@ -2,7 +2,7 @@
 
 
 
-.login-page-img-container{
+.login-page-background-img-container{
     position: fixed;
     top: 0;
     left: 0;
@@ -13,8 +13,236 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: 30% 100%;
     }
 }
+
+.login-page-first-headline{
+    margin: auto;
+    margin-top: 1rem;
+    text-align: center;
+    span{
+        font-size: 7rem;
+        background-color: rgba(255, 255, 255, .3);
+        padding: 0rem 1.2rem .5rem;
+        border-radius: .7rem;
+        font-family: Instagram Logo regular;
+    }
+}
+
+.login-inputs-container{
+    display: flex;
+    margin-top: 22rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    form{
+        margin: auto;
+        margin-top: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        .login-password-inputs{
+            display: flex;
+            flex-direction: column;
+            *{
+                padding: .5rem .8rem;
+                font-size: 1rem;
+                font-weight: 600;
+                margin: .25rem 1rem;
+                background:rgba(255, 255, 255, .8);
+                outline: 0;
+                border: 0;
+                width: 15rem;
+                text-align: center;
+                border-radius: .7rem;
+            }
+            *:focus{
+                text-align: initial;
+                background-color: white;
+            }
+        }
+        button{
+            background: white;
+            padding: .5rem .5rem .7rem .5rem;
+            font-weight: 660;
+            border-radius: .7rem;
+            text-align: center;
+            justify-content: center;
+        }
+    }
+}
+
+.login-for-guests-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    h2{
+        margin-top: 6rem;
+        // margin-bottom: 32rem;
+        font-size: 3rem;
+        font-weight: 660;
+        background-color: rgba(255, 255, 255, .7);
+        padding: 0rem 1.2rem .5rem;
+        border-radius: .7rem;
+        // font-family: Instagram Logo regular;
+        margin-bottom: 1.4rem;
+    }
+}
+.login-3-photos{
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    
+    *{
+        border-radius: .7rem;
+        
+        h1{
+        font-size: 1.5rem;
+        font-weight: 660;
+        background-color: rgba(255, 255, 255, .5);
+        padding: 0.5rem .5rem .7rem;
+        height: fit-content;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        align-self: center;
+        }
+    }
+    // *:hover{
+    //     height: 15rem;
+    //     width: 15rem;
+    // }
+    .login-character-image{
+        width: 13rem;
+        height: 13rem;
+        border-radius: .7rem;
+        cursor: pointer;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        display: block;
+        }
+        img{
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+        .login-character-image:hover{
+            width: 15rem;
+            height: 15rem;
+            // transform: translate(10000);
+        }
+        .login-character-image:hover h1{
+            background-color: white;
+        }
+    .login-bugs-bunny{
+        img{
+            object-position: 50% 10%;
+        }
+    }
+    .login-yoda{
+        img{
+            object-position: 50% 10%;
+        }
+    }
+    .login-wonder-woman{
+        img{
+            object-position: 50% 10%;
+        }
+    }
+}
+
+
+
+
+// ==================================== MEDIA QUERIES ========================
+
+@media screen and (max-width: 700px){
+    .login-page-container{
+        h1{
+        span{
+            font-size: 5rem;
+        }            
+        }
+    }
+
+    .login-for-guests-container{
+
+        h2{
+            font-size: 2rem;
+        }
+    }
+    .login-3-photos{
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        .login-character-image{
+            margin-bottom: 2.7rem;
+            width: 20rem;
+            height: 20rem;
+        }
+        .login-character-image:hover{
+            width: 22rem;
+            height: 22rem;
+        }
+    }
+}
+
+
+@media screen and (max-width: 480px){
+    .login-page-container{
+        h1{
+        span{
+            font-size: 3rem;
+        }            
+        }
+    }
+    .login-inputs-container{
+        width: 100%;
+        form{
+            width: 100%;
+        }
+        .login-password-inputs{
+            .username-input, .password-input{
+                width: 8rem;
+            }
+        }
+        
+    }
+    .login-3-photos{
+        width: 100%;
+        .login-character-image{
+            width: 100%;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            // display: none;
+        }
+        .login-character-image:hover{
+            // border: 1rem gold inset;
+            width: 100%;
+            height: 20rem;
+            padding: 0;
+            // background-color: gold;
+            // margin: 2rem;
+        }
+    }
+    // .login-password-inputs{
+    //     // width: 1rem;
+    // }
+}
+
+
+
+
+
+
+
 
 
 

@@ -27,11 +27,11 @@ const routes = [
         name: 'explore-feed', 
         component: exploreFeed
     },
-    // {
-    //     path: '/liked-stories-page/:userId',
-    //     name: 'liked-stories-page',
-    //     component: profilePage
-    // },
+    {
+        path: '/liked-stories-page/:userId',
+        name: 'liked-stories-page',
+        component: profilePage
+    },
     {
         path: '/profile-page/:userId',
         name: 'profile-page',

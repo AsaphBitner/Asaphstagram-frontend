@@ -30,6 +30,19 @@
         >
       </div>
     </div>
+    <!-- ============================================================= -->
+  <div class="profile-page-follow-unfollow-background" v-if="followBackground" @click.stop="followBackground = false">
+    <div class="follow-unfollow-menu">
+      <div class="follow-unfollow-statement">
+        <span class="follow-unfollow-statement-yes" v-if="loggedInFollowing()">You&nbsp;<span>Are</span>&nbsp;Following {{pageOwner.username}}</span>
+        <span class="follow-unfollow-statement-no" v-if="!loggedInFollowing()">You&nbsp;<span>Are NOT</span>&nbsp;Following {{pageOwner.username}}</span>
+      </div>
+      <div v-if="!loggedInFollowing()" class="follow-user" @click.stop="addFollow()">Follow</div>
+      <div v-if="loggedInFollowing()" class="unfollow-user" @click.stop="deleteFollow()">Unfollow</div>
+      <div class="folow-unfollow-user-cancel" @click.stop="followBackground = false">Cancel</div>
+    </div>
+  </div>
+<!-- ============================================================================= -->
   <div class="profile-page-upper-part">
     <div class="profile-page-profile-photo">
       <img :src="this.pageOwner.profileImgUrl" alt="">
@@ -37,7 +50,7 @@
     <div class="profile-page-texts-container">
         <div class="profile-page-username-options">
           <span class="profile-page-username">{{pageOwner.username}}</span>
-        <span class="profile-page-options">
+        <span class="profile-page-options" @click="followBackground = true">
         <svg aria-label="Options" class="_8-yf5 " fill="#262626" height="24" role="img" viewBox="0 0 48 48" width="24"><circle clip-rule="evenodd" cx="8" cy="24" fill-rule="evenodd" r="4.5"></circle><circle clip-rule="evenodd" cx="24" cy="24" fill-rule="evenodd" r="4.5"></circle><circle clip-rule="evenodd" cx="40" cy="24" fill-rule="evenodd" r="4.5"></circle></svg>  
         </span>
         </div>
@@ -140,8 +153,9 @@ data(){
     confirmMenuDisplayed: false,
     storyToDelete: {},
     headerMenuShown: false,
-    editingNow: true,
+    editingNow: false,
     profileTextEdit: '',
+    followBackground: false,
   }
 },
 
@@ -181,6 +195,10 @@ methods: {
 
     async getLoggedInUser(){
         this.loggedInUser = await this.$store.dispatch('getLoggedInUser')
+
+    },
+    upgradeLoggedInUser(){
+      this.loggedInUser = this.users.find(item=>item._id === this.loggedInUser._id)
     },
     closeBackground(){
       this.backgroundDisplayed = false
@@ -224,6 +242,7 @@ methods: {
   this.loadStories()
   this.filterFollowers()
     this.$router.push('/profile-page/'+id)
+    location.reload()
   },
 
   deleteConfirmed() {
@@ -251,6 +270,34 @@ methods: {
     if (checkSuccess === 'SUCCESS') {this.pageOwner.profileText = newText;} else {console.log('PROBLEM WITH SAVING TEXT!')}
     this.editingNow = false
   },
+  
+  async addFollow(){
+  this.loggedInUser.following.unshift(this.pageOwner._id)
+  this.pageOwner.followers.unshift(this.loggedInUser._id)
+  const payload = {
+    follower: this.loggedInUser,
+    following: this.pageOwner
+  }
+  const follow = await this.$store.dispatch('addFollow', payload)
+  if (follow === 'SUCCESS') {console.log('SUCCESS FOLLOW!!!')}
+  this.followBackground = false
+  },
+  async deleteFollow(){
+  const followIdx = this.loggedInUser.following.findIndex(item=> item === this.pageOwner._id) 
+  this.loggedInUser.following.splice(followIdx, 1)
+  const followingIdx = this.pageOwner.followers.findIndex(item=> item === this.loggedInUser._id) 
+  this.pageOwner.followers.splice(followingIdx, 1)
+  const payload = {
+    follower: this.loggedInUser,
+    following: this.pageOwner
+  }
+  const follow = await this.$store.dispatch('deleteFollow', payload)
+  if (follow === 'SUCCESS') {console.log('SUCCESS UNFOLLOW!!!')}
+  this.followBackground = false
+  },
+  loggedInFollowing(){
+    return this.loggedInUser.following.find(item=> item === this.pageOwner._id)
+  },
 
 },
 
@@ -260,19 +307,27 @@ methods: {
 //   // storiestoShow: 
 
 // },
+// mounted(){
+//   // await this.created()
+//   console.log('MOUNTED!!!!!!')
+// },
 
 async created(){
   // localStorage.clear()
   await this.getLoggedInUser()
   this.userId = this.$route.params.userId
+  if(!this.loggedInUser._id){this.$router.push('/')}
+  
   await this.setUsers()
   await this.setStories()
   this.loadUsers()
   this.loadStories()
   this.pageOwner = this.users.find(user => {return user._id === this.userId})
   this.filterFollowers()
+  this.upgradeLoggedInUser()
   this.profileTextEdit = this.pageOwner.profileText
   // console.log(this.pageOwnerFollowers)
+  // console.log('CREATED!!!!!!!!!!!!!!!!!!')
 }
 
 }

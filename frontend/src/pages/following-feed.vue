@@ -670,8 +670,9 @@ export default {
   async created() {
     // localStorage.clear()
     await this.getLoggedInUser()
+      if(!this.loggedInUser._id){this.$router.push('/')}
+      // console.log(this.loggedInUser_id)
     const userId = this.$route.params.userId
-    // console.log(userId)
     const loggedInId = this.loggedInUser._id
     if (userId !== loggedInId){
       console.log('user ID: ', userId, 'logged in ID: ', loggedInId)

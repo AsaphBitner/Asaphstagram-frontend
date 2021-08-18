@@ -9,6 +9,17 @@
     top: 0;
     z-index: 2;
     
+    .underline{
+        height: 0;
+        width: 2rem;
+        border-bottom: 5px solid black;
+        position: absolute;
+        top: 1.7rem;
+        left: -.27rem;
+        border-radius: .5rem;
+        // right: 1rem;
+    }
+
     // flex-flow: row-wrap;
     background-color: #fafafa;
     border-bottom: lightgray solid 0.08rem;
@@ -27,14 +38,16 @@
     max-width: 1.5rem;
     max-height: 1.5rem;
     cursor: pointer;
+    // position: relative;
 }
 
 .header-profile-image-container{
-    position: relative;
-    border-radius: 50%;
+    // position: relative;
+    // border-radius: 50%;
     // border: 0.1rem solid black;
     img{
         object-fit: cover;
+        border-radius: 50%;
     }
 
     .profile-triangle{
@@ -181,6 +194,7 @@ img{
     
 }
 }
+
 // .header-search:focus+.app-header-search-results{
 //         display: block
     
@@ -198,6 +212,9 @@ img{
     }
     .header-flex-3{
     padding-top: 0.2rem;
+    *{
+        position: relative;
+    }
     }
 
 
