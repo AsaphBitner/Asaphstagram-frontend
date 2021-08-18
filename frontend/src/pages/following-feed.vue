@@ -441,11 +441,12 @@ export default {
       // const storiesCut = this.stories.slice(0, this.numStoriesToShow)
       const currentUser = this.users.find(item => { return item._id === this.loggedInUser._id})
       this.storiesFollowing = this.stories.filter(item=> {
-      const followingOwner = currentUser.following.find(user => user === item.owner._id)
-      if (followingOwner) {return true}
-      else {return false}
-    })
-    const storiesNew = this.stories.slice(0, this.numStoriesToShow)
+        return currentUser.following.find(user => {return user === item.owner._id}) })
+      // const followingOwner = currentUser.following.find(user => user === item.owner._id)
+      // if (followingOwner) {return true}
+      // else {return false}
+    // })
+    const storiesNew = this.storiesFollowing.slice(0, this.numStoriesToShow)
     this.storiesToShow = storiesNew.slice()
       /////////////////////////////////////
       while (this.newCommentInputs.length < this.numStoriesToShow) {

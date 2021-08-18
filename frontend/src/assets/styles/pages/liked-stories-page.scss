@@ -1,0 +1,97 @@
+
+.liked-stories-page-headline{
+    font-size: 3.5rem;
+    font-weight: 750;
+    color: #fafafa;
+    background-color: darkslategray;
+    text-align: center;
+    // text-transform: uppercase;
+    margin-bottom: 1.6rem;
+    // font-family: Arial, Helvetica, sans-serif;
+}
+.no-posts-yet{
+    text-transform: uppercase;
+        font-size: 2.1rem;
+        font-weight: 600;
+        color: #8e8e8e;
+        margin: auto;
+        margin-top: 1rem;
+        text-align: center; 
+        margin-bottom: 1rem;
+}
+.liked-stories-page-story-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 19.555rem);
+    // grid-template-rows: repeat(25px, 25px);
+    grid-gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    @media screen and (max-width: 480px) {
+        width: 100%;
+        grid-template-columns: repeat(auto-fill, 100%);
+
+    }
+
+    .liked-stories-page-story-tile{
+        position: relative;
+        width: 19.555rem;
+        height: 19.555rem;
+        border: .5px solid black;
+        @media screen and (max-width: 480px) {
+            width: 100%;
+        }
+        .tile-background{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            z-index: 1;
+            background: rgba(0,0,0,.6);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            display: none;
+            
+            *{
+                color: #fafafa;
+                
+            }
+            svg{
+                fill: #fafafa;
+            }
+            .tile-background-options{
+                position: absolute;
+                top: 0.3rem;
+                right: 0.3rem;
+                border-radius: .5rem;
+                // padding: 1rem;
+                :hover{
+                border: .1rem solid #fafafa;
+            }
+
+            }
+            .tile-background-likes{
+                margin-right: .9rem;
+            }
+
+        }
+    }
+        .liked-stories-page-story-tile:hover{
+            .tile-background{
+                display: flex;
+            }
+        }
+
+        .tile-image{
+            width: 100%;
+            height: 100%;
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+    }

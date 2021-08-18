@@ -170,7 +170,7 @@ export default {
     this.setUsers()
     this.loadUsers()
     this.profileMenu = false
-    console.log(this.$route)
+    // console.log(this.$route)
   },
 }
 </script>

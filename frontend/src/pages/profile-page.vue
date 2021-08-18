@@ -302,16 +302,6 @@ methods: {
 },
 
 
-
-// computed: {
-//   // storiestoShow: 
-
-// },
-// mounted(){
-//   // await this.created()
-//   console.log('MOUNTED!!!!!!')
-// },
-
 async created(){
   // localStorage.clear()
   await this.getLoggedInUser()
@@ -326,8 +316,6 @@ async created(){
   this.filterFollowers()
   this.upgradeLoggedInUser()
   this.profileTextEdit = this.pageOwner.profileText
-  // console.log(this.pageOwnerFollowers)
-  // console.log('CREATED!!!!!!!!!!!!!!!!!!')
 }
 
 }

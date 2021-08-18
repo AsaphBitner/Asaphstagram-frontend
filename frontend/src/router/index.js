@@ -6,6 +6,7 @@ import followingFeed from '../pages/following-feed.vue'
 import loginSignup from '../pages/login-signup.vue'
 import profilePage from '../pages/profile-page.vue'
 import singleStory from '../pages/single-story.vue'
+import LikedStories from '../pages/liked-stories-page.vue'
 
 Vue.use(VueRouter)
 
@@ -30,7 +31,7 @@ const routes = [
     {
         path: '/liked-stories-page/:userId',
         name: 'liked-stories-page',
-        component: profilePage
+        component: LikedStories
     },
     {
         path: '/profile-page/:userId',
