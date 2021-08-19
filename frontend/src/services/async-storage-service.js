@@ -2,7 +2,7 @@
 // import {store} from '@/store/store.js'
 
 import axios from "axios"
-axios.defaults.baseURL = 'http://localhost:3000';
+// axios.defaults.baseURL = 'http://localhost:3000';
 
 
 // console.log(store)
@@ -42,8 +42,8 @@ export const storageService = {
 //     // 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
 
 // }
-let gLoggedInUser = {}
-_save('loggedInUser', gLoggedInUser)
+// let gLoggedInUser = {}
+// _save('loggedInUser', gLoggedInUser)
 
 
 
