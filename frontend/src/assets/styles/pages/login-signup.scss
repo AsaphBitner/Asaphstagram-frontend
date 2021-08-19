@@ -64,13 +64,19 @@
                 background-color: white;
             }
         }
-        button{
+        
+        .login-submit{
             background: white;
+            background-color: rgba(250, 250, 250, .5);
             padding: .5rem .5rem .7rem .5rem;
             font-weight: 660;
             border-radius: .7rem;
             text-align: center;
             justify-content: center;
+        }
+        .login-submit:hover{
+            background-color: rgba(250, 250, 250, .5);
+            background: white;
         }
     }
 }
@@ -215,6 +221,7 @@
         }
         
     }
+    
     .login-3-photos{
         width: 100%;
         .login-character-image{

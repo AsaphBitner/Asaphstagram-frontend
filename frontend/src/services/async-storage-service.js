@@ -42,8 +42,8 @@ export const storageService = {
 //     // 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
 
 // }
-
-// _save('loggedInUser', gLoggedInUser)
+let gLoggedInUser = {}
+_save('loggedInUser', gLoggedInUser)
 
 
 
@@ -246,7 +246,8 @@ async function updateFollow(payload){
 async function login(attempt){
     const verified = await axios.post('/login', attempt)
     if (verified.status === 200) {
-        let loggedInUser = getLoggedInUser()
+        // getLoggedInUser()
+        let loggedInUser = {}
         loggedInUser._id = verified.data._id
         loggedInUser.username = verified.data.username
         loggedInUser.fullname = verified.data.fullname
@@ -256,11 +257,12 @@ async function login(attempt){
     else {return null}
 }
 function logout(){
-    let loggedInUser = getLoggedInUser()
-    loggedInUser._id = ''
-    loggedInUser.username = ''
-    loggedInUser.fullname = ''
-    loggedInUser.profileImgUrl = ''
+    let loggedInUser = {}
+    // getLoggedInUser()
+    // loggedInUser._id = ''
+    // loggedInUser.username = ''
+    // loggedInUser.fullname = ''
+    // loggedInUser.profileImgUrl = ''
     _save('loggedInUser', loggedInUser)
 }
 
