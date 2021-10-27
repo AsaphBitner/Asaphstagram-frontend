@@ -115,7 +115,8 @@ export const store = new Vuex.Store({
         state.users[pageOwnerIdx].followers.splice(removeIdxFollowing, 1)
         },
         login(state, {payload}){
-            // console.log(payload)
+            console.log('!!!!!!!!!!' ,payload)
+            state.loggedInUser = {}
             state.loggedInUser._id = payload._id
             state.loggedInUser.username = payload.username
             state.loggedInUser.fullname = payload.fullname
