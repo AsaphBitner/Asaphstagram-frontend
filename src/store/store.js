@@ -157,7 +157,7 @@ export const store = new Vuex.Store({
 
         async deleteComment({commit}, payload){
             await storageService.deleteComment(payload)
-            await commit({type: 'deleteComment', payload: payload})
+            commit({type: 'deleteComment', payload: payload})
         },
         async deleteStory({commit}, payload){
             if (!payload.idx) {payload.idx = null}

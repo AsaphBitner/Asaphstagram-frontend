@@ -11,7 +11,7 @@
                 @click="setToDelete('Post', story)"
               >
                 <svg
-                  aria-label="More options"
+                aria-label="More options"
                   class=""
                   fill="#262626"
                   height="16"
@@ -61,6 +61,15 @@ methods: {
 sendToProfilePage(_id){
     this.$router.push('/profile-page/'+_id)
   },
+  
+  async deleteStory() {
+    const payload = {
+      _id: this.story._id
+    }
+    await this.$store.dispatch("deleteStory", payload);
+    this.$emit('storyDeleted')
+  },
+
 },
 
 

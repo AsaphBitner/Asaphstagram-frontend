@@ -40,7 +40,7 @@
         <li>
           <div class="single-story-container">
 <!-- STORY USER PHOTO NAME HERE!!! -->
-<storyUserPhotoName :story="story"/>
+<storyUserPhotoName :story="story" @storyDeleted="reloadPage"/>
 <!-- STORY USER PHOTO NAME HERE!!! -->
 
             <div class="main-image-story" @click="openSingleStory(story)">
@@ -600,6 +600,11 @@ export default {
   headerProfileMenuChange(status){
     this.headerMenuShown = status
   },
+
+  reloadPage(){
+    location.reload()
+  },
+
 
   //======================END OF METHODS=================
     

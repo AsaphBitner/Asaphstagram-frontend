@@ -1,6 +1,6 @@
 <template>
   <div class="single-page-story-container" @click="headerProfileMenuChange(false)">
-    <app-header @openNewStory="openNewStory()" @headerProfileTrue="headerProfileMenuChange(true)" @headerProfileFalse="headerProfileMenuChange(false)" :headerMenuShown="headerMenuShown" />
+    <app-header :headerMenuShown="headerMenuShown" @menuTrue="headerProfileMenuChange(true)" @menuFalse="headerProfileMenuChange(false)" />
 
     <new-story 
     v-if="newStoryOn"
@@ -460,6 +460,10 @@ export default {
       // console.log('HELLO')
       // console.log(stories)
     this.story = stories.find(item => {return item._id === storyId})
+    if (!this.story) {
+      console.log('No Story, it might have been deleted')
+      this.router.push('/following-feed/'+this.loggedInUser._id)
+    }
     // console.log(this.story)
     // console.log(this.story.owner.profileImgUrl)
     },

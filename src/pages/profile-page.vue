@@ -1,6 +1,6 @@
 <template>
   <div class="profile-page-container" @click="headerProfileMenuChange(false)">
-    <app-header @openNewStory="openNewStory()" @headerProfileTrue="headerProfileMenuChange(true)" @headerProfileFalse="headerProfileMenuChange(false)" :headerMenuShown="headerMenuShown" />
+    <app-header :headerMenuShown="headerMenuShown" @menuTrue="headerProfileMenuChange(true)" @menuFalse="headerProfileMenuChange(false)" />
     <new-story v-if="newStoryOn" @close="closeNewStory('no update')" @saved="closeNewStory('yes update')"
      />
     <div v-if="backgroundDisplayed" class="menu-background"
