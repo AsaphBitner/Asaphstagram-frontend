@@ -39,13 +39,11 @@
       >
         <li>
           <div class="single-story-container">
-<!-- STORY USER PHOTO NAME HERE!!! -->
-<storyUserPhotoName :story="story" @storyDeleted="reloadPage"/>
-<!-- STORY USER PHOTO NAME HERE!!! -->
-
-            <div class="main-image-story" @click="openSingleStory(story)">
-              <img :src="story.imgUrl" alt="ERROR!" />
-            </div>
+            <!-- STORY USER PHOTO NAME HERE!!! -->
+            <storyUserPhotoName :story="story" @storyDeleted="reloadPage"/>
+            <!-- STORY USER PHOTO NAME HERE!!! -->
+            <mainImageStory :story="story"/>
+            
             <div class="story-after-photo">
               <div class="story-four-icons-container">
                 <div class="story-four-icons">
@@ -345,12 +343,14 @@
 import appHeader from "@/components/app-header.vue";
 // import newStory from '@/components/new-story.vue';
 import storyUserPhotoName from '@/components/story-timeline-cmps/story-user-photo-name.vue'
+import mainImageStory from '@/components/story-timeline-cmps/main-image-story.vue'
 
 export default {
   components: {
     appHeader,
     // newStory,
     storyUserPhotoName,
+    mainImageStory,
   },
 
   data() {
