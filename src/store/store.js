@@ -49,29 +49,43 @@ export const store = new Vuex.Store({
             // console.log('USERS: ', state.users)
         },
 
-        toggleLike(state, {payload}){
-            // const payload = payloadInitial.payload
-            const storyIdx = state.stories.findIndex((element) => { return element._id === payload.story._id})
-            
-            const commentIdx = payload.commentIdx
-            if (payload.request === 'add'){
-                if (payload.entityType === 'story'){ 
-                    state.stories[storyIdx].likedBy.unshift(payload.likeToAdd)
-                }
-                else {
-                    state.stories[storyIdx].comments[commentIdx].likedBy.unshift(payload.likeToAdd._id)
-                }
-            }
-            else {
-                const removeIdx = payload.removeIdx
-                if (payload.entityType === 'story'){
-                    state.stories[storyIdx].likedBy.splice(removeIdx, 1)
-                }
-                else {
-                    state.stories[storyIdx].comments[commentIdx].likedBy.splice(removeIdx, 1)
-                }
-            }
+        addStoryLike(state, {payload}){
+            state.stories[payload.storyIdx].likedBy.unshift(payload.likeToAdd)
         },
+
+        removeStoryLike(state, {payload}){
+            state.stories[payload.storyIdx].likedby.splice(payload.likeIdx, 1)
+        },
+        addCommentLike(state, {payload}){
+            state.stories[payload.storyIdx].comments[payload.commentIdx].likedby.unshift(state.loggedInUser._id)
+        },
+        removeCommentLike(state, {payload}){
+            state.stories[payload.storyIdx].comments[payload.commentIdx].likedby.splice(payload.commenLikeIdx, 1)
+        },
+
+        // toggleLike(state, {payload}){
+        //     // const payload = payloadInitial.payload
+        //     const storyIdx = state.stories.findIndex((element) => { return element._id === payload.story._id})
+            
+        //     const commentIdx = payload.commentIdx
+        //     if (payload.request === 'add'){
+        //         if (payload.entityType === 'story'){ 
+        //             state.stories[storyIdx].likedBy.unshift(payload.likeToAdd)
+        //         }
+        //         else {
+        //             state.stories[storyIdx].comments[commentIdx].likedBy.unshift(payload.likeToAdd._id)
+        //         }
+        //     }
+        //     else {
+        //         const removeIdx = payload.removeIdx
+        //         if (payload.entityType === 'story'){
+        //             state.stories[storyIdx].likedBy.splice(removeIdx, 1)
+        //         }
+        //         else {
+        //             state.stories[storyIdx].comments[commentIdx].likedBy.splice(removeIdx, 1)
+        //         }
+        //     }
+        // },
 
         addComment(state, {payload}){
            const storyIdx = state.stories.findIndex((element) => { return element._id === payload.story._id})
@@ -142,13 +156,24 @@ export const store = new Vuex.Store({
             const users = await storageService._loadUsers()
             this.commit({type: 'loadUsers', users: users})
         },
-        async toggleLike({commit}, payload){
-            const details = await storageService._toggleLike(payload)
-            commit({type: 'toggleLike', payload: details})
+        async addStoryLike({commit}, payload){
+            const details = await storageService.addStoryLike(payload)
+            commit({type: 'addStoryLike', payload: details})
+        },
+        async removeStoryLike({commit}, payload){
+            const details = await storageService.removeStoryLike(payload)
+            commit({type: 'removeStoryLike', payload: details})
+        },
+        async addCommentLike({commit}, payload){
+            const details = await storageService.addCommentLike(payload)
+            commit({type: 'addCommentLike', payload: details})
+        },
+        async removeCommentLike({commit}, payload){
+            const details = await storageService.removeCommentLike(payload)
+            commit({type: 'removeCommentLike', payload: details})
         },
 
         async addComment({commit}, payload){
-
          const newComment = await storageService.addComment(payload)
          payload.newComment = newComment
          commit({ type: 'addComment', payload: payload})

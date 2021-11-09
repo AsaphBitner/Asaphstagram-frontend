@@ -12,11 +12,11 @@ export const storageService = {
     // put,
     // remove,
     // _delete,
+    // _toggleLike,
     query,
     _save,
     _makeId,
     _loadStories,
-    _toggleLike,
     getLoggedInUser,
     addComment,
     deleteComment,
@@ -27,7 +27,11 @@ export const storageService = {
     saveNewProfileText,
     updateFollow,
     login,
-    logout
+    logout,
+    addStoryLike,
+    removeStoryLike,
+    addCommentLike,
+    removeCommentLike,
 }
 
 // var gLoggedInUser = {
@@ -80,48 +84,117 @@ function getLoggedInUser(){
     return loggedInUser
 }
 
-async function _toggleLike(payload){
+async function addStoryLike(payload){
     const loggedInUser = getLoggedInUser()
     const stories = await query('/storyAll')
-    // console.log('PAYLOAD :', payload)
-    const storyIdx = stories.findIndex((element) => { return element._id === payload.story._id})
-    var sendBack = payload
+    const storyIdx = stories.findIndex((element) => { return element._id === payload._id})
+    let story = stories[storyIdx]
+    let likeToAdd = {
+        _id: loggedInUser._id,
+        username: loggedInUser.username,
+        profileImgUrl: loggedInUser.profileImgUrl,
+    }
+    story.likedBy.unshift(JSON.parse(JSON.stringify(likeToAdd)))
+    let sendBack = {}
     sendBack.storyIdx = storyIdx
-
-    if (payload.request === 'add'){
-        var likeToAdd = {
-            _id: loggedInUser._id,
-            username: loggedInUser.username,
-            profileImgUrl: loggedInUser.profileImgUrl,
-        }
-        
-        // var likeToAdd = gLoggedInUser._id
-        
-        sendBack.likeToAdd = likeToAdd
-        if (payload.entityType === 'story'){
-            stories[storyIdx].likedBy.unshift(JSON.parse(JSON.stringify(likeToAdd)))
-        }
-        else {
-            stories[storyIdx].comments[payload.commentIdx].likedBy.unshift(likeToAdd._id)
-        }
-    }
-    else{
-        var removeIdx = -100
-        if (payload.entityType === 'story'){
-            removeIdx = stories[storyIdx].likedBy.findIndex(item => {return item._id === loggedInUser._id})
-            stories[storyIdx].likedBy.splice(removeIdx, 1)
-        }
-        else{
-            removeIdx = stories[storyIdx].comments[payload.commentIdx].likedBy.findIndex(item => {return item === loggedInUser._id})
-            stories[storyIdx].comments[payload.commentIdx].likedBy.splice(removeIdx, 1)
-        }
-
-        sendBack.removeIdx = removeIdx
-    }
-    const storyToSend = JSON.parse(JSON.stringify(stories[storyIdx]))
+    sendBack.likeToAdd = likeToAdd
+    
+    const storyToSend = JSON.parse(JSON.stringify(story))
     await axios.put('/story', storyToSend)
     return sendBack
 }
+
+async function removeStoryLike(payload){
+    const loggedInUser = getLoggedInUser()
+    const stories = await query('/storyAll')
+    const storyIdx = stories.findIndex((element) => { return element._id === payload._id})
+    let likeIdx = story.likedBy.findIndex((element) => { return element._id === loggedInUser._id})
+    let story = stories[storyIdx]
+    let sendBack = {}
+    sendBack.storyIdx = storyIdx
+    sendBack.likeIdx = likeIdx
+    story.likedBy.splice(likeIdx, 1)
+    const storyToSend = JSON.parse(JSON.stringify(story))
+    await axios.put('/story', storyToSend)
+    return sendBack
+}
+
+async function addCommentLike(payload){
+    const loggedInUser = getLoggedInUser()
+    const stories = await query('/storyAll')
+    const storyIdx = stories.findIndex((element) => { return element._id === payload.storyId})
+    let commentIdx = story.comments.findIndex((element) => { return element._id === payload.commentId})
+    let story = stories[storyIdx]
+    // let comment = story.comments[commentIdx]
+    let sendBack = {}
+    sendBack.storyIdx = storyIdx
+    sendBack.commentIdx = commentIdx
+    story.comments[commentIdx].likedBy.unshift(loggedInUser._id)
+    const storyToSend = JSON.parse(JSON.stringify(story))
+    await axios.put('/story', storyToSend)
+    return sendBack
+}
+
+async function removeCommentLike(payload){
+    const loggedInUser = getLoggedInUser()
+    const stories = await query('/storyAll')
+    const storyIdx = stories.findIndex((element) => { return element._id === payload.storyId})
+    let commentIdx = story.comments.findIndex((element) => { return element._id === payload.commentId})
+    let commentLikeIdx = story.comments.likedBy.findIndex((element) => { return element === loggedInUser._id})
+    let story = stories[storyIdx]
+    // let comment = story.comments[commentIdx]
+    let sendBack = {}
+    sendBack.storyIdx = storyIdx
+    sendBack.commentIdx = commentIdx
+    sendBack.commentLikeIdx = commentLikeIdx
+    story.comments[commentIdx].likedBy.splice(commentLikeIdx, 1)
+    const storyToSend = JSON.parse(JSON.stringify(story))
+    await axios.put('/story', storyToSend)
+    return sendBack
+}
+
+// async function _toggleLike(payload){
+//     const loggedInUser = getLoggedInUser()
+//     const stories = await query('/storyAll')
+//     // console.log('PAYLOAD :', payload)
+//     const storyIdx = stories.findIndex((element) => { return element._id === payload.story._id})
+//     var sendBack = payload
+//     sendBack.storyIdx = storyIdx
+
+//     if (payload.request === 'add'){
+//         var likeToAdd = {
+//             _id: loggedInUser._id,
+//             username: loggedInUser.username,
+//             profileImgUrl: loggedInUser.profileImgUrl,
+//         }
+        
+//         // var likeToAdd = gLoggedInUser._id
+        
+//         sendBack.likeToAdd = likeToAdd
+//         if (payload.entityType === 'story'){
+//             stories[storyIdx].likedBy.unshift(JSON.parse(JSON.stringify(likeToAdd)))
+//         }
+//         else {
+//             stories[storyIdx].comments[payload.commentIdx].likedBy.unshift(likeToAdd._id)
+//         }
+//     }
+//     else{
+//         var removeIdx = -100
+//         if (payload.entityType === 'story'){
+//             removeIdx = stories[storyIdx].likedBy.findIndex(item => {return item._id === loggedInUser._id})
+//             stories[storyIdx].likedBy.splice(removeIdx, 1)
+//         }
+//         else{
+//             removeIdx = stories[storyIdx].comments[payload.commentIdx].likedBy.findIndex(item => {return item === loggedInUser._id})
+//             stories[storyIdx].comments[payload.commentIdx].likedBy.splice(removeIdx, 1)
+//         }
+
+//         sendBack.removeIdx = removeIdx
+//     }
+//     const storyToSend = JSON.parse(JSON.stringify(stories[storyIdx]))
+//     await axios.put('/story', storyToSend)
+//     return sendBack
+// }
 
 
 async function addComment(payload){
