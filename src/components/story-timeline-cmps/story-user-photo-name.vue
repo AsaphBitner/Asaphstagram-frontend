@@ -62,18 +62,18 @@ sendToProfilePage(_id){
     this.$router.push('/profile-page/'+_id)
   },
   
-  async deleteStory() {
-    const payload = {
-      _id: this.story._id
-    }
-    await this.$store.dispatch("deleteStory", payload);
-    this.$emit('storyDeleted')
-  },
+async deleteStory() {
+  const payload = {
+    _id: this.story._id
+  }
+  await this.$store.dispatch("deleteStory", payload);
+  this.$emit('storyDeleted')
+},
 
 },
 
 
-created:{
+created(){
 
 },
 }

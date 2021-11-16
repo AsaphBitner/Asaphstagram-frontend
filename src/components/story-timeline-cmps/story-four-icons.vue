@@ -3,7 +3,7 @@
         <div class="story-four-icons">
             <span
             v-if="!likedByMe"
-            @click="toggleLike('add', 'story', story, idx)"
+            @click="addStoryLike"
             >
             <svg
                 aria-label="Like"
@@ -21,7 +21,7 @@
             </span>
             <span
             v-if="likedByMe"
-            @click="toggleLike('remove', 'story', story, idx)"
+            @click="removeStoryLike"
             >
             <svg
                 aria-label="unLike"
@@ -42,7 +42,7 @@
             </svg>
             </span>
             <!-- COMMENT -->
-            <span class="story-comment-icon" @click="openSingleStory(story)">
+            <span class="story-comment-icon" @click="openSingleStory(story._id)">
             <svg
                 aria-label="Comment"
                 class="story-comment-icon"
@@ -108,6 +108,9 @@ loggedInUser: {},
 }
 },
 methods: {
+async getLoggedInUser(){
+    this.loggedInUser = await this.$store.dispatch('getLoggedInUser')
+},
 openSingleStory(_id){
     this.$router.push('/single-story/'+_id)
 },
@@ -137,9 +140,10 @@ computed:{
     likedByMe() {
         if (!this.story.likedBy.length) return false 
         const likedOrNot = this.story.likedBy.find((item) => {
-        return item._id === this.loggedInUser._id;
-        });
-        return likedOrNot;
+        return item._id === this.loggedInUser._id
+        })
+        // console.log(this.story.likedBy)
+        return likedOrNot
     },
     
 },

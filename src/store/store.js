@@ -50,17 +50,21 @@ export const store = new Vuex.Store({
         },
 
         addStoryLike(state, {payload}){
-            state.stories[payload.storyIdx].likedBy.unshift(payload.likeToAdd)
+            const storyIdx = state.stories.findIndex((element) => {return element._id === payload.storyId})
+            state.stories[storyIdx].likedBy.unshift(payload.likeToAdd)
         },
 
         removeStoryLike(state, {payload}){
-            state.stories[payload.storyIdx].likedby.splice(payload.likeIdx, 1)
+            const storyIdx = state.stories.findIndex((element) => {return element._id === payload.storyId})
+            state.stories[storyIdx].likedBy.splice(payload.likeIdx, 1)
         },
         addCommentLike(state, {payload}){
-            state.stories[payload.storyIdx].comments[payload.commentIdx].likedby.unshift(state.loggedInUser._id)
+            const storyIdx = state.stories.findIndex((element) => {return element._id === payload.storyId})
+            state.stories[storyIdx].comments[payload.commentIdx].likedBy.unshift(state.loggedInUser._id)
         },
         removeCommentLike(state, {payload}){
-            state.stories[payload.storyIdx].comments[payload.commentIdx].likedby.splice(payload.commenLikeIdx, 1)
+            const storyIdx = state.stories.findIndex((element) => {return element._id === payload.storyId})
+            state.stories[storyIdx].comments[payload.commentIdx].likedBy.splice(payload.commenLikeIdx, 1)
         },
 
         // toggleLike(state, {payload}){
@@ -92,8 +96,9 @@ export const store = new Vuex.Store({
            state.stories[storyIdx].comments.push(payload.newComment)
         },
         deleteComment(state, {payload}){
-           const storyIdx = state.stories.findIndex((element) => { return element._id === payload.story._id})
-           state.stories[storyIdx].comments.splice(payload.commentIdx, 1)
+           const storyIdx = state.stories.findIndex((element) => { return element._id === payload.storyIsd})
+           const commentIdx = state.stories[storyIdx].comments.findIndex((element) => { return element._id === payload.commentId})
+           state.stories[storyIdx].comments.splice(commentIdx, 1)
 
         },
         deleteStory(state, {payload}){

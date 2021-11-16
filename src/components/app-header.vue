@@ -1,5 +1,5 @@
 <template >
-  <container name="container" @click.stop="toggleProfileMenu('close')" class="header-container">
+  <section name="container" @click.stop="toggleProfileMenu('close')" class="header-container">
     <new-story v-if="newStoryOn" @close="closeNewStory('no update')" @saved="closeNewStory('yes update')"/>
 
     <div class="header-flex-wide-left"></div>
@@ -80,7 +80,7 @@
     <!-- <router-link :to="'/login-signup'">
     Login-Signup
     </router-link> -->
-  </container>
+  </section>
 </template>
 
 <script>
@@ -184,7 +184,7 @@ export default {
     await this.getLoggedInUser()
     if(!this.loggedInUser._id){this.$router.push('/')}
     this.userId = this.loggedInUser._id
-    this.setUsers()
+    await this.setUsers()
     this.loadUsers()
   },
 }

@@ -24,7 +24,7 @@ openSingleStory(_id){
 },
 
 
-created:{
+created(){
 
 },
 }

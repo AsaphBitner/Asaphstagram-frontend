@@ -51,28 +51,16 @@ export const storageService = {
 
 
 async function query(entityType, payload = null) {
-    // var entities = JSON.parse(localStorage.getItem(entityType)) || []
     let entities
     if (entityType === '/story' || entityType === '/user' || entityType === '/username')
     {entities = await axios.get(entityType+'/'+payload)}
     else if (entityType === '/userAll' || entityType === '/storyAll')
     {entities = await axios.get(entityType)}
-    // return new Promise((resolve)=>{
-    //     setTimeout(()=>{
-    //         resolve(entities)
-    //     }, delay)
-    // })
-    // console.log('Query: ', entities)
     if (entityType === '/storyAll'){
         const sort = JSON.parse(JSON.stringify(entities.data)).sort((a,b)=> {
-            // console.log(typeof a.createdAt , typeof b.createdAt)
-            // console.log(a.createdAt > b.createdAt)
             return a.createdAt < b.createdAt ? 1 : -1
         })
         
-        // sort.forEach(element => {
-        //     console.log(element.createdAt)
-        // });
         return Promise.resolve(JSON.parse(JSON.stringify(sort)))
     }
 
@@ -85,20 +73,18 @@ function getLoggedInUser(){
 }
 
 async function addStoryLike(payload){
+    // console.log('!!!!!!!!', payload)
     const loggedInUser = getLoggedInUser()
-    const stories = await query('/storyAll')
-    const storyIdx = stories.findIndex((element) => { return element._id === payload._id})
-    let story = stories[storyIdx]
+    let story = await query('/story', payload)
     let likeToAdd = {
         _id: loggedInUser._id,
         username: loggedInUser.username,
         profileImgUrl: loggedInUser.profileImgUrl,
     }
-    story.likedBy.unshift(JSON.parse(JSON.stringify(likeToAdd)))
+    story.likedBy.unshift(likeToAdd)
     let sendBack = {}
-    sendBack.storyIdx = storyIdx
+    sendBack.storyId = payload
     sendBack.likeToAdd = likeToAdd
-    
     const storyToSend = JSON.parse(JSON.stringify(story))
     await axios.put('/story', storyToSend)
     return sendBack
@@ -106,13 +92,11 @@ async function addStoryLike(payload){
 
 async function removeStoryLike(payload){
     const loggedInUser = getLoggedInUser()
-    const stories = await query('/storyAll')
-    const storyIdx = stories.findIndex((element) => { return element._id === payload._id})
+    let story = await query('/story', payload)
     let likeIdx = story.likedBy.findIndex((element) => { return element._id === loggedInUser._id})
-    let story = stories[storyIdx]
-    let sendBack = {}
-    sendBack.storyIdx = storyIdx
-    sendBack.likeIdx = likeIdx
+    let sendBack = {storyId: payload,
+                    likeIdx: likeIdx
+                    }
     story.likedBy.splice(likeIdx, 1)
     const storyToSend = JSON.parse(JSON.stringify(story))
     await axios.put('/story', storyToSend)
@@ -121,13 +105,10 @@ async function removeStoryLike(payload){
 
 async function addCommentLike(payload){
     const loggedInUser = getLoggedInUser()
-    const stories = await query('/storyAll')
-    const storyIdx = stories.findIndex((element) => { return element._id === payload.storyId})
+    let story = await query('/story', payload.storyId)
     let commentIdx = story.comments.findIndex((element) => { return element._id === payload.commentId})
-    let story = stories[storyIdx]
     // let comment = story.comments[commentIdx]
-    let sendBack = {}
-    sendBack.storyIdx = storyIdx
+    let sendBack = {payload}
     sendBack.commentIdx = commentIdx
     story.comments[commentIdx].likedBy.unshift(loggedInUser._id)
     const storyToSend = JSON.parse(JSON.stringify(story))
@@ -137,14 +118,11 @@ async function addCommentLike(payload){
 
 async function removeCommentLike(payload){
     const loggedInUser = getLoggedInUser()
-    const stories = await query('/storyAll')
-    const storyIdx = stories.findIndex((element) => { return element._id === payload.storyId})
+    let story = await query('/story', payload.storyId)
     let commentIdx = story.comments.findIndex((element) => { return element._id === payload.commentId})
     let commentLikeIdx = story.comments.likedBy.findIndex((element) => { return element === loggedInUser._id})
-    let story = stories[storyIdx]
     // let comment = story.comments[commentIdx]
-    let sendBack = {}
-    sendBack.storyIdx = storyIdx
+    let sendBack = {payload}
     sendBack.commentIdx = commentIdx
     sendBack.commentLikeIdx = commentLikeIdx
     story.comments[commentIdx].likedBy.splice(commentLikeIdx, 1)
@@ -218,11 +196,10 @@ async function addComment(payload){
 }
 
 async function deleteComment(payload){
-    const stories = await query('/storyAll')
-    const storyIdx = stories.findIndex((element) => { return element._id === payload.story._id})
-    stories[storyIdx].comments.splice(payload.commentIdx, 1)
-    await axios.put('/story', stories[storyIdx])
-    // _save('stories', stories)
+    let story = await query('/story', payload.storyId)
+    commentIdx = story.comments.findIndex((item) => item._id === payload.commentId)
+    story.comments.splice(commentIdx, 1)
+    await axios.put('/story', story)
 }
 
 
