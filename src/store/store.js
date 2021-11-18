@@ -92,21 +92,20 @@ export const store = new Vuex.Store({
         // },
 
         addComment(state, {payload}){
-           const storyIdx = state.stories.findIndex((element) => { return element._id === payload.story._id})
+           const storyIdx = state.stories.findIndex((element) => { return element._id === payload.storyId})
            state.stories[storyIdx].comments.push(payload.newComment)
         },
         deleteComment(state, {payload}){
-           const storyIdx = state.stories.findIndex((element) => { return element._id === payload.storyIsd})
+           const storyIdx = state.stories.findIndex((element) => { return element._id === payload.storyId})
            const commentIdx = state.stories[storyIdx].comments.findIndex((element) => { return element._id === payload.commentId})
            state.stories[storyIdx].comments.splice(commentIdx, 1)
 
         },
         deleteStory(state, {payload}){
-            const storyIdx = state.stories.findIndex((element) => { return element._id === payload._id})
+            const storyIdx = state.stories.findIndex((element) => { return element._id === payload})
             state.stories.splice(storyIdx, 1)
             const userIdx = state.users.findIndex((item)=> {return item._id === state.loggedInUser._id})
-            // console.log(state.users)
-            const removeFromUserIdx = state.users[userIdx].ownedStories.findIndex(item => {return item === payload._id})
+            const removeFromUserIdx = state.users[userIdx].ownedStories.findIndex(item => {return item === payload})
             state.users[userIdx].ownedStories.splice(removeFromUserIdx, 1)
         },
         addStory(state, {payload}){
@@ -179,9 +178,8 @@ export const store = new Vuex.Store({
         },
 
         async addComment({commit}, payload){
-         const newComment = await storageService.addComment(payload)
-         payload.newComment = newComment
-         commit({ type: 'addComment', payload: payload})
+         const newPayload = await storageService.addComment(payload)
+         commit({ type: 'addComment', payload: newPayload})
 
         }, 
 
@@ -190,7 +188,6 @@ export const store = new Vuex.Store({
             commit({type: 'deleteComment', payload: payload})
         },
         async deleteStory({commit}, payload){
-            if (!payload.idx) {payload.idx = null}
             await storageService.deleteStory(payload)
             commit({type: 'deleteStory', payload: payload})
         },
