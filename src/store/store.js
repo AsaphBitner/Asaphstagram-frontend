@@ -38,7 +38,8 @@ export const store = new Vuex.Store({
     },
     mutations: {
         loadStories(state, {payload}){
-            state.stories = payload.slice(); 
+            state.stories = []
+            state.stories = payload 
             // console.log('mutations: ', state.stories)
         },
         // setLoggedInUser(state, payload){
@@ -153,7 +154,6 @@ export const store = new Vuex.Store({
     actions: {
         async loadStories({commit}){
             const stories = await storageService._loadStories()
-
             commit({type: 'loadStories', payload: stories})
         },
         async loadUsers(){
@@ -232,6 +232,11 @@ export const store = new Vuex.Store({
         async logout({commit}){
             await storageService.logout()
             commit({type: 'logout'})
+        },
+        async getSingleStory(payload){
+            console.log(payload)
+            let story = await storageService.getSingleStory(payload)
+            return story
         },
 
         // async getLoggedInUser({commit}){

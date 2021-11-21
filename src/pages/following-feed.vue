@@ -25,7 +25,6 @@
 
 <script>
 import appHeader from "@/components/app-header.vue";
-// import newStory from '@/components/new-story.vue';
 import storyUserPhotoName from '@/components/story-timeline-cmps/story-user-photo-name.vue'
 import mainImageStory from '@/components/story-timeline-cmps/main-image-story.vue'
 import storyFourIcons from '@/components/story-timeline-cmps/story-four-icons.vue'

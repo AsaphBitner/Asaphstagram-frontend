@@ -182,16 +182,7 @@ methods: {
     return item !== this.pageOwner._id})
     
     this.pageOwnerFollowers = this.users.filter(user => {return followerIds.find(item=>item === user._id)})
-    // if (!followerList.length) {return ''}
-    // else if (followerList.length === 1) {return `Followed by ${followerList[0].username}`}
-    // else if (followerList.length === 2) {return `Followed by ${followerList[0].username} and ${followerList[1].username}`}
-    // else if (followerList.length === 3) {return `Followed by ${followerList[0].username}, ${followerList[1].username} and 1 other`}
-    // else if (followerList.length > 3) {return `Followed by ${followerList[0].username}, ${followerList[1].username} and ${followerList.length - 2} others`}
- 
     },
-
-    // openBackground(){
-    //   },
 
     async getLoggedInUser(){
         this.loggedInUser = await this.$store.dispatch('getLoggedInUser')
@@ -231,8 +222,6 @@ methods: {
       this.openDeleteMenu();
     },
    async sendToProfilePage(id){
-    // this.$router.reload()
-    // localStorage.clear()
   this.pageOwner = this.users.find(user => {return user._id === id})
   this.loggedInUser = this.$store.state.loggedInUser
   this.userId = id

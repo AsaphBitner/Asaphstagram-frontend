@@ -101,12 +101,9 @@ methods: {
       },
       
     loadStories() {
-        // console.log('LOGGEDIN: ', this.loggedInUser)
       this.stories = this.$store.state.stories;
-      // console.log(this.stories)
       const toShow = this.stories.filter(item => {return item.likedBy.find(like => {return like._id === this.loggedInUser._id})})
       this.storiesToShow = toShow
-    // this.storiesToShow = this.stories
     },
 
 
@@ -148,15 +145,13 @@ methods: {
       this.openDeleteMenu();
     },
    async sendToProfilePage(id){
-    // this.$router.reload()
-    // localStorage.clear()
-  this.pageOwner = this.users.find(user => {return user._id === id})
-  this.loggedInUser = this.$store.state.loggedInUser
-  this.userId = id
-  await this.setUsers()
-  await this.setStories()
-  this.loadUsers()
-  this.loadStories()
+  // this.pageOwner = this.users.find(user => {return user._id === id})
+  // this.loggedInUser = this.loggedInUser
+  // this.userId = id
+  // await this.setUsers()
+  // await this.setStories()
+  // this.loadUsers()
+  // this.loadStories()
     this.$router.push('/profile-page/'+id)
     location.reload()
   },

@@ -32,6 +32,7 @@ export const storageService = {
     removeStoryLike,
     addCommentLike,
     removeCommentLike,
+    getSingleStory,
 }
 
 // var gLoggedInUser = {
@@ -229,11 +230,15 @@ async function addStory(story){
 }
 
 async function _loadStories() {
-    var stories = await query('/storyAll')
-    return stories
+    let stories = await query('/storyAll')
+    return JSON.parse(JSON.stringify(stories))
 }
 
-
+async function getSingleStory(payload){
+    let story = await query('/story', payload)
+    // console.log('IN STORAGE SERVIECE: ', story)
+    return JSON.parse(JSON.stringify(story))
+}
 
 
 async function _loadUsers(){
