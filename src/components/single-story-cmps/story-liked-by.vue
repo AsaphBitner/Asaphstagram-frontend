@@ -1,5 +1,5 @@
 <template>
-  <section class="story-liked-by">
+  <section v-if="story.likedBy" class="story-liked-by">
     <p v-if="story.likedBy.length">
       Liked by&nbsp;<span @click="sendToProfilePage(story.likedBy[0])">{{
         latestLiker(story)

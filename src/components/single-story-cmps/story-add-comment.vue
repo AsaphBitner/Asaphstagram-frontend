@@ -68,6 +68,8 @@ export default {
       };
       await this.$store.dispatch("addComment", payload);
       this.newCommentInput = "";
+      let tempStory = this.$store.state.stories.find(item => item._id === this.story._id)
+      this.story.comments = tempStory.comments
       //   await this.resetnewCommentsInput(storyIdx);
       //   this.loadLimitedStories();
     },

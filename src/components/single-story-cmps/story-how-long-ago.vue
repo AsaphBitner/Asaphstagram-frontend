@@ -1,5 +1,5 @@
 <template>
-  <section class="story-how-long-ago">
+  <section v-if="story.createdAt" class="story-how-long-ago">
     {{ timeDifference(Date.now(), story.createdAt).toUpperCase() }}
   </section>
 </template>

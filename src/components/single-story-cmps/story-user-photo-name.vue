@@ -1,5 +1,5 @@
 <template>
-  <section class="story-user-photo-name-2">
+  <section v-if="story.owner._id" class="story-user-photo-name-2">
     <div
       class="small-profile-img-story-2"
       @click="sendToProfilePage(story.owner._id)"

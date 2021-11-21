@@ -1,5 +1,5 @@
 <template>
-  <section class="single-story-main-image">
+  <section v-if="story.imgUrl" class="single-story-main-image">
     <img :src="story.imgUrl" alt="ERROR!" />
   </section>
 </template>

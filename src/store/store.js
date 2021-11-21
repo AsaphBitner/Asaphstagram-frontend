@@ -233,11 +233,11 @@ export const store = new Vuex.Store({
             await storageService.logout()
             commit({type: 'logout'})
         },
-        async getSingleStory(payload){
-            console.log(payload)
-            let story = await storageService.getSingleStory(payload)
-            return story
-        },
+        // async getSingleStory(payload){
+        //     console.log(payload)
+        //     let story = await storageService.getSingleStory(payload)
+        //     return story
+        // },
 
         // async getLoggedInUser({commit}){
         //     var payload = await storageService.query('loggedInUser')

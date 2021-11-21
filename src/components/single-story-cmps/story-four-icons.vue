@@ -1,5 +1,5 @@
 <template>
-    <section class="story-four-icons">
+    <section v-if="story.likedBy" class="story-four-icons">
             <span
               v-if="!likedByMe"
               @click="addStoryLike()"
@@ -114,24 +114,28 @@ openSingleStory(_id){
 },
 async addStoryLike(){
     this.$store.dispatch('addStoryLike', this.story._id)
+    let tempStory = this.$store.state.stories.find(item => item._id === this.story._id)
+    this.story.likedBy = tempStory.likedBy
 },
 async removeStoryLike(){
    await this.$store.dispatch('removeStoryLike', this.story._id)
+   let tempStory = this.$store.state.stories.find(item => item._id === this.story._id)
+    this.story.likedBy = tempStory.likedBy
 },
-async addCommentLike(commentId){
-    const payload = {
-        storyId: this.story._id,
-        commentId: commentId,
-    }
-    await this.$store.dispatch('addCommentLike', payload)
-},
-async removeCommentlike(commentId){
-    const payload = {
-        storyId: this.story._id,
-        commentId: commentId,
-    }
-    await this.$store.dispatch('removeCommentlike', payload)
-},
+// async addCommentLike(commentId){
+//     const payload = {
+//         storyId: this.story._id,
+//         commentId: commentId,
+//     }
+//     await this.$store.dispatch('addCommentLike', payload)
+// },
+// async removeCommentlike(commentId){
+//     const payload = {
+//         storyId: this.story._id,
+//         commentId: commentId,
+//     }
+//     await this.$store.dispatch('removeCommentlike', payload)
+// },
 
 },
 computed:{

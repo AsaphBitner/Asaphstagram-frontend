@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div v-if="story._id"
     class="single-page-story-container"
     @click="headerProfileMenuChange(false)"  >
     <app-header :headerMenuShown="headerMenuShown" @menuTrue="headerProfileMenuChange(true)" @menuFalse="headerProfileMenuChange(false)" />
@@ -80,22 +80,6 @@ export default {
       const storyId = this.$route.params.storyId   
       let story = await storageService.getSingleStory(storyId)
       this.story = story
-      // console.log(storyId)
-      // console.log(storyId)
-      // console.log(storyId)
-      // console.log(storyId)
-      // this.story = await this.$store.dispatch('getSingleStory', storyId)
-    //   let story = this.stories.find(item => {return item._id === storyId})
-    // if (!story) {
-    //   console.log('No Story, it might have been deleted')
-    //   this.router.push('/following-feed/'+this.loggedInUser._id)
-    // }
-    // this.story = JSON.parse(JSON.stringify(story))
-    // console.log(this.story)
-    // console.log(this.story)
-    // console.log(this.story)
-    // console.log(this.story)
-    // console.log(this.story)
     },
 
   headerProfileMenuChange(status){

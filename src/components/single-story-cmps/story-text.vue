@@ -1,5 +1,5 @@
 <template>
-    <section class="single-story-text">
+    <section v-if="story.text" class="single-story-text">
     <div
       class="small-profile-img-story-2-comment"
       @click="sendToProfilePage(story.owner._id)"

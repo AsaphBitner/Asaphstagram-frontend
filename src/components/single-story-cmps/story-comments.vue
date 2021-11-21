@@ -1,16 +1,16 @@
 <template>
-  <section class="single-story-comments">
+  <section v-if="story.comments" class="single-story-comments">
     <ul v-for="(comment) in story.comments" :key="comment._id">
       <li class="single-story-single-comment">
-        <div class="comment-everything-but-like-counter">
+        <div class="comment-everything-but-like-counter" v-if="comment._id">
           <span
             class="small-profile-img-comment"
             @click="sendToProfilePage(comment.by._id)"
           >
-            <img :src="comment.by.profileImgUrl" alt="" />
+            <img :src="comment.by.profileImgUrl" alt="ERROR" />
           </span>
           <p>
-            <span @click="sendToProfilePage(comment.by._id)">{{
+            <span @click="sendToProfilePage(comment.by._id)" v-if="comment.text">{{
               comment.by.username
             }}</span
             >&nbsp;{{ comment.text }}
@@ -205,6 +205,8 @@ export default {
       };
       await this.$store.dispatch("deleteComment", payload);
       this.closeBackground();
+      let tempStory = this.$store.state.stories.find(item => item._id === this.story._id)
+      this.story.comments = tempStory.comments
     },
     async addCommentLike(storyId, commentId) {
       const payload = {
@@ -212,6 +214,8 @@ export default {
         commentId: commentId,
       };
       await this.$store.dispatch("addCommentLike", payload);
+      let tempStory = this.$store.state.stories.find(item => item._id === this.story._id)
+      this.story.comments = tempStory.comments
     },
     async removeCommentLike(storyId, commentId) {
       const payload = {
@@ -219,7 +223,15 @@ export default {
         commentId: commentId,
       };
       await this.$store.dispatch("removeCommentLike", payload);
+      let tempStory = this.$store.state.stories.find(item => item._id === this.story._id)
+      this.story.comments = tempStory.comments
     },
+    
+    commentLikeMessage(comment){
+    if (!comment.likedBy.length) {return ''}
+    else if  (comment.likedBy.length === 1) {return '1 like'}
+    else if  (comment.likedBy.length > 1) {return `${comment.likedBy.length} likes`}
+  },
     commentLikedByMe(commentId) {
       let commentIdx = this.story.comments.findIndex(
         (item) => item._id === commentId
@@ -229,14 +241,9 @@ export default {
       );
       return answer;
     },
-    commentLikeMessage(comment){
-    if (!comment.likedBy.length) {return ''}
-    else if  (comment.likedBy.length === 1) {return '1 like'}
-    else if  (comment.likedBy.length > 1) {return `${comment.likedBy.length} likes`}
   },
-  },
-  //   computed:{
-  //   },
+    // computed:{
+    // },
 
   async created() {
     await this.getLoggedInUser();
