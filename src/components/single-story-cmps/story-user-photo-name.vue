@@ -50,7 +50,7 @@
       @click="closeBackground()"
     ></div>
     <div v-if="deleteMenuDisplayed" class="delete-menu">
-      <span class="menu-option-delete" @click.stop="openConfirmMenu()"
+      <span v-if="storyByMe()" class="menu-option-delete" @click.stop="openConfirmMenu()"
         >Delete&nbsp;Post</span
       >
       <span class="menu-option-cancel" @click.stop="closeBackground()"
@@ -75,23 +75,24 @@ export default {
 
   data() {
     return {
-      // ownerProfileImg: getStoryOwnerImage,
+      loggedInUser: {},
       backgroundDisplayed: false,
       deleteMenuDisplayed: false,
       confirmMenuDisplayed: false,
     };
   },
   methods: {
+    async getLoggedInUser() {
+      this.loggedInUser = await this.$store.dispatch("getLoggedInUser");
+    },
     sendToProfilePage(_id) {
       this.$router.push("/profile-page/" + _id);
     },
 
     async deleteStory() {
-      const payload = {
-        _id: this.story._id,
-      };
+      const payload = this.story._id
       await this.$store.dispatch("deleteStory", payload);
-      this.$emit("storyDeleted");
+      location.reload()
     },
 
     closeBackground() {
@@ -116,12 +117,15 @@ export default {
       this.closeBackground();
       location.reload();
     },
-    // getStoryOwnerImage(){
-    //   return this.story.owner.profileImgUrl
-    // },
+    storyByMe(){
+      return (this.story.owner._id === this.loggedInUser._id)
+    },
+
   },
 
-  created() {},
+ async created() {
+   await this.getLoggedInUser()
+ },
 };
 </script>
 

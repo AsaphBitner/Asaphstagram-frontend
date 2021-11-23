@@ -280,19 +280,19 @@ img{
            }
    }
 //========
-    @media screen and (max-width: 360px){
-        .header-flex-1{
-            display: none;
-            // background-color: pink;
+    // @media screen and (max-width: 360px){
+    //     .header-flex-1{
+    //         display: none;
+    //         // background-color: pink;
 
-        }
-        .header-flex-3{
-            display: flex;
-            width: 100%;
-            justify-content: space-between;
-            padding: 0 1rem
-        }
-        .header-icon{
-            margin: 0.4rem
-        }
-    }
+    //     }
+    //     .header-flex-3{
+    //         display: flex;
+    //         width: 100%;
+    //         justify-content: space-between;
+    //         padding: 0 1rem
+    //     }
+    //     .header-icon{
+    //         margin: 0.4rem
+    //     }
+    // }

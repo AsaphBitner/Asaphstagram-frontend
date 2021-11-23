@@ -1,5 +1,5 @@
 <template>
-  <div class="liked-stories-page-container" @click="headerProfileMenuChange(false)">
+  <div class="liked-stories-page-container" @click="headerProfileMenuChange(false)" v-if="storiesLoaded">
     <app-header :headerMenuShown="headerMenuShown" @menuTrue="headerProfileMenuChange(true)" @menuFalse="headerProfileMenuChange(false)" />
     <new-story v-if="newStoryOn" @close="closeNewStory('no update')" @saved="closeNewStory('yes update')"
      />
@@ -71,6 +71,7 @@ newStory,
 data(){
   return{
     stories: [],
+    storiesLoaded: false,
     loggedInUser: {},
     userId: '',
     pageOwner: {},
@@ -78,7 +79,6 @@ data(){
     users: [],
     storiesToShow: [],
     backgroundDisplayed: false,
-    newStoryOn: false,
     deleteMenuDisplayed: false,
     confirmMenuDisplayed: false,
     storyToDelete: {},
@@ -104,6 +104,7 @@ methods: {
       this.stories = this.$store.state.stories;
       const toShow = this.stories.filter(item => {return item.likedBy.find(like => {return like._id === this.loggedInUser._id})})
       this.storiesToShow = toShow
+      this.storiesLoaded = true
     },
 
 
@@ -140,18 +141,11 @@ methods: {
         this.loadStories()
         }
     },
-    setToDelete(story ) {
+    setToDelete(story) {
       this.storyToDelete = story
       this.openDeleteMenu();
     },
    async sendToProfilePage(id){
-  // this.pageOwner = this.users.find(user => {return user._id === id})
-  // this.loggedInUser = this.loggedInUser
-  // this.userId = id
-  // await this.setUsers()
-  // await this.setStories()
-  // this.loadUsers()
-  // this.loadStories()
     this.$router.push('/profile-page/'+id)
     location.reload()
   },

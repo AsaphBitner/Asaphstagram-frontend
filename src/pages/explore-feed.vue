@@ -20,7 +20,7 @@
       </ul>
     </div>
 <!-- v-if="storiesFollowing.length > numStoriesToShow" -->
-    <div v-if="storiesFollowing.length > numStoriesToShow" @click="LoadMoreStoreis" class="load-more-storeis"><h1>Load More Posts</h1></div>
+    <div v-if="storiesFollowing.length > numStoriesToShow" @click="loadMoreStories" class="load-more-stories"><h1>Load More Posts</h1></div>
   </section>
 </template>
 
@@ -77,7 +77,8 @@ export default {
     async loadLimitedStories() {
       await this.loadStories()
       const storiesNew = this.stories.sort((a,b)=> (a.createdAt/(this.randomInt(1, 10)) < b.createdAt/(this.randomInt(1, 10)) ? 1 : -1))
-      this.storiesToShow = storiesNew.slice()
+      this.storiesFollowing = storiesNew
+      this.storiesToShow = storiesNew.slice(0, this.numStoriesToShow)
     },
 
     randomInt(min = 1, max = 10) {
@@ -86,7 +87,7 @@ export default {
     return Math.floor(Math.random() * (max - min + 1) + min); 
   },
 
-    LoadMoreStoreis(){
+    loadMoreStories(){
       this.numStoriesToShow += 6
       this.loadLimitedStories()
     },
@@ -97,7 +98,10 @@ export default {
     
     reloadPage(){
     location.reload()
-  },
+    },
+    headerProfileMenuChange(status){
+    this.headerMenuShown = status
+    },
   //======================END OF METHODS=================
     
   },

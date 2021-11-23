@@ -19,7 +19,7 @@
         </li>
       </ul>
     </div>
-    <div v-if="storiesFollowing.length > numStoriesToShow" @click="LoadMoreStoreis" class="load-more-storeis"><h1>Load More Posts</h1></div>
+    <div v-if="storiesFollowing.length > numStoriesToShow" @click="loadMoreStories" class="load-more-stories"><h1>Load More Posts</h1></div>
   </section>
 </template>
 
@@ -82,7 +82,7 @@ export default {
     this.storiesToShow = storiesNew.slice()
     },
 
-    LoadMoreStoreis(){
+    loadMoreStories(){
       this.numStoriesToShow += 6
       this.loadLimitedStories()
     },

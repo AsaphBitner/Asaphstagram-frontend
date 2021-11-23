@@ -68,29 +68,6 @@ export const store = new Vuex.Store({
             state.stories[storyIdx].comments[payload.commentIdx].likedBy.splice(payload.commenLikeIdx, 1)
         },
 
-        // toggleLike(state, {payload}){
-        //     // const payload = payloadInitial.payload
-        //     const storyIdx = state.stories.findIndex((element) => { return element._id === payload.story._id})
-            
-        //     const commentIdx = payload.commentIdx
-        //     if (payload.request === 'add'){
-        //         if (payload.entityType === 'story'){ 
-        //             state.stories[storyIdx].likedBy.unshift(payload.likeToAdd)
-        //         }
-        //         else {
-        //             state.stories[storyIdx].comments[commentIdx].likedBy.unshift(payload.likeToAdd._id)
-        //         }
-        //     }
-        //     else {
-        //         const removeIdx = payload.removeIdx
-        //         if (payload.entityType === 'story'){
-        //             state.stories[storyIdx].likedBy.splice(removeIdx, 1)
-        //         }
-        //         else {
-        //             state.stories[storyIdx].comments[commentIdx].likedBy.splice(removeIdx, 1)
-        //         }
-        //     }
-        // },
 
         addComment(state, {payload}){
            const storyIdx = state.stories.findIndex((element) => { return element._id === payload.storyId})

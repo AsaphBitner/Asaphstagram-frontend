@@ -182,7 +182,7 @@ async function addComment(payload){
         by: {
             _id: loggedInUser._id,
             username: loggedInUser.username,
-            imgUrl: loggedInUser.profileImgUrl
+            profileImgUrl: loggedInUser.profileImgUrl
         },
         text: payload.text,
         likedBy: [],

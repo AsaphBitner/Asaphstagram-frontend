@@ -1,34 +1,25 @@
 <template>
-  <div class="profile-page-container" @click="headerProfileMenuChange(false)">
+  <section v-if="storiesToShow && pageOwner" class="profile-page-container" @click="headerProfileMenuChange(false)">
     <app-header :headerMenuShown="headerMenuShown" @menuTrue="headerProfileMenuChange(true)" @menuFalse="headerProfileMenuChange(false)" />
-    <new-story v-if="newStoryOn" @close="closeNewStory('no update')" @saved="closeNewStory('yes update')"
-     />
-    <div v-if="backgroundDisplayed" class="menu-background"
+    <div
+      v-if="backgroundDisplayed"
+      class="menu-background"
       @click="closeBackground()"
-    >
-      <div
-        v-if="this.deleteMenuDisplayed"
-        class="delete-menu"
+    ></div>
+    <div v-if="deleteMenuDisplayed" class="delete-menu">
+      <span v-if="storyByMe()" class="menu-option-delete" @click.stop="openConfirmMenu()"
+        >Delete&nbsp;Post</span
       >
-        <span v-if="storyByMe()" class="menu-option-delete" @click.stop="openComfirmMenu()"
-          >Delete Post</span
-        >
-        <span class="menu-option-cancel" @click.stop="closeBackground()"
-          >Cancel</span
-        >
-      </div>
-      <div
-        v-if="confirmMenuDisplayed"
-        class="are-you-sure-menu"
+      <span class="menu-option-cancel" @click.stop="closeBackground()"
+        >Cancel</span
       >
-        <span class="confirmation">Are you sure?</span>
-        <span class="yesNo"
-          ><span class="yes" @click.stop="deleteConfirmed()">Yes, delete</span
-          ><span class="no" @click.stop="closeBackground()"
-            >No, cancel</span
-          ></span
-        >
-      </div>
+    </div>
+    <div v-if="confirmMenuDisplayed" class="are-you-sure-menu">
+      <span class="confirmation">Are you sure?</span>
+      <span class="yesNo"
+        ><span class="yes" @click.stop="deleteConfirmed()">Yes, Delete</span>
+        <span class="no" @click.stop="closeBackground()">No, Cancel</span></span
+      >
     </div>
     <!-- ============================================================= -->
   <div class="profile-page-follow-unfollow-background" v-if="followBackground" @click.stop="followBackground = false">
@@ -75,7 +66,7 @@
           <span v-if="pageOwner.profileText === profileTextEdit" class="cancel-edit-profile-text" @click="editingNow = false">Cancel</span>
         </div>
 
-      <div class="followers-detailed">
+      <div v-if="pageOwnerFollowers" class="followers-detailed">
         <div v-if="pageOwnerFollowers.length">Followed by&nbsp;<span @click="sendToProfilePage(pageOwnerFollowers[0]._id)">{{pageOwnerFollowers[0].username}}</span> 
         </div>
         <div v-if="pageOwnerFollowers.length === 2">&nbsp;and&nbsp;<span @click="sendToProfilePage(pageOwnerFollowers[1]._id)">{{pageOwnerFollowers[1].username}}</span></div>
@@ -102,7 +93,7 @@
         <li v-for="story in this.storiesToShow" :key="story._id">
           <div class="profile-page-story-tile" @click="sendToSingleStory(story._id)">
             <div class="tile-background">
-              <span class="tile-background-options" @click.stop="setToDelete(story)">
+              <span class="tile-background-options" @click.stop="setToDelete(story._id)">
                 <svg aria-label="Comment Options" class="_8-yf5 " fill="#262626" height="16" role="img" viewBox="0 0 48 48" width="16"><circle clip-rule="evenodd" cx="8" cy="24" fill-rule="evenodd" r="4.5"></circle><circle clip-rule="evenodd" cx="24" cy="24" fill-rule="evenodd" r="4.5"></circle><circle clip-rule="evenodd" cx="40" cy="24" fill-rule="evenodd" r="4.5"></circle></svg>
               </span>
 
@@ -125,17 +116,15 @@
       </ul>
 
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
 import appHeader from '../components/app-header.vue'
-import newStory from '../components/new-story.vue'
 
 export default {
 components:{
 appHeader,
-newStory,
 },
 
 data(){
@@ -148,10 +137,9 @@ data(){
     users: [],
     storiesToShow: [],
     backgroundDisplayed: false,
-    newStoryOn: false,
     deleteMenuDisplayed: false,
     confirmMenuDisplayed: false,
-    storyToDelete: {},
+    storyToDelete: '',
     headerMenuShown: false,
     editingNow: false,
     profileTextEdit: '',
@@ -203,46 +191,28 @@ methods: {
       this.backgroundDisplayed = true
       this.deleteMenuDisplayed = true
     },
-    openComfirmMenu(){
+    openConfirmMenu(){
       this.deleteMenuDisplayed = false
       this.confirmMenuDisplayed = true
     },
 
-    openNewStory(){
-      this.newStoryOn = true
-    },
-    closeNewStory(result){
-      this.newStoryOn = false
-      if (result === 'yes update') {
-        this.loadStories()
-        }
-    },
-    setToDelete(story ) {
-      this.storyToDelete = story
+    setToDelete(id) {
+      this.storyToDelete = id
       this.openDeleteMenu();
     },
+     deleteConfirmed() {
+       this.deleteStory();
+       this.closeBackground();
+     },
    async sendToProfilePage(id){
-  this.pageOwner = this.users.find(user => {return user._id === id})
-  this.loggedInUser = this.$store.state.loggedInUser
-  this.userId = id
-  await this.setUsers()
-  await this.setStories()
-  this.loadUsers()
-  this.loadStories()
-  this.filterFollowers()
     this.$router.push('/profile-page/'+id)
     location.reload()
   },
 
-  deleteConfirmed() {
-        this.deleteStory();
-        this.closeBackground();
-      },
-
   async deleteStory() {
       const payload = this.storyToDelete;
       await this.$store.dispatch("deleteStory", payload);
-      this.storyToDelete = {};
+      this.storyToDelete = '';
       this.loadStories();      
     },
   sendToSingleStory(id){
