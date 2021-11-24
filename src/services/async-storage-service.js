@@ -1,18 +1,11 @@
 // import {store} from '@/store/store.js'
 
 import axios from "axios"
-axios.defaults.baseURL = 'http://localhost:3000';
+// axios.defaults.baseURL = 'http://localhost:3000';
 
-
-// console.log(store)
 
 export const storageService = {
-    // _get,
-    // post,
-    // put,
-    // remove,
-    // _delete,
-    // _toggleLike,
+
     query,
     _save,
     _makeId,
@@ -34,20 +27,6 @@ export const storageService = {
     removeCommentLike,
     getSingleStory,
 }
-
-// var gLoggedInUser = {
-//     _id: '',
-//     // '6112f6116376cf1087265293',
-//     username: '',
-//     // 'Homer_Simpson',
-//     fullname: '', 
-//     // 'Homer Simpson',
-//     profileImgUrl: '', 
-//     // 'https://res.cloudinary.com/asaphstagram2021/image/upload/v1628445913/Homer%20Simpson/Homer_Simpson_2006_veqnka.png',
-
-// }
-// let gLoggedInUser = {}
-// _save('loggedInUser', gLoggedInUser)
 
 
 
@@ -131,50 +110,6 @@ async function removeCommentLike(payload){
     return sendBack
 }
 
-// async function _toggleLike(payload){
-//     const loggedInUser = getLoggedInUser()
-//     const stories = await query('/storyAll')
-//     // console.log('PAYLOAD :', payload)
-//     const storyIdx = stories.findIndex((element) => { return element._id === payload.story._id})
-//     var sendBack = payload
-//     sendBack.storyIdx = storyIdx
-
-//     if (payload.request === 'add'){
-//         var likeToAdd = {
-//             _id: loggedInUser._id,
-//             username: loggedInUser.username,
-//             profileImgUrl: loggedInUser.profileImgUrl,
-//         }
-        
-//         // var likeToAdd = gLoggedInUser._id
-        
-//         sendBack.likeToAdd = likeToAdd
-//         if (payload.entityType === 'story'){
-//             stories[storyIdx].likedBy.unshift(JSON.parse(JSON.stringify(likeToAdd)))
-//         }
-//         else {
-//             stories[storyIdx].comments[payload.commentIdx].likedBy.unshift(likeToAdd._id)
-//         }
-//     }
-//     else{
-//         var removeIdx = -100
-//         if (payload.entityType === 'story'){
-//             removeIdx = stories[storyIdx].likedBy.findIndex(item => {return item._id === loggedInUser._id})
-//             stories[storyIdx].likedBy.splice(removeIdx, 1)
-//         }
-//         else{
-//             removeIdx = stories[storyIdx].comments[payload.commentIdx].likedBy.findIndex(item => {return item === loggedInUser._id})
-//             stories[storyIdx].comments[payload.commentIdx].likedBy.splice(removeIdx, 1)
-//         }
-
-//         sendBack.removeIdx = removeIdx
-//     }
-//     const storyToSend = JSON.parse(JSON.stringify(stories[storyIdx]))
-//     await axios.put('/story', storyToSend)
-//     return sendBack
-// }
-
-
 async function addComment(payload){
     const loggedInUser = getLoggedInUser()
     const newComment =  {
@@ -190,7 +125,6 @@ async function addComment(payload){
     let story = await query('/story', payload.storyId)
     story.comments.push(newComment)
     payload.newComment = newComment
-    // _save('stories', stories)
     await axios.put('/story', story)
     return payload
 }
@@ -236,7 +170,6 @@ async function _loadStories() {
 
 async function getSingleStory(payload){
     let story = await query('/story', payload)
-    // console.log('IN STORAGE SERVIECE: ', story)
     return JSON.parse(JSON.stringify(story))
 }
 
