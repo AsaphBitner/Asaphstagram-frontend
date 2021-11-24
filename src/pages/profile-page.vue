@@ -72,7 +72,7 @@
         <div v-if="pageOwnerFollowers.length === 2">&nbsp;and&nbsp;<span @click="sendToProfilePage(pageOwnerFollowers[1]._id)">{{pageOwnerFollowers[1].username}}</span></div>
 
         <div v-if="pageOwnerFollowers.length === 3">&nbsp;, <span @click="sendToProfilePage(pageOwnerFollowers[1]._id)">{{pageOwnerFollowers[1].username}}</span>, and 1 other</div>
-        <div v-if="pageOwnerFollowers.length > 3">&nbsp;, <span @click="sendToProfilePage(pageOwnerFollowers[1]._id)">{{pageOwnerFollowers[1].username}}</span>, and <span>{{pageOwnerFollowers.length - 2}}</span> others</div> 
+        <div v-if="pageOwnerFollowers.length > 3">&nbsp;, <span @click="sendToProfilePage(pageOwnerFollowers[1]._id)">{{pageOwnerFollowers[1].username}}</span>, and&nbsp;<span class="no-cursor-change">{{pageOwnerFollowers.length - 2}}</span> &nbsp;others</div> 
       </div>
     </div>
     </div>

@@ -1,6 +1,6 @@
 
 .profile-page-container{
-   
+
 .profile-page-upper-part{
     margin: 3rem auto;
     max-width: 48.06rem;
@@ -173,9 +173,12 @@
             font-weight: 600;
             cursor: pointer;
         }
+        .no-cursor-change{
+            cursor: initial;
+        }
 
     }
-
+    
     
     
     
@@ -297,6 +300,8 @@
             }
         }
     }
+
+  
 
 }
 
